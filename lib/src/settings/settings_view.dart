@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:task_voting/src/fields/prelude.dart';
 
 import 'settings_controller.dart';
 
@@ -15,36 +15,75 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(loc.settingsPageTitle),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        // Glue the SettingsController to the theme selection DropdownButton.
-        //
-        // When a user selects a theme from the dropdown list, the
-        // SettingsController is updated, which rebuilds the MaterialApp.
-        child: DropdownButton<ThemeMode>(
-          // Read the selected themeMode from the controller
-          value: controller.themeMode,
-          // Call the updateThemeMode method any time the user selects a theme.
-          onChanged: controller.updateThemeMode,
-          items: const [
-            DropdownMenuItem(
-              value: ThemeMode.system,
-              child: Text('System Theme'),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(24),
+            // Glue the SettingsController to the theme selection DropdownButton.
+            //
+            // When a user selects a theme from the dropdown list, the
+            // SettingsController is updated, which rebuilds the MaterialApp.
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(loc.settingsColorTheme),
+                ),
+                DropdownButton<ThemeMode>(
+                  // Read the selected themeMode from the controller
+                  value: controller.themeMode,
+                  // Call the updateThemeMode method any time the user selects a theme.
+                  onChanged: controller.updateThemeMode,
+                  items: [
+                    DropdownMenuItem(
+                      value: ThemeMode.system,
+                      child: Text(loc.settingsSystemTheme),
+                    ),
+                    DropdownMenuItem(
+                      value: ThemeMode.light,
+                      child: Text(loc.settingsLightTheme),
+                    ),
+                    DropdownMenuItem(
+                      value: ThemeMode.dark,
+                      child: Text(loc.settingsDarkTheme),
+                    )
+                  ],
+                ),
+              ],
             ),
-            DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('Light Theme'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(loc.settingsLanguage),
+                ),
+                DropdownButton<Locale>(
+                  value: controller.locale,
+                  onChanged: (v) => controller.updateLocale(v!),
+                  items: const [
+                    DropdownMenuItem(
+                      value: Locale('en'),
+                      child: Text('English (en)'),
+                    ),
+                    DropdownMenuItem(
+                      value: Locale('es'),
+                      child: Text('Español (es)'),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('Dark Theme'),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
