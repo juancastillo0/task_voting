@@ -21,9 +21,10 @@ class SampleItemListView extends StatelessObserverWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Sample Items'),
+          title: Text(loc.choiceListTitle),
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),
@@ -105,8 +106,8 @@ class _ChoicesFormState extends State<ChoicesForm> {
         children: [
           Material(
             elevation: 1,
-            color: Colors.white,
-            surfaceTintColor: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
+            surfaceTintColor: Theme.of(context).colorScheme.surface,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

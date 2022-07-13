@@ -68,11 +68,11 @@ class ChoiceInfo extends StatelessObserverWidget {
               ],
             ),
           ),
+        if (choice.pros.isNotEmpty || choice.cons.isNotEmpty) const Divider(),
         if (choice.pros.isNotEmpty)
           Column(
             key: const Key('pros'),
             children: [
-              const Divider(),
               ChoiceInfoTitle(loc.choiceInfoPros),
               ...choice.pros.map(
                 (pro) => Padding(

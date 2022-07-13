@@ -42,8 +42,10 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale('en', ''), // English, no country code
+            Locale('en', null), // English, no country code
+            Locale('es', null), // English, no country code
           ],
+          locale: settingsController.locale,
 
           // Use AppLocalizations to configure the correct application title
           // depending on the user's locale.
@@ -56,37 +58,8 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(
-            primarySwatch: Colors.teal,
-            inputDecorationTheme: const InputDecorationTheme(
-              isDense: true,
-              filled: true,
-              // isCollapsed: true,
-              contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-              // border: OutlineInputBorder(
-              //   borderSide: BorderSide(
-              //     color: Colors.transparent,
-              //   ),
-              // ),
-              // border: UnderlineInputBorder(),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black12,
-                ),
-              ),
-            ),
-            cardTheme: const CardTheme(
-              elevation: 2,
-              margin: EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-            ),
-            appBarTheme: const AppBarTheme(
-              toolbarHeight: 42,
-            ),
-          ),
-          darkTheme: ThemeData.dark(),
+          theme: globalTheme(brightness: Brightness.light),
+          darkTheme: globalTheme(brightness: Brightness.dark),
           themeMode: settingsController.themeMode,
           debugShowCheckedModeBanner: false,
 
@@ -112,4 +85,38 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+ThemeData globalTheme({required Brightness brightness}) {
+  return ThemeData(
+    brightness: brightness,
+    primarySwatch: Colors.teal,
+    inputDecorationTheme: const InputDecorationTheme(
+      isDense: true,
+      filled: true,
+      // isCollapsed: true,
+      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      // border: OutlineInputBorder(
+      //   borderSide: BorderSide(
+      //     color: Colors.transparent,
+      //   ),
+      // ),
+      // border: UnderlineInputBorder(),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.black12,
+        ),
+      ),
+    ),
+    cardTheme: const CardTheme(
+      elevation: 2,
+      margin: EdgeInsets.all(8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+    ),
+    appBarTheme: const AppBarTheme(
+      toolbarHeight: 42,
+    ),
+  );
 }
