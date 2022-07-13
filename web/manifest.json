@@ -1,11 +1,11 @@
 {
-    "name": "task_voting",
-    "short_name": "task_voting",
+    "name": "Task Voting",
+    "short_name": "Task Voting",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Vote and Prioritize Tasks.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

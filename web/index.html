@@ -18,7 +18,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Vote and Prioritize Tasks.">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,8 +29,9 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>task_voting</title>
+  <title>Task Voting</title>
   <link rel="manifest" href="manifest.json">
+  <script src="./assets/packages/file_system_access/assets/file_persistence.js"></script>
 
   <script>
     // The value below is injected by flutter build, do not touch.
@@ -38,8 +39,22 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+  <style>
+    html, body {
+      margin: 0px;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
+  <div style="display:flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
+    <img src="./icons/Icon-192.png" alt="Flutter" width="64px" height="64px">
+    <div style="display:flex;flex-direction:column;align-items: center;justify-content: center;">
+      <h1 style="color:black;font:28px sans-serif;margin:0;">Task Voting</h1>
+      <h4 style="color:black;font:18px sans-serif;margin:0;">Vote and Prioritize Tasks</h4>
+    </div>
+  </div>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

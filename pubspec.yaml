@@ -39,3 +39,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - packages/file_system_access/assets/file_persistence.js
