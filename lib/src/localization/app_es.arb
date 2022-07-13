@@ -3,6 +3,15 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "@settings": {
+    "description": "The settings page"
+  },
+  "settingsPageTitle": "Configuraciones",
+  "settingsLanguage": "Lenguaje",
+  "settingsColorTheme": "Tema de Color",
+  "settingsLightTheme": "Tema Claro",
+  "settingsDarkTheme": "Tema Oscuro",
+  "settingsSystemTheme": "Tema del Sistema",
   "@choiceInfo": {
     "description": "The detail of a choice"
   },
