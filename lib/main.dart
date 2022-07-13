@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
 void main() async {
+  mainContext.config = ReactiveConfig(
+    writePolicy: ReactiveWritePolicy.never,
+  );
+  final prev = debugPrint;
+  debugPrint = (message, {wrapWidth}) {
+    if (message != null &&
+        message.startsWith('No observables detected in the build method of')) {
+      return;
+    }
+    prev(message, wrapWidth: wrapWidth);
+  };
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
