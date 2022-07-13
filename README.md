@@ -1,6 +1,22 @@
 # task_voting
 
-A new Flutter project.
+- Create votes
+  - add description, images for each item to choose
+  - share authenticated links
+  - save results
+  - handle/communicate uncertainty
+  - ask for different types of choices
+    - sorted
+    - 1-vs-1
+    - best
+    - least bad
+    - assign points
+  - predefined templates ICE
+    - add custom parameters with different weights
+    - cost, resources, time, difficulty, impact, uncertainty, helpfulness, alignment
+  - download results
+  - maybe generic forms/questionnaires
+
 
 ## Getting Started
 
