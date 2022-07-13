@@ -1,8 +1,8 @@
 import 'package:file_system_access/file_system_access.dart';
-import 'package:meta/meta.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:task_voting/src/notifiers/app_notifier.dart';
+import 'package:task_voting/src/util/disposable.dart';
 
 /// A placeholder class that represents an entity or model.
 class SampleItem {
@@ -20,40 +20,6 @@ class SampleItem {
 }
 
 typedef Id = int;
-
-class Disposer implements Disposable {
-  List<void Function()> _disposeCallbacks = [];
-  bool isDisposed = false;
-
-  void onDispose(void Function() callback) {
-    _disposeCallbacks.add(callback);
-  }
-
-  @override
-  Disposer get disposer => this;
-
-  @override
-  void dispose() {
-    if (isDisposed) return;
-    isDisposed = true;
-    while (_disposeCallbacks.isNotEmpty) {
-      final prev = _disposeCallbacks;
-      _disposeCallbacks = [];
-      for (final c in prev) {
-        c();
-      }
-    }
-  }
-}
-
-mixin Disposable {
-  final disposer = Disposer();
-
-  @mustCallSuper
-  void dispose() {
-    disposer.dispose();
-  }
-}
 
 class ChoicesStore with Disposable {
   ChoicesStore() {
