@@ -98,7 +98,7 @@ packages:
       name: file_selector_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.1.0"
   file_selector_web:
     dependency: transitive
     description:
@@ -118,7 +118,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "30dd17a73608543cdfacdc30a325dde6bdfefba3"
+      resolved-ref: "2bad39c3dc3029fec092eafe632641edd11e8416"
       url: "https://github.com/juancastillo0/file_system_access_web.git"
     source: git
     version: "0.0.1"
