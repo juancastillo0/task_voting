@@ -8,52 +8,74 @@ class RankedVoting extends StatelessObserverWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final store = Provider.of<ChoicesStore>(context);
     final sortedRank = store.sortedRaked.value;
 
-    return ReorderableListView(
-      onReorder: (i1, i2) {
-        if (i2 > sortedRank.length) return;
-        final it1 = sortedRank[i1];
-        final it2 = sortedRank[i2 == sortedRank.length ? i2 - 1 : i2];
-        it1.rankingPoints.set(it2.rankingPoints.value);
-        store.computeRanked();
-      },
-      buildDefaultDragHandles: false,
-      proxyDecorator: (child, index, animation) =>
-          itemWidget(index, sortedRank[index], store.computeRanked),
+    return Column(
       children: [
-        ...sortedRank.mapIndexed(
-          (i, e) => KeyedSubtree(
-            key: ValueKey(e),
-            child: itemWidget(i, e, store.computeRanked),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 2.0),
+                    child: Text(loc.rankedVotingIsNumericRanked),
+                  ),
+                  Switch(
+                    value: store.rankedIsNumeric.value,
+                    onChanged: store.rankedIsNumeric.set,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: ReorderableListView(
+            onReorder: store.onReorder,
+            buildDefaultDragHandles: false,
+            proxyDecorator: (child, index, animation) =>
+                itemWidget(index, sortedRank[index], store.computeRanked),
+            children: [
+              ...sortedRank.mapIndexed(
+                (i, e) => KeyedSubtree(
+                  key: ValueKey(e),
+                  child: itemWidget(i, e, store.computeRanked),
+                ),
+              ),
+              const SizedBox(key: Key('bottomPadding'), height: 50),
+            ],
+            // itemBuilder: (context, index) {
+            //   final choice = sortedRank[index];
+            //   // final listController = AnimatedList.of(context);
+            //   void onChange() {
+            //     store.computeRanked();
+            //     // final current = store.sortedRaked.value;
+            //     // final map = Map.fromEntries(
+            //     //     sortedRank.mapIndexed((i, e) => MapEntry(e, i)));
+            //     // for (final i in Iterable.generate(sortedRank.length)) {
+            //     //   final p = sortedRank[i];
+            //     //   final c = current[i];
+            //     //   if (p != c) {
+            //     //     listController.removeItem(
+            //     //       map[p]!,
+            //     //       (context, animation) => itemWidget(p, onChange),
+            //     //     );
+            //     //     listController.insertItem(index);
+            //     //   }
+            //     // }
+            //   }
+
+            //   return itemWidget(choice, onChange);
+            // },
           ),
         ),
-        const SizedBox(key: Key('bottomPadding'), height: 50),
       ],
-      // itemBuilder: (context, index) {
-      //   final choice = sortedRank[index];
-      //   // final listController = AnimatedList.of(context);
-      //   void onChange() {
-      //     store.computeRanked();
-      //     // final current = store.sortedRaked.value;
-      //     // final map = Map.fromEntries(
-      //     //     sortedRank.mapIndexed((i, e) => MapEntry(e, i)));
-      //     // for (final i in Iterable.generate(sortedRank.length)) {
-      //     //   final p = sortedRank[i];
-      //     //   final c = current[i];
-      //     //   if (p != c) {
-      //     //     listController.removeItem(
-      //     //       map[p]!,
-      //     //       (context, animation) => itemWidget(p, onChange),
-      //     //     );
-      //     //     listController.insertItem(index);
-      //     //   }
-      //     // }
-      //   }
-
-      //   return itemWidget(choice, onChange);
-      // },
     );
   }
 
