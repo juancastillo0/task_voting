@@ -16,6 +16,8 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    const itemPadding = EdgeInsets.only(top: 10, left: 24, right: 24);
+    const titleWidth = 160.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -23,17 +25,21 @@ class SettingsView extends StatelessWidget {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.all(24),
+            padding: itemPadding,
             // Glue the SettingsController to the theme selection DropdownButton.
             //
             // When a user selects a theme from the dropdown list, the
             // SettingsController is updated, which rebuilds the MaterialApp.
-            child: Column(
+            child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(loc.settingsColorTheme),
+                SizedBox(
+                  width: titleWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(loc.settingsColorTheme),
+                  ),
                 ),
                 DropdownButton<ThemeMode>(
                   // Read the selected themeMode from the controller
@@ -59,12 +65,15 @@ class SettingsView extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
+            padding: itemPadding,
+            child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(loc.settingsLanguage),
+                SizedBox(
+                  width: titleWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(loc.settingsLanguage),
+                  ),
                 ),
                 DropdownButton<Locale>(
                   value: controller.locale,

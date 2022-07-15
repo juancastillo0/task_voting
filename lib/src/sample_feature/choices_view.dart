@@ -29,6 +29,7 @@ class ChoiceInfo extends StatelessObserverWidget {
     final loc = AppLocalizations.of(context)!;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
@@ -47,10 +48,25 @@ class ChoiceInfo extends StatelessObserverWidget {
         if (choice.image.value != null)
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
-            height: 150,
-            child: ImageValueView(
-              image: choice.image.value!,
-              key: const Key('image'),
+            height: 180,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...[choice.image.value!]
+                      .followedBy(choice.additionalImages.value ?? [])
+                      .map(
+                        (e) => ImageValueView(
+                          key: ValueKey(e),
+                          image: e,
+                        ),
+                      )
+                      .expand((element) sync* {
+                    yield const SizedBox(width: 10);
+                    yield element;
+                  }).skip(1),
+                ],
+              ),
             ),
           ),
         if (choice.description.value != null)
@@ -82,7 +98,7 @@ class ChoiceInfo extends StatelessObserverWidget {
                       Icon(
                         Icons.playlist_add_check_rounded,
                         size: 18,
-                        color: Colors.green[900],
+                        color: Colors.green[800],
                       ),
                       const SizedBox(width: 10),
                       Expanded(
@@ -107,7 +123,7 @@ class ChoiceInfo extends StatelessObserverWidget {
                       Icon(
                         Icons.playlist_remove_rounded,
                         size: 18,
-                        color: Colors.red[900],
+                        color: Theme.of(context).colorScheme.error,
                       ),
                       const SizedBox(width: 10),
                       Expanded(

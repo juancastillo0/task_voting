@@ -50,8 +50,8 @@ class ChoiceInfoForm extends StatelessObserverWidget {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: isExpanded
-                ? const Icon(Icons.arrow_drop_up_outlined)
-                : const Icon(Icons.arrow_drop_down_outlined),
+                ? const Icon(Icons.keyboard_arrow_up)
+                : const Icon(Icons.keyboard_arrow_down),
           ),
         ),
       ],
@@ -89,13 +89,11 @@ class ChoiceInfoForm extends StatelessObserverWidget {
                     onPressed: choice.selectImages,
                   ),
                   const SizedBox(width: 10),
-                  InkWell(
+                  RoundedIconButton(
                     key: const Key('removeImages'),
-                    onTap: choice.removeImages,
-                    child: const Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: Icon(Icons.delete),
-                    ),
+                    onTap:
+                        choice.image.value != null ? choice.removeImages : null,
+                    icon: Icons.delete,
                   ),
                 ],
               ),
