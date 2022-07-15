@@ -3,6 +3,11 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "close": "Cerrar",
+  "goBack": "Volver",
+  "open": "Abrir",
+  "accept": "Aceptar",
+  "cancel": "Cancelar",
   "@settings": {
     "description": "The settings page"
   },
@@ -36,6 +41,26 @@
   "choiceListVoteRanked": "Voto Ordenado",
   "choiceListEditChoices": "Editar Opciones",
   "choiceListExpandItems": "Expandir",
-  "choiceListCollapseItems": "Collapsar",
+  "choiceListCollapseItems": "Colapsar",
+  "choiceListEditItems": "Editar",
+  "choiceListViewItems": "Ver",
+  "choiceListShowOptions": "Opciones",
+  "@iceTable": {
+    "description": "The table with ICE voting"
+  },
+  "iceTableChoiceTitle": "Título",
+  "iceTableImpact": "Impacto",
+  "iceTableConfidence": "Confianza",
+  "iceTableEasiness": "Facilidad",
+  "iceTableUrgency": "Urgencia",
+  "iceTablePoints": "Puntos",
+  "iceTableSumFooter": "Suma",
+  "@rankedVoting": {
+    "description": "The list with ranked voting"
+  },
+  "rankedVotingIsNumericRanked": "Numérico",
+  "@oneVsOne": {
+    "description": "The selector for One vs One voting"
+  },
   "oneVsOneSelectOne": "Selecciona una opción"
 }

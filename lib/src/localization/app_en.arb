@@ -3,6 +3,11 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "close": "Close",
+  "goBack": "Go Back",
+  "open": "Open",
+  "accept": "Accept",
+  "cancel": "Cancel",
   "@settings": {
     "description": "The settings page"
   },
@@ -37,5 +42,25 @@
   "choiceListEditChoices": "Edit Choices",
   "choiceListExpandItems": "Expand",
   "choiceListCollapseItems": "Collapse",
+  "choiceListEditItems": "Edit",
+  "choiceListViewItems": "View",
+  "choiceListShowOptions": "Options",
+  "@iceTable": {
+    "description": "The table with ICE voting"
+  },
+  "iceTableChoiceTitle": "Title",
+  "iceTableImpact": "Impact",
+  "iceTableConfidence": "Confidence",
+  "iceTableEasiness": "Easiness",
+  "iceTableUrgency": "Urgency",
+  "iceTablePoints": "Points",
+  "iceTableSumFooter": "Sum",
+  "@rankedVoting": {
+    "description": "The list with ranked voting"
+  },
+  "rankedVotingIsNumericRanked": "Numeric",
+  "@oneVsOne": {
+    "description": "The selector for One vs One voting"
+  },
   "oneVsOneSelectOne": "Select one choice"
 }
