@@ -94,8 +94,9 @@ ThemeData globalTheme({required Brightness brightness}) {
     inputDecorationTheme: const InputDecorationTheme(
       isDense: true,
       filled: true,
+      labelStyle: TextStyle(height: 0.5),
       // isCollapsed: true,
-      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
       // border: OutlineInputBorder(
       //   borderSide: BorderSide(
       //     color: Colors.transparent,

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:task_voting/src/fields/prelude.dart';
 import 'package:task_voting/src/sample_feature/sample_item.dart';
 import 'package:cross_file/cross_file.dart';
 
@@ -89,23 +89,12 @@ class _ImageValueViewState extends State<ImageValueView> {
       gaplessPlayback: imageWidget.gaplessPlayback,
       isAntiAlias: imageWidget.isAntiAlias,
       filterQuality: imageWidget.filterQuality,
+      key: imageWidget.key,
     );
 
     return InkWell(
       onTap: () {
-        showDialog(
-          context: context,
-          barrierDismissible: true,
-          builder: (context) => AlertDialog(
-            content: child,
-            actions: [
-              TextButton(
-                onPressed: Navigator.of(context).pop,
-                child: const Text('Close'),
-              ),
-            ],
-          ),
-        );
+        showSimpleAlertDialog(context, child);
       },
       child: child,
     );

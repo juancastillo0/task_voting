@@ -195,6 +195,7 @@ class _ObsTextInputState<T> extends State<ObsTextInput<T>> {
       scribbleEnabled: widget.textField.scribbleEnabled,
       enableIMEPersonalizedLearning:
           widget.textField.enableIMEPersonalizedLearning,
+      key: widget.textField.key,
     );
   }
 }
