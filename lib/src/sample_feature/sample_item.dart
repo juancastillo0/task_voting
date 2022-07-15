@@ -279,13 +279,13 @@ class SampleItemEditable with StoreSerde {
         FilePickerAcceptType(
           description: 'Images',
           accept: {
-            'image/*': ['*']
+            'image/*': ['.png', '.gif', '.jpeg', '.jpg']
           },
         )
       ],
     );
-    runInAction(name: 'selectImage', () {
-      if (images.isNotEmpty) {
+    if (images.isNotEmpty) {
+      runInAction(name: 'selectImage', () {
         image.set(ImageValue(file: images.first));
         if (images.length > 1) {
           additionalImages.set(
@@ -294,8 +294,8 @@ class SampleItemEditable with StoreSerde {
         } else {
           additionalImages.set(null);
         }
-      }
-    });
+      });
+    }
   }
 
   void removeImages() {

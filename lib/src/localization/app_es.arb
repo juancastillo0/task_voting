@@ -8,6 +8,8 @@
   "open": "Abrir",
   "accept": "Aceptar",
   "cancel": "Cancelar",
+  "retry": "Intentar",
+  "viewImagePermissionError": "Hubo un error al obtener el archivo. Por favor inténtalo nuevamente.",
   "@settings": {
     "description": "The settings page"
   },

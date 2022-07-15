@@ -8,6 +8,8 @@
   "open": "Open",
   "accept": "Accept",
   "cancel": "Cancel",
+  "retry": "Retry",
+  "viewImagePermissionError": "There was an error reading the file. Please try again.",
   "@settings": {
     "description": "The settings page"
   },

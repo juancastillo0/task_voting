@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_system_access/file_system_access.dart';
 import 'package:flutter/foundation.dart';
 import 'package:task_voting/src/fields/prelude.dart';
 import 'package:task_voting/src/sample_feature/sample_item.dart';
@@ -20,11 +21,12 @@ class ImageValueView extends StatefulWidget {
 
 class _ImageValueViewState extends State<ImageValueView> {
   XFile? file;
+  PermissionStateEnum? permissionState;
 
   @override
   void initState() {
-    setUpFile();
     super.initState();
+    setUpFile();
   }
 
   @override
@@ -37,7 +39,22 @@ class _ImageValueViewState extends State<ImageValueView> {
     final handle = widget.image.file;
     if (handle == null) {
       file = widget.image.xFile;
+      permissionState = null;
+      if (mounted) {
+        setState(() {});
+      }
     } else {
+      try {
+        final value =
+            await handle.requestPermission(mode: FileSystemPermissionMode.read);
+        permissionState = value;
+      } catch (e) {
+        permissionState = PermissionStateEnum.prompt;
+      }
+      if (!mounted) return;
+      setState(() {});
+
+      if (permissionState != PermissionStateEnum.granted) return;
       final file = await handle.getFile();
       if (mounted && handle == widget.image.file) {
         setState(() {
@@ -49,6 +66,8 @@ class _ImageValueViewState extends State<ImageValueView> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     final ImageProvider provider;
     if (widget.image.url != null) {
       final url = widget.image.url!;
@@ -58,6 +77,30 @@ class _ImageValueViewState extends State<ImageValueView> {
         provider = NetworkImage(url);
       }
     } else {
+      if (permissionState != null &&
+          permissionState != PermissionStateEnum.granted) {
+        return Container(
+          width: 300,
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  loc.viewImagePermissionError,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              OutlinedButton(
+                onPressed: setUpFile,
+                child: Text(loc.retry),
+              ),
+            ],
+          ),
+        );
+      }
       if (file == null) {
         return const CircularProgressIndicator();
       }
