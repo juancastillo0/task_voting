@@ -12,7 +12,7 @@ import 'sample_item.dart';
 class SampleItemListView extends StatelessObserverWidget {
   const SampleItemListView({
     Key? key,
-    this.items = const [SampleItem(1), SampleItem(2), SampleItem(3)],
+    this.items = const [SampleItem('1'), SampleItem('2'), SampleItem('3')],
   }) : super(key: key);
 
   static const routeName = '/';
@@ -88,6 +88,20 @@ class _ChoicesFormState extends State<ChoicesForm> {
   final ChoicesStore store = ChoicesStore();
   final itemsScrollController = ScrollController();
 
+  bool loading = true;
+
+  @override
+  void initState() {
+    store.setUp().then((value) {
+      if (mounted) {
+        setState(() {
+          loading = false;
+        });
+      }
+    });
+    super.initState();
+  }
+
   @override
   void dispose() {
     store.dispose();
@@ -96,6 +110,9 @@ class _ChoicesFormState extends State<ChoicesForm> {
 
   @override
   Widget build(BuildContext context) {
+    if (loading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     final loc = AppLocalizations.of(context)!;
 
     return Provider(
@@ -110,60 +127,144 @@ class _ChoicesFormState extends State<ChoicesForm> {
             surfaceTintColor: Theme.of(context).colorScheme.surface,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(child: ChoiceInfoTitle(loc.choiceListTitle)),
-                  if (store.isCreatingItems.value) ...[
-                    OutlinedButton.icon(
-                      key: const Key('toggleAreItemsExpanded'),
-                      onPressed: store.toggleAreItemsExpanded,
-                      icon: store.areItemsExpanded.value
-                          ? const Icon(Icons.arrow_drop_up_outlined)
-                          : const Icon(Icons.arrow_drop_down_outlined),
-                      label: Text(
-                        store.areItemsExpanded.value
-                            ? loc.choiceListCollapseItems
-                            : loc.choiceListExpandItems,
+              child: LayoutBuilder(builder: (context, box) {
+                return Observer(builder: (context) {
+                  final Iterable<Widget> additionalItems;
+                  if (!store.isViewingItems.value) {
+                    additionalItems = [];
+                  } else {
+                    final buttons = [
+                      OutlinedButton.icon(
+                        key: const Key('toggleIsEditingItems'),
+                        onPressed: store.toggleIsEditingItems,
+                        icon: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: store.isEditingItems.value
+                              ? const Icon(Icons.edit_off, size: 20)
+                              : const Icon(Icons.edit, size: 20),
+                        ),
+                        label: Text(
+                          store.isEditingItems.value
+                              ? loc.choiceListViewItems
+                              : loc.choiceListEditItems,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    OutlinedButton.icon(
-                      key: const Key('addChoice'),
-                      onPressed: store.addChoice,
-                      icon: const Icon(Icons.add),
-                      label: Text(loc.choiceListAddChoice),
-                    ),
-                    const SizedBox(width: 10),
-                  ],
-                  OutlinedButton.icon(
-                    onPressed: store.isCreatingItems.value
-                        ? store.toggleICEVote
-                        : store.toggleIsCreatingItems,
-                    icon: store.isCreatingItems.value
-                        ? const Icon(Icons.how_to_vote)
-                        : const Icon(Icons.edit),
-                    label: Text(
-                      store.isCreatingItems.value
-                          ? loc.choiceListVoteICE
-                          : loc.choiceListEditChoices,
-                    ),
-                  ),
-                  if (store.isCreatingItems.value)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: OutlinedButton.icon(
+                      if (store.isEditingItems.value)
+                        OutlinedButton.icon(
+                          key: const Key('toggleAreItemsExpanded'),
+                          onPressed: store.toggleAreItemsExpanded,
+                          icon: store.areItemsExpanded.value
+                              ? const Icon(Icons.keyboard_arrow_up)
+                              : const Icon(Icons.keyboard_arrow_down),
+                          label: Text(
+                            store.areItemsExpanded.value
+                                ? loc.choiceListCollapseItems
+                                : loc.choiceListExpandItems,
+                          ),
+                        ),
+                      OutlinedButton.icon(
+                        key: const Key('addChoice'),
+                        onPressed: store.addChoice,
+                        icon: const Icon(Icons.add),
+                        label: Text(loc.choiceListAddChoice),
+                      ),
+                      OutlinedButton.icon(
+                        key: const Key('toggleRankedVote'),
                         onPressed: store.toggleRankedVote,
-                        icon: const Icon(Icons.how_to_vote),
+                        icon: const Padding(
+                          padding: EdgeInsets.all(2.0),
+                          child: Icon(Icons.how_to_vote, size: 20),
+                        ),
                         label: Text(
                           loc.choiceListVoteRanked,
                         ),
                       ),
-                    ),
-                ],
-              ),
+                    ];
+                    if (box.maxWidth < 670) {
+                      additionalItems = [
+                        DropdownButton<Object?>(
+                          // isDense: true,
+                          isDense: true,
+                          // isExpanded: true,
+
+                          items: buttons.mapIndexed(
+                            (i, e) {
+                              return DropdownMenuItem(
+                                value: i,
+                                key: e.key,
+                                onTap: e.onPressed,
+                                child: e.child!,
+                              );
+                            },
+                          ).toList(),
+                          value: null,
+                          onChanged: (_) {},
+                          hint: Text(loc.choiceListShowOptions),
+                        ),
+                        const SizedBox(width: 10),
+                      ];
+                    } else {
+                      additionalItems = buttons.expand(
+                        (e) sync* {
+                          yield e;
+                          yield const SizedBox(width: 10);
+                        },
+                      );
+                    }
+                  }
+                  return Row(
+                    children: [
+                      const Spacer(),
+                      if (store.isViewingItems.value) ...additionalItems,
+                      OutlinedButton.icon(
+                        onPressed: store.isViewingItems.value
+                            ? store.toggleICEVote
+                            : store.toggleIsCreatingItems,
+                        icon: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: store.isViewingItems.value
+                              ? const Icon(Icons.how_to_vote, size: 20)
+                              : const Icon(Icons.edit, size: 20),
+                        ),
+                        label: Text(
+                          store.isViewingItems.value
+                              ? loc.choiceListVoteICE
+                              : loc.choiceListEditChoices,
+                        ),
+                      ),
+                      // Row(
+                      //   children: [
+                      //     const SizedBox(width: 6),
+                      //     const Icon(Icons.how_to_vote, size: 20),
+                      //     const Padding(
+                      //       padding: EdgeInsets.symmetric(horizontal: 6.0),
+                      //       child: Text('Vote'),
+                      //     ),
+                      //     ButtonBar(
+                      //       buttonHeight: 20,
+                      //       buttonMinWidth: 40,
+                      //       layoutBehavior: ButtonBarLayoutBehavior.padded,
+                      //       buttonPadding: EdgeInsets.zero,
+                      //       children: [
+                      //         TextButton(
+                      //           child: Text('ICE'),
+                      //           onPressed: () {},
+                      //         ),
+                      //         TextButton(
+                      //           child: Text('Ranked'),
+                      //           onPressed: () {},
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
+                    ],
+                  );
+                });
+              }),
             ),
           ),
-          if (store.isCreatingItems.value)
+          if (store.isViewingItems.value)
             Expanded(
               child: ListView(
                 controller: itemsScrollController,
@@ -181,6 +282,9 @@ class _ChoicesFormState extends State<ChoicesForm> {
                               vertical: 12,
                             ),
                             child: Observer(builder: (context) {
+                              if (!store.isEditingItems.value) {
+                                return ChoiceInfo(choice: e);
+                              }
                               return ChoiceInfoForm(
                                 choice: e,
                                 isExpanded: e.isExpanded.value ??
@@ -204,15 +308,12 @@ class _ChoicesFormState extends State<ChoicesForm> {
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 600),
                   padding: const EdgeInsets.all(20),
                   child: Observer(builder: (context) {
                     return ICEVotingTable(
                       sortCallback: store.sortCallback,
                       sortIndex: store.sortedTableIndex.value,
-                      items: store.sortedTableList.value
-                          .map((e) => e.iceAssessment)
-                          .toList(),
+                      items: store.sortedTableList.value,
                     );
                   }),
                 ),
