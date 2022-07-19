@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:file_system_access/file_system_access.dart';
-import 'package:cross_file/cross_file.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:task_voting/src/notifiers/app_notifier.dart';
+import 'package:task_voting/src/sample_feature/voting_choices_store.dart';
 import 'package:task_voting/src/settings/settings_service.dart';
-import 'package:task_voting/src/util/constants.dart';
-import 'package:task_voting/src/util/disposable.dart';
+import 'package:task_voting/src/util/prelude.dart';
+import 'package:task_voting/src/util/string.dart';
 
 /// A placeholder class that represents an entity or model.
 class SampleItem {
@@ -24,14 +26,24 @@ class SampleItem {
 
 typedef Id = String;
 
-class ChoicesStore with Disposable, StoreSerde {
-  ChoicesStore({this.name = 'ChoicesStore'}) {
+class ChoicesStore with DisposableWithSetUp, StoreSerde {
+  ChoicesStore(
+    this.rootStore, {
+    String? name,
+  }) : name = name ?? randomString(32) {
     addChoice();
   }
   @override
   final String name;
 
-  Future<void> setUp() async {
+  final RootStore rootStore;
+
+  static final ref = Ref(
+    (root) => root.ref(VotingChoicesStore.ref).selectedStore,
+  );
+
+  @override
+  Future<void> performSetUp() async {
     disposer.onDispose(
       reaction<Set<Id>>(
         name: 'cleanSimpleVotes',
@@ -62,11 +74,9 @@ class ChoicesStore with Disposable, StoreSerde {
       ),
     );
 
-    // TODO: use generated key for multiple choice stores
-    const rootKey = 'rootKey';
     try {
       await HiveCollectionKey.choicesStoreCollection
-          .get(rootKey, valueToEdit: this);
+          .get(name, valueToEdit: this);
 
       computeRanked();
     } catch (e, s) {
@@ -106,7 +116,7 @@ class ChoicesStore with Disposable, StoreSerde {
         };
 
         _iterateStore(this);
-        HiveCollectionKey.choicesStoreCollection.set(rootKey, this);
+        HiveCollectionKey.choicesStoreCollection.set(name, this);
       },
     ));
   }
@@ -258,7 +268,6 @@ class SampleItemEditable with StoreSerde {
   );
   final Obs<String?> description = Obs('description', null);
 
-  // TODO:
   final Obs<List<ImageValue>?> additionalImages = Obs(
     'additionalImages',
     null,
@@ -273,23 +282,39 @@ class SampleItemEditable with StoreSerde {
   final rankingPoints = Obs('rankingPoints', 0);
 
   void selectImages() async {
-    final images = await FileSystem.instance.showOpenFilePicker(
-      multiple: true,
-      types: const [
-        FilePickerAcceptType(
-          description: 'Images',
-          accept: {
-            'image/*': ['.png', '.gif', '.jpeg', '.jpg']
-          },
-        )
-      ],
+    final images = await FileSystem.instance.showOpenFilePickerWebSafe(
+      const FsOpenOptions(
+        multiple: true,
+        startIn: AppPlatform.kIsWeb
+            ? FsStartsInOptions.path(WellKnownDirectory.pictures)
+            : null,
+        types: [
+          FilePickerAcceptType(
+            description: 'Images',
+            accept: {
+              'image/*': ['.png', '.gif', '.jpeg', '.jpg']
+            },
+          )
+        ],
+      ),
     );
     if (images.isNotEmpty) {
       runInAction(name: 'selectImage', () {
-        image.set(ImageValue(file: images.first));
+        image.set(ImageValue(
+          handle: images.first.handle,
+          xFile: images.first.file,
+        ));
         if (images.length > 1) {
           additionalImages.set(
-            images.skip(1).map((e) => ImageValue(file: e)).toList(),
+            images
+                .skip(1)
+                .map(
+                  (e) => ImageValue(
+                    handle: e.handle,
+                    xFile: e.file,
+                  ),
+                )
+                .toList(),
           );
         } else {
           additionalImages.set(null);
@@ -320,15 +345,15 @@ class SampleItemEditable with StoreSerde {
 
 class ImageValue {
   final String? url;
-  final FileSystemFileHandle? file;
+  final FileSystemFileHandle? handle;
   final XFile? xFile;
 
   ImageValue({
     this.url,
-    this.file,
+    this.handle,
     this.xFile,
   }) {
-    if (file == null && url == null && xFile == null) {
+    if (handle == null && url == null && xFile == null) {
       throw Exception();
     }
   }
@@ -336,32 +361,41 @@ class ImageValue {
   static final typeSerde = Serde<ImageValue>(
     fromJson: (json) {
       final file = (json as Map)['file'];
+      FileSystemPersistanceItem? item;
+      if (file is int && SettingsService.webFilePersistence != null) {
+        item = SettingsService.webFilePersistence!.get(file);
+      }
 
       final value = ImageValue(
         url: json['url'] as String?,
-        xFile: file is String ? XFile(file) : null,
-        file: file is int && AppPlatform.kIsWeb
-            ? SettingsService.webFilePersistence!.get(file)?.value
-                as FileSystemFileHandle?
-            : null,
+        xFile: file is String ? XFile(file) : item?.persistedFile?.file,
+        handle: item?.handle as FileSystemFileHandle?,
       );
       return value;
     },
     toJson: (json) async {
       // TODO: should this be necessary?
       if (json == null) return null;
-      Object? file;
-      if (json.file != null) {
-        // TODO: web that does not support FilePersistence
-        if (SettingsService.webFilePersistence != null) {
+
+      final Object? file;
+      if (json.handle != null) {
+        if (AppPlatform.kIsWeb && SettingsService.webFilePersistence != null) {
           file = await SettingsService.webFilePersistence!
-              .put(json.file!)
+              .put(json.handle!)
               .then((value) => value.id);
         } else {
-          file = await json.file!.getFile().then((value) => value.path);
+          file = await json.handle!.getFile().then((value) => value.path);
         }
       } else if (json.xFile != null) {
-        file = json.xFile?.path;
+        if (AppPlatform.kIsWeb && SettingsService.webFilePersistence != null) {
+          file = await SettingsService.webFilePersistence!
+              .putFile(json.xFile!)
+              .then((value) => value.id);
+        } else {
+          file = json.xFile!.path;
+        }
+      } else {
+        file = null;
       }
 
       return {

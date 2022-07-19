@@ -99,22 +99,24 @@ class HiveKey<T> {
 
 class HiveCollectionKey<T> {
   final String boxName;
-  final Future<T> Function(Map<String, Object?>, {T? valueToEdit}) fromJson;
+  final Future<T> Function(
+    Map<String, Object?>, {
+    required T valueToEdit,
+  }) fromJson;
   final Future<Map<String, Object?>> Function(T) toJson;
 
   HiveCollectionKey._(this.boxName, this.fromJson, this.toJson);
 
   static final choicesStoreCollection = HiveCollectionKey<ChoicesStore>._(
     'task_voting_ChoicesStoreBox',
-    (json, {valueToEdit}) async {
-      final store = valueToEdit ?? ChoicesStore();
+    (json, {required valueToEdit}) async {
+      final store = valueToEdit;
       final result = await store.populateFromJson(json);
       result.when<void>(
         ok: (ok) => ok(),
         err: (err) {
-          if (valueToEdit == null) {
-            store.dispose();
-          }
+          store.dispose();
+
           throw err;
         },
       );
@@ -123,9 +125,7 @@ class HiveCollectionKey<T> {
     (value) async => value.toJson(),
   );
 
-  Future<T?> call(String key) => get(key);
-
-  Future<T?> get(String key, {T? valueToEdit}) async {
+  Future<T?> get(String key, {required T valueToEdit}) async {
     final box = await Hive.openLazyBox<Map>(boxName);
     final value = await box.get(key);
     if (value == null) return null;
@@ -139,17 +139,22 @@ class HiveCollectionKey<T> {
     return json;
   }
 
-  Future<List<T>> getAll() async {
+  Future<List<String>> keys() async {
     final box = await Hive.openLazyBox<Map>(boxName);
-    final value = await Future.wait(
-      box.keys.map(
-        (key) async {
-          final map = await box.get(key);
-          return fromJson(map!.cast());
-        },
-      ),
-    );
-
-    return value;
+    return box.keys.cast<String>().toList();
   }
+
+  // Future<List<T>> getAll() async {
+  //   final box = await Hive.openLazyBox<Map>(boxName);
+  //   final value = await Future.wait(
+  //     box.keys.map(
+  //       (key) async {
+  //         final map = await box.get(key);
+  //         return fromJson(map!.cast());
+  //       },
+  //     ),
+  //   );
+
+  //   return value;
+  // }
 }

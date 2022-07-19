@@ -4,74 +4,137 @@ import 'package:task_voting/src/sample_feature/choices_form.dart';
 import 'package:task_voting/src/sample_feature/choices_view.dart';
 import 'package:task_voting/src/sample_feature/ice_voting.dart';
 import 'package:task_voting/src/sample_feature/ranked_voting.dart';
+import 'package:task_voting/src/sample_feature/voting_choices_store.dart';
+import 'package:task_voting/src/tasks/tasks_tab_view.dart';
+import 'package:task_voting/src/util/disposable.dart';
+import 'package:task_voting/src/util/routes.dart';
 
 import '../settings/settings_view.dart';
 import 'sample_item.dart';
 
 /// Displays a list of SampleItems.
 class SampleItemListView extends StatelessObserverWidget {
-  const SampleItemListView({
-    Key? key,
-    this.items = const [SampleItem('1'), SampleItem('2'), SampleItem('3')],
-  }) : super(key: key);
+  const SampleItemListView({Key? key}) : super(key: key);
 
   static const routeName = '/';
-
-  final List<SampleItem> items;
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(loc.choiceListTitle),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
-              },
+    final routerDelegate = context.ref(AppRouterDelegate.ref);
+
+    return DefaultTabController(
+      initialIndex: routerDelegate.currentTab.index,
+      length: AppTab.values.length,
+      child: AnimatedBuilder(
+        animation: routerDelegate,
+        builder: (context, child) {
+          // final selectedBorder = Border(
+          //   bottom: BorderSide(
+          //     color:Colors.white, // Theme.of(context).colorScheme.onSurface,
+          //     width: 2,
+          //   ),
+          // );
+          return Scaffold(
+            appBar: AppBar(
+              title: Row(
+                children: [
+                  Text(loc.choiceListTitle),
+                  const SizedBox(width: 20),
+                  SizedBox(
+                    width: 200,
+                    child: TabBar(
+                      tabs: const [
+                        Tab(
+                          child: Text('Votes'),
+                        ),
+                        Tab(
+                          child: Text('Tasks'),
+                        ),
+                      ],
+                      onTap: (index) {
+                        routerDelegate.changeTab(AppTab.values[index]);
+                      },
+                    ),
+                  ),
+                  // TextButton(
+                  //   onPressed: ,
+                  //   style: TextButton.styleFrom(
+                  //     shape: RoundedRectangleBorder(
+
+                  //     ),
+
+                  //   )
+                  //       routerDelegate.currentTab.isTasks ? selectedBorder : null,
+
+                  //   child: Text('Tasks'),
+                  // ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     routerDelegate.changeTab(AppTab.votes);
+                  //   },
+                  //   customBorder:
+                  //       routerDelegate.currentTab.isVotes ? selectedBorder : null,
+                  //   child: Text('Votes'),
+                  // ),
+                ],
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.settings),
+                  onPressed: () {
+                    // Navigate to the settings page. If the user leaves and returns
+                    // to the app after it has been killed while running in the
+                    // background, the navigation stack is restored.
+                    Navigator.restorablePushNamed(
+                        context, SettingsView.routeName);
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
 
-        // To work with lists that may contain a large number of items, it’s best
-        // to use the ListView.builder constructor.
-        //
-        // In contrast to the default ListView constructor, which requires
-        // building all Widgets up front, the ListView.builder constructor lazily
-        // builds Widgets as they’re scrolled into view.
-        body: const ChoicesForm()
-        // ListView.builder(
-        //   // Providing a restorationId allows the ListView to restore the
-        //   // scroll position when a user leaves and returns to the app after it
-        //   // has been killed while running in the background.
-        //   restorationId: 'sampleItemListView',
-        //   itemCount: items.length,
-        //   itemBuilder: (BuildContext context, int index) {
-        //     final item = items[index];
+            // To work with lists that may contain a large number of items, it’s best
+            // to use the ListView.builder constructor.
+            //
+            // In contrast to the default ListView constructor, which requires
+            // building all Widgets up front, the ListView.builder constructor lazily
+            // builds Widgets as they’re scrolled into view.
+            body: const TabBarView(
+              children: [
+                ChoicesForm(),
+                TasksTabView(),
+              ],
+            ),
+            // ListView.builder(
+            //   // Providing a restorationId allows the ListView to restore the
+            //   // scroll position when a user leaves and returns to the app after it
+            //   // has been killed while running in the background.
+            //   restorationId: 'sampleItemListView',
+            //   itemCount: items.length,
+            //   itemBuilder: (BuildContext context, int index) {
+            //     final item = items[index];
 
-        //     return ListTile(
-        //         title: Text('SampleItem ${item.id}'),
-        //         leading: const CircleAvatar(
-        //           // Display the Flutter Logo image asset.
-        //           foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-        //         ),
-        //         onTap: () {
-        //           // Navigate to the details page. If the user leaves and returns to
-        //           // the app after it has been killed while running in the
-        //           // background, the navigation stack is restored.
-        //           Navigator.restorablePushNamed(
-        //             context,
-        //             SampleItemDetailsView.routeName,
-        //           );
-        //         });
-        //   },
-        // ),
-        );
+            //     return ListTile(
+            //         title: Text('SampleItem ${item.id}'),
+            //         leading: const CircleAvatar(
+            //           // Display the Flutter Logo image asset.
+            //           foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+            //         ),
+            //         onTap: () {
+            //           // Navigate to the details page. If the user leaves and returns to
+            //           // the app after it has been killed while running in the
+            //           // background, the navigation stack is restored.
+            //           Navigator.restorablePushNamed(
+            //             context,
+            //             SampleItemDetailsView.routeName,
+            //           );
+            //         });
+            //   },
+            // ),
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -85,26 +148,40 @@ class ChoicesForm extends StatefulObserverWidget {
 }
 
 class _ChoicesFormState extends State<ChoicesForm> {
-  final ChoicesStore store = ChoicesStore();
+  late ChoicesStore store;
   final itemsScrollController = ScrollController();
 
   bool loading = true;
 
+  final disposer = Disposer();
+
   @override
   void initState() {
-    store.setUp().then((value) {
-      if (mounted) {
-        setState(() {
-          loading = false;
-        });
-      }
-    });
     super.initState();
+    context.ref(VotingChoicesStore.ref).setUp().then((value) {
+      if (!mounted) return;
+      disposer.onDispose(reaction<ChoicesStore>(
+        fireImmediately: true,
+        (_) => context.ref(ChoicesStore.ref),
+        (value) {
+          store = value;
+          loading = true;
+          store.setUp().then((_) {
+            if (mounted) {
+              setState(() {
+                loading = false;
+              });
+            }
+          });
+          if (mounted) setState(() {});
+        },
+      ));
+    });
   }
 
   @override
   void dispose() {
-    store.dispose();
+    disposer.dispose();
     super.dispose();
   }
 

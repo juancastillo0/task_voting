@@ -19,6 +19,7 @@
   "settingsLightTheme": "Light Theme",
   "settingsDarkTheme": "Dark Theme",
   "settingsSystemTheme": "System Theme",
+  "settingsSystemLocale": "System Language",
   "@choiceInfo": {
     "description": "The detail of a choice"
   },
