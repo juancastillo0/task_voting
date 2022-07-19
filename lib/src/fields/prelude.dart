@@ -11,3 +11,4 @@ export 'package:task_voting/src/fields/setup_builder.dart';
 export 'package:task_voting/src/fields/buttons.dart';
 export 'package:task_voting/src/fields/dialogs.dart';
 export 'package:task_voting/src/notifiers/app_notifier.dart';
+export 'package:task_voting/src/util/root_store.dart';

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:stack_portal/stack_portal.dart';
+import 'package:task_voting/src/util/root_store.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
@@ -11,13 +13,12 @@ import 'settings/settings_view.dart';
 class MyApp extends StatelessWidget {
   const MyApp({
     Key? key,
-    required this.settingsController,
   }) : super(key: key);
-
-  final SettingsController settingsController;
 
   @override
   Widget build(BuildContext context) {
+    final rootStore = RootStore.of(context);
+    final settingsController = rootStore.getGlobal<SettingsController>();
     // Glue the SettingsController to the MaterialApp.
     //
     // The AnimatedBuilder Widget listens to the SettingsController for changes.
@@ -62,6 +63,12 @@ class MyApp extends StatelessWidget {
           darkTheme: globalTheme(brightness: Brightness.dark),
           themeMode: settingsController.themeMode,
           debugShowCheckedModeBanner: false,
+          builder: (context, child) {
+            return GlobalStack(child: child!);
+          },
+
+          // routeInformationParser: const _RouteInformationParser(),
+          // routerDelegate: AppRouterDelegate(rootStore),
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -71,7 +78,7 @@ class MyApp extends StatelessWidget {
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
+                    return const SettingsView();
                   case SampleItemDetailsView.routeName:
                     return const SampleItemDetailsView();
                   case SampleItemListView.routeName:

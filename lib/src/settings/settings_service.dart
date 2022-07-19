@@ -39,20 +39,20 @@ class SettingsService {
     (v) => {'themeMode': v.name},
   );
 
-  final locale = HiveKey<Locale>._(
+  final locale = HiveKey<Locale?>._(
     'locale',
     (json) => json == null ||
             AppLocalizations.supportedLocales.every(
               (l) =>
-                  l.languageCode != (json['languageCode'] as String) ||
+                  l.languageCode != (json['languageCode'] as String?) ||
                   l.countryCode != (json['countryCode'] as String?),
             )
-        ? const Locale('en', null)
+        ? null
         : Locale(
             json['languageCode'] as String,
             json['countryCode'] as String?,
           ),
-    (v) => {'languageCode': v.languageCode, 'countryCode': v.countryCode},
+    (v) => {'languageCode': v?.languageCode, 'countryCode': v?.countryCode},
   );
 }
 

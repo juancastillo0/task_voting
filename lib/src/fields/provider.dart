@@ -13,4 +13,9 @@ class Provider<T> extends InheritedWidget {
 
   static T of<T>(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<Provider<T>>()!.value;
+
+  static T get<T>(BuildContext context) =>
+      (context.getElementForInheritedWidgetOfExactType<Provider<T>>()!.widget
+              as Provider<T>)
+          .value;
 }
