@@ -1,5 +1,9 @@
 # task_voting
 
+```
+fvm flutter pub run build_runner watch --delete-conflicting-outputs
+```
+
 - Create votes
   - add description, images for each item to choose
   - share authenticated links

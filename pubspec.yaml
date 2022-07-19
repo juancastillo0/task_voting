@@ -2,7 +2,7 @@ name: task_voting
 description: A new Flutter project.
 
 # Prevent accidental publishing to pub.dev.
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -25,6 +25,7 @@ dependencies:
   file_system_access:
     git:
       url: https://github.com/juancastillo0/file_system_access_web.git
+  valida:
   stack_portal:
     git:
       url: https://github.com/juancastillo0/stack_portal.git
@@ -34,6 +35,19 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  valida_generator:
+  mobx_codegen:
+  build_runner:
+
+dependency_overrides:
+  valida:
+    git:
+      url: https://github.com/juancastillo0/valida.git
+      path: valida
+  valida_generator:
+    git:
+      url: https://github.com/juancastillo0/valida.git
+      path: valida_generator
 
 flutter:
   uses-material-design: true
