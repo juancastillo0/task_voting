@@ -3,12 +3,60 @@
 part of 'task_model.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Task _$TaskFromJson(Map<String, dynamic> json) => Task._(
+      id: json['id'] as String?,
+    )
+      ..parentTaskId = json['parentTaskId'] as String?
+      ..name = json['name'] as String
+      ..description = json['description'] as String
+      ..minDuration = Duration(microseconds: json['minDuration'] as int)
+      ..maxDuration = Duration(microseconds: json['maxDuration'] as int)
+      ..deliveryDate = json['deliveryDate'] == null
+          ? null
+          : DateTime.parse(json['deliveryDate'] as String)
+      ..showFieldsOwn = json['showFieldsOwn'] as bool
+      ..minWeight = json['minWeight'] as int
+      ..maxWeight = json['maxWeight'] as int
+      ..tagIds = const _ObservableSetStringConverter()
+          .fromJson(json['tagIds'] as List<String>);
+
+Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
+      'parentTaskId': instance.parentTaskId,
+      'name': instance.name,
+      'description': instance.description,
+      'minDuration': instance.minDuration.inMicroseconds,
+      'maxDuration': instance.maxDuration.inMicroseconds,
+      'deliveryDate': instance.deliveryDate?.toIso8601String(),
+      'showFieldsOwn': instance.showFieldsOwn,
+      'minWeight': instance.minWeight,
+      'maxWeight': instance.maxWeight,
+      'id': instance.id,
+      'tagIds': const _ObservableSetStringConverter().toJson(instance.tagIds),
+    };
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$Task on _Task, Store {
+  Computed<List<TaskTag>>? _$tagsComputed;
+
+  @override
+  List<TaskTag> get tags => (_$tagsComputed ??=
+          Computed<List<TaskTag>>(() => super.tags, name: '_Task.tags'))
+      .value;
+  Computed<int>? _$priorityComputed;
+
+  @override
+  int get priority => (_$priorityComputed ??=
+          Computed<int>(() => super.priority, name: '_Task.priority'))
+      .value;
+
   late final _$parentTaskIdAtom =
       Atom(name: '_Task.parentTaskId', context: context);
 
@@ -150,6 +198,35 @@ mixin _$Task on _Task, Store {
     });
   }
 
+  late final _$tagIdsAtom = Atom(name: '_Task.tagIds', context: context);
+
+  @override
+  ObservableSet<String> get tagIds {
+    _$tagIdsAtom.reportRead();
+    return super.tagIds;
+  }
+
+  @override
+  set tagIds(ObservableSet<String> value) {
+    _$tagIdsAtom.reportWrite(value, super.tagIds, () {
+      super.tagIds = value;
+    });
+  }
+
+  late final _$_TaskActionController =
+      ActionController(name: '_Task', context: context);
+
+  @override
+  void selectTag(TaskTag tag) {
+    final _$actionInfo =
+        _$_TaskActionController.startAction(name: '_Task.selectTag');
+    try {
+      return super.selectTag(tag);
+    } finally {
+      _$_TaskActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -161,7 +238,10 @@ maxDuration: ${maxDuration},
 deliveryDate: ${deliveryDate},
 showFieldsOwn: ${showFieldsOwn},
 minWeight: ${minWeight},
-maxWeight: ${maxWeight}
+maxWeight: ${maxWeight},
+tagIds: ${tagIds},
+tags: ${tags},
+priority: ${priority}
     ''';
   }
 }

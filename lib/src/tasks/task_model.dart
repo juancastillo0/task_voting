@@ -115,6 +115,38 @@ abstract class _Task with Store {
 
   @observable
   ObservableSet<String> tagIds = ObservableSet();
+
+  @action
+  void selectTag(TaskTag tag) {
+    if (!tagIds.remove(tag.key)) {
+      tagIds.add(tag.key);
+    }
+  }
+
+  @computed
+  List<TaskTag> get tags {
+    final tagsMap = tasksStore.tagsMap;
+    return tagIds
+        .map<TaskTag?>((e) => tagsMap[e])
+        .whereType<TaskTag>()
+        .toList();
+  }
+
+  @computed
+  int get priority {
+    final meanWeight = (minWeight + maxWeight) / 2;
+    final meanMillis =
+        (minDuration.inMilliseconds + maxDuration.inMilliseconds) / 2;
+
+    double uncertainty = (maxWeight - minWeight) / meanWeight;
+    final uncertaintyMillis =
+        (maxDuration.inMilliseconds - minDuration.inMilliseconds) / meanMillis;
+    uncertainty += uncertaintyMillis;
+    final p = meanWeight +
+        10 / uncertainty +
+        const Duration(days: 7 * 2).inMilliseconds / meanMillis;
+    return p.round();
+  }
 }
 
 class _ObservableSetStringConverter
