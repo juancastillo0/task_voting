@@ -2,6 +2,7 @@ import 'package:task_voting/src/fields/prelude.dart';
 
 import 'package:task_voting/src/choices/choices_view.dart';
 import 'package:task_voting/src/choices/choices_store.dart';
+import 'package:task_voting/src/choices/choice_model.dart';
 
 class RankedVoting extends StatelessObserverWidget {
   const RankedVoting({Key? key}) : super(key: key);
@@ -81,7 +82,7 @@ class RankedVoting extends StatelessObserverWidget {
 
   Widget itemWidget(
     int index,
-    SampleItemEditable choice,
+    ChoiceModel choice,
     void Function() onChange,
   ) {
     return Center(

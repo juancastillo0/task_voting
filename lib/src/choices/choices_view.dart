@@ -1,7 +1,7 @@
 import 'package:task_voting/src/fields/prelude.dart';
 
 import 'package:task_voting/src/fields/image_value_view.dart';
-import 'package:task_voting/src/choices/choices_store.dart';
+import 'package:task_voting/src/choices/choice_model.dart';
 
 class ChoiceInfoTitle extends StatelessWidget {
   const ChoiceInfoTitle(this.text, {Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class ChoiceInfoTitle extends StatelessWidget {
 
 class ChoiceInfo extends StatelessObserverWidget {
   const ChoiceInfo({Key? key, required this.choice}) : super(key: key);
-  final SampleItemEditable choice;
+  final ChoiceModel choice;
 
   @override
   Widget build(BuildContext context) {

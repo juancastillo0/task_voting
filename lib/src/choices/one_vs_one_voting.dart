@@ -1,7 +1,7 @@
 import 'package:task_voting/src/fields/prelude.dart';
 
 import 'package:task_voting/src/choices/choices_view.dart';
-import 'package:task_voting/src/choices/choices_store.dart';
+import 'package:task_voting/src/choices/choice_model.dart';
 
 class OneVsOneSelect extends StatelessObserverWidget {
   const OneVsOneSelect({
@@ -11,9 +11,9 @@ class OneVsOneSelect extends StatelessObserverWidget {
     required this.onSelect,
   }) : super(key: key);
 
-  final SampleItemEditable choice1;
-  final SampleItemEditable choice2;
-  final void Function(SampleItemEditable) onSelect;
+  final ChoiceModel choice1;
+  final ChoiceModel choice2;
+  final void Function(ChoiceModel) onSelect;
 
   @override
   Widget build(BuildContext context) {

@@ -1,28 +1,13 @@
 import 'dart:async';
 
-import 'package:file_system_access/file_system_access.dart';
 import 'package:mobx/mobx.dart';
+import 'package:task_voting/src/choices/choice_model.dart';
 
 import 'package:task_voting/src/notifiers/app_notifier.dart';
 import 'package:task_voting/src/choices/voting_choices_store.dart';
 import 'package:task_voting/src/settings/settings_service.dart';
 import 'package:task_voting/src/util/prelude.dart';
 import 'package:task_voting/src/util/string.dart';
-
-/// A placeholder class that represents an entity or model.
-class SampleItem {
-  const SampleItem(this.id);
-
-  final Id id;
-
-  final String title = '';
-  final String? image = null;
-  final String? description = null;
-
-  final List<String>? additionalImages = null;
-  final List<String>? pros = null;
-  final List<String>? cons = null;
-}
 
 typedef Id = String;
 
@@ -97,11 +82,9 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
     ));
   }
 
-  int _maxId = 0;
-
-  final items = ObsList<SampleItemEditable>(
+  final items = ObsList<ChoiceModel>(
     'items',
-    serde: SampleItemEditable.typeSerde.list(),
+    serde: ChoiceModel.typeSerde.list(),
   );
   final simpleVotes = VotingState('simpleVotes');
   final iceMaxValuePerVote = Obs('iceMaxValuePerVote', 100);
@@ -112,7 +95,7 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   final isViewingItems = Obs('isViewingItems', true);
   final isEditingItems = Obs('isEditingItems', true);
 
-  final sortedRaked = Obs<List<SampleItemEditable>>('sortedRaked', []);
+  final sortedRaked = Obs<List<ChoiceModel>>('sortedRaked', []);
   final sortedTableIndex = Obs<int?>('sortedTableIndex', null);
 
   @override
@@ -128,12 +111,12 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
     sortedTableIndex,
   ];
 
-  late final sortedTableList = Computed<List<SampleItemEditable>>(
+  late final sortedTableList = Computed<List<ChoiceModel>>(
     name: 'sortedTableList',
     () {
       final index = sortedTableIndex.value;
       if (index == null) return items;
-      Comparable field(SampleItemEditable a) {
+      Comparable field(ChoiceModel a) {
         switch (index.abs()) {
           case 1:
             return a.iceAssessment.impact.value;
@@ -191,7 +174,7 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   }
 
   void addChoice() {
-    items.add(SampleItemEditable('${++_maxId}'));
+    items.add(ChoiceModel());
   }
 
   void toggleIsCreatingItems() {
@@ -220,164 +203,6 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
         element.isExpanded.set(null);
       }
       areItemsExpanded.set(!areItemsExpanded.value);
-    },
-  );
-}
-
-class SampleItemEditable with StoreSerde {
-  SampleItemEditable(this.id);
-
-  final Id id;
-
-  @override
-  String get name => id;
-
-  static final typeSerde = Serde.fromStore(
-    (json) => SampleItemEditable((json as Map)['id'] as String),
-  );
-
-  final Obs<String> title = Obs('title', '');
-  final Obs<ImageValue?> image = Obs(
-    'image',
-    null,
-    serde: ImageValue.typeSerde,
-  );
-  final Obs<String?> description = Obs('description', null);
-
-  final Obs<List<ImageValue>?> additionalImages = Obs(
-    'additionalImages',
-    null,
-    serde: ImageValue.typeSerde.list(),
-  );
-  final pros = ObsList<String>('pros');
-  final cons = ObsList<String>('cons');
-
-  final isExpanded = Obs<bool?>('areItemsExpanded', null);
-
-  late final iceAssessment = ItemICEAssessment('iceAssessment');
-  final rankingPoints = Obs('rankingPoints', 0);
-
-  void selectImages() async {
-    final images = await FileSystem.instance.showOpenFilePickerWebSafe(
-      const FsOpenOptions(
-        multiple: true,
-        startIn: AppPlatform.kIsWeb
-            ? FsStartsInOptions.path(WellKnownDirectory.pictures)
-            : null,
-        types: [
-          FilePickerAcceptType(
-            description: 'Images',
-            accept: {
-              'image/*': ['.png', '.gif', '.jpeg', '.jpg']
-            },
-          )
-        ],
-      ),
-    );
-    if (images.isNotEmpty) {
-      runInAction(name: 'selectImage', () {
-        image.set(ImageValue(
-          handle: images.first.handle,
-          xFile: images.first.file,
-        ));
-        if (images.length > 1) {
-          additionalImages.set(
-            images
-                .skip(1)
-                .map(
-                  (e) => ImageValue(
-                    handle: e.handle,
-                    xFile: e.file,
-                  ),
-                )
-                .toList(),
-          );
-        } else {
-          additionalImages.set(null);
-        }
-      });
-    }
-  }
-
-  void removeImages() {
-    image.set(null);
-    additionalImages.set(null);
-  }
-
-  @override
-  late final List<ToJson> serdeProperties = [
-    ToJson.constant('id', id),
-    title,
-    image,
-    description,
-    additionalImages,
-    pros,
-    cons,
-    isExpanded,
-    iceAssessment,
-    rankingPoints,
-  ];
-}
-
-class ImageValue {
-  final String? url;
-  final FileSystemFileHandle? handle;
-  final XFile? xFile;
-
-  ImageValue({
-    this.url,
-    this.handle,
-    this.xFile,
-  }) {
-    if (handle == null && url == null && xFile == null) {
-      throw Exception();
-    }
-  }
-
-  static final typeSerde = Serde<ImageValue>(
-    fromJson: (json) {
-      final file = (json as Map)['file'];
-      FileSystemPersistanceItem? item;
-      if (file is int && SettingsService.webFilePersistence != null) {
-        item = SettingsService.webFilePersistence!.get(file);
-      }
-
-      final value = ImageValue(
-        url: json['url'] as String?,
-        xFile: file is String ? XFile(file) : item?.persistedFile?.file,
-        handle: item?.handle as FileSystemFileHandle?,
-      );
-      return value;
-    },
-    toJson: (json) async {
-      // TODO: should this be necessary?
-      if (json == null) return null;
-
-      final Object? file;
-      if (json.handle != null) {
-        if (AppPlatform.kIsWeb && SettingsService.webFilePersistence != null) {
-          file = await SettingsService.webFilePersistence!
-              .put(json.handle!)
-              .then((value) => value.id);
-        } else {
-          file = await json.handle!.getFile().then((value) => value.path);
-        }
-      } else if (json.xFile != null) {
-        if (AppPlatform.kIsWeb && SettingsService.webFilePersistence != null) {
-          file = await SettingsService.webFilePersistence!
-              .putFile(json.xFile!)
-              .then((value) => value.id);
-        } else {
-          file = json.xFile!.path;
-        }
-      } else {
-        file = null;
-      }
-
-      return {
-        if (json.url != null) 'url': json.url,
-        if (file != null) 'file': file,
-      };
     },
   );
 }

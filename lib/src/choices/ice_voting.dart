@@ -1,6 +1,7 @@
 import 'package:task_voting/src/fields/prelude.dart';
 import 'package:task_voting/src/choices/choices_view.dart';
 import 'package:task_voting/src/choices/choices_store.dart';
+import 'package:task_voting/src/choices/choice_model.dart';
 
 class ICEVotingTable extends StatelessObserverWidget {
   const ICEVotingTable({
@@ -10,7 +11,7 @@ class ICEVotingTable extends StatelessObserverWidget {
     required this.sortIndex,
   }) : super(key: key);
 
-  final List<SampleItemEditable> items;
+  final List<ChoiceModel> items;
   final int? sortIndex;
   final void Function(int index, bool ascending) sortCallback;
 

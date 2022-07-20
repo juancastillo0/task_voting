@@ -2,7 +2,7 @@ import 'package:task_voting/src/fields/prelude.dart';
 
 import 'package:task_voting/src/fields/image_value_view.dart';
 import 'package:task_voting/src/choices/choices_view.dart';
-import 'package:task_voting/src/choices/choices_store.dart';
+import 'package:task_voting/src/choices/choice_model.dart';
 
 class ChoiceInfoForm extends StatelessObserverWidget {
   const ChoiceInfoForm({
@@ -13,7 +13,7 @@ class ChoiceInfoForm extends StatelessObserverWidget {
   }) : super(key: key);
 
   final bool isExpanded;
-  final SampleItemEditable choice;
+  final ChoiceModel choice;
   final void Function()? onRemove;
 
   @override
