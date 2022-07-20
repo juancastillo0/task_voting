@@ -1,4 +1,4 @@
-// import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 import 'package:task_voting/src/util/root_store.dart';
@@ -8,20 +8,33 @@ import 'package:valida/valida.dart';
 part 'task_model.g.dart';
 
 @Valida(nullableErrorLists: true)
-// @JsonSerializable()
+@JsonSerializable(constructor: '_')
 class Task extends _Task with _$Task {
-  Task(this.root, {String? id}) : id = id ?? randomString(32);
+  Task(this.tasksStore, {String? id}) : id = id ?? randomString(32);
 
-  final RootStore root;
+  Task._({String? id}) : id = id ?? randomString(32);
+
+  @override
+  @JsonKey(ignore: true)
+  late final TasksStore tasksStore;
+
+  @override
+  RootStore get root => tasksStore.root;
 
   @override
   final String id;
 
-  // factory Task.fromJson(Map<String, Object?> json) => _$TaskFromJson(json);
-  // Map<String, Object?> toJson() => _$TaskToJson(this);
+  @override
+  @_ObservableSetStringConverter()
+  ObservableSet<String> get tagIds;
+
+  factory Task.fromJson(Map<String, Object?> json) => _$TaskFromJson(json);
+  Map<String, Object?> toJson() => _$TaskToJson(this);
 }
 
 abstract class _Task with Store {
+  TasksStore get tasksStore;
+
   RootStore get root;
 
   String get id;
@@ -99,4 +112,18 @@ abstract class _Task with Store {
   )
   @observable
   int maxWeight = 34;
+
+  @observable
+  ObservableSet<String> tagIds = ObservableSet();
+}
+
+class _ObservableSetStringConverter
+    implements JsonConverter<ObservableSet<String>, List<String>> {
+  const _ObservableSetStringConverter();
+  @override
+  ObservableSet<String> fromJson(List<String> json) =>
+      ObservableSet<String>.of(json);
+
+  @override
+  List<String> toJson(ObservableSet<String> object) => object.toList();
 }
