@@ -96,8 +96,12 @@ class MyApp extends StatelessWidget {
 
 ThemeData globalTheme({required Brightness brightness}) {
   return ThemeData(
-    brightness: brightness,
-    primarySwatch: Colors.teal,
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.teal,
+      brightness: brightness,
+    ).copyWith(
+      onError: const Color(0xffffffff),
+    ),
     inputDecorationTheme: const InputDecorationTheme(
       isDense: true,
       filled: true,
