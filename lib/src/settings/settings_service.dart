@@ -4,6 +4,7 @@ import 'package:file_system_access/file_system_access.dart';
 import 'package:hive/hive.dart';
 import 'package:task_voting/src/fields/prelude.dart';
 import 'package:task_voting/src/sample_feature/sample_item.dart';
+import 'package:task_voting/src/tasks/tasks_store.dart';
 
 /// A service that stores and retrieves user settings.
 ///
@@ -16,7 +17,7 @@ class SettingsService {
   static late final FileSystemPersistance? webFilePersistence;
 
   Future<void> setUp() async {
-    Hive.registerAdapter<Map>(_JsonAdapter(typeId: 1));
+    Hive.registerAdapter<MapWrapper>(_JsonAdapter(typeId: 2));
     box = await Hive.openLazyBox('task_voting_MainBox');
 
     try {
@@ -56,22 +57,34 @@ class SettingsService {
   );
 }
 
-class _JsonAdapter extends TypeAdapter<Map<String, Object?>> {
+class MapWrapper {
+  final Map<String, Object?> map;
+
+  const MapWrapper(this.map);
+}
+
+class _JsonAdapter extends TypeAdapter<MapWrapper> {
   _JsonAdapter({required this.typeId});
 
   @override
   final int typeId;
 
   @override
-  Map<String, Object?> read(BinaryReader reader) {
-    final jsonString = reader.readString();
-    final json = jsonDecode(jsonString);
-    return (json as Map).cast();
+  MapWrapper read(BinaryReader reader) {
+    Map json;
+    try {
+      final jsonString = reader.readString();
+      json = jsonDecode(jsonString);
+    } catch (_) {
+      final map = reader.readMap();
+      json = jsonDecode(jsonEncode(map));
+    }
+    return MapWrapper(json.cast());
   }
 
   @override
-  void write(BinaryWriter writer, Map<String, Object?> json) {
-    final jsonString = jsonEncode(json);
+  void write(BinaryWriter writer, MapWrapper json) {
+    final jsonString = jsonEncode(json.map);
     writer.writeString(jsonString);
   }
 }
@@ -123,22 +136,39 @@ class HiveCollectionKey<T> {
     (value) async => value.toJson(),
   );
 
+  static final tasksStoreCollection = HiveCollectionKey<TasksStore>._(
+    'task_voting_TasksStoreBox',
+    (json, {required valueToEdit}) async {
+      final store = TasksStore.fromJson(json);
+      // TODO: don't require valueToEdit
+      store.root = valueToEdit.root;
+      return store;
+    },
+    (value) async => value.toJson(),
+  );
+
+  Future<LazyBox> _getBox() => Hive.openLazyBox(boxName);
+
   Future<T?> get(String key, {required T valueToEdit}) async {
-    final box = await Hive.openLazyBox<Map>(boxName);
+    final box = await _getBox();
     final value = await box.get(key);
     if (value == null) return null;
-    return fromJson(value.cast(), valueToEdit: valueToEdit);
+    final json =
+        jsonDecode(jsonEncode(value is MapWrapper ? value.map : value));
+    return fromJson(json, valueToEdit: valueToEdit);
   }
 
   Future<Map<String, Object?>> set(String key, T value) async {
-    final box = await Hive.openLazyBox<Map>(boxName);
+    final box = await _getBox();
     final json = await toJson(value);
-    await box.put(key, json);
+    // TODO: dont jsonDecode(jsonEncode()
+    final jsonCast = jsonDecode(jsonEncode(json)) as Map;
+    await box.put(key, MapWrapper(jsonCast.cast()));
     return json;
   }
 
   Future<List<String>> keys() async {
-    final box = await Hive.openLazyBox<Map>(boxName);
+    final box = await _getBox();
     return box.keys.cast<String>().toList();
   }
 

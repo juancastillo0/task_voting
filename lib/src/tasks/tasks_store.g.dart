@@ -3,6 +3,69 @@
 part of 'tasks_store.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TasksStore _$TasksStoreFromJson(Map<String, dynamic> json) => TasksStore._(
+      id: json['id'] as String?,
+    )
+      ..hoursPerDay = (json['hoursPerDay'] as num).toDouble()
+      ..sortedBy = $enumDecodeNullable(_$TaskSortEnumMap, json['sortedBy'])
+      ..sortReversed = json['sortReversed'] as bool
+      ..view = $enumDecode(_$TaskViewEnumMap, json['view'])
+      ..useUncertainty = json['useUncertainty'] as bool
+      ..editingTag =
+          TaskTag.fromJson(json['editingTag'] as Map<String, dynamic>)
+      ..tasks =
+          const ObservableListTaskConverter().fromJson(json['tasks'] as List)
+      ..tags =
+          const ObservableListTaskTagConverter().fromJson(json['tags'] as List)
+      ..tasksReferences = const _ObservableSubtaskReferencesConverter()
+          .fromJson(json['tasksReferences'] as Map<String, Object?>)
+      ..selectedTagKeys = const ObservableSetStringConverter()
+          .fromJson(json['selectedTagKeys'] as List);
+
+Map<String, dynamic> _$TasksStoreToJson(TasksStore instance) =>
+    <String, dynamic>{
+      'hoursPerDay': instance.hoursPerDay,
+      'sortedBy': _$TaskSortEnumMap[instance.sortedBy],
+      'sortReversed': instance.sortReversed,
+      'view': _$TaskViewEnumMap[instance.view]!,
+      'useUncertainty': instance.useUncertainty,
+      'editingTag': instance.editingTag,
+      'id': instance.id,
+      'tasks': const ObservableListTaskConverter().toJson(instance.tasks),
+      'tags': const ObservableListTaskTagConverter().toJson(instance.tags),
+      'tasksReferences': const _ObservableSubtaskReferencesConverter()
+          .toJson(instance.tasksReferences),
+      'selectedTagKeys':
+          const ObservableSetStringConverter().toJson(instance.selectedTagKeys),
+    };
+
+const _$TaskSortEnumMap = {
+  TaskSort.priority: 'priority',
+  TaskSort.weight: 'weight',
+  TaskSort.date: 'date',
+  TaskSort.duration: 'duration',
+};
+
+const _$TaskViewEnumMap = {
+  TaskView.list: 'list',
+  TaskView.sequence: 'sequence',
+  TaskView.week: 'week',
+  TaskView.month: 'month',
+};
+
+TaskTag _$TaskTagFromJson(Map<String, dynamic> json) => TaskTag(
+      key: json['key'] as String?,
+    )..name = json['name'] as String;
+
+Map<String, dynamic> _$TaskTagToJson(TaskTag instance) => <String, dynamic>{
+      'name': instance.name,
+      'key': instance.key,
+    };
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 

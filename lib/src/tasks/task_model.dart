@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
+import 'package:task_voting/src/util/converters.dart';
 import 'package:task_voting/src/util/root_store.dart';
 import 'package:task_voting/src/util/string.dart';
 import 'package:valida/valida.dart';
@@ -10,9 +11,9 @@ part 'task_model.g.dart';
 @Valida(nullableErrorLists: true)
 @JsonSerializable(constructor: '_')
 class Task extends _Task with _$Task {
-  Task(this.tasksStore, {String? id}) : id = id ?? randomString(32);
+  Task(this.tasksStore, {String? id}) : id = id ?? randomKey();
 
-  Task._({String? id}) : id = id ?? randomString(32);
+  Task._({String? id}) : id = id ?? randomKey();
 
   @override
   @JsonKey(ignore: true)
@@ -25,7 +26,7 @@ class Task extends _Task with _$Task {
   final String id;
 
   @override
-  @_ObservableSetStringConverter()
+  @ObservableSetStringConverter()
   ObservableSet<String> get tagIds;
 
   factory Task.fromJson(Map<String, Object?> json) => _$TaskFromJson(json);
@@ -77,9 +78,9 @@ abstract class _Task with Store {
 
   @ValidaFunction()
   List<ValidaError> _validateTask() {
-    final tasksSameName = root.ref(TasksStore.ref).tasks.where(
-          (t) => t.name == name,
-        );
+    final tasksSameName = tasksStore.tasks.where(
+      (t) => t.name == name,
+    );
     return [
       if (tasksSameName.length > 1)
         ValidaError(
@@ -149,13 +150,14 @@ abstract class _Task with Store {
   }
 }
 
-class _ObservableSetStringConverter
-    implements JsonConverter<ObservableSet<String>, List<String>> {
-  const _ObservableSetStringConverter();
+class ObservableListTaskConverter
+    implements JsonConverter<ObservableList<Task>, List<Object?>> {
+  const ObservableListTaskConverter();
   @override
-  ObservableSet<String> fromJson(List<String> json) =>
-      ObservableSet<String>.of(json);
+  ObservableList<Task> fromJson(List<Object?> json) => ObservableList<Task>.of(
+      json.map((t) => Task.fromJson((t as Map).cast())));
 
   @override
-  List<String> toJson(ObservableSet<String> object) => object.toList();
+  List<Object?> toJson(ObservableList<Task> object) =>
+      object.map((t) => t.toJson()).toList();
 }

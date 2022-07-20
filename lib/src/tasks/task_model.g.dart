@@ -20,8 +20,8 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task._(
       ..showFieldsOwn = json['showFieldsOwn'] as bool
       ..minWeight = json['minWeight'] as int
       ..maxWeight = json['maxWeight'] as int
-      ..tagIds = const _ObservableSetStringConverter()
-          .fromJson(json['tagIds'] as List<String>);
+      ..tagIds =
+          const ObservableSetStringConverter().fromJson(json['tagIds'] as List);
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'parentTaskId': instance.parentTaskId,
@@ -34,7 +34,7 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'minWeight': instance.minWeight,
       'maxWeight': instance.maxWeight,
       'id': instance.id,
-      'tagIds': const _ObservableSetStringConverter().toJson(instance.tagIds),
+      'tagIds': const ObservableSetStringConverter().toJson(instance.tagIds),
     };
 
 // **************************************************************************
