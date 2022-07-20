@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
                     return const SampleItemDetailsView();
                   case SampleItemListView.routeName:
                   default:
-                    return const SampleItemListView();
+                    return const GlobalStack(child: SampleItemListView());
                 }
               },
             );

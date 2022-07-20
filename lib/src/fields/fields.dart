@@ -200,54 +200,54 @@ class _ObsTextInputState<T> extends State<ObsTextInput<T>> {
   }
 }
 
-class IntInput extends StatefulWidget {
-  const IntInput({
-    Key? key,
-    required this.obs,
-  }) : super(key: key);
-  final Obs<int> obs;
+// class IntInput extends StatefulWidget {
+//   const IntInput({
+//     Key? key,
+//     required this.obs,
+//   }) : super(key: key);
+//   final Obs<int> obs;
 
-  @override
-  State<IntInput> createState() => _IntInputState();
-}
+//   @override
+//   State<IntInput> createState() => _IntInputState();
+// }
 
-class _IntInputState extends State<IntInput> {
-  final controller = TextEditingController();
+// class _IntInputState extends State<IntInput> {
+//   final controller = TextEditingController();
 
-  int? parsedValue;
+//   int? parsedValue;
 
-  @override
-  void initState() {
-    super.initState();
-    controller.text = widget.obs.value.toString();
-    controller.addListener(() {
-      final value = int.tryParse(controller.text);
-      parsedValue = value;
-      if (value != null) {
-        widget.obs.set(value);
-      }
-    });
-    widget.obs.addListener(_onValueChanged);
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     controller.text = widget.obs.value.toString();
+//     controller.addListener(() {
+//       final value = int.tryParse(controller.text);
+//       parsedValue = value;
+//       if (value != null) {
+//         widget.obs.set(value);
+//       }
+//     });
+//     widget.obs.addListener(_onValueChanged);
+//   }
 
-  void _onValueChanged() {
-    if (widget.obs.value != parsedValue) {
-      controller.text = widget.obs.value.toString();
-    }
-  }
+//   void _onValueChanged() {
+//     if (widget.obs.value != parsedValue) {
+//       controller.text = widget.obs.value.toString();
+//     }
+//   }
 
-  @override
-  void dispose() {
-    widget.obs.removeListener(_onValueChanged);
-    controller.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     widget.obs.removeListener(_onValueChanged);
+//     controller.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      keyboardType: TextInputType.number,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextField(
+//       controller: controller,
+//       keyboardType: TextInputType.number,
+//     );
+//   }
+// }

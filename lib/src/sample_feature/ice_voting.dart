@@ -139,16 +139,40 @@ class ICEVotingTable extends StatelessObserverWidget {
                           ),
                         ),
                         DataCell(
-                          IntInput(obs: e.impact),
+                          ObsTextInput(
+                            obs: e.impact,
+                            parser: TextInputParser.intParser,
+                            textField: const TextField(
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
                         ),
                         DataCell(
-                          IntInput(obs: e.confidence),
+                          ObsTextInput(
+                            obs: e.confidence,
+                            parser: TextInputParser.intParser,
+                            textField: const TextField(
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
                         ),
                         DataCell(
-                          IntInput(obs: e.easiness),
+                          ObsTextInput(
+                            obs: e.easiness,
+                            parser: TextInputParser.intParser,
+                            textField: const TextField(
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
                         ),
                         DataCell(
-                          IntInput(obs: e.urgency),
+                          ObsTextInput(
+                            obs: e.urgency,
+                            parser: TextInputParser.intParser,
+                            textField: const TextField(
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
                         ),
                         DataCell(
                           Observer(builder: (context) {
