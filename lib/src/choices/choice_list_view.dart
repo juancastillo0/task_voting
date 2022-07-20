@@ -10,7 +10,7 @@ import 'package:task_voting/src/util/disposable.dart';
 import 'package:task_voting/src/util/routes.dart';
 
 import '../settings/settings_view.dart';
-import 'sample_item.dart';
+import 'choices_store.dart';
 
 /// Displays a list of SampleItems.
 class SampleItemListView extends StatelessObserverWidget {

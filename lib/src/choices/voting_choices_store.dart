@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:task_voting/src/choices/sample_item.dart';
+import 'package:task_voting/src/choices/choices_store.dart';
 import 'package:task_voting/src/settings/settings_service.dart';
 
 import '../notifiers/app_notifier.dart';

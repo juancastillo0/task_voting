@@ -4,8 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:stack_portal/stack_portal.dart';
 import 'package:task_voting/src/util/root_store.dart';
 
-import 'choices/sample_item_details_view.dart';
-import 'choices/sample_item_list_view.dart';
+import 'choices/choice_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -79,8 +78,6 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return const SettingsView();
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
                   case SampleItemListView.routeName:
                   default:
                     return const GlobalStack(child: SampleItemListView());

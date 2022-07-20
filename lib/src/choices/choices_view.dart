@@ -1,7 +1,7 @@
 import 'package:task_voting/src/fields/prelude.dart';
 
 import 'package:task_voting/src/fields/image_value_view.dart';
-import 'package:task_voting/src/choices/sample_item.dart';
+import 'package:task_voting/src/choices/choices_store.dart';
 
 class ChoiceInfoTitle extends StatelessWidget {
   const ChoiceInfoTitle(this.text, {Key? key}) : super(key: key);
