@@ -44,12 +44,12 @@ mixin _$TasksStore on _TasksStore, Store {
       (_$tagsMapComputed ??= Computed<Map<String, TaskTag>>(() => super.tagsMap,
               name: '_TasksStore.tagsMap'))
           .value;
-  Computed<String>? _$editingTagErrorComputed;
+  Computed<EditingTagError?>? _$editingTagErrorComputed;
 
   @override
-  String get editingTagError => (_$editingTagErrorComputed ??= Computed<String>(
-          () => super.editingTagError,
-          name: '_TasksStore.editingTagError'))
+  EditingTagError? get editingTagError => (_$editingTagErrorComputed ??=
+          Computed<EditingTagError?>(() => super.editingTagError,
+              name: '_TasksStore.editingTagError'))
       .value;
 
   late final _$hoursPerDayAtom =

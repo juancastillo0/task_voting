@@ -1,5 +1,5 @@
 {
-  "appTitle": "task_voting",
+  "appTitle": "Task Voting",
   "@appTitle": {
     "description": "The title of the application"
   },
@@ -9,6 +9,9 @@
   "accept": "Aceptar",
   "cancel": "Cancelar",
   "retry": "Intentar",
+  "add": "Añadir",
+  "remove": "Eliminar",
+  "day": "Día",
   "viewImagePermissionError": "Hubo un error al obtener el archivo. Por favor inténtalo nuevamente.",
   "@settings": {
     "description": "The settings page"
@@ -65,5 +68,38 @@
   "@oneVsOne": {
     "description": "The selector for One vs One voting"
   },
-  "oneVsOneSelectOne": "Selecciona una opción"
+  "oneVsOneSelectOne": "Selecciona una opción",
+  "@tasks": {
+    "description": "The tasks functionality"
+  },
+  "tasksTitle": "Tareas",
+  "tasksCreateTask": "Crear Tarea",
+  "tasksView": "Vista",
+  "tasksSortBy": "Ordenar Por",
+  "tasksReversed": "Invertido",
+  "tasksUncertainty": "Incertidumbre",
+  "tasksSubtasks": "Sub-tareas",
+  "tasksEditTags": "Editar Grupos",
+  "tasksNoTags": "Sin Grupos",
+  "tasksTaskDescription": "Descripción",
+  "tasksTaskName": "Nombre",
+  "tasksTaskMinWeight": "Min Peso",
+  "tasksTaskMaxWeight": "Max Peso",
+  "tasksTaskMinDuration": "Min Duración",
+  "tasksTaskMaxDuration": "Max Duración",
+  "tasksTaskDueDate": "Fecha límite",
+  "tasksViewList": "lista",
+  "tasksViewSequence": "secuencia",
+  "tasksViewWeek": "semana",
+  "tasksViewMonth": "mes",
+  "tasksSortNone": "ninguna",
+  "tasksSortPriority": "prioridad",
+  "tasksSortWeight": "peso",
+  "tasksSortDate": "fecha",
+  "tasksSortDuration": "duración",
+  "tasksTagName": "Nombre de Grupo",
+  "tasksAddTag": "Añadir",
+  "tasksNoTagsFound": "No se encontró ningún grupo para el nombre dado",
+  "tasksTagErrorEmpty": "Nombre del grupo no debería estar vacío.",
+  "tasksTagErrorNotUnique": "Nombre de grupo \"{name}\" debería ser único."
 }

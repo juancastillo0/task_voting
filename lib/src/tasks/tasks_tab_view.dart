@@ -15,6 +15,34 @@ class TasksTabView extends StatelessObserverWidget {
     final store = context.ref(TasksStore.ref);
     final sortedList = store.sortedTasks;
     final titleStyle = Theme.of(context).textTheme.subtitle2;
+    final loc = AppLocalizations.of(context)!;
+
+    String locTaskSort(TaskSort? sort) {
+      if (sort == null) return loc.tasksSortNone;
+      switch (sort) {
+        case TaskSort.date:
+          return loc.tasksSortDate;
+        case TaskSort.priority:
+          return loc.tasksSortPriority;
+        case TaskSort.weight:
+          return loc.tasksSortWeight;
+        case TaskSort.duration:
+          return loc.tasksSortDuration;
+      }
+    }
+
+    String locTaskView(TaskView view) {
+      switch (view) {
+        case TaskView.list:
+          return loc.tasksViewList;
+        case TaskView.sequence:
+          return loc.tasksViewSequence;
+        case TaskView.week:
+          return loc.tasksViewWeek;
+        case TaskView.month:
+          return loc.tasksViewMonth;
+      }
+    }
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -32,7 +60,7 @@ class TasksTabView extends StatelessObserverWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Tasks (${store.tasks.length})',
+                        '${loc.tasksTitle} (${store.tasks.length})',
                         style: Theme.of(context).textTheme.headline5,
                       ),
                     ),
@@ -43,7 +71,7 @@ class TasksTabView extends StatelessObserverWidget {
                           store.addTask();
                         },
                         icon: const Icon(Icons.add),
-                        label: const Text('Create Task'),
+                        label: Text(loc.tasksCreateTask),
                       ),
                     ),
                   ],
@@ -53,7 +81,7 @@ class TasksTabView extends StatelessObserverWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('View', style: titleStyle),
+                      Text(loc.tasksView, style: titleStyle),
                       ButtonBar(
                         buttonPadding: EdgeInsets.zero,
                         children: [
@@ -64,7 +92,7 @@ class TasksTabView extends StatelessObserverWidget {
                                   : () {
                                       store.view = v;
                                     },
-                              child: Text(v.name),
+                              child: Text(locTaskView(v)),
                             ),
                           ),
                         ],
@@ -73,11 +101,11 @@ class TasksTabView extends StatelessObserverWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Sort By', style: titleStyle),
+                      Text(loc.tasksSortBy, style: titleStyle),
                       ButtonBar(
                         buttonPadding: EdgeInsets.zero,
                         children: [
@@ -88,8 +116,21 @@ class TasksTabView extends StatelessObserverWidget {
                                   : () {
                                       store.sortedBy = v;
                                     },
-                              child: Text(v?.name ?? 'none'),
+                              child: Text(locTaskSort(v)),
                             ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(width: 8),
+                          Text(loc.tasksReversed, style: titleStyle),
+                          Switch(
+                            value: store.sortReversed,
+                            onChanged: (_) {
+                              store.sortReversed = !store.sortReversed;
+                            },
                           ),
                         ],
                       ),
@@ -99,19 +140,8 @@ class TasksTabView extends StatelessObserverWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Reversed', style: titleStyle),
-                    Switch(
-                      value: store.sortReversed,
-                      onChanged: (_) {
-                        store.sortReversed = !store.sortReversed;
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text('Uncertainty', style: titleStyle),
+                    const SizedBox(width: 8),
+                    Text(loc.tasksUncertainty, style: titleStyle),
                     Switch(
                       value: store.useUncertainty,
                       onChanged: (_) {
@@ -122,7 +152,7 @@ class TasksTabView extends StatelessObserverWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 6),
             Expanded(
               child: store.view == TaskView.list
                   ? ListView.builder(
@@ -233,7 +263,7 @@ class TaskItem extends StatelessObserverWidget {
                             : null;
                       })(),
                       errorMaxLines: 2,
-                      labelText: 'name',
+                      labelText: loc.tasksTaskName,
                     ),
                     onChanged: (name) {
                       task.name = name;
@@ -244,7 +274,7 @@ class TaskItem extends StatelessObserverWidget {
               SizedBox(
                   width: 100,
                   child: IntInput(
-                    label: 'minWeight',
+                    label: loc.tasksTaskMinWeight,
                     value: task.minWeight,
                     error: (() {
                       if (validation.fields.minWeight == null) return null;
@@ -292,7 +322,7 @@ class TaskItem extends StatelessObserverWidget {
                       return err.isEmpty ? null : err;
                     })(),
                     errorMaxLines: 2,
-                    labelText: 'maxWeight',
+                    labelText: loc.tasksTaskMaxWeight,
                   ),
                   validator: (v) {
                     if (v != null) {
@@ -314,7 +344,7 @@ class TaskItem extends StatelessObserverWidget {
                   Observer(
                     builder: (context) {
                       return DurationInputButton(
-                        title: 'Min Duration',
+                        title: loc.tasksTaskMinDuration,
                         duration: task.minDuration,
                         onChanged: (dur) {
                           task.minDuration = dur;
@@ -326,7 +356,7 @@ class TaskItem extends StatelessObserverWidget {
                   Observer(
                     builder: (context) {
                       return DurationInputButton(
-                        title: 'Max Duration',
+                        title: loc.tasksTaskMaxDuration,
                         duration: task.maxDuration,
                         onChanged: (dur) {
                           task.maxDuration = dur;
@@ -339,7 +369,7 @@ class TaskItem extends StatelessObserverWidget {
               Observer(
                 builder: (context) {
                   return DateInput(
-                    title: 'Due Date',
+                    title: loc.tasksTaskDueDate,
                     date: task.deliveryDate,
                     firstDate: DateTime.now().add(const Duration(days: -1)),
                     lastDate: DateTime.now().add(const Duration(days: 366)),
@@ -356,9 +386,9 @@ class TaskItem extends StatelessObserverWidget {
                   initialValue: task.description,
                   expands: true,
                   maxLines: null,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     errorMaxLines: 2,
-                    labelText: 'description',
+                    labelText: loc.tasksTaskDescription,
                   ),
                   onChanged: (description) {
                     task.description = description;
@@ -392,12 +422,12 @@ class TaskItem extends StatelessObserverWidget {
                           },
                         );
                       },
-                      child: Text('Edit Tags'),
+                      child: Text(loc.tasksEditTags),
                     ),
                     if (task.tags.isEmpty)
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text('No tags'),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(loc.tasksNoTags),
                       )
                     else
                       Expanded(
@@ -409,7 +439,8 @@ class TaskItem extends StatelessObserverWidget {
                                 (e) => Padding(
                                   key: Key(e.key),
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0),
+                                    horizontal: 4.0,
+                                  ),
                                   child: Chip(
                                     label: Text(e.name),
                                   ),
@@ -467,7 +498,7 @@ class TaskItem extends StatelessObserverWidget {
                     Row(
                       children: [
                         Text(
-                          'Subtasks',
+                          loc.tasksSubtasks,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                         const SizedBox(width: 10),
@@ -475,7 +506,7 @@ class TaskItem extends StatelessObserverWidget {
                           onPressed: () {
                             store.addChildTask(task);
                           },
-                          child: const Text('Add'),
+                          child: Text(loc.add),
                         )
                       ],
                     ),

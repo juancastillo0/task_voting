@@ -39,17 +39,17 @@ class SampleItemListView extends StatelessObserverWidget {
             appBar: AppBar(
               title: Row(
                 children: [
-                  Text(loc.choiceListTitle),
+                  Text(loc.appTitle),
                   const SizedBox(width: 20),
                   SizedBox(
                     width: 200,
                     child: TabBar(
-                      tabs: const [
+                      tabs: [
                         Tab(
-                          child: Text('Votes'),
+                          child: Text(loc.choiceListTitle),
                         ),
                         Tab(
-                          child: Text('Tasks'),
+                          child: Text(loc.tasksTitle),
                         ),
                       ],
                       onTap: (index) {

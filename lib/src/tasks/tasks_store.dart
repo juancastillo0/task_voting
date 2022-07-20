@@ -96,13 +96,12 @@ abstract class _TasksStore with Store {
   TaskTag editingTag = TaskTag();
 
   @computed
-  String get editingTagError {
+  EditingTagError? get editingTagError {
     final name = editingTag.name.trim();
-    // TODO: localize
-    if (name.isEmpty) return 'Tag name should not be empty.';
+    if (name.isEmpty) return EditingTagError.empty;
     return tags.any((tag) => tag.name == name)
-        ? 'Tag name "${name}" should be unique.'
-        : '';
+        ? EditingTagError.notUnique
+        : null;
   }
 
   @action
@@ -112,7 +111,7 @@ abstract class _TasksStore with Store {
 
   @action
   void addTag() {
-    if (editingTagError.isNotEmpty) return;
+    if (editingTagError != null) return;
     editingTag.name = editingTag.name.trim();
     tags.add(editingTag);
     editingTag = TaskTag();
@@ -193,6 +192,11 @@ enum TaskSort {
   weight,
   date,
   duration,
+}
+
+enum EditingTagError {
+  empty,
+  notUnique,
 }
 
 class TaskTag extends _TaskTag with _$TaskTag {}

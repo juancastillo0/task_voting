@@ -1,5 +1,5 @@
 {
-  "appTitle": "task_voting",
+  "appTitle": "Task Voting",
   "@appTitle": {
     "description": "The title of the application"
   },
@@ -9,6 +9,9 @@
   "accept": "Accept",
   "cancel": "Cancel",
   "retry": "Retry",
+  "add": "Add",
+  "remove": "Remove",
+  "day": "Day",
   "viewImagePermissionError": "There was an error reading the file. Please try again.",
   "@settings": {
     "description": "The settings page"
@@ -65,5 +68,45 @@
   "@oneVsOne": {
     "description": "The selector for One vs One voting"
   },
-  "oneVsOneSelectOne": "Select one choice"
+  "oneVsOneSelectOne": "Select one choice",
+  "@tasks": {
+    "description": "The tasks functionality"
+  },
+  "tasksTitle": "Tasks",
+  "tasksCreateTask": "Create Task",
+  "tasksView": "View",
+  "tasksSortBy": "Sort By",
+  "tasksReversed": "Reversed",
+  "tasksUncertainty": "Uncertainty",
+  "tasksSubtasks": "Subtasks",
+  "tasksEditTags": "Edit Tags",
+  "tasksNoTags": "No Tags",
+  "tasksTaskDescription": "Description",
+  "tasksTaskName": "Name",
+  "tasksTaskMinWeight": "minWeight",
+  "tasksTaskMaxWeight": "maxWeight",
+  "tasksTaskMinDuration": "Min Duration",
+  "tasksTaskMaxDuration": "Max Duration",
+  "tasksTaskDueDate": "Due Date",
+  "tasksViewList": "list",
+  "tasksViewSequence": "sequence",
+  "tasksViewWeek": "week",
+  "tasksViewMonth": "month",
+  "tasksSortNone": "none",
+  "tasksSortPriority": "priority",
+  "tasksSortWeight": "weight",
+  "tasksSortDate": "date",
+  "tasksSortDuration": "duration",
+  "tasksTagName": "Tag Name",
+  "tasksAddTag": "Add Tag",
+  "tasksNoTagsFound": "No tags found for search query",
+  "tasksTagErrorEmpty": "Tag name should not be empty.",
+  "tasksTagErrorNotUnique": "Tag name \"{name}\" should be unique.",
+  "@tasksTagErrorNotUnique": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

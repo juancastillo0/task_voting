@@ -14,6 +14,16 @@ class TaskTagList extends StatelessObserverWidget {
   @override
   Widget build(BuildContext context) {
     final store = context.ref(TasksStore.ref);
+    final loc = context.loc;
+
+    String errorString(EditingTagError editingTagError) {
+      switch (editingTagError) {
+        case EditingTagError.empty:
+          return loc.tasksTagErrorEmpty;
+        case EditingTagError.notUnique:
+          return loc.tasksTagErrorNotUnique(store.editingTag.name);
+      }
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -24,7 +34,7 @@ class TaskTagList extends StatelessObserverWidget {
             children: [
               Expanded(
                 child: TextFormField(
-                  decoration: const InputDecoration(label: Text('Tag Name')),
+                  decoration: InputDecoration(label: Text(loc.tasksTagName)),
                   initialValue: store.editingTag.name,
                   onChanged: (text) {
                     store.editingTag.name = text;
@@ -33,26 +43,27 @@ class TaskTagList extends StatelessObserverWidget {
               ),
               TextButton(
                 onPressed: () {
-                  if (store.editingTagError.isNotEmpty) {
-                    // TODO: extract
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(store.editingTagError)),
+                  final editingTagError = store.editingTagError;
+                  if (editingTagError != null) {
+                    context.showSnackBar(
+                      errorString(editingTagError),
+                      isError: true,
                     );
                   } else {
                     store.addTag();
                     onSelect(store.tags.last);
                   }
                 },
-                child: Text('Add Tag'),
+                child: Text(loc.tasksAddTag),
               )
             ],
           ),
           if (store.filteredTags.isEmpty)
             Container(
               padding: const EdgeInsets.all(18.0),
-              // width: 100,
+              width: 250,
               child: Text(
-                "No tags found for search query",
+                loc.tasksNoTagsFound,
                 textAlign: TextAlign.center,
               ),
             )
@@ -74,7 +85,7 @@ class TaskTagList extends StatelessObserverWidget {
                     onPressed: () {
                       onSelect(tag);
                     },
-                    child: Text(isSelected ? 'Remove' : 'Add'),
+                    child: Text(isSelected ? loc.remove : loc.add),
                   ),
                 ],
               );

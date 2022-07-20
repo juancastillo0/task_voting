@@ -8,6 +8,7 @@ class TasksCalendarView extends StatelessObserverWidget {
   @override
   Widget build(BuildContext context) {
     final store = context.ref(TasksStore.ref);
+    final loc = AppLocalizations.of(context)!;
 
     // week
     // month
@@ -34,11 +35,11 @@ class TasksCalendarView extends StatelessObserverWidget {
               width: 100,
               child: Column(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: rowHeight,
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Tasks'),
+                      child: Text(loc.tasksTitle),
                     ),
                   ),
                   ...sortedTasks.map(
@@ -71,13 +72,18 @@ class TasksCalendarView extends StatelessObserverWidget {
                             alignment: Alignment.topCenter,
                             decoration: index == 0
                                 ? const BoxDecoration(
-                                    border: Border.fromBorderSide(side))
+                                    border: Border.fromBorderSide(side),
+                                  )
                                 : const BoxDecoration(
                                     border: Border(
-                                        right: side, bottom: side, top: side)),
+                                      right: side,
+                                      bottom: side,
+                                      top: side,
+                                    ),
+                                  ),
                             child: SizedBox(
                               height: rowHeight,
-                              child: Center(child: Text('Day ${index + 1}')),
+                              child: Center(child: Text('${loc.day} ${index + 1}')),
                             ),
                           ),
                         ),
@@ -125,7 +131,7 @@ class TasksCalendarView extends StatelessObserverWidget {
     }
 
     final date = DateTime.now();
-    final weekDayFormat = DateFormat(DateFormat.ABBR_WEEKDAY);
+    final weekDayFormat = DateFormat(DateFormat.ABBR_WEEKDAY, loc.localeName);
     const dayWidth = 80.0;
     final start = -(DateTime(date.year, date.month, 1).weekday - 2);
 
