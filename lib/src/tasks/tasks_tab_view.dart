@@ -4,15 +4,40 @@ import 'package:task_voting/src/tasks/tags_dialog.dart';
 import 'package:task_voting/src/tasks/task_model.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 import 'package:stack_portal/fields.dart';
+import 'package:task_voting/src/util/disposable.dart';
 
-class TasksTabView extends StatelessObserverWidget {
+class TasksTabView extends StatefulObserverWidget {
   const TasksTabView({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<TasksTabView> createState() => _TasksTabViewState();
+}
+
+class _TasksTabViewState extends State<TasksTabView> with DisposableState {
+  bool isLoading = true;
+  late TasksStore store;
+
+  @override
+  void initState() {
+    super.initState();
+    context.ref(TaskProjectsStore.ref).setUp().then((value) {
+      if (!mounted) return;
+      disposer.onDispose(autorun((_) {
+        setState(() {
+          isLoading = false;
+          store = context.ref(TasksStore.ref);
+        });
+      }));
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final store = context.ref(TasksStore.ref);
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     final sortedList = store.sortedTasks;
     final titleStyle = Theme.of(context).textTheme.subtitle2;
     final loc = AppLocalizations.of(context)!;
