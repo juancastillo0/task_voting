@@ -31,7 +31,7 @@ class VotingChoicesStore with DisposableWithSetUp {
     stores.addAll(values.whereType<ChoicesStore>());
   }
 
-  static final ref = Ref((root) => VotingChoicesStore(root));
+  static final ref = Ref(reCreate: false, (root) => VotingChoicesStore(root));
 
   ChoicesStore get selectedStore {
     return runInAction(name: 'selectedStore', () {

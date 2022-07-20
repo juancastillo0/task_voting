@@ -11,3 +11,5 @@ String randomString(int length) {
     (_) => _alphabetFull[_random.nextInt(_alphabetFull.length)],
   ).join();
 }
+
+String randomKey() => randomString(32);

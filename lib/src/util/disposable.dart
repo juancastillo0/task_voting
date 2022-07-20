@@ -1,13 +1,17 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart' show State, StatefulWidget;
 import 'package:meta/meta.dart';
 
 class Disposer implements Disposable {
   List<void Function()> _disposeCallbacks = [];
   bool isDisposed = false;
 
-  void onDispose(void Function() callback) {
+  void Function() onDispose(void Function() callback) {
     _disposeCallbacks.add(callback);
+    return () {
+      _disposeCallbacks.remove(callback);
+    };
   }
 
   @override
@@ -63,4 +67,16 @@ mixin DisposableWithSetUp implements Disposable {
 
   @protected
   Future<void> performSetUp();
+}
+
+mixin DisposableState<T extends StatefulWidget> on State<T>
+    implements Disposable {
+  @override
+  final disposer = Disposer();
+
+  @override
+  void dispose() {
+    disposer.dispose();
+    super.dispose();
+  }
 }

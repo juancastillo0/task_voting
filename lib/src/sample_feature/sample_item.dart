@@ -30,7 +30,7 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   ChoicesStore(
     this.rootStore, {
     String? name,
-  }) : name = name ?? randomString(32) {
+  }) : name = name ?? randomKey() {
     addChoice();
   }
   @override
@@ -39,6 +39,7 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   final RootStore rootStore;
 
   static final ref = Ref(
+    reCreate: true,
     (root) => root.ref(VotingChoicesStore.ref).selectedStore,
   );
 
@@ -393,7 +394,7 @@ class VotingState with StoreSerde {
   final oneVsOneMap = ObsMap<ObservableSet<Id>>(
     'oneVsOneMap',
     serde: Serde<ObservableSet<Id>>(
-      fromJson: (a) => ObservableSet.of(a as Iterable<Id>),
+      fromJson: (a) => ObservableSet.of((a as Iterable).cast<Id>()),
       toJson: (v) => v?.toList(),
     ).map(),
   );

@@ -119,7 +119,7 @@ class AppRouterDelegate extends RouterDelegate<RouteInfo>
 
   AppRouterDelegate(this.root);
 
-  static const ref = Ref(AppRouterDelegate.new);
+  static const ref = Ref(reCreate: false, AppRouterDelegate.new);
 
   @override
   Widget build(BuildContext context) {

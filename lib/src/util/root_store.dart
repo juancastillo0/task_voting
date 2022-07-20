@@ -15,6 +15,8 @@ class RootStore {
   }
 
   T ref<T extends Disposable>(Ref<T> reference) {
+    if (reference.reCreate) return reference.create(this);
+
     Object? value = _refs[reference];
     if (value is T) {
       return value;
@@ -34,8 +36,12 @@ class RootStore {
 
 class Ref<T extends Disposable> {
   final T Function(RootStore) create;
+  final bool reCreate;
 
-  const Ref(this.create);
+  const Ref(
+    this.create, {
+    required this.reCreate,
+  });
 }
 
 extension RootStoreRef on BuildContext {
