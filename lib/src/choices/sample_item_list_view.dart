@@ -1,10 +1,10 @@
 import 'package:task_voting/src/fields/prelude.dart';
 
-import 'package:task_voting/src/sample_feature/choices_form.dart';
-import 'package:task_voting/src/sample_feature/choices_view.dart';
-import 'package:task_voting/src/sample_feature/ice_voting.dart';
-import 'package:task_voting/src/sample_feature/ranked_voting.dart';
-import 'package:task_voting/src/sample_feature/voting_choices_store.dart';
+import 'package:task_voting/src/choices/choices_form.dart';
+import 'package:task_voting/src/choices/choices_view.dart';
+import 'package:task_voting/src/choices/ice_voting.dart';
+import 'package:task_voting/src/choices/ranked_voting.dart';
+import 'package:task_voting/src/choices/voting_choices_store.dart';
 import 'package:task_voting/src/tasks/tasks_tab_view.dart';
 import 'package:task_voting/src/util/disposable.dart';
 import 'package:task_voting/src/util/routes.dart';

@@ -4,8 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:stack_portal/stack_portal.dart';
 import 'package:task_voting/src/util/root_store.dart';
 
-import 'sample_feature/sample_item_details_view.dart';
-import 'sample_feature/sample_item_list_view.dart';
+import 'choices/sample_item_details_view.dart';
+import 'choices/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 

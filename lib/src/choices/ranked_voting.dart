@@ -1,7 +1,7 @@
 import 'package:task_voting/src/fields/prelude.dart';
 
-import 'package:task_voting/src/sample_feature/choices_view.dart';
-import 'package:task_voting/src/sample_feature/sample_item.dart';
+import 'package:task_voting/src/choices/choices_view.dart';
+import 'package:task_voting/src/choices/sample_item.dart';
 
 class RankedVoting extends StatelessObserverWidget {
   const RankedVoting({Key? key}) : super(key: key);

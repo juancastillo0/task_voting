@@ -3,7 +3,7 @@ import 'dart:convert' show jsonDecode, jsonEncode;
 import 'package:file_system_access/file_system_access.dart';
 import 'package:hive/hive.dart';
 import 'package:task_voting/src/fields/prelude.dart';
-import 'package:task_voting/src/sample_feature/sample_item.dart';
+import 'package:task_voting/src/choices/sample_item.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 
 /// A service that stores and retrieves user settings.

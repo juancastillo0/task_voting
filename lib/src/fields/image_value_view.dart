@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_system_access/file_system_access.dart';
 import 'package:flutter/foundation.dart';
 import 'package:task_voting/src/fields/prelude.dart';
-import 'package:task_voting/src/sample_feature/sample_item.dart';
+import 'package:task_voting/src/choices/sample_item.dart';
 
 class ImageValueView extends StatefulWidget {
   const ImageValueView({

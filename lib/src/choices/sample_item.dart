@@ -4,7 +4,7 @@ import 'package:file_system_access/file_system_access.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:task_voting/src/notifiers/app_notifier.dart';
-import 'package:task_voting/src/sample_feature/voting_choices_store.dart';
+import 'package:task_voting/src/choices/voting_choices_store.dart';
 import 'package:task_voting/src/settings/settings_service.dart';
 import 'package:task_voting/src/util/prelude.dart';
 import 'package:task_voting/src/util/string.dart';
