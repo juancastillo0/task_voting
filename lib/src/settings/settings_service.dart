@@ -115,8 +115,6 @@ class HiveCollectionKey<T> {
       result.when<void>(
         ok: (ok) => ok(),
         err: (err) {
-          store.dispose();
-
           throw err;
         },
       );

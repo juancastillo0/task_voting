@@ -232,6 +232,30 @@ mixin StoreSerde implements ToJson {
     return 'StoreSerde("$name", runtimeType: $runtimeType,'
         ' ${serdeProperties.map((e) => '${e.name}:$e').join(', ')})';
   }
+
+  static void _iterateValue(Object? value) {
+    if (value is List) {
+      value.forEach(_iterateValue);
+    } else if (value is Set) {
+      value.forEach(_iterateValue);
+    } else if (value is Map) {
+      value.keys.forEach(_iterateValue);
+      value.values.forEach(_iterateValue);
+    } else if (value is StoreSerde) {
+      iterateStoreObservables(value);
+    }
+  }
+
+  static iterateStoreObservables(StoreSerde store) {
+    for (final v in store.serdeProperties) {
+      if (v is MutableListenableValue) {
+        final value = (v as MutableListenableValue).value;
+        _iterateValue(value);
+      } else if (v is StoreSerde) {
+        iterateStoreObservables(v);
+      }
+    }
+  }
 }
 
 mixin JsonSerde<T> implements ToJson, MutableValue<T> {

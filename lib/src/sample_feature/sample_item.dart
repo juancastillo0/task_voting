@@ -90,32 +90,7 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
       name: 'persist',
       delay: 3000,
       (r) {
-        late final void Function(StoreSerde store) _iterateStore;
-        void _iterateValue(Object? value) {
-          if (value is List) {
-            value.forEach(_iterateValue);
-          } else if (value is Set) {
-            value.forEach(_iterateValue);
-          } else if (value is Map) {
-            value.keys.forEach(_iterateValue);
-            value.values.forEach(_iterateValue);
-          } else if (value is StoreSerde) {
-            _iterateStore(value);
-          }
-        }
-
-        _iterateStore = (StoreSerde store) {
-          for (final v in store.serdeProperties) {
-            if (v is MutableListenableValue) {
-              final value = (v as MutableListenableValue).value;
-              _iterateValue(value);
-            } else if (v is StoreSerde) {
-              _iterateStore(v);
-            }
-          }
-        };
-
-        _iterateStore(this);
+        StoreSerde.iterateStoreObservables(this);
         HiveCollectionKey.choicesStoreCollection.set(name, this);
       },
     ));
