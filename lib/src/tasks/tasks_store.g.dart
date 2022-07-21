@@ -93,6 +93,13 @@ mixin _$TasksStore on _TasksStore, Store {
           Computed<int Function(Task, Task)>(() => super.sorter,
               name: '_TasksStore.sorter'))
       .value;
+  Computed<List<TaskTag>>? _$selectedTagsComputed;
+
+  @override
+  List<TaskTag> get selectedTags => (_$selectedTagsComputed ??=
+          Computed<List<TaskTag>>(() => super.selectedTags,
+              name: '_TasksStore.selectedTags'))
+      .value;
   Computed<List<TaskTag>>? _$filteredTagsComputed;
 
   @override
@@ -236,6 +243,39 @@ mixin _$TasksStore on _TasksStore, Store {
   }
 
   @override
+  void clearAllSelectedTags() {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.clearAllSelectedTags');
+    try {
+      return super.clearAllSelectedTags();
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void toggleTagForFilter(TaskTag tag) {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.toggleTagForFilter');
+    try {
+      return super.toggleTagForFilter(tag);
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void deleteTag(TaskTag tag) {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.deleteTag');
+    try {
+      return super.deleteTag(tag);
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   bool removeTask(Task task, {bool removeChildren = true}) {
     final _$actionInfo = _$_TasksStoreActionController.startAction(
         name: '_TasksStore.removeTask');
@@ -269,6 +309,7 @@ editingTag: ${editingTag},
 tasksWithSelectedTags: ${tasksWithSelectedTags},
 sortedTasks: ${sortedTasks},
 sorter: ${sorter},
+selectedTags: ${selectedTags},
 filteredTags: ${filteredTags},
 tagsMap: ${tagsMap},
 editingTagError: ${editingTagError}

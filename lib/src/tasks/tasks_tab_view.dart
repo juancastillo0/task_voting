@@ -1,5 +1,6 @@
 import 'package:task_voting/src/fields/prelude.dart';
 import 'package:task_voting/src/tasks/calendar_view.dart';
+import 'package:task_voting/src/tasks/tags_dialog.dart';
 import 'package:task_voting/src/tasks/task_view.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 import 'package:task_voting/src/util/disposable.dart';
@@ -175,6 +176,7 @@ class _TasksTabViewState extends State<TasksTabView> with DisposableState {
                 ),
               ],
             ),
+            const TaskTagsFilterRow(),
             const SizedBox(height: 6),
             Expanded(
               child: store.view == TaskView.list
@@ -201,6 +203,87 @@ class _TasksTabViewState extends State<TasksTabView> with DisposableState {
           ],
         ),
       ),
+    );
+  }
+}
+
+class TaskTagsFilterRow extends StatelessObserverWidget {
+  const TaskTagsFilterRow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final store = context.ref(TasksStore.ref);
+    final loc = context.loc;
+
+    return Row(
+      children: [
+        TextButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return SimpleDialog(
+                  children: [
+                    TaskTagList(
+                      selected: store.selectedTagKeys,
+                      onSelect: store.toggleTagForFilter,
+                      onDelete: store.deleteTag,
+                    ),
+                    Align(
+                      child: OutlinedButton(
+                        onPressed: Navigator.of(context).pop,
+                        child: Text(loc.close),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: Text(loc.tasksEditFilterTags),
+        ),
+        if (store.selectedTagKeys.isEmpty)
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text(loc.tasksNoTags),
+          )
+        else
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Padding(
+                    key: const Key('clearAll'),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 4.0,
+                    ),
+                    child: Chip(
+                      onDeleted: store.clearAllSelectedTags,
+                      label: Text(loc.tasksClearFilterTags),
+                    ),
+                  ),
+                  ...store.selectedTags.map(
+                    (e) => Padding(
+                      key: Key(e.key),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0,
+                      ),
+                      child: Chip(
+                        onDeleted: () {
+                          store.toggleTagForFilter(e);
+                        },
+                        label: Text(e.name),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

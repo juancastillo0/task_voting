@@ -12,6 +12,7 @@
   "add": "Add",
   "remove": "Remove",
   "day": "Day",
+  "delete": "Delete",
   "viewImagePermissionError": "There was an error reading the file. Please try again.",
   "@settings": {
     "description": "The settings page"
@@ -80,7 +81,9 @@
   "tasksUncertainty": "Uncertainty",
   "tasksSubtasks": "Subtasks",
   "tasksEditTags": "Edit Tags",
-  "tasksNoTags": "No Tags",
+  "tasksEditFilterTags": "Filter by Tags",
+  "tasksClearFilterTags": "Clear All",
+  "tasksNoTags": "No tags",
   "tasksTaskDescription": "Description",
   "tasksTaskName": "Name",
   "tasksTaskMinWeight": "minWeight",

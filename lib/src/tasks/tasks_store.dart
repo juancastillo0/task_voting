@@ -152,6 +152,12 @@ abstract class _TasksStore with Store {
   }
 
   @computed
+  List<TaskTag> get selectedTags {
+    final map = tagsMap;
+    return selectedTagKeys.map((t) => map[t]!).toList();
+  }
+
+  @computed
   List<TaskTag> get filteredTags {
     if (editingTag.name.trim().isEmpty) return tags;
     return tags.where((tag) => tag.name.contains(editingTag.name)).toList();
@@ -198,6 +204,28 @@ abstract class _TasksStore with Store {
     editingTag.name = editingTag.name.trim();
     tags.add(editingTag);
     editingTag = TaskTag();
+  }
+
+  @action
+  void clearAllSelectedTags() {
+    selectedTagKeys.clear();
+  }
+
+  @action
+  void toggleTagForFilter(TaskTag tag) {
+    if (!selectedTagKeys.remove(tag.key)) {
+      selectedTagKeys.add(tag.key);
+    }
+  }
+
+  @action
+  void deleteTag(TaskTag tag) {
+    selectedTagKeys.remove(tag.key);
+    tags.remove(tag);
+    for (final task
+        in tasks.followedBy(tasksReferences.values.expand((e) => e))) {
+      task.tagIds.remove(tag.key);
+    }
   }
 
   @action

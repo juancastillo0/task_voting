@@ -220,60 +220,7 @@ class TaskItem extends StatelessObserverWidget {
               SizedBox(
                 width: 400,
                 height: 80,
-                child: Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return SimpleDialog(
-                              children: [
-                                TaskTagList(
-                                  selected: task.tagIds,
-                                  onSelect: task.selectTag,
-                                ),
-                                Align(
-                                  child: OutlinedButton(
-                                    onPressed: Navigator.of(context).pop,
-                                    child: Text(loc.close),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      child: Text(loc.tasksEditTags),
-                    ),
-                    if (task.tags.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(loc.tasksNoTags),
-                      )
-                    else
-                      Expanded(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              ...task.tags.map(
-                                (e) => Padding(
-                                  key: Key(e.key),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 4.0,
-                                  ),
-                                  child: Chip(
-                                    label: Text(e.name),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
+                child: TaskTagsRow(task: task),
               )
             ],
           ),
@@ -355,6 +302,75 @@ class TaskItem extends StatelessObserverWidget {
             ),
         ],
       ),
+    );
+  }
+}
+
+class TaskTagsRow extends StatelessObserverWidget {
+  const TaskTagsRow({
+    Key? key,
+    required this.task,
+  }) : super(key: key);
+
+  final Task task;
+
+  @override
+  Widget build(BuildContext context) {
+    final loc = context.loc;
+
+    return Row(
+      children: [
+        TextButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return SimpleDialog(
+                  children: [
+                    TaskTagList(
+                      selected: task.tagIds,
+                      onSelect: task.selectTag,
+                    ),
+                    Align(
+                      child: OutlinedButton(
+                        onPressed: Navigator.of(context).pop,
+                        child: Text(loc.close),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: Text(loc.tasksEditTags),
+        ),
+        if (task.tags.isEmpty)
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text(loc.tasksNoTags),
+          )
+        else
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...task.tags.map(
+                    (e) => Padding(
+                      key: Key(e.key),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0,
+                      ),
+                      child: Chip(
+                        label: Text(e.name),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
