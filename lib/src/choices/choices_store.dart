@@ -11,6 +11,12 @@ import 'package:task_voting/src/util/string.dart';
 
 typedef Id = String;
 
+enum ChoicesView {
+  list,
+  ice,
+  ranked,
+}
+
 class ChoicesStore with DisposableWithSetUp, StoreSerde {
   ChoicesStore(
     this.rootStore, {

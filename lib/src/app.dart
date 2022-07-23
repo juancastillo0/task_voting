@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:stack_portal/stack_portal.dart';
-import 'package:task_voting/src/util/root_store.dart';
 
-import 'choices/choice_list_view.dart';
+import 'util/root_store.dart';
+import 'util/routes.dart';
 import 'settings/settings_controller.dart';
-import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -18,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final rootStore = RootStore.of(context);
     final settingsController = rootStore.getGlobal<SettingsController>();
+    final appRouterDelegate = context.ref(AppRouterDelegate.ref);
     // Glue the SettingsController to the MaterialApp.
     //
     // The AnimatedBuilder Widget listens to the SettingsController for changes.
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return AnimatedBuilder(
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
+        return MaterialApp.router(
           // Providing a restorationScopeId allows the Navigator built by the
           // MaterialApp to restore the navigation stack when a user leaves and
           // returns to the app after it has been killed while running in the
@@ -66,25 +66,25 @@ class MyApp extends StatelessWidget {
             return GlobalStack(child: child!);
           },
 
-          // routeInformationParser: const _RouteInformationParser(),
-          // routerDelegate: AppRouterDelegate(rootStore),
+          routeInformationParser: const AppRouteInformationParser(),
+          routerDelegate: appRouterDelegate,
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return const SettingsView();
-                  case SampleItemListView.routeName:
-                  default:
-                    return const GlobalStack(child: SampleItemListView());
-                }
-              },
-            );
-          },
+          // onGenerateRoute: (RouteSettings routeSettings) {
+          //   return MaterialPageRoute<void>(
+          //     settings: routeSettings,
+          //     builder: (BuildContext context) {
+          //       switch (routeSettings.name) {
+          //         case SettingsView.routeName:
+          //           return const SettingsView();
+          //         case SampleItemListView.routeName:
+          //         default:
+          //           return const GlobalStack(child: SampleItemListView());
+          //       }
+          //     },
+          //   );
+          // },
         );
       },
     );

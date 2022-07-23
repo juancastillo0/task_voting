@@ -3,12 +3,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mobx/mobx.dart';
 import 'package:task_voting/src/fields/provider.dart';
 import 'package:task_voting/src/util/root_store.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
 void main() async {
+  setHashUrlStrategy();
   mainContext.config = ReactiveConfig(
     writePolicy: ReactiveWritePolicy.never,
   );

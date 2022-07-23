@@ -9,8 +9,6 @@ import 'settings_controller.dart';
 class SettingsView extends StatelessObserverWidget {
   const SettingsView({Key? key}) : super(key: key);
 
-  static const routeName = '/settings';
-
   @override
   Widget build(BuildContext context) {
     final rootStore = RootStore.of(context);
