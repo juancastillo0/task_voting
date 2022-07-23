@@ -7,6 +7,7 @@ import 'package:task_voting/src/tasks/task_model.dart';
 import 'package:task_voting/src/util/converters.dart';
 import 'package:task_voting/src/util/disposable.dart';
 import 'package:task_voting/src/util/root_store.dart';
+import 'package:task_voting/src/util/routes.dart';
 import 'package:task_voting/src/util/string.dart';
 
 part 'tasks_store.g.dart';
@@ -51,6 +52,11 @@ class TaskProjectsStore with DisposableWithSetUp {
       stores.values.forEach(_setUpStore);
       _selectedStoreId.value = stores.keys.first;
     });
+    final router = root.ref(AppRouterDelegate.ref);
+    disposer.onDispose(reaction<TaskRouteInfo>(
+      (_) => selectedStore.value.routeInfo,
+      router.changeCurrentTab,
+    ));
   }
 
   void _setUpStore(TasksStore store) {
@@ -62,6 +68,26 @@ class TaskProjectsStore with DisposableWithSetUp {
       }),
     );
   }
+
+  Future<void> setRouteInfo(TaskRouteInfo route) async {
+    await setUp();
+    runInAction(name: 'setRouteInfo', () {
+      if (stores.containsKey(route.projectId)) {
+        _selectedStoreId.value = route.projectId!;
+      }
+      final selectedStore = this.selectedStore.value;
+      if (route.view != null) {
+        selectedStore.view = route.view!;
+      }
+      if (route.sort != null) {
+        // TODO: set null sort?
+        selectedStore.sortedBy = route.sort!;
+      }
+      if (route.reversed != null) {
+        selectedStore.sortReversed = route.reversed!;
+      }
+    });
+  }
 }
 
 @JsonSerializable(constructor: '_')
@@ -70,6 +96,7 @@ class TasksStore extends _TasksStore with _$TasksStore, Disposable {
 
   TasksStore._({String? id}) : id = id ?? randomKey();
 
+  @override
   final String id;
 
   @JsonKey(ignore: true)
@@ -100,11 +127,20 @@ class TasksStore extends _TasksStore with _$TasksStore, Disposable {
 
 abstract class _TasksStore with Store {
   RootStore get root;
+  String get id;
 
   ObservableList<Task> tasks = ObservableList();
   ObservableList<TaskTag> tags = ObservableList();
   ObservableMap<String, ObservableList<Task>> tasksReferences = ObservableMap();
   ObservableSet<String> selectedTagKeys = ObservableSet();
+
+  @computed
+  TaskRouteInfo get routeInfo => TaskRouteInfo(
+        sort: sortedBy,
+        view: view,
+        reversed: sortReversed,
+        projectId: id,
+      );
 
   @computed
   List<Task> get tasksWithSelectedTags => selectedTagKeys.isEmpty

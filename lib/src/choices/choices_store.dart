@@ -7,6 +7,7 @@ import 'package:task_voting/src/notifiers/app_notifier.dart';
 import 'package:task_voting/src/choices/voting_choices_store.dart';
 import 'package:task_voting/src/settings/settings_service.dart';
 import 'package:task_voting/src/util/prelude.dart';
+import 'package:task_voting/src/util/routes.dart';
 import 'package:task_voting/src/util/string.dart';
 
 typedef Id = String;
@@ -97,9 +98,15 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   final rankedIsNumeric = Obs('rankedIsNumeric', true);
 
   final areItemsExpanded = Obs('areItemsExpanded', true);
-  final isICEVote = Obs('isICEVote', true);
-  final isViewingItems = Obs('isViewingItems', true);
   final isEditingItems = Obs('isEditingItems', true);
+  final view = Obs(
+    'view',
+    ChoicesView.list,
+    serde: Serde(
+      fromJson: (obj) => ChoicesView.values.byName(obj as String),
+      toJson: (val) => val?.name,
+    ),
+  );
 
   final sortedRaked = Obs<List<ChoiceModel>>('sortedRaked', []);
   final sortedTableIndex = Obs<int?>('sortedTableIndex', null);
@@ -111,11 +118,20 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
     iceMaxValuePerVote,
     rankedIsNumeric,
     areItemsExpanded,
-    isICEVote,
-    isViewingItems,
     isEditingItems,
+    view,
     sortedTableIndex,
   ];
+
+  late final routeInfo = Computed(
+    () => VoteRouteInfo(
+      sortedTableIndex: sortedTableIndex.value,
+      view: view.value,
+      expanded: areItemsExpanded.value,
+      editing: isEditingItems.value,
+      projectId: name,
+    ),
+  );
 
   late final sortedTableList = Computed<List<ChoiceModel>>(
     name: 'sortedTableList',
@@ -184,7 +200,7 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   }
 
   void toggleIsCreatingItems() {
-    isViewingItems.set(!isViewingItems.value);
+    view.set(ChoicesView.list);
   }
 
   void toggleIsEditingItems() {
@@ -192,14 +208,12 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   }
 
   void toggleICEVote() {
-    toggleIsCreatingItems();
-    isICEVote.set(true);
+    view.set(ChoicesView.ice);
   }
 
   void toggleRankedVote() {
     computeRanked();
-    toggleIsCreatingItems();
-    isICEVote.set(false);
+    view.set(ChoicesView.ranked);
   }
 
   late final toggleAreItemsExpanded = Action(

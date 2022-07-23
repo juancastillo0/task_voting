@@ -59,9 +59,11 @@ mixin DisposableWithSetUp implements Disposable {
     __isSettingUp = true;
     try {
       await performSetUp();
+      __setUpCompleter.complete();
+    } catch (e, s) {
+      __setUpCompleter.completeError(e, s);
     } finally {
       __isSettingUp = false;
-      __setUpCompleter.complete();
     }
   }
 
