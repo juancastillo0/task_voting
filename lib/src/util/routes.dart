@@ -39,38 +39,13 @@ extension ExtAppTab on AppTab {
 
 @immutable
 mixin RouteInfo<T extends RouteInfo<T>> {
-  // final AppTab tab;
-  AppRoute get route => routeSpec.route;
-
-  // const RouteInfo({
-  //   required this.tab,
-  //   required this.route,
-  // });
-
-  // RouteInfo copyWith({
-  //   AppTab? tab,
-  //   AppRoute? route,
-  // }) =>
-  //     RouteInfo(
-  //       route: route ?? this.route,
-  //       tab: tab ?? this.tab,
-  //     );
-
   RouteSpec<T> get routeSpec;
 
   T merge(T other);
 
   Map<String, String> get queryParams;
 
-  // Uri get url {
-  //   final queryParams = [
-  //     if (route != AppRoute.main) 'route=${route.name}',
-  //     if (route == AppRoute.main) 'tab=${tab.name}',
-  //   ];
-  //   return Uri.parse(
-  //     '/${queryParams.isEmpty ? '' : '?'}${queryParams.join('&')}',
-  //   );
-  // }
+  AppRoute get route => routeSpec.route;
 
   Uri get url {
     final queryParams = this.queryParams;
@@ -88,18 +63,6 @@ mixin RouteInfo<T extends RouteInfo<T>> {
   ];
 
   static RouteInfo? fromUrl(Uri url) {
-    // T _parseParam<T extends Enum>(String name, List<T> values, T defaultValue) {
-    //   final tab = url.queryParameters[name];
-    //   return values.firstWhere(
-    //     (t) => t.name == tab,
-    //     orElse: () => defaultValue,
-    //   );
-    // }
-
-    // return RouteInfo(
-    //   tab: _parseParam('tab', AppTab.values, AppTab.votes),
-    //   route: _parseParam(routeKey, AppRoute.values, AppRoute.main),
-    // );
     Uri mappedUrl = url;
     if (!url.queryParameters.containsKey(ROUTE)) {
       mappedUrl = url.replace(queryParameters: {
@@ -240,9 +203,6 @@ class TaskRouteInfo
     },
   );
 
-  // @override
-  // AppRoute get route => AppRoute.main;
-
   @override
   AppTab get tab => AppTab.tasks;
 
@@ -365,12 +325,18 @@ class AppRouterDelegate extends RouterDelegate<RouteInfo>
     with ChangeNotifier, Disposable {
   final RootStore root;
 
-  final navigationStack = ObservableList<RouteInfo>.of([
-    // const RouteInfo(route: AppRoute.main, tab: AppTab.votes),
-  ]);
+  final navigationStack = ObservableList<RouteInfo>();
 
   // PopNavigatorRouterDelegateMixin
   final navigatorKey = GlobalKey<NavigatorState>();
+
+  AppRouterDelegate(this.root) {
+    disposer.onDispose(navigationStack.observe((_) {
+      notifyListeners();
+    }));
+  }
+
+  static const ref = Ref(reCreate: false, AppRouterDelegate.new);
 
   MainRouteInfo get mainRoute => currentByType<MainRouteInfo>()!;
 
@@ -380,32 +346,16 @@ class AppRouterDelegate extends RouterDelegate<RouteInfo>
   RouteInfo? currentByRoute(AppRoute route) =>
       navigationStack.reversed.lastWhereOrNull((info) => info.route == route);
 
-  // void changeTab(AppTab tab) {
-  //   final index = navigationStack.lastIndexWhere(
-  //     (info) => info.route == AppRoute.main,
-  //   );
-  //   navigationStack[index] = RouteInfo(route: AppRoute.main, tab: tab);
-  // }
-
   void changeCurrentTab(RouteInfo routeInfo) {
     final index = navigationStack.lastIndexWhere(
       (info) => info.route == routeInfo.route,
     );
     navigationStack[index] = routeInfo;
-    notifyListeners();
   }
 
   @override
   RouteInfo? get currentConfiguration =>
       navigationStack.isEmpty ? null : navigationStack.last;
-
-  AppRouterDelegate(this.root) {
-    disposer.onDispose(navigationStack.observe((_) {
-      notifyListeners();
-    }));
-  }
-
-  static const ref = Ref(reCreate: false, AppRouterDelegate.new);
 
   @override
   Widget build(BuildContext context) {
