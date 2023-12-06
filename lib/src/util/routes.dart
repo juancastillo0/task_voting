@@ -149,7 +149,7 @@ class SpecRouteInfo with RouteInfo<SpecRouteInfo> {
   Map<String, String> get queryParams =>
       {ROUTE: routeSpec.route.name, ...routeSpec.requiredParams};
 
-  static final settingsInfo = SpecRouteInfo._(settingsSpec);
+  static final SpecRouteInfo settingsInfo = SpecRouteInfo._(settingsSpec);
   static final settingsSpec = RouteSpecValue(
     route: AppRoute.settings,
     requiredParams: {},

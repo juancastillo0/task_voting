@@ -34,7 +34,7 @@ class _ImageValueViewState extends State<ImageValueView> {
     setUpFile();
   }
 
-  void setUpFile() async {
+  Future<void> setUpFile() async {
     final handle = widget.image.handle;
     if (handle == null) {
       file = widget.image.xFile;

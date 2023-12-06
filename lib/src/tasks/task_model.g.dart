@@ -267,10 +267,13 @@ class TaskValidationFields {
   List<ValidaError>? get maxDuration => errorsMap[TaskField.maxDuration];
   List<ValidaError>? get minWeight => errorsMap[TaskField.minWeight];
   List<ValidaError>? get maxWeight => errorsMap[TaskField.maxWeight];
+  List<ValidaError>? get $global => errorsMap[TaskField.$global];
 }
 
 class TaskValidation extends Validation<Task, TaskField> {
-  TaskValidation(this.errorsMap, this.value, this.fields) : super(errorsMap);
+  TaskValidation(this.errorsMap, this.value)
+      : fields = TaskValidationFields(errorsMap),
+        super(errorsMap);
   @override
   final Map<TaskField, List<ValidaError>> errorsMap;
   @override
@@ -279,24 +282,15 @@ class TaskValidation extends Validation<Task, TaskField> {
   final TaskValidationFields fields;
 
   /// Validates [value] and returns a [TaskValidation] with the errors found as a result
-  static TaskValidation fromValue(Task value) {
-    Object? _getProperty(String property) => spec.getField(value, property);
-
-    final errors = <TaskField, List<ValidaError>>{
-      if (spec.globalValidate != null)
-        TaskField.$global: spec.globalValidate!(value),
-      ...spec.fieldsMap.map(
-        (key, field) => MapEntry(
-          key,
-          field.validate(key.name, _getProperty),
-        ),
-      )
-    };
-    errors.removeWhere((key, value) => value.isEmpty);
-    return TaskValidation(errors, value, TaskValidationFields(errors));
-  }
+  factory TaskValidation.fromValue(Task value) => spec.validate(value);
 
   static const spec = ValidaSpec(
+    globalValidate: GlobalValidateFunc(
+      function: _globalValidate,
+      field: TaskField.$global,
+    ),
+    validationFactory: TaskValidation.new,
+    getField: _getField,
     fieldsMap: {
       TaskField.minDuration: ValidaDuration(
           comp: ValidaComparison(
@@ -314,8 +308,6 @@ class TaskValidation extends Validation<Task, TaskField> {
       TaskField.maxWeight: ValidaNum(
           comp: ValidaComparison(moreEq: CompVal(0), lessEq: CompVal(100))),
     },
-    getField: _getField,
-    globalValidate: _globalValidate,
   );
 
   static List<ValidaError> _globalValidate(Task value) => [
@@ -324,21 +316,44 @@ class TaskValidation extends Validation<Task, TaskField> {
 
   static Object? _getField(Task value, String field) {
     switch (field) {
+      case 'tasksStore':
+        return value.tasksStore;
+      case 'id':
+        return value.id;
+      case 'root':
+        return value.root;
+      case 'tagIds':
+        return value.tagIds;
+      case 'parentTaskId':
+        return value.parentTaskId;
+      case 'name':
+        return value.name;
+      case 'description':
+        return value.description;
       case 'minDuration':
         return value.minDuration;
       case 'maxDuration':
         return value.maxDuration;
+      case 'deliveryDate':
+        return value.deliveryDate;
+      case 'showFieldsOwn':
+        return value.showFieldsOwn;
+      case 'validation':
+        return value.validation;
       case 'minWeight':
         return value.minWeight;
       case 'maxWeight':
         return value.maxWeight;
+      case 'tags':
+        return value.tags;
+      case 'priority':
+        return value.priority;
+      case 'hashCode':
+        return value.hashCode;
+      case 'runtimeType':
+        return value.runtimeType;
       default:
-        throw Exception();
+        throw Exception('Could not find field "$field" for value $value.');
     }
   }
-}
-
-@Deprecated('Use TaskValidation.fromValue')
-TaskValidation validateTask(Task value) {
-  return TaskValidation.fromValue(value);
 }

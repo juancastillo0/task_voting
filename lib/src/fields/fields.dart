@@ -25,7 +25,7 @@ mixin TextInputParser<T> {
     fromString: num.tryParse,
   );
   static final stringParser = TextInputParser.value(
-    asString: (i) => i,
+    asString: (i) => i as String,
     fromString: (s) => s,
   );
 

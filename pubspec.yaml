@@ -15,7 +15,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   url_strategy: ^0.2.0
-  intl: ^0.17.0
+  intl: ^0.18.1
   vote: ^2.1.0
   mobx: ^2.0.7+4
   flutter_mobx: ^2.0.6+1
@@ -36,10 +36,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   valida_generator:
   mobx_codegen:
-  build_runner:
+  build_runner: ^2.4.7
   json_serializable: ^6.3.1
 
 dependency_overrides:

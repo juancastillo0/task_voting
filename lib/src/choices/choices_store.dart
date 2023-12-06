@@ -102,7 +102,7 @@ class ChoicesStore with DisposableWithSetUp, StoreSerde {
   final view = Obs(
     'view',
     ChoicesView.list,
-    serde: Serde(
+    serde: Serde<ChoicesView>(
       fromJson: (obj) => ChoicesView.values.byName(obj as String),
       toJson: (val) => val?.name,
     ),
