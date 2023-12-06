@@ -8,10 +8,40 @@ environment:
 
 dependencies:
   args: ^2.4.0
+  leto_schema: ^0.0.1-dev.6
+  leto: ^0.0.1-dev.2
+  leto_shelf: ^0.0.1-dev.2
   shelf: ^1.4.0
   shelf_router: ^1.1.0
+  http: ^1.1.0
+  typesql: ^0.0.1
 
 dev_dependencies:
-  http: ^1.1.0
   lints: ^2.1.0
   test: ^1.24.0
+
+  leto_generator: ^0.0.1-dev.4
+  build_runner: ^2.4.7
+  typesql_generator: ^0.0.1
+
+dependency_overrides:
+  wasm_run:
+    git:
+      url: https://github.com/juancastillo0/wasm_run
+      path: packages/wasm_run
+  wasm_wit_component:
+    git:
+      url: https://github.com/juancastillo0/wasm_run
+      path: packages/dart_wit_component/wasm_wit_component
+  sql_parser:
+    git:
+      url: https://github.com/juancastillo0/wasm_run
+      path: packages/wasm_packages/sql_parser
+  typesql:
+    git:
+      url: https://github.com/juancastillo0/wasm_run
+      path: packages/wasm_packages/sql_parser/typesql
+  typesql_generator:
+    git:
+      url: https://github.com/juancastillo0/wasm_run
+      path: packages/wasm_packages/sql_parser/typesql_generator
