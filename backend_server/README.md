@@ -5,6 +5,12 @@ This sample code handles HTTP GET requests to `/` and `/echo/<message>`
 
 # Running the sample
 
+## Code Generation
+
+```
+fvm dart pub run build_runner watch --delete-conflicting-outputs
+```
+
 ## Running with the Dart SDK
 
 You can run the example with the [Dart SDK](https://dart.dev/get-dart)
