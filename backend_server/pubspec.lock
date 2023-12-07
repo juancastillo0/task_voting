@@ -17,6 +17,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.3.0"
+  api_client:
+    dependency: "direct dev"
+    description:
+      path: "../api_client"
+      relative: true
+    source: path
+    version: "1.0.0"
   archive:
     dependency: transitive
     description:
@@ -193,6 +200,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.5"
+  ferry:
+    dependency: transitive
+    description:
+      name: ferry
+      sha256: b96c1c74d2f3b0c2c151be0a0e1cb21dab0c5d6801bc11c229db0b97f70c6f10
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.0+1"
+  ferry_cache:
+    dependency: transitive
+    description:
+      name: ferry_cache
+      sha256: e02cc8bb9079be24e7ecfbf48ba03f423668784cc788634232349fa8678f4b59
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.0"
+  ferry_exec:
+    dependency: transitive
+    description:
+      name: ferry_exec
+      sha256: dfa916794065e65f35842b716026fe6ed930dc41d3ad49496204f0ef7da55c2d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
+  ferry_store:
+    dependency: transitive
+    description:
+      name: ferry_store
+      sha256: f1180951756583750c996e085d80dd14e77d0750e3b6b232b495bf92bd1f425b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.3"
   ffi:
     dependency: transitive
     description:
@@ -257,6 +296,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0+1"
+  gql_code_builder:
+    dependency: transitive
+    description:
+      name: gql_code_builder
+      sha256: b70e17fe62af58c3a9a3dfd619bf0b07ca15afe4d285001fbcd0852a40538401
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1+1"
+  gql_exec:
+    dependency: transitive
+    description:
+      name: gql_exec
+      sha256: "957db95ba37028001f76c1904e18b848f57cfef878e572ce77c6d898fafecf8f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
+  gql_http_link:
+    dependency: transitive
+    description:
+      name: gql_http_link
+      sha256: "1f922eed1b7078fdbfd602187663026f9f659fe9a9499e2207b5d5e01617f658"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1+1"
+  gql_link:
+    dependency: transitive
+    description:
+      name: gql_link
+      sha256: "4aa288a1e67c899b0d746a2209e949fd0dc87e56d9b759a5cdc46a7069722cf3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
+  gql_tristate_value:
+    dependency: transitive
+    description:
+      name: gql_tristate_value
+      sha256: ae045e7e272fbfd030084315140c683c9b032a9861a37165f68c2ecd8a759664
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   graphs:
     dependency: transitive
     description:
@@ -265,6 +344,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  hive:
+    dependency: transitive
+    description:
+      name: hive
+      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
   http:
     dependency: "direct main"
     description:
@@ -409,6 +496,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  normalize:
+    dependency: transitive
+    description:
+      name: normalize
+      sha256: "07c294801f8c4bd4e71f4595bc864af80caa373a5cf2e8120849c78a232a44b9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.0"
   oxidized:
     dependency: transitive
     description:
@@ -433,6 +528,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  pedantic:
+    dependency: transitive
+    description:
+      name: pedantic
+      sha256: "67fc27ed9639506c856c840ccce7594d0bdcd91bc8d53d6e52359449a1d50602"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.11.1"
   petitparser:
     dependency: transitive
     description:
@@ -489,6 +592,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "0c7c0cedd93788d996e33041ffecda924cc54389199cde4e6a34b440f50044cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.27.7"
   shelf:
     dependency: "direct main"
     description:
@@ -677,20 +788,16 @@ packages:
   typesql:
     dependency: "direct main"
     description:
-      path: "packages/wasm_packages/sql_parser/typesql"
-      ref: HEAD
-      resolved-ref: "6182b596892c9722fdc94236fddd8ec39a5765a0"
-      url: "https://github.com/juancastillo0/wasm_run"
-    source: git
+      path: "../../wasmi_dart/packages/wasm_packages/sql_parser/typesql"
+      relative: true
+    source: path
     version: "0.0.1"
   typesql_generator:
     dependency: "direct dev"
     description:
-      path: "packages/wasm_packages/sql_parser/typesql_generator"
-      ref: HEAD
-      resolved-ref: "6182b596892c9722fdc94236fddd8ec39a5765a0"
-      url: "https://github.com/juancastillo0/wasm_run"
-    source: git
+      path: "../../wasmi_dart/packages/wasm_packages/sql_parser/typesql_generator"
+      relative: true
+    source: path
     version: "0.0.1"
   uuid:
     dependency: transitive
