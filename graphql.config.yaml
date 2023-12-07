@@ -1,0 +1,8 @@
+projects:
+  polls:
+    schema: api_client/lib/schema.graphql
+    documents: api_client/lib/api/**/*.{graphql,gql}
+    extensions:
+      endpoints:
+        default:
+          url: http://localhost:8050/graphql

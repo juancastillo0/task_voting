@@ -1,0 +1,97 @@
+type Query {
+  """Get the current state"""
+  getState: Model
+  getPolls(id: Int, userId: Int): [Poll!]!
+}
+
+type Model {
+  state: String!
+  createdAt: Date!
+}
+
+"""An ISO-8601 Date."""
+scalar Date
+
+"""TODO: extends db.Poll"""
+type Poll {
+  options: [PollOption!]!
+  id: Int!
+  userId: Int!
+  title: String!
+  subtitle: String
+  body: String!
+  pollKind: String
+  formJsonSchema: String
+  createdAt: Date!
+}
+
+type PollOption {
+  votes: [PollOptionVote!]!
+  id: Int!
+  pollId: Int!
+  priority: Int
+  description: String
+  url: String
+  formJsonSchema: String
+  createdAt: Date!
+}
+
+type PollOptionVote {
+  pollOptionId: Int!
+  userId: Int!
+  value: Int!
+  formResponse: String
+  createdAt: Date!
+}
+
+type Mutation {
+  setState(
+    """The new state, can't be 'WrongState'!."""
+    newState: String!
+  ): Boolean!
+  insertPoll(insert: PollInsert!): Poll!
+  addPollOptions(pollId: Int!, options: [PollOptionInsert!]!): Poll!
+  votePoll(pollId: Int!, votes: [PollOptionVoteInsert!]!): ResultIntString!
+}
+
+input PollInsert {
+  id: Int
+  userId: Int!
+  title: String!
+  subtitle: String
+  body: String!
+  pollKind: String
+  formJsonSchema: String
+  createdAt: Date
+  options: [PollOptionInsert!]
+}
+
+input PollOptionInsert {
+  id: Int
+  priority: Int
+  description: String
+  url: String
+  formJsonSchema: String
+  createdAt: Date
+}
+
+"""
+Int! when the operation was successful or String! when an error was encountered.
+"""
+type ResultIntString {
+  ok: Int
+  err: String
+  isOk: Boolean!
+}
+
+input PollOptionVoteInsert {
+  pollOptionId: Int!
+  userId: Int!
+  value: Int!
+  formResponse: String
+  createdAt: Date
+}
+
+type Subscription {
+  onStateChange: Model!
+}

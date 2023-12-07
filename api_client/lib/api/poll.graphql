@@ -1,0 +1,60 @@
+query getPolls($id: Int, $userId: Int) {
+  getPolls(id: $id, userId: $userId) {
+    ...FullPoll
+  }
+}
+
+mutation insertPoll($insert: PollInsert!) {
+  insertPoll(insert: $insert) {
+    ...FullPoll
+  }
+}
+
+mutation addPollOptions($pollId: Int!, $options: [PollOptionInsert!]!) {
+  addPollOptions(pollId: $pollId, options: $options) {
+    ...FullPoll
+  }
+}
+
+mutation votePoll($pollId: Int!, $votes: [PollOptionVoteInsert!]!) {
+  votePoll(pollId: $pollId, votes: $votes) {
+    ok
+    err
+    isOk
+  }
+}
+
+fragment FullPoll on Poll {
+  options {
+    ...FullPollOption
+  }
+  id
+  userId
+  title
+  subtitle
+  body
+  pollKind
+  formJsonSchema
+  createdAt
+}
+
+fragment FullPollOption on PollOption {
+  votes {
+    ...FullPollOptionVote
+  }
+  id
+  pollId
+  priority
+  description
+  url
+  formJsonSchema
+  createdAt
+}
+
+fragment FullPollOptionVote on PollOptionVote {
+  pollOptionId
+  userId
+  value
+  formResponse
+  createdAt
+}
