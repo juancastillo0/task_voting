@@ -1,6 +1,7 @@
 // ignore: depend_on_referenced_packages
 import 'package:leto_schema/leto_schema.dart';
 import 'package:backend_server/api.dart';
+import 'package:backend_server/api_models.dart';
 
 GraphQLSchema recreateGraphQLApiSchema() {
   HotReloadableDefinition.incrementCounter();
@@ -11,18 +12,27 @@ GraphQLSchema recreateGraphQLApiSchema() {
 GraphQLSchema? _graphqlApiSchema;
 GraphQLSchema get graphqlApiSchema => _graphqlApiSchema ??= GraphQLSchema(
       serdeCtx: SerdeCtx()
-        ..addAll([])
+        ..addAll([
+          pollOptionSerializer,
+          pollInsertSerializer,
+          pollOptionVoteInsertSerializer,
+          pollOptionInsertSerializer,
+        ])
         ..children.addAll([]),
       queryType: objectType(
         'Query',
         fields: [
           getStateGraphQLField,
+          getPollsGraphQLField,
         ],
       ),
       mutationType: objectType(
         'Mutation',
         fields: [
           setStateGraphQLField,
+          insertPollGraphQLField,
+          addPollOptionsGraphQLField,
+          votePollGraphQLField,
         ],
       ),
       subscriptionType: objectType(

@@ -126,26 +126,26 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
   @override
   DataClassProps get dataClassProps => DataClassProps('PollUpdate', {
         'id': id,
-        'user_id': userId,
+        'userId': userId,
         'title': title,
         'subtitle': subtitle,
         'body': body,
-        'poll_kind': pollKind,
-        'form_json_schema': formJsonSchema,
-        'created_at': createdAt,
+        'pollKind': pollKind,
+        'formJsonSchema': formJsonSchema,
+        'createdAt': createdAt,
       });
   factory PollUpdate.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
             'id',
-            'user_id',
+            'userId',
             'title',
             'subtitle',
             'body',
-            'poll_kind',
-            'form_json_schema',
-            'created_at'
+            'pollKind',
+            'formJsonSchema',
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -189,7 +189,7 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
 }
 
 class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
-  final int id;
+  final int? id;
   final int userId;
   final String title;
   final String? subtitle;
@@ -198,7 +198,7 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
   final String? formJsonSchema;
   final DateTime? createdAt;
   const PollInsert({
-    required this.id,
+    this.id,
     required this.userId,
     required this.title,
     this.subtitle,
@@ -210,26 +210,26 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
   @override
   DataClassProps get dataClassProps => DataClassProps('PollInsert', {
         'id': id,
-        'user_id': userId,
+        'userId': userId,
         'title': title,
         'subtitle': subtitle,
         'body': body,
-        'poll_kind': pollKind,
-        'form_json_schema': formJsonSchema,
-        'created_at': createdAt,
+        'pollKind': pollKind,
+        'formJsonSchema': formJsonSchema,
+        'createdAt': createdAt,
       });
   factory PollInsert.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
             'id',
-            'user_id',
+            'userId',
             'title',
             'subtitle',
             'body',
-            'poll_kind',
-            'form_json_schema',
-            'created_at'
+            'pollKind',
+            'formJsonSchema',
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -244,7 +244,7 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
         final createdAt,
       ] =>
         PollInsert(
-          id: id as int,
+          id: id == null ? null : id as int,
           userId: userId as int,
           title: title as String,
           subtitle: subtitle == null ? null : subtitle as String,
@@ -288,26 +288,26 @@ class Poll with BaseDataClass implements SqlReturnModel {
   @override
   DataClassProps get dataClassProps => DataClassProps('poll', {
         'id': id,
-        'user_id': userId,
+        'userId': userId,
         'title': title,
         'subtitle': subtitle,
         'body': body,
-        'poll_kind': pollKind,
-        'form_json_schema': formJsonSchema,
-        'created_at': createdAt,
+        'pollKind': pollKind,
+        'formJsonSchema': formJsonSchema,
+        'createdAt': createdAt,
       });
   factory Poll.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
             'id',
-            'user_id',
+            'userId',
             'title',
             'subtitle',
             'body',
-            'poll_kind',
-            'form_json_schema',
-            'created_at'
+            'pollKind',
+            'formJsonSchema',
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -381,7 +381,7 @@ class PollOptionUpdate
   final Option<int>? priority;
   final Option<String>? description;
   final Option<String>? url;
-  final Option<String>? fromJsonSchema;
+  final Option<String>? formJsonSchema;
   final DateTime? createdAt;
   const PollOptionUpdate({
     this.id,
@@ -389,30 +389,30 @@ class PollOptionUpdate
     this.priority,
     this.description,
     this.url,
-    this.fromJsonSchema,
+    this.formJsonSchema,
     this.createdAt,
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('PollOptionUpdate', {
         'id': id,
-        'poll_id': pollId,
+        'pollId': pollId,
         'priority': priority,
         'description': description,
         'url': url,
-        'from_json_schema': fromJsonSchema,
-        'created_at': createdAt,
+        'formJsonSchema': formJsonSchema,
+        'createdAt': createdAt,
       });
   factory PollOptionUpdate.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
             'id',
-            'poll_id',
+            'pollId',
             'priority',
             'description',
             'url',
-            'from_json_schema',
-            'created_at'
+            'formJsonSchema',
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -422,7 +422,7 @@ class PollOptionUpdate
         final priority,
         final description,
         final url,
-        final fromJsonSchema,
+        final formJsonSchema,
         final createdAt,
       ] =>
         PollOptionUpdate(
@@ -437,10 +437,10 @@ class PollOptionUpdate
                   description, (description) => description as String),
           url:
               url == null ? null : Option.fromJson(url, (url) => url as String),
-          fromJsonSchema: fromJsonSchema == null
+          formJsonSchema: formJsonSchema == null
               ? null
               : Option.fromJson(
-                  fromJsonSchema, (fromJsonSchema) => fromJsonSchema as String),
+                  formJsonSchema, (formJsonSchema) => formJsonSchema as String),
           createdAt: createdAt == null
               ? null
               : createdAt is int
@@ -458,43 +458,43 @@ class PollOptionUpdate
 class PollOptionInsert
     with BaseDataClass
     implements SqlInsertModel<PollOption> {
-  final int id;
+  final int? id;
   final int pollId;
   final int? priority;
   final String? description;
   final String? url;
-  final String? fromJsonSchema;
+  final String? formJsonSchema;
   final DateTime? createdAt;
   const PollOptionInsert({
-    required this.id,
+    this.id,
     required this.pollId,
     this.priority,
     this.description,
     this.url,
-    this.fromJsonSchema,
+    this.formJsonSchema,
     this.createdAt,
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('PollOptionInsert', {
         'id': id,
-        'poll_id': pollId,
+        'pollId': pollId,
         'priority': priority,
         'description': description,
         'url': url,
-        'from_json_schema': fromJsonSchema,
-        'created_at': createdAt,
+        'formJsonSchema': formJsonSchema,
+        'createdAt': createdAt,
       });
   factory PollOptionInsert.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
             'id',
-            'poll_id',
+            'pollId',
             'priority',
             'description',
             'url',
-            'from_json_schema',
-            'created_at'
+            'formJsonSchema',
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -504,17 +504,17 @@ class PollOptionInsert
         final priority,
         final description,
         final url,
-        final fromJsonSchema,
+        final formJsonSchema,
         final createdAt,
       ] =>
         PollOptionInsert(
-          id: id as int,
+          id: id == null ? null : id as int,
           pollId: pollId as int,
           priority: priority == null ? null : priority as int,
           description: description == null ? null : description as String,
           url: url == null ? null : url as String,
-          fromJsonSchema:
-              fromJsonSchema == null ? null : fromJsonSchema as String,
+          formJsonSchema:
+              formJsonSchema == null ? null : formJsonSchema as String,
           createdAt: createdAt == null
               ? null
               : createdAt is int
@@ -535,7 +535,7 @@ class PollOption with BaseDataClass implements SqlReturnModel {
   final int? priority;
   final String? description;
   final String? url;
-  final String? fromJsonSchema;
+  final String? formJsonSchema;
   final DateTime createdAt;
   const PollOption({
     required this.id,
@@ -543,30 +543,30 @@ class PollOption with BaseDataClass implements SqlReturnModel {
     this.priority,
     this.description,
     this.url,
-    this.fromJsonSchema,
+    this.formJsonSchema,
     required this.createdAt,
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('poll_option', {
         'id': id,
-        'poll_id': pollId,
+        'pollId': pollId,
         'priority': priority,
         'description': description,
         'url': url,
-        'from_json_schema': fromJsonSchema,
-        'created_at': createdAt,
+        'formJsonSchema': formJsonSchema,
+        'createdAt': createdAt,
       });
   factory PollOption.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
             'id',
-            'poll_id',
+            'pollId',
             'priority',
             'description',
             'url',
-            'from_json_schema',
-            'created_at'
+            'formJsonSchema',
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -576,7 +576,7 @@ class PollOption with BaseDataClass implements SqlReturnModel {
         final priority,
         final description,
         final url,
-        final fromJsonSchema,
+        final formJsonSchema,
         final createdAt,
       ] =>
         PollOption(
@@ -585,8 +585,8 @@ class PollOption with BaseDataClass implements SqlReturnModel {
           priority: priority == null ? null : priority as int,
           description: description == null ? null : description as String,
           url: url == null ? null : url as String,
-          fromJsonSchema:
-              fromJsonSchema == null ? null : fromJsonSchema as String,
+          formJsonSchema:
+              formJsonSchema == null ? null : formJsonSchema as String,
           createdAt: createdAt is int
               ? DateTime.fromMicrosecondsSinceEpoch(createdAt)
               : DateTime.parse(createdAt as String),
@@ -643,15 +643,15 @@ class PollVoteUpdate with BaseDataClass implements SqlUpdateModel<PollVote> {
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('PollVoteUpdate', {
-        'poll_id': pollId,
-        'user_id': userId,
-        'form_response': formResponse,
-        'created_at': createdAt,
+        'pollId': pollId,
+        'userId': userId,
+        'formResponse': formResponse,
+        'createdAt': createdAt,
       });
   factory PollVoteUpdate.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['poll_id', 'user_id', 'form_response', 'created_at']
+        ? const ['pollId', 'userId', 'formResponse', 'createdAt']
             .map((f) => obj[f])
             .toList(growable: false)
         : obj;
@@ -696,15 +696,15 @@ class PollVoteInsert with BaseDataClass implements SqlInsertModel<PollVote> {
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('PollVoteInsert', {
-        'poll_id': pollId,
-        'user_id': userId,
-        'form_response': formResponse,
-        'created_at': createdAt,
+        'pollId': pollId,
+        'userId': userId,
+        'formResponse': formResponse,
+        'createdAt': createdAt,
       });
   factory PollVoteInsert.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['poll_id', 'user_id', 'form_response', 'created_at']
+        ? const ['pollId', 'userId', 'formResponse', 'createdAt']
             .map((f) => obj[f])
             .toList(growable: false)
         : obj;
@@ -746,15 +746,15 @@ class PollVote with BaseDataClass implements SqlReturnModel {
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('poll_vote', {
-        'poll_id': pollId,
-        'user_id': userId,
-        'form_response': formResponse,
-        'created_at': createdAt,
+        'pollId': pollId,
+        'userId': userId,
+        'formResponse': formResponse,
+        'createdAt': createdAt,
       });
   factory PollVote.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['poll_id', 'user_id', 'form_response', 'created_at']
+        ? const ['pollId', 'userId', 'formResponse', 'createdAt']
             .map((f) => obj[f])
             .toList(growable: false)
         : obj;
@@ -793,15 +793,13 @@ class PollVoteKeyPollIdUserId
   @override
   DataClassProps get dataClassProps =>
       DataClassProps('PollVoteKeyPollIdUserId', {
-        'poll_id': pollId,
-        'user_id': userId,
+        'pollId': pollId,
+        'userId': userId,
       });
   factory PollVoteKeyPollIdUserId.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['poll_id', 'user_id']
-            .map((f) => obj[f])
-            .toList(growable: false)
+        ? const ['pollId', 'userId'].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
       [
@@ -837,21 +835,21 @@ class PollOptionVoteUpdate
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('PollOptionVoteUpdate', {
-        'poll_option_id': pollOptionId,
-        'user_id': userId,
+        'pollOptionId': pollOptionId,
+        'userId': userId,
         'value': value,
         'form_response': formResponse,
-        'created_at': createdAt,
+        'createdAt': createdAt,
       });
   factory PollOptionVoteUpdate.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
-            'poll_option_id',
-            'user_id',
+            'pollOptionId',
+            'userId',
             'value',
             'form_response',
-            'created_at'
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -901,21 +899,21 @@ class PollOptionVoteInsert
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('PollOptionVoteInsert', {
-        'poll_option_id': pollOptionId,
-        'user_id': userId,
+        'pollOptionId': pollOptionId,
+        'userId': userId,
         'value': value,
         'form_response': formResponse,
-        'created_at': createdAt,
+        'createdAt': createdAt,
       });
   factory PollOptionVoteInsert.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
-            'poll_option_id',
-            'user_id',
+            'pollOptionId',
+            'userId',
             'value',
             'form_response',
-            'created_at'
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -960,21 +958,21 @@ class PollOptionVote with BaseDataClass implements SqlReturnModel {
   });
   @override
   DataClassProps get dataClassProps => DataClassProps('poll_option_vote', {
-        'poll_option_id': pollOptionId,
-        'user_id': userId,
+        'pollOptionId': pollOptionId,
+        'userId': userId,
         'value': value,
         'form_response': formResponse,
-        'created_at': createdAt,
+        'createdAt': createdAt,
       });
   factory PollOptionVote.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
         ? const [
-            'poll_option_id',
-            'user_id',
+            'pollOptionId',
+            'userId',
             'value',
             'form_response',
-            'created_at'
+            'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -1014,13 +1012,13 @@ class PollOptionVoteKeyPollOptionIdUserId
   @override
   DataClassProps get dataClassProps =>
       DataClassProps('PollOptionVoteKeyPollOptionIdUserId', {
-        'poll_option_id': pollOptionId,
-        'user_id': userId,
+        'pollOptionId': pollOptionId,
+        'userId': userId,
       });
   factory PollOptionVoteKeyPollOptionIdUserId.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['poll_option_id', 'user_id']
+        ? const ['pollOptionId', 'userId']
             .map((f) => obj[f])
             .toList(growable: false)
         : obj;
@@ -1056,13 +1054,13 @@ class PollWithOptionsJsonUpdate
   DataClassProps get dataClassProps =>
       DataClassProps('PollWithOptionsJsonUpdate', {
         'poll.id': pollId,
-        'poll.user_id': pollUserId,
-        'json_value': jsonValue,
+        'poll.userId': pollUserId,
+        'jsonValue': jsonValue,
       });
   factory PollWithOptionsJsonUpdate.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['poll.id', 'poll.user_id', 'json_value']
+        ? const ['poll.id', 'poll.userId', 'jsonValue']
             .map((f) => obj[f])
             .toList(growable: false)
         : obj;
@@ -1108,11 +1106,11 @@ class PollWithOptionsJsonUpdateJsonValue with BaseDataClass {
   DataClassProps get dataClassProps =>
       DataClassProps('PollWithOptionsJsonUpdateJsonValue', {
         'id': id,
-        'user_id': userId,
+        'userId': userId,
         'title': title,
         'subtitle': subtitle,
         'body': body,
-        'created_at': createdAt,
+        'createdAt': createdAt,
         'options': options,
       });
   factory PollWithOptionsJsonUpdateJsonValue.fromJson(Object? obj_) {
@@ -1120,11 +1118,11 @@ class PollWithOptionsJsonUpdateJsonValue with BaseDataClass {
     final list = obj is Map
         ? const [
             'id',
-            'user_id',
+            'userId',
             'title',
             'subtitle',
             'body',
-            'created_at',
+            'createdAt',
             'options'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -1174,13 +1172,13 @@ class PollWithOptionsJson
   DataClassProps get dataClassProps =>
       DataClassProps('poll_with_options_json', {
         'poll.id': pollId,
-        'poll.user_id': pollUserId,
-        'json_value': jsonValue,
+        'poll.userId': pollUserId,
+        'jsonValue': jsonValue,
       });
   factory PollWithOptionsJson.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['poll.id', 'poll.user_id', 'json_value']
+        ? const ['poll.id', 'poll.userId', 'jsonValue']
             .map((f) => obj[f])
             .toList(growable: false)
         : obj;
@@ -1224,11 +1222,11 @@ class PollWithOptionsJsonJsonValue with BaseDataClass {
   DataClassProps get dataClassProps =>
       DataClassProps('PollWithOptionsJsonJsonValue', {
         'id': id,
-        'user_id': userId,
+        'userId': userId,
         'title': title,
         'subtitle': subtitle,
         'body': body,
-        'created_at': createdAt,
+        'createdAt': createdAt,
         'options': options,
       });
   factory PollWithOptionsJsonJsonValue.fromJson(Object? obj_) {
@@ -1236,11 +1234,11 @@ class PollWithOptionsJsonJsonValue with BaseDataClass {
     final list = obj is Map
         ? const [
             'id',
-            'user_id',
+            'userId',
             'title',
             'subtitle',
             'body',
-            'created_at',
+            'createdAt',
             'options'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -1485,13 +1483,13 @@ class QuerySelectUser1 with BaseDataClass {
         'user_name': userName,
         'po.id': poId,
         'poll.id': pollId,
-        'poll.user_id': pollUserId,
+        'poll.userId': pollUserId,
         'poll.title': pollTitle,
         'poll.subtitle': pollSubtitle,
         'poll.body': pollBody,
-        'poll.poll_kind': pollPollKind,
-        'poll.form_json_schema': pollFormJsonSchema,
-        'poll.created_at': pollCreatedAt,
+        'poll.pollKind': pollPollKind,
+        'poll.formJsonSchema': pollFormJsonSchema,
+        'poll.createdAt': pollCreatedAt,
       });
   factory QuerySelectUser1.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
@@ -1501,13 +1499,13 @@ class QuerySelectUser1 with BaseDataClass {
             'user_name',
             'po.id',
             'poll.id',
-            'poll.user_id',
+            'poll.userId',
             'poll.title',
             'poll.subtitle',
             'poll.body',
-            'poll.poll_kind',
-            'poll.form_json_schema',
-            'poll.created_at'
+            'poll.pollKind',
+            'poll.formJsonSchema',
+            'poll.createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
     return switch (list) {
@@ -1607,11 +1605,11 @@ class UserWithPostsPollItem with BaseDataClass {
   @override
   DataClassProps get dataClassProps => DataClassProps('UserWithPostsPollItem', {
         'id': id,
-        'user_id': userId,
+        'userId': userId,
         'title': title,
         'subtitle': subtitle,
         'body': body,
-        'created_at': createdAt,
+        'createdAt': createdAt,
         'options': options,
       });
   factory UserWithPostsPollItem.fromJson(Object? obj_) {
@@ -1619,11 +1617,11 @@ class UserWithPostsPollItem with BaseDataClass {
     final list = obj is Map
         ? const [
             'id',
-            'user_id',
+            'userId',
             'title',
             'subtitle',
             'body',
-            'created_at',
+            'createdAt',
             'options'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -1668,13 +1666,13 @@ class UserWithPostsJSON with BaseDataClass {
   @override
   DataClassProps get dataClassProps => DataClassProps('UserWithPostsJSON', {
         'users.id': usersId,
-        'user_name': userName,
+        'userName': userName,
         'poll': poll,
       });
   factory UserWithPostsJSON.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const ['users.id', 'user_name', 'poll']
+        ? const ['users.id', 'userName', 'poll']
             .map((f) => obj[f])
             .toList(growable: false)
         : obj;
@@ -1718,11 +1716,11 @@ class UserWithPostsJSONPollItem with BaseDataClass {
   DataClassProps get dataClassProps =>
       DataClassProps('UserWithPostsJSONPollItem', {
         'id': id,
-        'user_id': userId,
+        'userId': userId,
         'title': title,
         'subtitle': subtitle,
         'body': body,
-        'created_at': createdAt,
+        'createdAt': createdAt,
         'options': options,
       });
   factory UserWithPostsJSONPollItem.fromJson(Object? obj_) {
@@ -1730,11 +1728,11 @@ class UserWithPostsJSONPollItem with BaseDataClass {
     final list = obj is Map
         ? const [
             'id',
-            'user_id',
+            'userId',
             'title',
             'subtitle',
             'body',
-            'created_at',
+            'createdAt',
             'options'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -1837,52 +1835,52 @@ class TableQueriesQueries {
     Users: SqlTypeData<Users, UsersUpdate>.value(
         'users',
         [
-          (name: 'id', type: BTypeInteger(), hasDefault: false),
+          (name: 'id', type: BTypeInteger(), hasDefault: true),
           (name: 'name', type: BTypeString(), hasDefault: false)
         ],
         Users.fromJson),
     Poll: SqlTypeData<Poll, PollUpdate>.value(
         'poll',
         [
-          (name: 'id', type: BTypeInteger(), hasDefault: false),
-          (name: 'user_id', type: BTypeInteger(), hasDefault: false),
+          (name: 'id', type: BTypeInteger(), hasDefault: true),
+          (name: 'userId', type: BTypeInteger(), hasDefault: false),
           (name: 'title', type: BTypeString(), hasDefault: false),
-          (name: 'subtitle', type: BTypeString(), hasDefault: false),
+          (name: 'subtitle', type: BTypeString(), hasDefault: true),
           (name: 'body', type: BTypeString(), hasDefault: false),
-          (name: 'poll_kind', type: BTypeString(), hasDefault: false),
-          (name: 'form_json_schema', type: BTypeString(), hasDefault: false),
-          (name: 'created_at', type: BTypeDateTime(), hasDefault: true)
+          (name: 'pollKind', type: BTypeString(), hasDefault: true),
+          (name: 'formJsonSchema', type: BTypeString(), hasDefault: true),
+          (name: 'createdAt', type: BTypeDateTime(), hasDefault: true)
         ],
         Poll.fromJson),
     PollOption: SqlTypeData<PollOption, PollOptionUpdate>.value(
         'poll_option',
         [
-          (name: 'id', type: BTypeInteger(), hasDefault: false),
-          (name: 'poll_id', type: BTypeInteger(), hasDefault: false),
+          (name: 'id', type: BTypeInteger(), hasDefault: true),
+          (name: 'pollId', type: BTypeInteger(), hasDefault: false),
           (name: 'priority', type: BTypeInteger(), hasDefault: true),
-          (name: 'description', type: BTypeString(), hasDefault: false),
-          (name: 'url', type: BTypeString(), hasDefault: false),
-          (name: 'from_json_schema', type: BTypeString(), hasDefault: false),
-          (name: 'created_at', type: BTypeDateTime(), hasDefault: true)
+          (name: 'description', type: BTypeString(), hasDefault: true),
+          (name: 'url', type: BTypeString(), hasDefault: true),
+          (name: 'formJsonSchema', type: BTypeString(), hasDefault: true),
+          (name: 'createdAt', type: BTypeDateTime(), hasDefault: true)
         ],
         PollOption.fromJson),
     PollVote: SqlTypeData<PollVote, PollVoteUpdate>.value(
         'poll_vote',
         [
-          (name: 'poll_id', type: BTypeInteger(), hasDefault: false),
-          (name: 'user_id', type: BTypeInteger(), hasDefault: false),
-          (name: 'form_response', type: BTypeString(), hasDefault: false),
-          (name: 'created_at', type: BTypeDateTime(), hasDefault: true)
+          (name: 'pollId', type: BTypeInteger(), hasDefault: false),
+          (name: 'userId', type: BTypeInteger(), hasDefault: false),
+          (name: 'formResponse', type: BTypeString(), hasDefault: true),
+          (name: 'createdAt', type: BTypeDateTime(), hasDefault: true)
         ],
         PollVote.fromJson),
     PollOptionVote: SqlTypeData<PollOptionVote, PollOptionVoteUpdate>.value(
         'poll_option_vote',
         [
-          (name: 'poll_option_id', type: BTypeInteger(), hasDefault: false),
-          (name: 'user_id', type: BTypeInteger(), hasDefault: false),
+          (name: 'pollOptionId', type: BTypeInteger(), hasDefault: false),
+          (name: 'userId', type: BTypeInteger(), hasDefault: false),
           (name: 'value', type: BTypeInteger(), hasDefault: false),
-          (name: 'form_response', type: BTypeString(), hasDefault: false),
-          (name: 'created_at', type: BTypeDateTime(), hasDefault: true)
+          (name: 'form_response', type: BTypeString(), hasDefault: true),
+          (name: 'createdAt', type: BTypeDateTime(), hasDefault: true)
         ],
         PollOptionVote.fromJson),
     PollWithOptionsJson:
@@ -1890,16 +1888,16 @@ class TableQueriesQueries {
             'poll_with_options_json',
             [
               (name: 'poll.id', type: BTypeInteger(), hasDefault: false),
-              (name: 'poll.user_id', type: BTypeInteger(), hasDefault: false),
+              (name: 'poll.userId', type: BTypeInteger(), hasDefault: false),
               (
-                name: 'json_value',
+                name: 'jsonValue',
                 type: BTypeJsonObject({
                   'id': BTypeInteger(),
-                  'user_id': BTypeInteger(),
+                  'userId': BTypeInteger(),
                   'title': BTypeString(),
                   'subtitle': BTypeNullable(BTypeString()),
                   'body': BTypeString(),
-                  'created_at': BTypeDateTime(),
+                  'createdAt': BTypeDateTime(),
                   'options': BTypeJsonArray(BTypeNullable(BTypeInteger()))
                 }),
                 hasDefault: false
@@ -1921,7 +1919,10 @@ class TableQueriesQueries {
       pollWithOptionsJsonController = SqlTypedController(typedExecutor);
   Future<SqlExecution> createTableUsers() async {
     final result = await executor.execute('''-- 
-CREATE TABLE users (id INTEGER NOT NULL PRIMARY KEY, name TEXT NOT NULL)''');
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name TEXT NOT NULL
+)''');
     return result;
   }
 
@@ -1974,14 +1975,14 @@ WHERE id IN (:ids)''', [args.ids]);
     final result = await executor.execute('''
 -- 
 CREATE TABLE poll (
-    id INTEGER NOT NULL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id),
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    userId INTEGER NOT NULL REFERENCES users(id),
     title TEXT NOT NULL,
     subtitle TEXT NULL,
     body TEXT NOT NULL,
-    poll_kind VARCHAR(512) NULL,
-    form_json_schema JSON NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    pollKind VARCHAR(512) NULL,
+    formJsonSchema JSON NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )''');
     return result;
   }
@@ -1990,13 +1991,13 @@ CREATE TABLE poll (
     final result = await executor.execute('''
 -- 
 CREATE TABLE poll_option (
-    id INTEGER NOT NULL PRIMARY KEY,
-    poll_id INTEGER NOT NULL REFERENCES poll(id),
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    pollId INTEGER NOT NULL REFERENCES poll(id),
     priority INT default 0,
     description TEXT NULL,
     url TEXT NULL,
-    from_json_schema JSON NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    formJsonSchema JSON NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )''');
     return result;
   }
@@ -2010,11 +2011,11 @@ CREATE TABLE poll_option (
 -- );
 -- 
 CREATE TABLE poll_vote (
-    poll_id INTEGER NOT NULL REFERENCES poll(id),
-    user_id INTEGER NOT NULL REFERENCES users(id),
-    form_response JSON NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(poll_id, user_id)
+    pollId INTEGER NOT NULL REFERENCES poll(id),
+    userId INTEGER NOT NULL REFERENCES users(id),
+    formResponse JSON NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(pollId, userId)
 )''');
     return result;
   }
@@ -2023,12 +2024,12 @@ CREATE TABLE poll_vote (
     final result = await executor.execute('''
 -- 
 CREATE TABLE poll_option_vote (
-    poll_option_id INTEGER NOT NULL REFERENCES poll_option(id),
-    user_id INTEGER NOT NULL REFERENCES users(id),
+    pollOptionId INTEGER NOT NULL REFERENCES poll_option(id),
+    userId INTEGER NOT NULL REFERENCES users(id),
     value INTEGER NOT NULL,
     form_response JSON NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(poll_option_id, user_id)
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(pollOptionId, userId)
 )''');
     return result;
   }
@@ -2041,8 +2042,8 @@ SELECT users.id,
     po.id,
     poll.*
 FROM user
-    INNER JOIN poll ON poll.user_id = users.id
-    LEFT JOIN poll_option po ON po.poll_id = poll.id
+    INNER JOIN poll ON poll.userId = users.id
+    LEFT JOIN poll_option po ON po.pollId = poll.id
 WHERE users.id = 1
     and poll.subtitle is not null''');
     return result.map(QuerySelectUser1.fromJson).toList();
@@ -2057,23 +2058,23 @@ SELECT users.id,
         json_object(
             'id',
             poll.id,
-            'user_id',
-            poll.user_id,
+            'userId',
+            poll.userId,
             'title',
             poll.title,
             'subtitle',
             poll.subtitle,
             'body',
             poll.body,
-            'created_at',
-            poll.created_at,
+            'createdAt',
+            poll.createdAt,
             'options',
             json_array(po.id)
         )
     ) poll
 FROM user
-    INNER JOIN poll ON poll.user_id = users.id
-    LEFT JOIN poll_option po ON po.poll_id = poll.id
+    INNER JOIN poll ON poll.userId = users.id
+    LEFT JOIN poll_option po ON po.pollId = poll.id
 WHERE poll.subtitle is not null
 GROUP BY users.id''');
     return result.map(UserWithPosts.fromJson).toList();
@@ -2083,10 +2084,10 @@ GROUP BY users.id''');
     final result = await executor.query('''
 -- {"name":"userWithPostsJSON"}
 SELECT users.id,
-    users.name user_name,
-    json_group_array(p.json_value) poll
+    users.name userName,
+    json_group_array(p.jsonValue) poll
 FROM user
-    INNER JOIN poll_with_options_json p ON p.user_id = users.id
+    INNER JOIN poll_with_options_json p ON p.userId = users.id
 GROUP BY users.id''');
     return result.map(UserWithPostsJSON.fromJson).toList();
   }
@@ -2096,25 +2097,25 @@ GROUP BY users.id''');
 -- 
 CREATE VIEW poll_with_options_json AS
 SELECT poll.id,
-    poll.user_id,
+    poll.userId,
     json_object(
         'id',
         poll.id,
-        'user_id',
-        poll.user_id,
+        'userId',
+        poll.userId,
         'title',
         poll.title,
         'subtitle',
         poll.subtitle,
         'body',
         poll.body,
-        'created_at',
-        poll.created_at,
+        'createdAt',
+        poll.createdAt,
         'options',
         json_group_array(po.id)
-    ) json_value
+    ) jsonValue
 FROM poll
-    LEFT JOIN poll_option po ON po.poll_id = poll.id
+    LEFT JOIN poll_option po ON po.pollId = poll.id
 GROUP BY poll.id''');
     return result;
   }
@@ -2156,8 +2157,8 @@ SELECT users.id,
     po.id,
     poll.*
 FROM user
-    INNER JOIN poll ON poll.user_id = users.id
-    LEFT JOIN poll_option po ON po.poll_id = poll.id
+    INNER JOIN poll ON poll.userId = users.id
+    LEFT JOIN poll_option po ON po.pollId = poll.id
 WHERE users.id = 1
     and poll.subtitle is not null
 
@@ -2170,23 +2171,23 @@ SELECT users.id,
         json_object(
             'id',
             poll.id,
-            'user_id',
-            poll.user_id,
+            'userId',
+            poll.userId,
             'title',
             poll.title,
             'subtitle',
             poll.subtitle,
             'body',
             poll.body,
-            'created_at',
-            poll.created_at,
+            'createdAt',
+            poll.createdAt,
             'options',
             json_array(po.id)
         )
     ) poll
 FROM user
-    INNER JOIN poll ON poll.user_id = users.id
-    LEFT JOIN poll_option po ON po.poll_id = poll.id
+    INNER JOIN poll ON poll.userId = users.id
+    LEFT JOIN poll_option po ON po.pollId = poll.id
 WHERE poll.subtitle is not null
 GROUP BY users.id
 
@@ -2194,9 +2195,9 @@ SqliteException(1): while preparing statement, no such table: user, SQL logic er
   Causing statement: 
 -- {"name":"userWithPostsJSON"}
 SELECT users.id,
-    users.name user_name,
-    json_group_array(p.json_value) poll
+    users.name userName,
+    json_group_array(p.jsonValue) poll
 FROM user
-    INNER JOIN poll_with_options_json p ON p.user_id = users.id
+    INNER JOIN poll_with_options_json p ON p.userId = users.id
 GROUP BY users.id */
 }
