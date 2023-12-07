@@ -3,6 +3,7 @@ import 'dart:convert' show jsonEncode, jsonDecode;
 import 'dart:io' show HttpServer;
 
 import 'package:backend_server/api.dart';
+import 'package:backend_server/database.dart';
 import 'package:backend_server/graphql_api.schema.dart';
 import 'package:http/http.dart' as http;
 import 'package:leto/leto.dart';
@@ -18,7 +19,11 @@ Future<void> main() async {
 
 Future<HttpServer> runServer({int? serverPort, ScopedMap? globals}) async {
   // you can override state with ScopedMap.setGlobal/setScoped
-  final ScopedMap scopedMap = globals ?? ScopedMap();
+  final executor = await inMemoryExecutor();
+  final ScopedMap scopedMap = globals ??
+      ScopedMap(overrides: [dbExecutorRef.override((scope) => executor)]);
+  await dbRef.get(scopedMap).defineDatabaseObjects();
+
   if (globals == null) {
     // if it wasn't overridden it should be the default
     assert(stateRef.get(scopedMap).value?.state == 'InitialState');
@@ -36,7 +41,7 @@ Future<HttpServer> runServer({int? serverPort, ScopedMap? globals}) async {
   );
 
   final port =
-      serverPort ?? const int.fromEnvironment('PORT', defaultValue: 8080);
+      serverPort ?? const int.fromEnvironment('PORT', defaultValue: 8050);
   const graphqlPath = 'graphql';
   const graphqlSubscriptionPath = 'graphql-subscription';
   final endpoint = 'http://localhost:$port/$graphqlPath';

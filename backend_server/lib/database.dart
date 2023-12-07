@@ -13,6 +13,13 @@ void _defaultExpect(Object? a, Object? b) {
   if (a != b) throw Exception('$a != $b');
 }
 
+Future<SqliteExecutor> inMemoryExecutor() async {
+  final sqlite = await loadSqlite();
+  final db = sqlite.openInMemory();
+  final executor = SqliteExecutor(db);
+  return executor;
+}
+
 Future<void> testDatabase({
   void Function(Object? a, Object? b) expect = _defaultExpect,
 }) async {
