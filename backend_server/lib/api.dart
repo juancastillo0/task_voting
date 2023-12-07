@@ -1,6 +1,10 @@
 import 'dart:async';
 
+import 'package:backend_server/api_models.dart';
+import 'package:backend_server/table_queries.sql.dart' as db;
 import 'package:leto_schema/leto_schema.dart';
+import 'package:typesql/typesql.dart';
+import 'package:oxidized/oxidized.dart';
 
 part 'api.g.dart';
 
@@ -11,6 +15,77 @@ class Model {
   final DateTime createdAt;
 
   const Model(this.state, this.createdAt);
+}
+
+final ScopedRef<SqlExecutor> dbExecutorRef =
+    ScopedRef.global((ctx) => throw Exception('Not implemented'));
+
+final ScopedRef<db.TableQueriesQueries> dbRef =
+    ScopedRef.global((ctx) => db.TableQueriesQueries(dbExecutorRef.get(ctx)));
+
+@ClassResolver()
+class PollController {
+  PollController({
+    required this.queries,
+  });
+  final db.TableQueriesQueries queries;
+  SqlTypedController<db.PollOptionVote, db.PollOptionVoteUpdate>
+      get voteController => queries.pollOptionVoteController;
+  SqlTypedController<db.Poll, db.PollUpdate> get controller =>
+      queries.pollController;
+  SqlTypedController<db.PollOption, db.PollOptionUpdate> get optionController =>
+      queries.pollOptionController;
+
+  static final ScopedRef<PollController> ref = ScopedRef.global(
+    (ctx) => PollController(queries: dbRef.get(ctx)),
+  );
+
+  @Query()
+  Future<List<Poll>> getPolls(
+    int? id,
+    int? userId,
+  ) async {
+    final polls = await controller
+        .selectMany(FilterEq(db.PollUpdate(id: id, userId: userId)));
+    return polls.map(Poll.fromDB).toList(growable: false);
+  }
+
+  @Mutation()
+  Future<Poll> insertPoll(PollInsert insert) async {
+    final inserted = await controller.insertReturning(insert.toDB());
+    final options = insert.options;
+    if (options != null && options.isNotEmpty) {
+      return addPollOptions(inserted.id, options);
+    }
+    return Poll.fromDB(inserted);
+  }
+
+  @Mutation()
+  Future<Poll> addPollOptions(
+    int pollId,
+    List<PollOptionInsert> options,
+  ) async {
+    final poll = await controller.selectUnique(db.PollKeyId(id: pollId));
+    if (poll == null) {
+      throw Exception('Poll not found');
+    }
+    final inserted = await optionController.insertManyReturning(
+        options.map((e) => e.toDB(pollId)).toList(growable: false));
+    return Poll.fromDB(
+      poll,
+      options: inserted.map(PollOption.fromDB).toList(growable: false),
+    );
+  }
+
+  @Mutation()
+  Future<Result<int, String>> votePoll(
+    int pollId,
+    List<PollOptionVoteInsert> votes,
+  ) async {
+    final inserted = await voteController.insertManyReturning(
+        votes.map((e) => e.toDB()).toList(growable: false));
+    return Ok(inserted.length);
+  }
 }
 
 /// Set up your state.
@@ -72,4 +147,45 @@ bool setState(
 @Subscription()
 Stream<Model> onStateChange(Ctx ctx) {
   return stateRef.get(ctx).stream;
+}
+
+// TODO: Result, ResultU and custom types
+final _resultGraphQLTypes = <String, GraphQLObjectType<Result>>{};
+
+GraphQLObjectType<Result<T, T2>>
+    resultGraphQLType<T extends Object, T2 extends Object>(
+  GraphQLType<T, Object> t1,
+  GraphQLType<T2, Object> t2, {
+  String? name,
+}) {
+  final t1Inner = t1.nullable();
+  final t2Inner = t2.nullable();
+  final name_ =
+      name ?? 'Result${t1Inner.printableName}${t2Inner.printableName}';
+  if (_resultGraphQLTypes.containsKey(name_)) {
+    return _resultGraphQLTypes[name_]! as GraphQLObjectType<Result<T, T2>>;
+  }
+
+  final type = objectType<Result<T, T2>>(
+    name_,
+    description: '$t1 when the operation was successful or'
+        ' $t2 when an error was encountered.',
+  );
+  _resultGraphQLTypes[name_] = type;
+
+  type.fields.addAll([
+    t1Inner.field(
+      'ok',
+      resolve: (result, ctx) => result.isOk() ? result.unwrap() : null,
+    ),
+    t2Inner.field(
+      'err',
+      resolve: (result, ctx) => result.isOk() ? null : result.unwrapErr(),
+    ),
+    graphQLBoolean.nonNull().field(
+          'isOk',
+          resolve: (result, ctx) => result.isOk(),
+        ),
+  ]);
+  return type;
 }
