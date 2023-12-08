@@ -61,7 +61,7 @@ CREATE TABLE poll_option_vote (
     pollOptionId INTEGER NOT NULL REFERENCES poll_option(id),
     userId INTEGER NOT NULL REFERENCES users(id),
     value INTEGER NOT NULL,
-    form_response JSON NULL,
+    formResponse JSON NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(pollOptionId, userId)
 );
@@ -131,5 +131,42 @@ SELECT poll.id,
 FROM poll
     LEFT JOIN poll_option po ON po.pollId = poll.id
 GROUP BY poll.id;
+--
+-- -- 
+-- CREATE VIEW poll_with_options_json AS
+-- SELECT id,
+--     userId,
+--     title,
+--     subtitle,
+--     body,
+--     createdAt,
+--     po.options
+-- FROM poll
+--     LEFT JOIN (SELECT json_group_array(
+--             json_object(
+--         'id', id,
+--         'pollId', pollId,
+--         'priority', priority,
+--         'description', description,
+--         'url', url,
+--         'formJsonSchema', formJsonSchema,
+--         'createdAt', createdAt,
+--         'votes', pov.votes)
+--     ) options,
+--     pollId
+--         from poll_option
+--         LEFT JOIN (SELECT json_group_array(
+--                 json_object('pollOptionId', pollOptionId,
+--                             'userId', userId,
+--                             'value', value,
+--                             'formResponse', formResponse,
+--                             'createdAt', createdAt)
+--                         ) votes,
+--                         pollOptionId
+--             FROM poll_option_vote
+--             GROUP BY pollOptionId
+--         ) pov ON pov.pollOptionId = id
+--         group by pollId
+--     ) po ON po.pollId = poll.id;
 --
 DELETE FROM users WHERE (id = ?) RETURNING id,name;

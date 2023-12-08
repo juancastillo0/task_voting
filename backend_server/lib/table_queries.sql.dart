@@ -35,11 +35,41 @@ class UsersUpdate with BaseDataClass implements SqlUpdateModel<Users> {
   String get table => 'users';
 }
 
-typedef UsersInsert = Users;
+class UsersInsert with BaseDataClass implements SqlInsertModel<Users> {
+  final int? id;
+  final String name;
+  const UsersInsert({
+    this.id,
+    required this.name,
+  });
+  @override
+  DataClassProps get dataClassProps => DataClassProps('UsersInsert', {
+        'id': id,
+        'name': name,
+      });
+  factory UsersInsert.fromJson(Object? obj_) {
+    final obj = obj_ is String ? jsonDecode(obj_) : obj_;
+    final list = obj is Map
+        ? const ['id', 'name'].map((f) => obj[f]).toList(growable: false)
+        : obj;
+    return switch (list) {
+      [
+        final id,
+        final name,
+      ] =>
+        UsersInsert(
+          id: id == null ? null : id as int,
+          name: name as String,
+        ),
+      _ => throw Exception(
+          'Invalid JSON or SQL Row for UsersInsert.fromJson ${obj.runtimeType}'),
+    };
+  }
+  @override
+  String get table => 'users';
+}
 
-class Users
-    with BaseDataClass
-    implements SqlInsertModel<Users>, SqlReturnModel {
+class Users with BaseDataClass implements SqlReturnModel {
   final int id;
   final String name;
   const Users({
@@ -838,19 +868,15 @@ class PollOptionVoteUpdate
         'pollOptionId': pollOptionId,
         'userId': userId,
         'value': value,
-        'form_response': formResponse,
+        'formResponse': formResponse,
         'createdAt': createdAt,
       });
   factory PollOptionVoteUpdate.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const [
-            'pollOptionId',
-            'userId',
-            'value',
-            'form_response',
-            'createdAt'
-          ].map((f) => obj[f]).toList(growable: false)
+        ? const ['pollOptionId', 'userId', 'value', 'formResponse', 'createdAt']
+            .map((f) => obj[f])
+            .toList(growable: false)
         : obj;
     return switch (list) {
       [
@@ -902,19 +928,15 @@ class PollOptionVoteInsert
         'pollOptionId': pollOptionId,
         'userId': userId,
         'value': value,
-        'form_response': formResponse,
+        'formResponse': formResponse,
         'createdAt': createdAt,
       });
   factory PollOptionVoteInsert.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const [
-            'pollOptionId',
-            'userId',
-            'value',
-            'form_response',
-            'createdAt'
-          ].map((f) => obj[f]).toList(growable: false)
+        ? const ['pollOptionId', 'userId', 'value', 'formResponse', 'createdAt']
+            .map((f) => obj[f])
+            .toList(growable: false)
         : obj;
     return switch (list) {
       [
@@ -961,19 +983,15 @@ class PollOptionVote with BaseDataClass implements SqlReturnModel {
         'pollOptionId': pollOptionId,
         'userId': userId,
         'value': value,
-        'form_response': formResponse,
+        'formResponse': formResponse,
         'createdAt': createdAt,
       });
   factory PollOptionVote.fromJson(Object? obj_) {
     final obj = obj_ is String ? jsonDecode(obj_) : obj_;
     final list = obj is Map
-        ? const [
-            'pollOptionId',
-            'userId',
-            'value',
-            'form_response',
-            'createdAt'
-          ].map((f) => obj[f]).toList(growable: false)
+        ? const ['pollOptionId', 'userId', 'value', 'formResponse', 'createdAt']
+            .map((f) => obj[f])
+            .toList(growable: false)
         : obj;
     return switch (list) {
       [
@@ -1879,7 +1897,7 @@ class TableQueriesQueries {
           (name: 'pollOptionId', type: BTypeInteger(), hasDefault: false),
           (name: 'userId', type: BTypeInteger(), hasDefault: false),
           (name: 'value', type: BTypeInteger(), hasDefault: false),
-          (name: 'form_response', type: BTypeString(), hasDefault: true),
+          (name: 'formResponse', type: BTypeString(), hasDefault: true),
           (name: 'createdAt', type: BTypeDateTime(), hasDefault: true)
         ],
         PollOptionVote.fromJson),
@@ -2027,7 +2045,7 @@ CREATE TABLE poll_option_vote (
     pollOptionId INTEGER NOT NULL REFERENCES poll_option(id),
     userId INTEGER NOT NULL REFERENCES users(id),
     value INTEGER NOT NULL,
-    form_response JSON NULL,
+    formResponse JSON NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(pollOptionId, userId)
 )''');
@@ -2122,6 +2140,43 @@ GROUP BY poll.id''');
 
   Future<List<DeleteUsers1>> deleteUsers1(DeleteUsers1Args args) async {
     final result = await executor.query('''
+--
+-- -- 
+-- CREATE VIEW poll_with_options_json AS
+-- SELECT id,
+--     userId,
+--     title,
+--     subtitle,
+--     body,
+--     createdAt,
+--     po.options
+-- FROM poll
+--     LEFT JOIN (SELECT json_group_array(
+--             json_object(
+--         'id', id,
+--         'pollId', pollId,
+--         'priority', priority,
+--         'description', description,
+--         'url', url,
+--         'formJsonSchema', formJsonSchema,
+--         'createdAt', createdAt,
+--         'votes', pov.votes)
+--     ) options,
+--     pollId
+--         from poll_option
+--         LEFT JOIN (SELECT json_group_array(
+--                 json_object('pollOptionId', pollOptionId,
+--                             'userId', userId,
+--                             'value', value,
+--                             'formResponse', formResponse,
+--                             'createdAt', createdAt)
+--                         ) votes,
+--                         pollOptionId
+--             FROM poll_option_vote
+--             GROUP BY pollOptionId
+--         ) pov ON pov.pollOptionId = id
+--         group by pollId
+--     ) po ON po.pollId = poll.id;
 --
 DELETE FROM users WHERE (id = ?) RETURNING id,name''', [args.arg0]);
     return result.map(DeleteUsers1.fromJson).toList();
