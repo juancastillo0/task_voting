@@ -16,6 +16,11 @@ Serializer<GgetPollsData_getPolls_options>
 Serializer<GgetPollsData_getPolls_options_votes>
     _$ggetPollsDataGetPollsOptionsVotesSerializer =
     new _$GgetPollsData_getPolls_options_votesSerializer();
+Serializer<GregisterUserData> _$gregisterUserDataSerializer =
+    new _$GregisterUserDataSerializer();
+Serializer<GregisterUserData_registerUser>
+    _$gregisterUserDataRegisterUserSerializer =
+    new _$GregisterUserData_registerUserSerializer();
 Serializer<GinsertPollData> _$ginsertPollDataSerializer =
     new _$GinsertPollDataSerializer();
 Serializer<GinsertPollData_insertPoll> _$ginsertPollDataInsertPollSerializer =
@@ -41,6 +46,8 @@ Serializer<GvotePollData> _$gvotePollDataSerializer =
     new _$GvotePollDataSerializer();
 Serializer<GvotePollData_votePoll> _$gvotePollDataVotePollSerializer =
     new _$GvotePollData_votePollSerializer();
+Serializer<GFullUserData> _$gFullUserDataSerializer =
+    new _$GFullUserDataSerializer();
 Serializer<GFullPollData> _$gFullPollDataSerializer =
     new _$GFullPollDataSerializer();
 Serializer<GFullPollData_options> _$gFullPollDataOptionsSerializer =
@@ -419,6 +426,115 @@ class _$GgetPollsData_getPolls_options_votesSerializer
         case 'createdAt':
           result.createdAt.replace(serializers.deserialize(value,
               specifiedType: const FullType(_i2.GDate))! as _i2.GDate);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GregisterUserDataSerializer
+    implements StructuredSerializer<GregisterUserData> {
+  @override
+  final Iterable<Type> types = const [GregisterUserData, _$GregisterUserData];
+  @override
+  final String wireName = 'GregisterUserData';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GregisterUserData object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'registerUser',
+      serializers.serialize(object.registerUser,
+          specifiedType: const FullType(GregisterUserData_registerUser)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GregisterUserData deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GregisterUserDataBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'registerUser':
+          result.registerUser.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(GregisterUserData_registerUser))!
+              as GregisterUserData_registerUser);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GregisterUserData_registerUserSerializer
+    implements StructuredSerializer<GregisterUserData_registerUser> {
+  @override
+  final Iterable<Type> types = const [
+    GregisterUserData_registerUser,
+    _$GregisterUserData_registerUser
+  ];
+  @override
+  final String wireName = 'GregisterUserData_registerUser';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GregisterUserData_registerUser object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GregisterUserData_registerUser deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GregisterUserData_registerUserBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -1296,6 +1412,59 @@ class _$GvotePollData_votePollSerializer
         case 'isOk':
           result.isOk = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GFullUserDataSerializer implements StructuredSerializer<GFullUserData> {
+  @override
+  final Iterable<Type> types = const [GFullUserData, _$GFullUserData];
+  @override
+  final String wireName = 'GFullUserData';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GFullUserData object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GFullUserData deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GFullUserDataBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -2656,6 +2825,246 @@ class GgetPollsData_getPolls_options_votesBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GregisterUserData extends GregisterUserData {
+  @override
+  final String G__typename;
+  @override
+  final GregisterUserData_registerUser registerUser;
+
+  factory _$GregisterUserData(
+          [void Function(GregisterUserDataBuilder)? updates]) =>
+      (new GregisterUserDataBuilder()..update(updates))._build();
+
+  _$GregisterUserData._({required this.G__typename, required this.registerUser})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GregisterUserData', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        registerUser, r'GregisterUserData', 'registerUser');
+  }
+
+  @override
+  GregisterUserData rebuild(void Function(GregisterUserDataBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GregisterUserDataBuilder toBuilder() =>
+      new GregisterUserDataBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GregisterUserData &&
+        G__typename == other.G__typename &&
+        registerUser == other.registerUser;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, registerUser.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GregisterUserData')
+          ..add('G__typename', G__typename)
+          ..add('registerUser', registerUser))
+        .toString();
+  }
+}
+
+class GregisterUserDataBuilder
+    implements Builder<GregisterUserData, GregisterUserDataBuilder> {
+  _$GregisterUserData? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  GregisterUserData_registerUserBuilder? _registerUser;
+  GregisterUserData_registerUserBuilder get registerUser =>
+      _$this._registerUser ??= new GregisterUserData_registerUserBuilder();
+  set registerUser(GregisterUserData_registerUserBuilder? registerUser) =>
+      _$this._registerUser = registerUser;
+
+  GregisterUserDataBuilder() {
+    GregisterUserData._initializeBuilder(this);
+  }
+
+  GregisterUserDataBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _registerUser = $v.registerUser.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GregisterUserData other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GregisterUserData;
+  }
+
+  @override
+  void update(void Function(GregisterUserDataBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GregisterUserData build() => _build();
+
+  _$GregisterUserData _build() {
+    _$GregisterUserData _$result;
+    try {
+      _$result = _$v ??
+          new _$GregisterUserData._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename, r'GregisterUserData', 'G__typename'),
+              registerUser: registerUser.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'registerUser';
+        registerUser.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GregisterUserData', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GregisterUserData_registerUser extends GregisterUserData_registerUser {
+  @override
+  final String G__typename;
+  @override
+  final int id;
+  @override
+  final String name;
+
+  factory _$GregisterUserData_registerUser(
+          [void Function(GregisterUserData_registerUserBuilder)? updates]) =>
+      (new GregisterUserData_registerUserBuilder()..update(updates))._build();
+
+  _$GregisterUserData_registerUser._(
+      {required this.G__typename, required this.id, required this.name})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GregisterUserData_registerUser', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        id, r'GregisterUserData_registerUser', 'id');
+    BuiltValueNullFieldError.checkNotNull(
+        name, r'GregisterUserData_registerUser', 'name');
+  }
+
+  @override
+  GregisterUserData_registerUser rebuild(
+          void Function(GregisterUserData_registerUserBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GregisterUserData_registerUserBuilder toBuilder() =>
+      new GregisterUserData_registerUserBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GregisterUserData_registerUser &&
+        G__typename == other.G__typename &&
+        id == other.id &&
+        name == other.name;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GregisterUserData_registerUser')
+          ..add('G__typename', G__typename)
+          ..add('id', id)
+          ..add('name', name))
+        .toString();
+  }
+}
+
+class GregisterUserData_registerUserBuilder
+    implements
+        Builder<GregisterUserData_registerUser,
+            GregisterUserData_registerUserBuilder> {
+  _$GregisterUserData_registerUser? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  GregisterUserData_registerUserBuilder() {
+    GregisterUserData_registerUser._initializeBuilder(this);
+  }
+
+  GregisterUserData_registerUserBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _id = $v.id;
+      _name = $v.name;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GregisterUserData_registerUser other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GregisterUserData_registerUser;
+  }
+
+  @override
+  void update(void Function(GregisterUserData_registerUserBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GregisterUserData_registerUser build() => _build();
+
+  _$GregisterUserData_registerUser _build() {
+    final _$result = _$v ??
+        new _$GregisterUserData_registerUser._(
+            G__typename: BuiltValueNullFieldError.checkNotNull(
+                G__typename, r'GregisterUserData_registerUser', 'G__typename'),
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'GregisterUserData_registerUser', 'id'),
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, r'GregisterUserData_registerUser', 'name'));
     replace(_$result);
     return _$result;
   }
@@ -4462,6 +4871,121 @@ class GvotePollData_votePollBuilder
             err: err,
             isOk: BuiltValueNullFieldError.checkNotNull(
                 isOk, r'GvotePollData_votePoll', 'isOk'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GFullUserData extends GFullUserData {
+  @override
+  final String G__typename;
+  @override
+  final int id;
+  @override
+  final String name;
+
+  factory _$GFullUserData([void Function(GFullUserDataBuilder)? updates]) =>
+      (new GFullUserDataBuilder()..update(updates))._build();
+
+  _$GFullUserData._(
+      {required this.G__typename, required this.id, required this.name})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GFullUserData', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(id, r'GFullUserData', 'id');
+    BuiltValueNullFieldError.checkNotNull(name, r'GFullUserData', 'name');
+  }
+
+  @override
+  GFullUserData rebuild(void Function(GFullUserDataBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GFullUserDataBuilder toBuilder() => new GFullUserDataBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GFullUserData &&
+        G__typename == other.G__typename &&
+        id == other.id &&
+        name == other.name;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GFullUserData')
+          ..add('G__typename', G__typename)
+          ..add('id', id)
+          ..add('name', name))
+        .toString();
+  }
+}
+
+class GFullUserDataBuilder
+    implements Builder<GFullUserData, GFullUserDataBuilder> {
+  _$GFullUserData? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  GFullUserDataBuilder() {
+    GFullUserData._initializeBuilder(this);
+  }
+
+  GFullUserDataBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _id = $v.id;
+      _name = $v.name;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GFullUserData other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFullUserData;
+  }
+
+  @override
+  void update(void Function(GFullUserDataBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GFullUserData build() => _build();
+
+  _$GFullUserData _build() {
+    final _$result = _$v ??
+        new _$GFullUserData._(
+            G__typename: BuiltValueNullFieldError.checkNotNull(
+                G__typename, r'GFullUserData', 'G__typename'),
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'GFullUserData', 'id'),
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, r'GFullUserData', 'name'));
     replace(_$result);
     return _$result;
   }

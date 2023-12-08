@@ -4,6 +4,13 @@ query getPolls($id: Int, $userId: Int) {
   }
 }
 
+mutation registerUser($name: String!) {
+  registerUser(name: $name) {
+    ...FullUser
+  }
+}
+
+
 mutation insertPoll($insert: PollInsert!) {
   insertPoll(insert: $insert) {
     ...FullPoll
@@ -22,6 +29,11 @@ mutation votePoll($pollId: Int!, $votes: [PollOptionVoteInsert!]!) {
     err
     isOk
   }
+}
+
+fragment FullUser on User {
+  id
+  name
 }
 
 fragment FullPoll on Poll {

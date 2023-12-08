@@ -33,6 +33,29 @@ abstract class GgetPollsVars
       );
 }
 
+abstract class GregisterUserVars
+    implements Built<GregisterUserVars, GregisterUserVarsBuilder> {
+  GregisterUserVars._();
+
+  factory GregisterUserVars([Function(GregisterUserVarsBuilder b) updates]) =
+      _$GregisterUserVars;
+
+  String get name;
+  static Serializer<GregisterUserVars> get serializer =>
+      _$gregisterUserVarsSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GregisterUserVars.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GregisterUserVars? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GregisterUserVars.serializer,
+        json,
+      );
+}
+
 abstract class GinsertPollVars
     implements Built<GinsertPollVars, GinsertPollVarsBuilder> {
   GinsertPollVars._();
@@ -99,6 +122,27 @@ abstract class GvotePollVars
   static GvotePollVars? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GvotePollVars.serializer,
+        json,
+      );
+}
+
+abstract class GFullUserVars
+    implements Built<GFullUserVars, GFullUserVarsBuilder> {
+  GFullUserVars._();
+
+  factory GFullUserVars([Function(GFullUserVarsBuilder b) updates]) =
+      _$GFullUserVars;
+
+  static Serializer<GFullUserVars> get serializer => _$gFullUserVarsSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullUserVars.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullUserVars? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullUserVars.serializer,
         json,
       );
 }

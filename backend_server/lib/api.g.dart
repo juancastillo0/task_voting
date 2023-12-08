@@ -6,6 +6,28 @@ part of 'api.dart';
 // _GraphQLGenerator
 // **************************************************************************
 
+GraphQLObjectField<User, Object?, Object?> get registerUserGraphQLField =>
+    _registerUserGraphQLField.value;
+final _registerUserGraphQLField =
+    HotReloadableDefinition<GraphQLObjectField<User, Object?, Object?>>(
+        (setValue) => setValue(userGraphQLType.nonNull().field<Object?>(
+              'registerUser',
+              resolve: (obj, ctx) {
+                final args = ctx.args;
+
+                final _call = (UserController r) =>
+                    r.registerUser((args["name"] as String));
+                final FutureOr<UserController> _obj =
+// ignore: unnecessary_non_null_assertion
+                    UserController.ref.get(ctx)!;
+                if (_obj is Future<UserController>)
+                  return _obj.then(_call);
+                else
+                  return _call(_obj);
+              },
+            ))
+              ..inputs.addAll([graphQLString.nonNull().inputField('name')]));
+
 GraphQLObjectField<List<Poll>, Object?, Object?> get getPollsGraphQLField =>
     _getPollsGraphQLField.value;
 final _getPollsGraphQLField =

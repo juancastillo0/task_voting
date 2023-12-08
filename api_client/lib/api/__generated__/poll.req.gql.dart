@@ -87,6 +87,80 @@ abstract class GgetPollsReq
       );
 }
 
+abstract class GregisterUserReq
+    implements
+        Built<GregisterUserReq, GregisterUserReqBuilder>,
+        _i1.OperationRequest<_i2.GregisterUserData, _i3.GregisterUserVars> {
+  GregisterUserReq._();
+
+  factory GregisterUserReq([Function(GregisterUserReqBuilder b) updates]) =
+      _$GregisterUserReq;
+
+  static void _initializeBuilder(GregisterUserReqBuilder b) => b
+    ..operation = _i4.Operation(
+      document: _i5.document,
+      operationName: 'registerUser',
+    )
+    ..executeOnListen = true;
+
+  @override
+  _i3.GregisterUserVars get vars;
+  @override
+  _i4.Operation get operation;
+  @override
+  _i4.Request get execRequest => _i4.Request(
+        operation: operation,
+        variables: vars.toJson(),
+      );
+
+  @override
+  String? get requestId;
+  @override
+  @BuiltValueField(serialize: false)
+  _i2.GregisterUserData? Function(
+    _i2.GregisterUserData?,
+    _i2.GregisterUserData?,
+  )? get updateResult;
+  @override
+  _i2.GregisterUserData? get optimisticResponse;
+  @override
+  String? get updateCacheHandlerKey;
+  @override
+  Map<String, dynamic>? get updateCacheHandlerContext;
+  @override
+  _i1.FetchPolicy? get fetchPolicy;
+  @override
+  bool get executeOnListen;
+  @override
+  _i2.GregisterUserData? parseData(Map<String, dynamic> json) =>
+      _i2.GregisterUserData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(dynamic data) => data.toJson();
+
+  @override
+  _i1.OperationRequest<_i2.GregisterUserData, _i3.GregisterUserVars>
+      transformOperation(_i4.Operation Function(_i4.Operation) transform) =>
+          this.rebuild((b) => b..operation = transform(operation));
+
+  static Serializer<GregisterUserReq> get serializer =>
+      _$gregisterUserReqSerializer;
+
+  Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
+        GregisterUserReq.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GregisterUserReq? fromJson(Map<String, dynamic> json) =>
+      _i6.serializers.deserializeWith(
+        GregisterUserReq.serializer,
+        json,
+      );
+}
+
 abstract class GinsertPollReq
     implements
         Built<GinsertPollReq, GinsertPollReqBuilder>,
@@ -304,6 +378,51 @@ abstract class GvotePollReq
   static GvotePollReq? fromJson(Map<String, dynamic> json) =>
       _i6.serializers.deserializeWith(
         GvotePollReq.serializer,
+        json,
+      );
+}
+
+abstract class GFullUserReq
+    implements
+        Built<GFullUserReq, GFullUserReqBuilder>,
+        _i1.FragmentRequest<_i2.GFullUserData, _i3.GFullUserVars> {
+  GFullUserReq._();
+
+  factory GFullUserReq([Function(GFullUserReqBuilder b) updates]) =
+      _$GFullUserReq;
+
+  static void _initializeBuilder(GFullUserReqBuilder b) => b
+    ..document = _i5.document
+    ..fragmentName = 'FullUser';
+
+  @override
+  _i3.GFullUserVars get vars;
+  @override
+  _i7.DocumentNode get document;
+  @override
+  String? get fragmentName;
+  @override
+  Map<String, dynamic> get idFields;
+  @override
+  _i2.GFullUserData? parseData(Map<String, dynamic> json) =>
+      _i2.GFullUserData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(dynamic data) => data.toJson();
+
+  static Serializer<GFullUserReq> get serializer => _$gFullUserReqSerializer;
+
+  Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
+        GFullUserReq.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullUserReq? fromJson(Map<String, dynamic> json) =>
+      _i6.serializers.deserializeWith(
+        GFullUserReq.serializer,
         json,
       );
 }

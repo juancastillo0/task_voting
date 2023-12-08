@@ -30,6 +30,7 @@ GraphQLSchema get graphqlApiSchema => _graphqlApiSchema ??= GraphQLSchema(
         'Mutation',
         fields: [
           setStateGraphQLField,
+          registerUserGraphQLField,
           insertPollGraphQLField,
           addPollOptionsGraphQLField,
           votePollGraphQLField,

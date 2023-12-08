@@ -8,12 +8,16 @@ part of 'poll.var.gql.dart';
 
 Serializer<GgetPollsVars> _$ggetPollsVarsSerializer =
     new _$GgetPollsVarsSerializer();
+Serializer<GregisterUserVars> _$gregisterUserVarsSerializer =
+    new _$GregisterUserVarsSerializer();
 Serializer<GinsertPollVars> _$ginsertPollVarsSerializer =
     new _$GinsertPollVarsSerializer();
 Serializer<GaddPollOptionsVars> _$gaddPollOptionsVarsSerializer =
     new _$GaddPollOptionsVarsSerializer();
 Serializer<GvotePollVars> _$gvotePollVarsSerializer =
     new _$GvotePollVarsSerializer();
+Serializer<GFullUserVars> _$gFullUserVarsSerializer =
+    new _$GFullUserVarsSerializer();
 Serializer<GFullPollVars> _$gFullPollVarsSerializer =
     new _$GFullPollVarsSerializer();
 Serializer<GFullPollOptionVars> _$gFullPollOptionVarsSerializer =
@@ -66,6 +70,47 @@ class _$GgetPollsVarsSerializer implements StructuredSerializer<GgetPollsVars> {
         case 'userId':
           result.userId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GregisterUserVarsSerializer
+    implements StructuredSerializer<GregisterUserVars> {
+  @override
+  final Iterable<Type> types = const [GregisterUserVars, _$GregisterUserVars];
+  @override
+  final String wireName = 'GregisterUserVars';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GregisterUserVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GregisterUserVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GregisterUserVarsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -222,6 +267,26 @@ class _$GvotePollVarsSerializer implements StructuredSerializer<GvotePollVars> {
   }
 }
 
+class _$GFullUserVarsSerializer implements StructuredSerializer<GFullUserVars> {
+  @override
+  final Iterable<Type> types = const [GFullUserVars, _$GFullUserVars];
+  @override
+  final String wireName = 'GFullUserVars';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GFullUserVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    return <Object?>[];
+  }
+
+  @override
+  GFullUserVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    return new GFullUserVarsBuilder().build();
+  }
+}
+
 class _$GFullPollVarsSerializer implements StructuredSerializer<GFullPollVars> {
   @override
   final Iterable<Type> types = const [GFullPollVars, _$GFullPollVars];
@@ -374,6 +439,91 @@ class GgetPollsVarsBuilder
 
   _$GgetPollsVars _build() {
     final _$result = _$v ?? new _$GgetPollsVars._(id: id, userId: userId);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GregisterUserVars extends GregisterUserVars {
+  @override
+  final String name;
+
+  factory _$GregisterUserVars(
+          [void Function(GregisterUserVarsBuilder)? updates]) =>
+      (new GregisterUserVarsBuilder()..update(updates))._build();
+
+  _$GregisterUserVars._({required this.name}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(name, r'GregisterUserVars', 'name');
+  }
+
+  @override
+  GregisterUserVars rebuild(void Function(GregisterUserVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GregisterUserVarsBuilder toBuilder() =>
+      new GregisterUserVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GregisterUserVars && name == other.name;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GregisterUserVars')
+          ..add('name', name))
+        .toString();
+  }
+}
+
+class GregisterUserVarsBuilder
+    implements Builder<GregisterUserVars, GregisterUserVarsBuilder> {
+  _$GregisterUserVars? _$v;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  GregisterUserVarsBuilder();
+
+  GregisterUserVarsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GregisterUserVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GregisterUserVars;
+  }
+
+  @override
+  void update(void Function(GregisterUserVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GregisterUserVars build() => _build();
+
+  _$GregisterUserVars _build() {
+    final _$result = _$v ??
+        new _$GregisterUserVars._(
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, r'GregisterUserVars', 'name'));
     replace(_$result);
     return _$result;
   }
@@ -697,6 +847,63 @@ class GvotePollVarsBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GFullUserVars extends GFullUserVars {
+  factory _$GFullUserVars([void Function(GFullUserVarsBuilder)? updates]) =>
+      (new GFullUserVarsBuilder()..update(updates))._build();
+
+  _$GFullUserVars._() : super._();
+
+  @override
+  GFullUserVars rebuild(void Function(GFullUserVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GFullUserVarsBuilder toBuilder() => new GFullUserVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GFullUserVars;
+  }
+
+  @override
+  int get hashCode {
+    return 1017070611;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GFullUserVars').toString();
+  }
+}
+
+class GFullUserVarsBuilder
+    implements Builder<GFullUserVars, GFullUserVarsBuilder> {
+  _$GFullUserVars? _$v;
+
+  GFullUserVarsBuilder();
+
+  @override
+  void replace(GFullUserVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFullUserVars;
+  }
+
+  @override
+  void update(void Function(GFullUserVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GFullUserVars build() => _build();
+
+  _$GFullUserVars _build() {
+    final _$result = _$v ?? new _$GFullUserVars._();
     replace(_$result);
     return _$result;
   }

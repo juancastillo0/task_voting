@@ -11,6 +11,7 @@ import 'package:api_client/api/__generated__/poll.data.gql.dart'
         GFullPollOptionData,
         GFullPollOptionData_votes,
         GFullPollOptionVoteData,
+        GFullUserData,
         GaddPollOptionsData,
         GaddPollOptionsData_addPollOptions,
         GaddPollOptionsData_addPollOptions_options,
@@ -23,6 +24,8 @@ import 'package:api_client/api/__generated__/poll.data.gql.dart'
         GinsertPollData_insertPoll,
         GinsertPollData_insertPoll_options,
         GinsertPollData_insertPoll_options_votes,
+        GregisterUserData,
+        GregisterUserData_registerUser,
         GvotePollData,
         GvotePollData_votePoll;
 import 'package:api_client/api/__generated__/poll.req.gql.dart'
@@ -30,18 +33,22 @@ import 'package:api_client/api/__generated__/poll.req.gql.dart'
         GFullPollOptionReq,
         GFullPollOptionVoteReq,
         GFullPollReq,
+        GFullUserReq,
         GaddPollOptionsReq,
         GgetPollsReq,
         GinsertPollReq,
+        GregisterUserReq,
         GvotePollReq;
 import 'package:api_client/api/__generated__/poll.var.gql.dart'
     show
         GFullPollOptionVars,
         GFullPollOptionVoteVars,
         GFullPollVars,
+        GFullUserVars,
         GaddPollOptionsVars,
         GgetPollsVars,
         GinsertPollVars,
+        GregisterUserVars,
         GvotePollVars;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
@@ -69,6 +76,9 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GFullPollOptionVoteVars,
   GFullPollReq,
   GFullPollVars,
+  GFullUserData,
+  GFullUserReq,
+  GFullUserVars,
   GPollInsert,
   GPollOptionInsert,
   GPollOptionVoteInsert,
@@ -90,6 +100,10 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GinsertPollData_insertPoll_options_votes,
   GinsertPollReq,
   GinsertPollVars,
+  GregisterUserData,
+  GregisterUserData_registerUser,
+  GregisterUserReq,
+  GregisterUserVars,
   GvotePollData,
   GvotePollData_votePoll,
   GvotePollReq,

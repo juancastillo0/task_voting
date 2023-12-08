@@ -49,9 +49,15 @@ type Mutation {
     """The new state, can't be 'WrongState'!."""
     newState: String!
   ): Boolean!
+  registerUser(name: String!): User!
   insertPoll(insert: PollInsert!): Poll!
   addPollOptions(pollId: Int!, options: [PollOptionInsert!]!): Poll!
   votePoll(pollId: Int!, votes: [PollOptionVoteInsert!]!): ResultIntString!
+}
+
+type User {
+  id: Int!
+  name: String!
 }
 
 input PollInsert {

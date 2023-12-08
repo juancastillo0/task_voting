@@ -184,6 +184,71 @@ abstract class GgetPollsData_getPolls_options_votes
       );
 }
 
+abstract class GregisterUserData
+    implements Built<GregisterUserData, GregisterUserDataBuilder> {
+  GregisterUserData._();
+
+  factory GregisterUserData([Function(GregisterUserDataBuilder b) updates]) =
+      _$GregisterUserData;
+
+  static void _initializeBuilder(GregisterUserDataBuilder b) =>
+      b..G__typename = 'Mutation';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  GregisterUserData_registerUser get registerUser;
+  static Serializer<GregisterUserData> get serializer =>
+      _$gregisterUserDataSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GregisterUserData.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GregisterUserData? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GregisterUserData.serializer,
+        json,
+      );
+}
+
+abstract class GregisterUserData_registerUser
+    implements
+        Built<GregisterUserData_registerUser,
+            GregisterUserData_registerUserBuilder>,
+        GFullUser {
+  GregisterUserData_registerUser._();
+
+  factory GregisterUserData_registerUser(
+          [Function(GregisterUserData_registerUserBuilder b) updates]) =
+      _$GregisterUserData_registerUser;
+
+  static void _initializeBuilder(GregisterUserData_registerUserBuilder b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  static Serializer<GregisterUserData_registerUser> get serializer =>
+      _$gregisterUserDataRegisterUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GregisterUserData_registerUser.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GregisterUserData_registerUser? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GregisterUserData_registerUser.serializer,
+        json,
+      );
+}
+
 abstract class GinsertPollData
     implements Built<GinsertPollData, GinsertPollDataBuilder> {
   GinsertPollData._();
@@ -594,6 +659,45 @@ abstract class GvotePollData_votePoll
   static GvotePollData_votePoll? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GvotePollData_votePoll.serializer,
+        json,
+      );
+}
+
+abstract class GFullUser {
+  String get G__typename;
+  int get id;
+  String get name;
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullUserData
+    implements Built<GFullUserData, GFullUserDataBuilder>, GFullUser {
+  GFullUserData._();
+
+  factory GFullUserData([Function(GFullUserDataBuilder b) updates]) =
+      _$GFullUserData;
+
+  static void _initializeBuilder(GFullUserDataBuilder b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  static Serializer<GFullUserData> get serializer => _$gFullUserDataSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullUserData.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullUserData? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullUserData.serializer,
         json,
       );
 }

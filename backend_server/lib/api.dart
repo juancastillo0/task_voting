@@ -24,6 +24,27 @@ final ScopedRef<db.TableQueriesQueries> dbRef =
     ScopedRef.global((ctx) => db.TableQueriesQueries(dbExecutorRef.get(ctx)));
 
 @ClassResolver()
+class UserController {
+  UserController({
+    required this.queries,
+  });
+  final db.TableQueriesQueries queries;
+  SqlTypedController<db.Users, db.UsersUpdate> get controller =>
+      queries.usersController;
+
+  static final ScopedRef<UserController> ref = ScopedRef.global(
+    (ctx) => UserController(queries: dbRef.get(ctx)),
+  );
+
+  @Mutation()
+  Future<User> registerUser(String name) async {
+    final inserted =
+        await controller.insertReturning(db.UsersInsert(name: name));
+    return User(id: inserted.id, name: inserted.name);
+  }
+}
+
+@ClassResolver()
 class PollController {
   PollController({
     required this.queries,
@@ -69,11 +90,12 @@ class PollController {
     if (poll == null) {
       throw Exception('Poll not found');
     }
-    final inserted = await optionController.insertManyReturning(
+    await optionController.insertManyReturning(
         options.map((e) => e.toDB(pollId)).toList(growable: false));
     return Poll.fromDB(
       poll,
-      options: inserted.map(PollOption.fromDB).toList(growable: false),
+      // TODO: send precomputed options
+      // options: inserted.map(PollOption.fromDB).toList(growable: false),
     );
   }
 
