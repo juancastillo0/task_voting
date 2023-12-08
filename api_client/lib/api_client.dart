@@ -8,6 +8,21 @@ typedef ApiClient = Client;
 ApiClient makeClient([String? url]) {
   final link = HttpLink(url ?? 'http://localhost:8050/graphql');
   final cache = Cache(possibleTypes: possibleTypesMap);
-  final apiClient = Client(link: link, cache: cache);
+  final apiClient = Client(
+    link: link,
+    cache: cache,
+    defaultFetchPolicies: {
+      OperationType.query: FetchPolicy.CacheAndNetwork,
+      OperationType.mutation: FetchPolicy.NetworkOnly,
+      OperationType.subscription: FetchPolicy.CacheAndNetwork,
+    },
+  );
   return apiClient;
+}
+
+extension ApiClientFuture on ApiClient {
+  Future<OperationResponse<TData, TVars>> requestNoCache<TData, TVars>(
+    OperationRequest<TData, TVars> r,
+  ) =>
+      request(r).firstWhere((e) => e.dataSource != DataSource.Cache);
 }
