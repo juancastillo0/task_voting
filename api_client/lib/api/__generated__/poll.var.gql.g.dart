@@ -20,6 +20,10 @@ Serializer<GvotePollVars> _$gvotePollVarsSerializer =
     new _$GvotePollVarsSerializer();
 Serializer<GFullUserVars> _$gFullUserVarsSerializer =
     new _$GFullUserVarsSerializer();
+Serializer<GFullPollUserVars> _$gFullPollUserVarsSerializer =
+    new _$GFullPollUserVarsSerializer();
+Serializer<GFullPollUserVoteVars> _$gFullPollUserVoteVarsSerializer =
+    new _$GFullPollUserVoteVarsSerializer();
 Serializer<GFullPollVars> _$gFullPollVarsSerializer =
     new _$GFullPollVarsSerializer();
 Serializer<GFullPollOptionVars> _$gFullPollOptionVarsSerializer =
@@ -330,6 +334,52 @@ class _$GFullUserVarsSerializer implements StructuredSerializer<GFullUserVars> {
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new GFullUserVarsBuilder().build();
+  }
+}
+
+class _$GFullPollUserVarsSerializer
+    implements StructuredSerializer<GFullPollUserVars> {
+  @override
+  final Iterable<Type> types = const [GFullPollUserVars, _$GFullPollUserVars];
+  @override
+  final String wireName = 'GFullPollUserVars';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GFullPollUserVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    return <Object?>[];
+  }
+
+  @override
+  GFullPollUserVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    return new GFullPollUserVarsBuilder().build();
+  }
+}
+
+class _$GFullPollUserVoteVarsSerializer
+    implements StructuredSerializer<GFullPollUserVoteVars> {
+  @override
+  final Iterable<Type> types = const [
+    GFullPollUserVoteVars,
+    _$GFullPollUserVoteVars
+  ];
+  @override
+  final String wireName = 'GFullPollUserVoteVars';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GFullPollUserVoteVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    return <Object?>[];
+  }
+
+  @override
+  GFullPollUserVoteVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    return new GFullPollUserVoteVarsBuilder().build();
   }
 }
 
@@ -1027,6 +1077,125 @@ class GFullUserVarsBuilder
 
   _$GFullUserVars _build() {
     final _$result = _$v ?? new _$GFullUserVars._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GFullPollUserVars extends GFullPollUserVars {
+  factory _$GFullPollUserVars(
+          [void Function(GFullPollUserVarsBuilder)? updates]) =>
+      (new GFullPollUserVarsBuilder()..update(updates))._build();
+
+  _$GFullPollUserVars._() : super._();
+
+  @override
+  GFullPollUserVars rebuild(void Function(GFullPollUserVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GFullPollUserVarsBuilder toBuilder() =>
+      new GFullPollUserVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GFullPollUserVars;
+  }
+
+  @override
+  int get hashCode {
+    return 126890806;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GFullPollUserVars').toString();
+  }
+}
+
+class GFullPollUserVarsBuilder
+    implements Builder<GFullPollUserVars, GFullPollUserVarsBuilder> {
+  _$GFullPollUserVars? _$v;
+
+  GFullPollUserVarsBuilder();
+
+  @override
+  void replace(GFullPollUserVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFullPollUserVars;
+  }
+
+  @override
+  void update(void Function(GFullPollUserVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GFullPollUserVars build() => _build();
+
+  _$GFullPollUserVars _build() {
+    final _$result = _$v ?? new _$GFullPollUserVars._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GFullPollUserVoteVars extends GFullPollUserVoteVars {
+  factory _$GFullPollUserVoteVars(
+          [void Function(GFullPollUserVoteVarsBuilder)? updates]) =>
+      (new GFullPollUserVoteVarsBuilder()..update(updates))._build();
+
+  _$GFullPollUserVoteVars._() : super._();
+
+  @override
+  GFullPollUserVoteVars rebuild(
+          void Function(GFullPollUserVoteVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GFullPollUserVoteVarsBuilder toBuilder() =>
+      new GFullPollUserVoteVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GFullPollUserVoteVars;
+  }
+
+  @override
+  int get hashCode {
+    return 1029176415;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GFullPollUserVoteVars').toString();
+  }
+}
+
+class GFullPollUserVoteVarsBuilder
+    implements Builder<GFullPollUserVoteVars, GFullPollUserVoteVarsBuilder> {
+  _$GFullPollUserVoteVars? _$v;
+
+  GFullPollUserVoteVarsBuilder();
+
+  @override
+  void replace(GFullPollUserVoteVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFullPollUserVoteVars;
+  }
+
+  @override
+  void update(void Function(GFullPollUserVoteVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GFullPollUserVoteVars build() => _build();
+
+  _$GFullPollUserVoteVars _build() {
+    final _$result = _$v ?? new _$GFullPollUserVoteVars._();
     replace(_$result);
     return _$result;
   }

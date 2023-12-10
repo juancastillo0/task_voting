@@ -306,6 +306,100 @@ const FullUser = _i1.FragmentDefinitionNode(
       directives: [],
       selectionSet: null,
     ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'polls'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPoll'),
+          directives: [],
+        )
+      ]),
+    ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'pollsWithVotes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPollUser'),
+          directives: [],
+        )
+      ]),
+    ),
+  ]),
+);
+const FullPollUser = _i1.FragmentDefinitionNode(
+  name: _i1.NameNode(value: 'FullPollUser'),
+  typeCondition: _i1.TypeConditionNode(
+      on: _i1.NamedTypeNode(
+    name: _i1.NameNode(value: 'PollUser'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: _i1.SelectionSetNode(selections: [
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'poll'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPoll'),
+          directives: [],
+        )
+      ]),
+    ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'userVotes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPollUserVote'),
+          directives: [],
+        )
+      ]),
+    ),
+  ]),
+);
+const FullPollUserVote = _i1.FragmentDefinitionNode(
+  name: _i1.NameNode(value: 'FullPollUserVote'),
+  typeCondition: _i1.TypeConditionNode(
+      on: _i1.NamedTypeNode(
+    name: _i1.NameNode(value: 'PollUserVote'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: _i1.SelectionSetNode(selections: [
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'option'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPollOption'),
+          directives: [],
+        )
+      ]),
+    ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'vote'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPollOptionVote'),
+          directives: [],
+        )
+      ]),
+    ),
   ]),
 );
 const FullPoll = _i1.FragmentDefinitionNode(
@@ -513,6 +607,8 @@ const document = _i1.DocumentNode(definitions: [
   addPollOptions,
   votePoll,
   FullUser,
+  FullPollUser,
+  FullPollUserVote,
   FullPoll,
   FullPollOption,
   FullPollOptionVote,

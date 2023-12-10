@@ -190,7 +190,7 @@ final _pollUserGraphQLType =
   final __pollUserGraphQLType = objectType<PollUser>(
     __name,
     isInterface: false,
-    interfaces: [pollGraphQLType],
+    interfaces: [],
   );
 
   setValue(__pollUserGraphQLType);
@@ -204,80 +204,13 @@ final _pollUserGraphQLType =
             ) =>
                 obj.userVotes,
           ),
-      pollOptionGraphQLType.nonNull().list().nonNull().field(
-        'options',
-        resolve: (
-          obj,
-          ctx,
-        ) {
-          final args = ctx.args;
-
-          return obj.options(ctx);
-        },
-      ),
-      graphQLInt.nonNull().field(
-            'id',
+      pollGraphQLType.nonNull().field(
+            'poll',
             resolve: (
               obj,
               ctx,
             ) =>
-                obj.id,
-          ),
-      graphQLInt.nonNull().field(
-            'userId',
-            resolve: (
-              obj,
-              ctx,
-            ) =>
-                obj.userId,
-          ),
-      graphQLString.nonNull().field(
-            'title',
-            resolve: (
-              obj,
-              ctx,
-            ) =>
-                obj.title,
-          ),
-      graphQLString.field(
-        'subtitle',
-        resolve: (
-          obj,
-          ctx,
-        ) =>
-            obj.subtitle,
-      ),
-      graphQLString.nonNull().field(
-            'body',
-            resolve: (
-              obj,
-              ctx,
-            ) =>
-                obj.body,
-          ),
-      graphQLString.field(
-        'pollKind',
-        resolve: (
-          obj,
-          ctx,
-        ) =>
-            obj.pollKind,
-      ),
-      graphQLString.field(
-        'formJsonSchema',
-        resolve: (
-          obj,
-          ctx,
-        ) =>
-            obj.formJsonSchema,
-      ),
-      graphQLDate.nonNull().field(
-            'createdAt',
-            resolve: (
-              obj,
-              ctx,
-            ) =>
-                obj.createdAt,
+                obj.poll,
           ),
     ],
   );

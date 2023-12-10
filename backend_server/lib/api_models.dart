@@ -44,14 +44,16 @@ class User {
       PollUser? poll = list[p.pollId];
       if (poll == null) {
         poll = PollUser(
-          id: p.pollId,
-          userId: p.pollUserId,
-          title: p.pollTitle,
-          subtitle: p.pollSubtitle,
-          body: p.pollBody,
-          pollKind: p.pollPollKind,
-          formJsonSchema: p.pollFormJsonSchema,
-          createdAt: p.pollCreatedAt,
+          poll: Poll(
+            id: p.pollId,
+            userId: p.pollUserId,
+            title: p.pollTitle,
+            subtitle: p.pollSubtitle,
+            body: p.pollBody,
+            pollKind: p.pollPollKind,
+            formJsonSchema: p.pollFormJsonSchema,
+            createdAt: p.pollCreatedAt,
+          ),
           userVotes: [],
           // TODO: options
         );
@@ -130,21 +132,15 @@ class Poll {
           .toList(growable: false);
 }
 
+// TODO: extends in schema str
 @GraphQLObject()
-class PollUser extends Poll {
+class PollUser {
   final List<PollUserVote> userVotes;
+  final Poll poll;
 
   const PollUser({
-    required super.id,
-    required super.userId,
-    required super.title,
-    super.subtitle,
-    required super.body,
-    super.pollKind,
-    super.formJsonSchema,
-    required super.createdAt,
+    required this.poll,
     required this.userVotes,
-    super.options,
   });
 }
 

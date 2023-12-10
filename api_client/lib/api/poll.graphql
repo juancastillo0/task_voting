@@ -10,6 +10,11 @@ mutation registerUser($name: String!) {
   }
 }
 
+mutation getUser($name: String) {
+  registerUser(name: $name) {
+    ...FullUser
+  }
+}
 
 mutation insertPoll($insert: PollInsert!) {
   insertPoll(insert: $insert) {
@@ -34,6 +39,31 @@ mutation votePoll($pollId: Int!, $votes: [PollOptionVoteInsert!]!) {
 fragment FullUser on User {
   id
   name
+  refreshToken
+  polls {
+    ...FullPoll
+  }
+  pollsWithVotes {
+    ...FullPollUser
+  }
+}
+
+fragment FullPollUser on PollUser {
+  poll {
+    ...FullPoll
+  }
+  userVotes {
+    ...FullPollUserVote
+  }
+}
+
+fragment FullPollUserVote on PollUserVote {
+  option {
+    ...FullPollOption
+  }
+  vote {
+    ...FullPollOptionVote
+  }
 }
 
 fragment FullPoll on Poll {
