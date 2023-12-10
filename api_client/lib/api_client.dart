@@ -1,12 +1,21 @@
+import 'dart:async';
+
 import 'package:gql_http_link/gql_http_link.dart';
 import 'package:ferry/ferry.dart';
+import 'package:http/http.dart' as http;
 import 'package:api_client/__generated__/schema.schema.gql.dart'
     show possibleTypesMap;
 
 typedef ApiClient = Client;
 
-ApiClient makeClient([String? url]) {
-  final link = HttpLink(url ?? 'http://localhost:8050/graphql');
+ApiClient makeClient({
+  String? url,
+  FutureOr<String?> Function()? getAuthHeader,
+}) {
+  final link = HttpLink(
+    url ?? 'http://localhost:8050/graphql',
+    httpClient: _HttpClient(getAuthHeader: getAuthHeader),
+  );
   final cache = Cache(possibleTypes: possibleTypesMap);
   final apiClient = Client(
     link: link,
@@ -25,4 +34,19 @@ extension ApiClientFuture on ApiClient {
     OperationRequest<TData, TVars> r,
   ) =>
       request(r).firstWhere((e) => e.dataSource != DataSource.Cache);
+}
+
+class _HttpClient extends http.BaseClient {
+  final FutureOr<String?> Function()? getAuthHeader;
+
+  _HttpClient({required this.getAuthHeader});
+
+  @override
+  Future<http.StreamedResponse> send(http.BaseRequest request) async {
+    if (getAuthHeader != null) {
+      final h = await getAuthHeader!();
+      if (h != null) request.headers['authorization'] = h;
+    }
+    return request.send();
+  }
 }

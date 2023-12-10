@@ -12,7 +12,7 @@ void main() {
 
   setUp(() async {
     p = await runServer();
-    c = makeClient('http://${p.address.host}:${p.port}/graphql');
+    c = makeClient(url: 'http://${p.address.host}:${p.port}/graphql');
   });
 
   tearDown(() => p.close());

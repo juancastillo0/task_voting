@@ -232,7 +232,9 @@ abstract class GregisterUserData_registerUser
   @override
   int get id;
   @override
-  String get name;
+  String? get name;
+  @override
+  String get refreshToken;
   static Serializer<GregisterUserData_registerUser> get serializer =>
       _$gregisterUserDataRegisterUserSerializer;
 
@@ -245,6 +247,71 @@ abstract class GregisterUserData_registerUser
   static GregisterUserData_registerUser? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GregisterUserData_registerUser.serializer,
+        json,
+      );
+}
+
+abstract class GgetUserData
+    implements Built<GgetUserData, GgetUserDataBuilder> {
+  GgetUserData._();
+
+  factory GgetUserData([Function(GgetUserDataBuilder b) updates]) =
+      _$GgetUserData;
+
+  static void _initializeBuilder(GgetUserDataBuilder b) =>
+      b..G__typename = 'Mutation';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  GgetUserData_registerUser get registerUser;
+  static Serializer<GgetUserData> get serializer => _$ggetUserDataSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GgetUserData.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GgetUserData? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GgetUserData.serializer,
+        json,
+      );
+}
+
+abstract class GgetUserData_registerUser
+    implements
+        Built<GgetUserData_registerUser, GgetUserData_registerUserBuilder>,
+        GFullUser {
+  GgetUserData_registerUser._();
+
+  factory GgetUserData_registerUser(
+          [Function(GgetUserData_registerUserBuilder b) updates]) =
+      _$GgetUserData_registerUser;
+
+  static void _initializeBuilder(GgetUserData_registerUserBuilder b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String? get name;
+  @override
+  String get refreshToken;
+  static Serializer<GgetUserData_registerUser> get serializer =>
+      _$ggetUserDataRegisterUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GgetUserData_registerUser.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GgetUserData_registerUser? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GgetUserData_registerUser.serializer,
         json,
       );
 }
@@ -666,7 +733,8 @@ abstract class GvotePollData_votePoll
 abstract class GFullUser {
   String get G__typename;
   int get id;
-  String get name;
+  String? get name;
+  String get refreshToken;
   Map<String, dynamic> toJson();
 }
 
@@ -686,7 +754,9 @@ abstract class GFullUserData
   @override
   int get id;
   @override
-  String get name;
+  String? get name;
+  @override
+  String get refreshToken;
   static Serializer<GFullUserData> get serializer => _$gFullUserDataSerializer;
 
   @override

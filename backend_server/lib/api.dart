@@ -257,4 +257,3 @@ GraphQLObjectType<Result<T, T2>>
   ]);
   return type;
 }
-

@@ -55,6 +55,12 @@ class SettingsService {
           ),
     (v) => {'languageCode': v?.languageCode, 'countryCode': v?.countryCode},
   );
+
+  final refreshToken = HiveKey<String?>._(
+    'refreshToken',
+    (json) => json?['refreshToken'] as String?,
+    (v) => {'refreshToken': v},
+  );
 }
 
 class MapWrapper {

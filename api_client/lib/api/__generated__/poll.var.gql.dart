@@ -56,6 +56,28 @@ abstract class GregisterUserVars
       );
 }
 
+abstract class GgetUserVars
+    implements Built<GgetUserVars, GgetUserVarsBuilder> {
+  GgetUserVars._();
+
+  factory GgetUserVars([Function(GgetUserVarsBuilder b) updates]) =
+      _$GgetUserVars;
+
+  String? get name;
+  static Serializer<GgetUserVars> get serializer => _$ggetUserVarsSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GgetUserVars.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GgetUserVars? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GgetUserVars.serializer,
+        json,
+      );
+}
+
 abstract class GinsertPollVars
     implements Built<GinsertPollVars, GinsertPollVarsBuilder> {
   GinsertPollVars._();

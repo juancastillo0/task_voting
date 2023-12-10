@@ -87,6 +87,41 @@ const registerUser = _i1.OperationDefinitionNode(
     )
   ]),
 );
+const getUser = _i1.OperationDefinitionNode(
+  type: _i1.OperationType.mutation,
+  name: _i1.NameNode(value: 'getUser'),
+  variableDefinitions: [
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'name')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: false,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: null),
+      directives: [],
+    )
+  ],
+  directives: [],
+  selectionSet: _i1.SelectionSetNode(selections: [
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'registerUser'),
+      alias: null,
+      arguments: [
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'name'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'name')),
+        )
+      ],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullUser'),
+          directives: [],
+        )
+      ]),
+    )
+  ]),
+);
 const insertPoll = _i1.OperationDefinitionNode(
   type: _i1.OperationType.mutation,
   name: _i1.NameNode(value: 'insertPoll'),
@@ -259,6 +294,13 @@ const FullUser = _i1.FragmentDefinitionNode(
     ),
     _i1.FieldNode(
       name: _i1.NameNode(value: 'name'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'refreshToken'),
       alias: null,
       arguments: [],
       directives: [],
@@ -466,6 +508,7 @@ const FullPollOptionVote = _i1.FragmentDefinitionNode(
 const document = _i1.DocumentNode(definitions: [
   getPolls,
   registerUser,
+  getUser,
   insertPoll,
   addPollOptions,
   votePoll,

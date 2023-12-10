@@ -10,6 +10,8 @@ Serializer<GgetPollsVars> _$ggetPollsVarsSerializer =
     new _$GgetPollsVarsSerializer();
 Serializer<GregisterUserVars> _$gregisterUserVarsSerializer =
     new _$GregisterUserVarsSerializer();
+Serializer<GgetUserVars> _$ggetUserVarsSerializer =
+    new _$GgetUserVarsSerializer();
 Serializer<GinsertPollVars> _$ginsertPollVarsSerializer =
     new _$GinsertPollVarsSerializer();
 Serializer<GaddPollOptionsVars> _$gaddPollOptionsVarsSerializer =
@@ -111,6 +113,50 @@ class _$GregisterUserVarsSerializer
         case 'name':
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GgetUserVarsSerializer implements StructuredSerializer<GgetUserVars> {
+  @override
+  final Iterable<Type> types = const [GgetUserVars, _$GgetUserVars];
+  @override
+  final String wireName = 'GgetUserVars';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GgetUserVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  GgetUserVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GgetUserVarsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -524,6 +570,83 @@ class GregisterUserVarsBuilder
         new _$GregisterUserVars._(
             name: BuiltValueNullFieldError.checkNotNull(
                 name, r'GregisterUserVars', 'name'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GgetUserVars extends GgetUserVars {
+  @override
+  final String? name;
+
+  factory _$GgetUserVars([void Function(GgetUserVarsBuilder)? updates]) =>
+      (new GgetUserVarsBuilder()..update(updates))._build();
+
+  _$GgetUserVars._({this.name}) : super._();
+
+  @override
+  GgetUserVars rebuild(void Function(GgetUserVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GgetUserVarsBuilder toBuilder() => new GgetUserVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GgetUserVars && name == other.name;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GgetUserVars')..add('name', name))
+        .toString();
+  }
+}
+
+class GgetUserVarsBuilder
+    implements Builder<GgetUserVars, GgetUserVarsBuilder> {
+  _$GgetUserVars? _$v;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  GgetUserVarsBuilder();
+
+  GgetUserVarsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GgetUserVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GgetUserVars;
+  }
+
+  @override
+  void update(void Function(GgetUserVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GgetUserVars build() => _build();
+
+  _$GgetUserVars _build() {
+    final _$result = _$v ?? new _$GgetUserVars._(name: name);
     replace(_$result);
     return _$result;
   }

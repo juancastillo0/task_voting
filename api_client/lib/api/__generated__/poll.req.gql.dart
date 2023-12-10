@@ -161,6 +161,78 @@ abstract class GregisterUserReq
       );
 }
 
+abstract class GgetUserReq
+    implements
+        Built<GgetUserReq, GgetUserReqBuilder>,
+        _i1.OperationRequest<_i2.GgetUserData, _i3.GgetUserVars> {
+  GgetUserReq._();
+
+  factory GgetUserReq([Function(GgetUserReqBuilder b) updates]) = _$GgetUserReq;
+
+  static void _initializeBuilder(GgetUserReqBuilder b) => b
+    ..operation = _i4.Operation(
+      document: _i5.document,
+      operationName: 'getUser',
+    )
+    ..executeOnListen = true;
+
+  @override
+  _i3.GgetUserVars get vars;
+  @override
+  _i4.Operation get operation;
+  @override
+  _i4.Request get execRequest => _i4.Request(
+        operation: operation,
+        variables: vars.toJson(),
+      );
+
+  @override
+  String? get requestId;
+  @override
+  @BuiltValueField(serialize: false)
+  _i2.GgetUserData? Function(
+    _i2.GgetUserData?,
+    _i2.GgetUserData?,
+  )? get updateResult;
+  @override
+  _i2.GgetUserData? get optimisticResponse;
+  @override
+  String? get updateCacheHandlerKey;
+  @override
+  Map<String, dynamic>? get updateCacheHandlerContext;
+  @override
+  _i1.FetchPolicy? get fetchPolicy;
+  @override
+  bool get executeOnListen;
+  @override
+  _i2.GgetUserData? parseData(Map<String, dynamic> json) =>
+      _i2.GgetUserData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(dynamic data) => data.toJson();
+
+  @override
+  _i1.OperationRequest<_i2.GgetUserData, _i3.GgetUserVars> transformOperation(
+          _i4.Operation Function(_i4.Operation) transform) =>
+      this.rebuild((b) => b..operation = transform(operation));
+
+  static Serializer<GgetUserReq> get serializer => _$ggetUserReqSerializer;
+
+  Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
+        GgetUserReq.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GgetUserReq? fromJson(Map<String, dynamic> json) =>
+      _i6.serializers.deserializeWith(
+        GgetUserReq.serializer,
+        json,
+      );
+}
+
 abstract class GinsertPollReq
     implements
         Built<GinsertPollReq, GinsertPollReqBuilder>,

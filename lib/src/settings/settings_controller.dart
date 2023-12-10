@@ -1,3 +1,6 @@
+import 'package:api_client/api/__generated__/poll.data.gql.dart';
+import 'package:api_client/api/__generated__/poll.req.gql.dart';
+import 'package:api_client/api_client.dart';
 import 'package:flutter/material.dart';
 
 import 'settings_service.dart';
@@ -24,14 +27,41 @@ class SettingsController with ChangeNotifier {
 
   Locale? get locale => _locale;
 
+  String? _refreshToken;
+  String? get refreshToken => _refreshToken;
+
+  ApiClient? _apiClient;
+  GFullUser? _user;
+
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the
   /// settings from the service.
   Future<void> loadSettings() async {
     _themeMode = await _settingsService.themeMode();
     _locale = await _settingsService.locale();
+    _refreshToken = await _settingsService.refreshToken();
+    const backendHost = String.fromEnvironment('BACKEND_HOST');
+    if (backendHost.isNotEmpty) {
+      final client = makeClient(
+        url: backendHost,
+        getAuthHeader: () => _refreshToken,
+      );
+      _apiClient = client;
+      if (_refreshToken != null) {
+        final getUserResponse =
+            await client.requestNoCache(GgetUserReq((u) => u.vars..name = ''));
+      }
 
-    // Important! Inform listeners a change has occurred.
+      final registerUserResponse = await client
+          .requestNoCache(GregisterUserReq((u) => u.vars..name = ''));
+      final registerUser = registerUserResponse.data?.registerUser;
+
+      if (registerUser == null) {
+        throw (registerUserResponse.linkException ??
+            registerUserResponse.graphqlErrors)!;
+      }
+      await updateRefreshToken(registerUser.refreshToken);
+    }
     notifyListeners();
   }
 
@@ -59,5 +89,12 @@ class SettingsController with ChangeNotifier {
     _locale = newLocale;
     notifyListeners();
     await _settingsService.locale.set(newLocale);
+  }
+
+  Future<void> updateRefreshToken(String? refreshToken) async {
+    if (refreshToken == _refreshToken) return;
+    _refreshToken = refreshToken;
+    notifyListeners();
+    await _settingsService.refreshToken.set(refreshToken);
   }
 }
