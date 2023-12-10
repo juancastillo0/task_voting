@@ -44,20 +44,43 @@ type PollOptionVote {
   createdAt: Date!
 }
 
+type PollUser {
+  userVotes: [PollUserVote!]!
+  options: [PollOption!]!
+  id: Int!
+  userId: Int!
+  title: String!
+  subtitle: String
+  body: String!
+  pollKind: String
+  formJsonSchema: String
+  createdAt: Date!
+}
+
+type PollUserVote {
+  option: PollOption!
+  vote: PollOptionVote!
+}
+
 type Mutation {
   setState(
     """The new state, can't be 'WrongState'!."""
     newState: String!
   ): Boolean!
-  registerUser(name: String!): User!
+  getUser(name: String): User!
+  registerUser(name: String): User!
   insertPoll(insert: PollInsert!): Poll!
   addPollOptions(pollId: Int!, options: [PollOptionInsert!]!): Poll!
   votePoll(pollId: Int!, votes: [PollOptionVoteInsert!]!): ResultIntString!
 }
 
 type User {
+  polls: [Poll!]!
+  votes: [PollOptionVote!]!
+  pollsWithVotes: [PollUser!]!
   id: Int!
-  name: String!
+  name: String
+  refreshToken: String!
 }
 
 input PollInsert {

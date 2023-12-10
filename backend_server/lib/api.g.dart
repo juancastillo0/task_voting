@@ -6,6 +6,28 @@ part of 'api.dart';
 // _GraphQLGenerator
 // **************************************************************************
 
+GraphQLObjectField<User, Object?, Object?> get getUserGraphQLField =>
+    _getUserGraphQLField.value;
+final _getUserGraphQLField =
+    HotReloadableDefinition<GraphQLObjectField<User, Object?, Object?>>(
+        (setValue) => setValue(userGraphQLType.nonNull().field<Object?>(
+              'getUser',
+              resolve: (obj, ctx) {
+                final args = ctx.args;
+
+                final _call = (UserController r) =>
+                    r.getUser(ctx: ctx, name: (args["name"] as String?));
+                final FutureOr<UserController> _obj =
+// ignore: unnecessary_non_null_assertion
+                    UserController.ref.get(ctx)!;
+                if (_obj is Future<UserController>)
+                  return _obj.then(_call);
+                else
+                  return _call(_obj);
+              },
+            ))
+              ..inputs.addAll([graphQLString.inputField('name')]));
+
 GraphQLObjectField<User, Object?, Object?> get registerUserGraphQLField =>
     _registerUserGraphQLField.value;
 final _registerUserGraphQLField =
@@ -16,7 +38,7 @@ final _registerUserGraphQLField =
                 final args = ctx.args;
 
                 final _call = (UserController r) =>
-                    r.registerUser((args["name"] as String));
+                    r.registerUser((args["name"] as String?));
                 final FutureOr<UserController> _obj =
 // ignore: unnecessary_non_null_assertion
                     UserController.ref.get(ctx)!;
@@ -26,7 +48,7 @@ final _registerUserGraphQLField =
                   return _call(_obj);
               },
             ))
-              ..inputs.addAll([graphQLString.nonNull().inputField('name')]));
+              ..inputs.addAll([graphQLString.inputField('name')]));
 
 GraphQLObjectField<List<Poll>, Object?, Object?> get getPollsGraphQLField =>
     _getPollsGraphQLField.value;

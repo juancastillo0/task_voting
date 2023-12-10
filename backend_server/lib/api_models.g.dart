@@ -19,6 +19,39 @@ final _userGraphQLType =
   setValue(__userGraphQLType);
   __userGraphQLType.fields.addAll(
     [
+      pollGraphQLType.nonNull().list().nonNull().field(
+        'polls',
+        resolve: (
+          obj,
+          ctx,
+        ) {
+          final args = ctx.args;
+
+          return obj.polls(ctx);
+        },
+      ),
+      pollOptionVoteGraphQLType.nonNull().list().nonNull().field(
+        'votes',
+        resolve: (
+          obj,
+          ctx,
+        ) {
+          final args = ctx.args;
+
+          return obj.votes(ctx);
+        },
+      ),
+      pollUserGraphQLType.nonNull().list().nonNull().field(
+        'pollsWithVotes',
+        resolve: (
+          obj,
+          ctx,
+        ) {
+          final args = ctx.args;
+
+          return obj.pollsWithVotes(ctx);
+        },
+      ),
       graphQLInt.nonNull().field(
             'id',
             resolve: (
@@ -27,13 +60,21 @@ final _userGraphQLType =
             ) =>
                 obj.id,
           ),
+      graphQLString.field(
+        'name',
+        resolve: (
+          obj,
+          ctx,
+        ) =>
+            obj.name,
+      ),
       graphQLString.nonNull().field(
-            'name',
+            'refreshToken',
             resolve: (
               obj,
               ctx,
             ) =>
-                obj.name,
+                obj.refreshToken,
           ),
     ],
   );
@@ -141,6 +182,151 @@ final _pollGraphQLType =
 
 /// Auto-generated from [Poll].
 GraphQLObjectType<Poll> get pollGraphQLType => _pollGraphQLType.value;
+
+final _pollUserGraphQLType =
+    HotReloadableDefinition<GraphQLObjectType<PollUser>>((setValue) {
+  final __name = 'PollUser';
+
+  final __pollUserGraphQLType = objectType<PollUser>(
+    __name,
+    isInterface: false,
+    interfaces: [pollGraphQLType],
+  );
+
+  setValue(__pollUserGraphQLType);
+  __pollUserGraphQLType.fields.addAll(
+    [
+      pollUserVoteGraphQLType.nonNull().list().nonNull().field(
+            'userVotes',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.userVotes,
+          ),
+      pollOptionGraphQLType.nonNull().list().nonNull().field(
+        'options',
+        resolve: (
+          obj,
+          ctx,
+        ) {
+          final args = ctx.args;
+
+          return obj.options(ctx);
+        },
+      ),
+      graphQLInt.nonNull().field(
+            'id',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.id,
+          ),
+      graphQLInt.nonNull().field(
+            'userId',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.userId,
+          ),
+      graphQLString.nonNull().field(
+            'title',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.title,
+          ),
+      graphQLString.field(
+        'subtitle',
+        resolve: (
+          obj,
+          ctx,
+        ) =>
+            obj.subtitle,
+      ),
+      graphQLString.nonNull().field(
+            'body',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.body,
+          ),
+      graphQLString.field(
+        'pollKind',
+        resolve: (
+          obj,
+          ctx,
+        ) =>
+            obj.pollKind,
+      ),
+      graphQLString.field(
+        'formJsonSchema',
+        resolve: (
+          obj,
+          ctx,
+        ) =>
+            obj.formJsonSchema,
+      ),
+      graphQLDate.nonNull().field(
+            'createdAt',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.createdAt,
+          ),
+    ],
+  );
+
+  return __pollUserGraphQLType;
+});
+
+/// Auto-generated from [PollUser].
+GraphQLObjectType<PollUser> get pollUserGraphQLType =>
+    _pollUserGraphQLType.value;
+
+final _pollUserVoteGraphQLType =
+    HotReloadableDefinition<GraphQLObjectType<PollUserVote>>((setValue) {
+  final __name = 'PollUserVote';
+
+  final __pollUserVoteGraphQLType = objectType<PollUserVote>(
+    __name,
+    isInterface: false,
+    interfaces: [],
+  );
+
+  setValue(__pollUserVoteGraphQLType);
+  __pollUserVoteGraphQLType.fields.addAll(
+    [
+      pollOptionGraphQLType.nonNull().field(
+            'option',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.option,
+          ),
+      pollOptionVoteGraphQLType.nonNull().field(
+            'vote',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.vote,
+          ),
+    ],
+  );
+
+  return __pollUserVoteGraphQLType;
+});
+
+/// Auto-generated from [PollUserVote].
+GraphQLObjectType<PollUserVote> get pollUserVoteGraphQLType =>
+    _pollUserVoteGraphQLType.value;
 
 final pollOptionSerializer = SerializerValue<PollOption>(
   key: "PollOption",

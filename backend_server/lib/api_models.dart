@@ -8,11 +8,76 @@ part 'api_models.g.dart';
 @GraphQLObject()
 class User {
   final int id;
-  final String name;
+  final String? name;
+  final String refreshToken;
   const User({
     required this.id,
     required this.name,
+    required this.refreshToken,
   });
+
+  factory User.fromDB(db.Users u) => User(
+        name: u.name,
+        id: u.id,
+        refreshToken: u.refreshToken,
+      );
+
+  Future<List<Poll>> polls(Ctx ctx) async => (await dbRef
+          .get(ctx)
+          .pollController
+          .selectMany(FilterEq(db.PollUpdate(userId: id))))
+      .map(Poll.fromDB)
+      .toList(growable: false);
+
+  Future<List<PollOptionVote>> votes(Ctx ctx) async => (await dbRef
+          .get(ctx)
+          .pollOptionVoteController
+          .selectMany(FilterEq(db.PollOptionVoteUpdate(userId: id))))
+      .map(PollOptionVote.fromDB)
+      .toList(growable: false);
+
+  Future<List<PollUser>> pollsWithVotes(Ctx ctx) async {
+    final data =
+        await dbRef.get(ctx).userWithVotes(db.UserWithVotesArgs(userId: id));
+    final list = <int, PollUser>{};
+    for (final p in data) {
+      PollUser? poll = list[p.pollId];
+      if (poll == null) {
+        poll = PollUser(
+          id: p.pollId,
+          userId: p.pollUserId,
+          title: p.pollTitle,
+          subtitle: p.pollSubtitle,
+          body: p.pollBody,
+          pollKind: p.pollPollKind,
+          formJsonSchema: p.pollFormJsonSchema,
+          createdAt: p.pollCreatedAt,
+          userVotes: [],
+          // TODO: options
+        );
+        list[p.pollId] = poll;
+      }
+      poll.userVotes.add(PollUserVote(
+        option: PollOption(
+          id: p.poId,
+          pollId: p.poPollId,
+          priority: p.poPriority,
+          description: p.poDescription,
+          url: p.poUrl,
+          formJsonSchema: p.poFormJsonSchema,
+          createdAt: p.poCreatedAt,
+        ),
+        vote: PollOptionVote(
+          pollOptionId: p.povPollOptionId,
+          userId: p.povUserId,
+          value: p.povValue,
+          formResponse: p.povFormResponse,
+          createdAt: p.povCreatedAt,
+        ),
+      ));
+    }
+    return list.values.toList(growable: false);
+  }
 }
 
 /// TODO: extends db.Poll
@@ -63,6 +128,35 @@ class Poll {
               .selectMany(FilterEq(db.PollOptionUpdate(pollId: id))))
           .map(PollOption.fromDB)
           .toList(growable: false);
+}
+
+@GraphQLObject()
+class PollUser extends Poll {
+  final List<PollUserVote> userVotes;
+
+  const PollUser({
+    required super.id,
+    required super.userId,
+    required super.title,
+    super.subtitle,
+    required super.body,
+    super.pollKind,
+    super.formJsonSchema,
+    required super.createdAt,
+    required this.userVotes,
+    super.options,
+  });
+}
+
+@GraphQLObject()
+class PollUserVote {
+  final PollOption option;
+  final PollOptionVote vote;
+
+  const PollUserVote({
+    required this.option,
+    required this.vote,
+  });
 }
 
 @GraphQLObject()

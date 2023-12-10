@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:backend_server/api_models.dart';
 import 'package:backend_server/table_queries.sql.dart' as db;
 import 'package:leto_schema/leto_schema.dart';
+import 'package:leto_shelf/leto_shelf.dart';
 import 'package:typesql/typesql.dart';
-import 'package:oxidized/oxidized.dart';
+import 'package:wasm_wit_component/wasm_wit_component.dart' show Result, Ok;
 
 part 'api.g.dart';
 
@@ -23,6 +25,13 @@ final ScopedRef<SqlExecutor> dbExecutorRef =
 final ScopedRef<db.TableQueriesQueries> dbRef =
     ScopedRef.global((ctx) => db.TableQueriesQueries(dbExecutorRef.get(ctx)));
 
+String _randomRefreshToken() {
+  const baseAlphabet = 'abcdefghijklmnopqrstuvwxyz';
+  final alphabet = '$baseAlphabet${baseAlphabet.toUpperCase()}';
+  final r = Random.secure();
+  return List.generate(64, (_) => alphabet[r.nextInt(alphabet.length)]).join();
+}
+
 @ClassResolver()
 class UserController {
   UserController({
@@ -37,10 +46,47 @@ class UserController {
   );
 
   @Mutation()
-  Future<User> registerUser(String name) async {
-    final inserted =
-        await controller.insertReturning(db.UsersInsert(name: name));
-    return User(id: inserted.id, name: inserted.name);
+  Future<User> getUser({
+    required Ctx ctx,
+    String? name,
+  }) async {
+    db.Users found = await getAuthUser(ctx);
+    if (name != null) {
+      final updated = await controller.updateReturning(
+        db.UsersKeyId(id: found.id),
+        db.UsersUpdate(name: Some(name)),
+      );
+      found = updated ?? found;
+    }
+    return User.fromDB(found);
+  }
+
+  @Mutation()
+  Future<User> registerUser(String? name) async {
+    final refreshToken = _randomRefreshToken();
+    final inserted = await controller.insertReturning(
+        db.UsersInsert(name: name, refreshToken: refreshToken));
+    return User.fromDB(inserted);
+  }
+
+  String getAuthHeader(Ctx ctx) {
+    final authHeader = ctx.request.headers['authorization'];
+    if (authHeader == null) {
+      ctx.updateResponse((r) => Response(400));
+      throw Exception('Unauthorized');
+    }
+    return authHeader;
+  }
+
+  Future<db.Users> getAuthUser(Ctx ctx) async {
+    final authHeader = getAuthHeader(ctx);
+    final found = await controller
+        .selectUnique(db.UsersKeyRefreshToken(refreshToken: authHeader));
+    if (found == null) {
+      ctx.updateResponse((r) => Response(400));
+      throw Exception('Unauthorized');
+    }
+    return found;
   }
 }
 
@@ -198,16 +244,17 @@ GraphQLObjectType<Result<T, T2>>
   type.fields.addAll([
     t1Inner.field(
       'ok',
-      resolve: (result, ctx) => result.isOk() ? result.unwrap() : null,
+      resolve: (result, ctx) => result.isOk ? result.unwrap() : null,
     ),
     t2Inner.field(
       'err',
-      resolve: (result, ctx) => result.isOk() ? null : result.unwrapErr(),
+      resolve: (result, ctx) => result.isOk ? null : result.unwrapErr(),
     ),
     graphQLBoolean.nonNull().field(
           'isOk',
-          resolve: (result, ctx) => result.isOk(),
+          resolve: (result, ctx) => result.isOk,
         ),
   ]);
   return type;
 }
+

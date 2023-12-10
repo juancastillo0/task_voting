@@ -1,7 +1,8 @@
 -- 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    name TEXT NOT NULL
+    name TEXT,
+    refreshToken TEXT NOT NULL UNIQUE
 );
 -- 
 SELECT *
@@ -170,3 +171,9 @@ GROUP BY poll.id;
 --     ) po ON po.pollId = poll.id;
 --
 DELETE FROM users WHERE (id = ?) RETURNING id,name;
+-- {"name":"userWithVotes"}
+SELECT *
+FROM poll
+inner join poll_option po on po.pollId = poll.id
+inner join poll_option_vote pov on pov.pollOptionId = po.id
+WHERE pov.userId = :userId;

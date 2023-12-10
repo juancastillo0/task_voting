@@ -36,13 +36,27 @@ Future<void> testDatabase({
 
   final users = await queries.querySelectUsers1();
   expect(users.length, 2);
-  expect(users[0], QuerySelectUsers1(usersId: 1, usersName: 'name1'));
-  expect(users[1], QuerySelectUsers1(usersId: 2, usersName: 'name'));
+  expect(
+    users[0],
+    QuerySelectUsers1(
+      usersId: 1,
+      usersName: 'name1',
+      usersRefreshToken: '',
+    ),
+  );
+  expect(
+    users[1],
+    QuerySelectUsers1(
+      usersId: 2,
+      usersName: 'name',
+      usersRefreshToken: '',
+    ),
+  );
 
   {
     final toInsert = [
-      UsersInsert(id: 3, name: 'name3'),
-      UsersInsert(id: 4, name: 'name4'),
+      UsersInsert(id: 3, name: 'name3', refreshToken: ''),
+      UsersInsert(id: 4, name: 'name4', refreshToken: ''),
     ];
     final usersQueries = queries.usersController;
     final inserted = await usersQueries.insertManyReturning(toInsert);
@@ -53,15 +67,15 @@ Future<void> testDatabase({
 
     final updated3 = await usersQueries.updateReturning(
       UsersKeyId(id: 3),
-      UsersUpdate(name: 'nameUpdated3'),
+      UsersUpdate(name: Some('nameUpdated3')),
     );
     expect(updated3, null);
 
     final updated4 = await usersQueries.updateReturning(
       UsersKeyId(id: 4),
-      UsersUpdate(name: 'nameUpdated4'),
+      UsersUpdate(name: Some('nameUpdated4')),
     );
-    expect(updated4, Users(id: 4, name: 'nameUpdated4'));
+    expect(updated4, Users(id: 4, name: 'nameUpdated4', refreshToken: ''));
 
     final selected4 = await usersQueries.selectUnique(UsersKeyId(id: 4));
     expect(selected4, updated4);
