@@ -111,5 +111,27 @@
         "type": "String"
       }
     }
-  }
+  },
+  "@polls": {
+    "description": "The polls functionality"
+  },
+  "pollsTitle": "Polls",
+  "pollsTabRecent": "Recent",
+  "pollsTabPolls": "Created",
+  "pollsTabVotes": "Voted",
+  "pollsTabCreate": "Create",
+  "pollsNew": "New Poll",
+  "pollsCreate": "Create",
+  "pollsDuplicate": "Duplicate",
+  "pollsGoToList": "Poll List",
+  "pollsEdit": "Edit",
+  "pollsDelete": "Delete",
+  "pollsConfirmDelete": "Are you sure you want to delete this poll?",
+  "pollsFieldTitle": "Title",
+  "pollsFieldSubtitle": "Subtitle",
+  "pollsFieldBody": "Body",
+  "pollsFieldFormJsonSchema": "Form JsonSchema",
+  "pollsFieldPollKind": "Kind",
+  "pollsFieldCreatedAt": "Created At",
+  "pollsFieldOptions": "Options"
 }

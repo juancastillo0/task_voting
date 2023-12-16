@@ -5,6 +5,8 @@ import 'package:task_voting/src/choices/choices_view.dart';
 import 'package:task_voting/src/choices/ice_voting.dart';
 import 'package:task_voting/src/choices/ranked_voting.dart';
 import 'package:task_voting/src/choices/voting_choices_store.dart';
+import 'package:task_voting/src/polls/polls_list_view.dart';
+import 'package:task_voting/src/polls/polls_store.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 import 'package:task_voting/src/tasks/tasks_tab_view.dart';
 import 'package:task_voting/src/util/disposable.dart';
@@ -60,6 +62,10 @@ class _SampleItemListViewState extends State<SampleItemListView>
             .setUp()
             .then((_) => store.selectedStore.routeInfo.value);
         break;
+      case AppTab.polls:
+        final store = context.ref(PollsStore.ref);
+        info = await store.setUp().then((_) => store.routeInfo.value);
+        break;
     }
     routerDelegate.changeCurrentTab(info);
   }
@@ -71,6 +77,9 @@ class _SampleItemListViewState extends State<SampleItemListView>
       await store.setRouteInfo(route);
     } else if (route is VoteRouteInfo) {
       final store = context.ref(VotingChoicesStore.ref);
+      await store.setRouteInfo(route);
+    } else if (route is PollsRouteInfo) {
+      final store = context.ref(PollsStore.ref);
       await store.setRouteInfo(route);
     }
     if (routerDelegate.mainRoute == route) {
@@ -90,10 +99,13 @@ class _SampleItemListViewState extends State<SampleItemListView>
             Text(loc.appTitle),
             const SizedBox(width: 20),
             SizedBox(
-              width: 200,
+              width: 320,
               child: TabBar(
                 controller: tabController,
                 tabs: [
+                  Tab(
+                    child: Text(loc.pollsTitle),
+                  ),
                   Tab(
                     child: Text(loc.choiceListTitle),
                   ),
@@ -148,6 +160,7 @@ class _SampleItemListViewState extends State<SampleItemListView>
       body: TabBarView(
         controller: tabController,
         children: const [
+          PollsListView(),
           ChoicesForm(),
           TasksTabView(),
         ],

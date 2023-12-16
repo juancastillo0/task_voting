@@ -4,6 +4,7 @@ import 'package:file_system_access/file_system_access.dart';
 import 'package:hive/hive.dart';
 import 'package:task_voting/src/fields/prelude.dart';
 import 'package:task_voting/src/choices/choices_store.dart';
+import 'package:task_voting/src/polls/polls_store.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 
 /// A service that stores and retrieves user settings.
@@ -128,6 +129,23 @@ class HiveCollectionKey<T> {
 
   static final choicesStoreCollection = HiveCollectionKey<ChoicesStore>._(
     'task_voting_ChoicesStoreBox',
+    (json, {required valueToEdit}) async {
+      final store = valueToEdit;
+      final result = await store.populateFromJson(json);
+      result.when<void>(
+        ok: (ok) => ok(),
+        err: (err) {
+          throw err;
+        },
+      );
+      return store;
+    },
+    (value) async => value.toJson(),
+  );
+
+
+  static final pollsStoreCollection = HiveCollectionKey<PollsStore>._(
+    'task_voting_PollsStoreBox',
     (json, {required valueToEdit}) async {
       final store = valueToEdit;
       final result = await store.populateFromJson(json);

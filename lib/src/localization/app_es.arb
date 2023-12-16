@@ -104,5 +104,27 @@
   "tasksAddTag": "Añadir",
   "tasksNoTagsFound": "No se encontró ningún grupo para el nombre dado",
   "tasksTagErrorEmpty": "Nombre del grupo no debería estar vacío.",
-  "tasksTagErrorNotUnique": "Nombre de grupo \"{name}\" debería ser único."
+  "tasksTagErrorNotUnique": "Nombre de grupo \"{name}\" debería ser único.",
+  "@polls": {
+    "description": "The polls functionality"
+  },
+  "pollsTitle": "Encuestas",
+  "pollsTabRecent": "Recientes",
+  "pollsTabPolls": "Creadas",
+  "pollsTabVotes": "Votadas",
+  "pollsTabCreate": "Create",
+  "pollsNew": "Nueva Encuesta",
+  "pollsCreate": "Crear",
+  "pollsDuplicate": "Duplicar",
+  "pollsGoToList": "Listado",
+  "pollsEdit": "Editar",
+  "pollsDelete": "Eliminar",
+  "pollsConfirmDelete": "¿Estás seguro que quieres eliminar esta encuesta?",
+  "pollsFieldTitle": "Título",
+  "pollsFieldSubtitle": "Subtítulo",
+  "pollsFieldBody": "Descripción",
+  "pollsFieldFormJsonSchema": "JsonSchema de Formulario",
+  "pollsFieldPollKind": "Tipo",
+  "pollsFieldCreatedAt": "Fecha de Creación",
+  "pollsFieldOptions": "Opciones"
 }

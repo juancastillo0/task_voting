@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:stack_portal/stack_portal.dart' hide Ref;
 import 'package:task_voting/src/choices/choices_store.dart';
 import 'package:task_voting/src/fields/prelude.dart';
+import 'package:task_voting/src/polls/polls_store.dart';
 import 'package:task_voting/src/settings/settings_view.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 import 'package:task_voting/src/util/disposable.dart';
@@ -17,6 +18,7 @@ enum AppRoute {
 }
 
 enum AppTab {
+  polls,
   votes,
   tasks,
 }
@@ -59,6 +61,7 @@ mixin RouteInfo<T extends RouteInfo<T>> {
   static final specs = <RouteSpec<RouteInfo>>[
     TaskRouteInfo.spec,
     VoteRouteInfo.spec,
+    PollsRouteInfo.spec,
     SpecRouteInfo.settingsSpec,
   ];
 
@@ -302,12 +305,85 @@ class VoteRouteInfo
   }
 }
 
+class PollsRouteInfo
+    with RouteInfo<PollsRouteInfo>, MainRouteInfo<PollsRouteInfo> {
+  final int? selectedPoll;
+  final PollsView? view;
+  final bool? expanded;
+  final bool? editing;
+  final String? projectId;
+
+  PollsRouteInfo({
+    required this.selectedPoll,
+    required this.view,
+    required this.expanded,
+    required this.editing,
+    required this.projectId,
+  });
+
+  @override
+  RouteSpec<PollsRouteInfo> get routeSpec => spec;
+
+  static final spec = RouteSpecValue(
+    route: AppRoute.main,
+    requiredParams: {'tab': _tab.name},
+    builder: (context, info) => const SampleItemListView(),
+    // getCurrent: (root) => root.ref(TasksStore.ref).routeInfo,
+    parser: (url) {
+      if (url.queryParameters['tab'] != _tab.name) {
+        return null;
+      }
+      return PollsRouteInfo(
+        projectId: url.queryParameters['projectId'],
+        expanded: url.queryParameters['expanded'] == null
+            ? null
+            : url.queryParameters['expanded'] == 'true',
+        editing: url.queryParameters['editing'] == null
+            ? null
+            : url.queryParameters['editing'] == 'true',
+        selectedPoll: int.tryParse(url.queryParameters['selectedPoll'] ?? ''),
+        view: PollsView.values.firstWhereOrNull(
+            (element) => element.name == url.queryParameters['view']),
+      );
+    },
+  );
+
+  static AppTab get _tab => AppTab.polls;
+
+  @override
+  AppTab get tab => _tab;
+
+  @override
+  Map<String, String> get queryParams {
+    return {
+      ROUTE: route.name,
+      'tab': tab.name,
+      if (projectId != null) 'projectId': projectId!,
+      if (view != null) 'view': view!.name,
+      if (editing != null) 'editing': editing.toString(),
+      if (selectedPoll != null) 'selectedPoll': selectedPoll!.toString(),
+      if (expanded != null) 'expanded': expanded.toString(),
+    };
+  }
+
+  @override
+  PollsRouteInfo merge(PollsRouteInfo other) {
+    return PollsRouteInfo(
+      selectedPoll: other.selectedPoll ?? selectedPoll,
+      view: other.view ?? view,
+      expanded: other.expanded ?? expanded,
+      editing: other.editing ?? editing,
+      projectId: other.projectId ?? projectId,
+    );
+  }
+}
+
 class AppRouteInformationParser extends RouteInformationParser<RouteInfo> {
   const AppRouteInformationParser();
 
   @override
   Future<RouteInfo> parseRouteInformation(RouteInformation routeInformation) {
-    final url = Uri.parse(routeInformation.location ?? '/');
+    final url = routeInformation.uri;
     final info = RouteInfo.fromUrl(url) ?? VoteRouteInfo.spec.defaultRouteInfo;
     return SynchronousFuture(info);
   }
@@ -315,7 +391,7 @@ class AppRouteInformationParser extends RouteInformationParser<RouteInfo> {
   @override
   RouteInformation? restoreRouteInformation(RouteInfo configuration) {
     return RouteInformation(
-      location: configuration.url.toString(),
+      uri: configuration.url,
       state: null,
     );
   }
