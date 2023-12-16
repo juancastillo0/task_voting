@@ -4,14 +4,14 @@ query getPolls($id: Int, $userId: Int) {
   }
 }
 
-mutation registerUser($name: String!) {
+mutation registerUser($name: String) {
   registerUser(name: $name) {
     ...FullUser
   }
 }
 
 mutation getUser($name: String) {
-  registerUser(name: $name) {
+  getUser(name: $name) {
     ...FullUser
   }
 }

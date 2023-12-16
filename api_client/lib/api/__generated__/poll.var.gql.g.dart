@@ -94,11 +94,15 @@ class _$GregisterUserVarsSerializer
   @override
   Iterable<Object?> serialize(Serializers serializers, GregisterUserVars object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -116,7 +120,7 @@ class _$GregisterUserVarsSerializer
       switch (key) {
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -542,15 +546,13 @@ class GgetPollsVarsBuilder
 
 class _$GregisterUserVars extends GregisterUserVars {
   @override
-  final String name;
+  final String? name;
 
   factory _$GregisterUserVars(
           [void Function(GregisterUserVarsBuilder)? updates]) =>
       (new GregisterUserVarsBuilder()..update(updates))._build();
 
-  _$GregisterUserVars._({required this.name}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, r'GregisterUserVars', 'name');
-  }
+  _$GregisterUserVars._({this.name}) : super._();
 
   @override
   GregisterUserVars rebuild(void Function(GregisterUserVarsBuilder) updates) =>
@@ -616,10 +618,7 @@ class GregisterUserVarsBuilder
   GregisterUserVars build() => _build();
 
   _$GregisterUserVars _build() {
-    final _$result = _$v ??
-        new _$GregisterUserVars._(
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, r'GregisterUserVars', 'name'));
+    final _$result = _$v ?? new _$GregisterUserVars._(name: name);
     replace(_$result);
     return _$result;
   }

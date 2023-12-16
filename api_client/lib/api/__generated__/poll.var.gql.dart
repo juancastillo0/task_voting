@@ -40,7 +40,7 @@ abstract class GregisterUserVars
   factory GregisterUserVars([Function(GregisterUserVarsBuilder b) updates]) =
       _$GregisterUserVars;
 
-  String get name;
+  String? get name;
   static Serializer<GregisterUserVars> get serializer =>
       _$gregisterUserVarsSerializer;
 

@@ -56,41 +56,40 @@ Serializer<GregisterUserData_registerUser_pollsWithVotes_userVotes_vote>
     new _$GregisterUserData_registerUser_pollsWithVotes_userVotes_voteSerializer();
 Serializer<GgetUserData> _$ggetUserDataSerializer =
     new _$GgetUserDataSerializer();
-Serializer<GgetUserData_registerUser> _$ggetUserDataRegisterUserSerializer =
-    new _$GgetUserData_registerUserSerializer();
-Serializer<GgetUserData_registerUser_polls>
-    _$ggetUserDataRegisterUserPollsSerializer =
-    new _$GgetUserData_registerUser_pollsSerializer();
-Serializer<GgetUserData_registerUser_polls_options>
-    _$ggetUserDataRegisterUserPollsOptionsSerializer =
-    new _$GgetUserData_registerUser_polls_optionsSerializer();
-Serializer<GgetUserData_registerUser_polls_options_votes>
-    _$ggetUserDataRegisterUserPollsOptionsVotesSerializer =
-    new _$GgetUserData_registerUser_polls_options_votesSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes>
-    _$ggetUserDataRegisterUserPollsWithVotesSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotesSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes_poll>
-    _$ggetUserDataRegisterUserPollsWithVotesPollSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotes_pollSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes_poll_options>
-    _$ggetUserDataRegisterUserPollsWithVotesPollOptionsSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotes_poll_optionsSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes_poll_options_votes>
-    _$ggetUserDataRegisterUserPollsWithVotesPollOptionsVotesSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotes_poll_options_votesSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes_userVotes>
-    _$ggetUserDataRegisterUserPollsWithVotesUserVotesSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotes_userVotesSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes_userVotes_option>
-    _$ggetUserDataRegisterUserPollsWithVotesUserVotesOptionSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotes_userVotes_optionSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes>
-    _$ggetUserDataRegisterUserPollsWithVotesUserVotesOptionVotesSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesSerializer();
-Serializer<GgetUserData_registerUser_pollsWithVotes_userVotes_vote>
-    _$ggetUserDataRegisterUserPollsWithVotesUserVotesVoteSerializer =
-    new _$GgetUserData_registerUser_pollsWithVotes_userVotes_voteSerializer();
+Serializer<GgetUserData_getUser> _$ggetUserDataGetUserSerializer =
+    new _$GgetUserData_getUserSerializer();
+Serializer<GgetUserData_getUser_polls> _$ggetUserDataGetUserPollsSerializer =
+    new _$GgetUserData_getUser_pollsSerializer();
+Serializer<GgetUserData_getUser_polls_options>
+    _$ggetUserDataGetUserPollsOptionsSerializer =
+    new _$GgetUserData_getUser_polls_optionsSerializer();
+Serializer<GgetUserData_getUser_polls_options_votes>
+    _$ggetUserDataGetUserPollsOptionsVotesSerializer =
+    new _$GgetUserData_getUser_polls_options_votesSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes>
+    _$ggetUserDataGetUserPollsWithVotesSerializer =
+    new _$GgetUserData_getUser_pollsWithVotesSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes_poll>
+    _$ggetUserDataGetUserPollsWithVotesPollSerializer =
+    new _$GgetUserData_getUser_pollsWithVotes_pollSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes_poll_options>
+    _$ggetUserDataGetUserPollsWithVotesPollOptionsSerializer =
+    new _$GgetUserData_getUser_pollsWithVotes_poll_optionsSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes_poll_options_votes>
+    _$ggetUserDataGetUserPollsWithVotesPollOptionsVotesSerializer =
+    new _$GgetUserData_getUser_pollsWithVotes_poll_options_votesSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes_userVotes>
+    _$ggetUserDataGetUserPollsWithVotesUserVotesSerializer =
+    new _$GgetUserData_getUser_pollsWithVotes_userVotesSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes_userVotes_option>
+    _$ggetUserDataGetUserPollsWithVotesUserVotesOptionSerializer =
+    new _$GgetUserData_getUser_pollsWithVotes_userVotes_optionSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>
+    _$ggetUserDataGetUserPollsWithVotesUserVotesOptionVotesSerializer =
+    new _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votesSerializer();
+Serializer<GgetUserData_getUser_pollsWithVotes_userVotes_vote>
+    _$ggetUserDataGetUserPollsWithVotesUserVotesVoteSerializer =
+    new _$GgetUserData_getUser_pollsWithVotes_userVotes_voteSerializer();
 Serializer<GinsertPollData> _$ginsertPollDataSerializer =
     new _$GinsertPollDataSerializer();
 Serializer<GinsertPollData_insertPoll> _$ginsertPollDataInsertPollSerializer =
@@ -1830,9 +1829,9 @@ class _$GgetUserDataSerializer implements StructuredSerializer<GgetUserData> {
       '__typename',
       serializers.serialize(object.G__typename,
           specifiedType: const FullType(String)),
-      'registerUser',
-      serializers.serialize(object.registerUser,
-          specifiedType: const FullType(GgetUserData_registerUser)),
+      'getUser',
+      serializers.serialize(object.getUser,
+          specifiedType: const FullType(GgetUserData_getUser)),
     ];
 
     return result;
@@ -1854,10 +1853,10 @@ class _$GgetUserDataSerializer implements StructuredSerializer<GgetUserData> {
           result.G__typename = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'registerUser':
-          result.registerUser.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GgetUserData_registerUser))!
-              as GgetUserData_registerUser);
+        case 'getUser':
+          result.getUser.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(GgetUserData_getUser))!
+              as GgetUserData_getUser);
           break;
       }
     }
@@ -1866,19 +1865,19 @@ class _$GgetUserDataSerializer implements StructuredSerializer<GgetUserData> {
   }
 }
 
-class _$GgetUserData_registerUserSerializer
-    implements StructuredSerializer<GgetUserData_registerUser> {
+class _$GgetUserData_getUserSerializer
+    implements StructuredSerializer<GgetUserData_getUser> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser,
-    _$GgetUserData_registerUser
+    GgetUserData_getUser,
+    _$GgetUserData_getUser
   ];
   @override
-  final String wireName = 'GgetUserData_registerUser';
+  final String wireName = 'GgetUserData_getUser';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GgetUserData_registerUser object,
+      Serializers serializers, GgetUserData_getUser object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -1891,13 +1890,12 @@ class _$GgetUserData_registerUserSerializer
           specifiedType: const FullType(String)),
       'polls',
       serializers.serialize(object.polls,
-          specifiedType: const FullType(BuiltList,
-              const [const FullType(GgetUserData_registerUser_polls)])),
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(GgetUserData_getUser_polls)])),
       'pollsWithVotes',
       serializers.serialize(object.pollsWithVotes,
-          specifiedType: const FullType(BuiltList, const [
-            const FullType(GgetUserData_registerUser_pollsWithVotes)
-          ])),
+          specifiedType: const FullType(BuiltList,
+              const [const FullType(GgetUserData_getUser_pollsWithVotes)])),
     ];
     Object? value;
     value = object.name;
@@ -1911,10 +1909,10 @@ class _$GgetUserData_registerUserSerializer
   }
 
   @override
-  GgetUserData_registerUser deserialize(
+  GgetUserData_getUser deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUserData_registerUserBuilder();
+    final result = new GgetUserData_getUserBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -1941,13 +1939,13 @@ class _$GgetUserData_registerUserSerializer
         case 'polls':
           result.polls.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(GgetUserData_registerUser_polls)
+                const FullType(GgetUserData_getUser_polls)
               ]))! as BuiltList<Object?>);
           break;
         case 'pollsWithVotes':
           result.pollsWithVotes.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(GgetUserData_registerUser_pollsWithVotes)
+                const FullType(GgetUserData_getUser_pollsWithVotes)
               ]))! as BuiltList<Object?>);
           break;
       }
@@ -1957,19 +1955,19 @@ class _$GgetUserData_registerUserSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsSerializer
-    implements StructuredSerializer<GgetUserData_registerUser_polls> {
+class _$GgetUserData_getUser_pollsSerializer
+    implements StructuredSerializer<GgetUserData_getUser_polls> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_polls,
-    _$GgetUserData_registerUser_polls
+    GgetUserData_getUser_polls,
+    _$GgetUserData_getUser_polls
   ];
   @override
-  final String wireName = 'GgetUserData_registerUser_polls';
+  final String wireName = 'GgetUserData_getUser_polls';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GgetUserData_registerUser_polls object,
+      Serializers serializers, GgetUserData_getUser_polls object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -1978,7 +1976,7 @@ class _$GgetUserData_registerUser_pollsSerializer
       'options',
       serializers.serialize(object.options,
           specifiedType: const FullType(BuiltList,
-              const [const FullType(GgetUserData_registerUser_polls_options)])),
+              const [const FullType(GgetUserData_getUser_polls_options)])),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
       'userId',
@@ -2018,10 +2016,10 @@ class _$GgetUserData_registerUser_pollsSerializer
   }
 
   @override
-  GgetUserData_registerUser_polls deserialize(
+  GgetUserData_getUser_polls deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUserData_registerUser_pollsBuilder();
+    final result = new GgetUserData_getUser_pollsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2036,7 +2034,7 @@ class _$GgetUserData_registerUser_pollsSerializer
         case 'options':
           result.options.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(GgetUserData_registerUser_polls_options)
+                const FullType(GgetUserData_getUser_polls_options)
               ]))! as BuiltList<Object?>);
           break;
         case 'id':
@@ -2078,19 +2076,19 @@ class _$GgetUserData_registerUser_pollsSerializer
   }
 }
 
-class _$GgetUserData_registerUser_polls_optionsSerializer
-    implements StructuredSerializer<GgetUserData_registerUser_polls_options> {
+class _$GgetUserData_getUser_polls_optionsSerializer
+    implements StructuredSerializer<GgetUserData_getUser_polls_options> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_polls_options,
-    _$GgetUserData_registerUser_polls_options
+    GgetUserData_getUser_polls_options,
+    _$GgetUserData_getUser_polls_options
   ];
   @override
-  final String wireName = 'GgetUserData_registerUser_polls_options';
+  final String wireName = 'GgetUserData_getUser_polls_options';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GgetUserData_registerUser_polls_options object,
+      Serializers serializers, GgetUserData_getUser_polls_options object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2099,7 +2097,7 @@ class _$GgetUserData_registerUser_polls_optionsSerializer
       'votes',
       serializers.serialize(object.votes,
           specifiedType: const FullType(BuiltList, const [
-            const FullType(GgetUserData_registerUser_polls_options_votes)
+            const FullType(GgetUserData_getUser_polls_options_votes)
           ])),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
@@ -2141,10 +2139,10 @@ class _$GgetUserData_registerUser_polls_optionsSerializer
   }
 
   @override
-  GgetUserData_registerUser_polls_options deserialize(
+  GgetUserData_getUser_polls_options deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUserData_registerUser_polls_optionsBuilder();
+    final result = new GgetUserData_getUser_polls_optionsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2159,7 +2157,7 @@ class _$GgetUserData_registerUser_polls_optionsSerializer
         case 'votes':
           result.votes.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(GgetUserData_registerUser_polls_options_votes)
+                const FullType(GgetUserData_getUser_polls_options_votes)
               ]))! as BuiltList<Object?>);
           break;
         case 'id':
@@ -2197,20 +2195,19 @@ class _$GgetUserData_registerUser_polls_optionsSerializer
   }
 }
 
-class _$GgetUserData_registerUser_polls_options_votesSerializer
-    implements
-        StructuredSerializer<GgetUserData_registerUser_polls_options_votes> {
+class _$GgetUserData_getUser_polls_options_votesSerializer
+    implements StructuredSerializer<GgetUserData_getUser_polls_options_votes> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_polls_options_votes,
-    _$GgetUserData_registerUser_polls_options_votes
+    GgetUserData_getUser_polls_options_votes,
+    _$GgetUserData_getUser_polls_options_votes
   ];
   @override
-  final String wireName = 'GgetUserData_registerUser_polls_options_votes';
+  final String wireName = 'GgetUserData_getUser_polls_options_votes';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_polls_options_votes object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GgetUserData_getUser_polls_options_votes object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2239,10 +2236,10 @@ class _$GgetUserData_registerUser_polls_options_votesSerializer
   }
 
   @override
-  GgetUserData_registerUser_polls_options_votes deserialize(
+  GgetUserData_getUser_polls_options_votes deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUserData_registerUser_polls_options_votesBuilder();
+    final result = new GgetUserData_getUser_polls_options_votesBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2281,19 +2278,19 @@ class _$GgetUserData_registerUser_polls_options_votesSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotesSerializer
-    implements StructuredSerializer<GgetUserData_registerUser_pollsWithVotes> {
+class _$GgetUserData_getUser_pollsWithVotesSerializer
+    implements StructuredSerializer<GgetUserData_getUser_pollsWithVotes> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes,
-    _$GgetUserData_registerUser_pollsWithVotes
+    GgetUserData_getUser_pollsWithVotes,
+    _$GgetUserData_getUser_pollsWithVotes
   ];
   @override
-  final String wireName = 'GgetUserData_registerUser_pollsWithVotes';
+  final String wireName = 'GgetUserData_getUser_pollsWithVotes';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GgetUserData_registerUser_pollsWithVotes object,
+      Serializers serializers, GgetUserData_getUser_pollsWithVotes object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2302,11 +2299,11 @@ class _$GgetUserData_registerUser_pollsWithVotesSerializer
       'poll',
       serializers.serialize(object.poll,
           specifiedType:
-              const FullType(GgetUserData_registerUser_pollsWithVotes_poll)),
+              const FullType(GgetUserData_getUser_pollsWithVotes_poll)),
       'userVotes',
       serializers.serialize(object.userVotes,
           specifiedType: const FullType(BuiltList, const [
-            const FullType(GgetUserData_registerUser_pollsWithVotes_userVotes)
+            const FullType(GgetUserData_getUser_pollsWithVotes_userVotes)
           ])),
     ];
 
@@ -2314,10 +2311,10 @@ class _$GgetUserData_registerUser_pollsWithVotesSerializer
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes deserialize(
+  GgetUserData_getUser_pollsWithVotes deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUserData_registerUser_pollsWithVotesBuilder();
+    final result = new GgetUserData_getUser_pollsWithVotesBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2331,15 +2328,14 @@ class _$GgetUserData_registerUser_pollsWithVotesSerializer
           break;
         case 'poll':
           result.poll.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      GgetUserData_registerUser_pollsWithVotes_poll))!
-              as GgetUserData_registerUser_pollsWithVotes_poll);
+                  specifiedType:
+                      const FullType(GgetUserData_getUser_pollsWithVotes_poll))!
+              as GgetUserData_getUser_pollsWithVotes_poll);
           break;
         case 'userVotes':
           result.userVotes.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(
-                    GgetUserData_registerUser_pollsWithVotes_userVotes)
+                const FullType(GgetUserData_getUser_pollsWithVotes_userVotes)
               ]))! as BuiltList<Object?>);
           break;
       }
@@ -2349,20 +2345,19 @@ class _$GgetUserData_registerUser_pollsWithVotesSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_pollSerializer
-    implements
-        StructuredSerializer<GgetUserData_registerUser_pollsWithVotes_poll> {
+class _$GgetUserData_getUser_pollsWithVotes_pollSerializer
+    implements StructuredSerializer<GgetUserData_getUser_pollsWithVotes_poll> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes_poll,
-    _$GgetUserData_registerUser_pollsWithVotes_poll
+    GgetUserData_getUser_pollsWithVotes_poll,
+    _$GgetUserData_getUser_pollsWithVotes_poll
   ];
   @override
-  final String wireName = 'GgetUserData_registerUser_pollsWithVotes_poll';
+  final String wireName = 'GgetUserData_getUser_pollsWithVotes_poll';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_pollsWithVotes_poll object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GgetUserData_getUser_pollsWithVotes_poll object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2371,8 +2366,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_pollSerializer
       'options',
       serializers.serialize(object.options,
           specifiedType: const FullType(BuiltList, const [
-            const FullType(
-                GgetUserData_registerUser_pollsWithVotes_poll_options)
+            const FullType(GgetUserData_getUser_pollsWithVotes_poll_options)
           ])),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
@@ -2413,10 +2407,10 @@ class _$GgetUserData_registerUser_pollsWithVotes_pollSerializer
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll deserialize(
+  GgetUserData_getUser_pollsWithVotes_poll deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUserData_registerUser_pollsWithVotes_pollBuilder();
+    final result = new GgetUserData_getUser_pollsWithVotes_pollBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2431,8 +2425,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_pollSerializer
         case 'options':
           result.options.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(
-                    GgetUserData_registerUser_pollsWithVotes_poll_options)
+                const FullType(GgetUserData_getUser_pollsWithVotes_poll_options)
               ]))! as BuiltList<Object?>);
           break;
         case 'id':
@@ -2474,22 +2467,20 @@ class _$GgetUserData_registerUser_pollsWithVotes_pollSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_poll_optionsSerializer
+class _$GgetUserData_getUser_pollsWithVotes_poll_optionsSerializer
     implements
-        StructuredSerializer<
-            GgetUserData_registerUser_pollsWithVotes_poll_options> {
+        StructuredSerializer<GgetUserData_getUser_pollsWithVotes_poll_options> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes_poll_options,
-    _$GgetUserData_registerUser_pollsWithVotes_poll_options
+    GgetUserData_getUser_pollsWithVotes_poll_options,
+    _$GgetUserData_getUser_pollsWithVotes_poll_options
   ];
   @override
-  final String wireName =
-      'GgetUserData_registerUser_pollsWithVotes_poll_options';
+  final String wireName = 'GgetUserData_getUser_pollsWithVotes_poll_options';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_pollsWithVotes_poll_options object,
+      GgetUserData_getUser_pollsWithVotes_poll_options object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2499,7 +2490,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_optionsSerializer
       serializers.serialize(object.votes,
           specifiedType: const FullType(BuiltList, const [
             const FullType(
-                GgetUserData_registerUser_pollsWithVotes_poll_options_votes)
+                GgetUserData_getUser_pollsWithVotes_poll_options_votes)
           ])),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
@@ -2541,11 +2532,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_optionsSerializer
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_options deserialize(
+  GgetUserData_getUser_pollsWithVotes_poll_options deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder();
+        new GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2561,7 +2552,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_optionsSerializer
           result.votes.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(
-                    GgetUserData_registerUser_pollsWithVotes_poll_options_votes)
+                    GgetUserData_getUser_pollsWithVotes_poll_options_votes)
               ]))! as BuiltList<Object?>);
           break;
         case 'id':
@@ -2599,22 +2590,22 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_optionsSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votesSerializer
+class _$GgetUserData_getUser_pollsWithVotes_poll_options_votesSerializer
     implements
         StructuredSerializer<
-            GgetUserData_registerUser_pollsWithVotes_poll_options_votes> {
+            GgetUserData_getUser_pollsWithVotes_poll_options_votes> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes_poll_options_votes,
-    _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes
+    GgetUserData_getUser_pollsWithVotes_poll_options_votes,
+    _$GgetUserData_getUser_pollsWithVotes_poll_options_votes
   ];
   @override
   final String wireName =
-      'GgetUserData_registerUser_pollsWithVotes_poll_options_votes';
+      'GgetUserData_getUser_pollsWithVotes_poll_options_votes';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_pollsWithVotes_poll_options_votes object,
+      GgetUserData_getUser_pollsWithVotes_poll_options_votes object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2643,11 +2634,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votesSerializer
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_options_votes deserialize(
+  GgetUserData_getUser_pollsWithVotes_poll_options_votes deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder();
+        new GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2686,21 +2677,20 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votesSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotesSerializer
+class _$GgetUserData_getUser_pollsWithVotes_userVotesSerializer
     implements
-        StructuredSerializer<
-            GgetUserData_registerUser_pollsWithVotes_userVotes> {
+        StructuredSerializer<GgetUserData_getUser_pollsWithVotes_userVotes> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes_userVotes,
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes
+    GgetUserData_getUser_pollsWithVotes_userVotes,
+    _$GgetUserData_getUser_pollsWithVotes_userVotes
   ];
   @override
-  final String wireName = 'GgetUserData_registerUser_pollsWithVotes_userVotes';
+  final String wireName = 'GgetUserData_getUser_pollsWithVotes_userVotes';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_pollsWithVotes_userVotes object,
+      GgetUserData_getUser_pollsWithVotes_userVotes object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2709,22 +2699,21 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotesSerializer
       'option',
       serializers.serialize(object.option,
           specifiedType: const FullType(
-              GgetUserData_registerUser_pollsWithVotes_userVotes_option)),
+              GgetUserData_getUser_pollsWithVotes_userVotes_option)),
       'vote',
       serializers.serialize(object.vote,
           specifiedType: const FullType(
-              GgetUserData_registerUser_pollsWithVotes_userVotes_vote)),
+              GgetUserData_getUser_pollsWithVotes_userVotes_vote)),
     ];
 
     return result;
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes deserialize(
+  GgetUserData_getUser_pollsWithVotes_userVotes deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result =
-        new GgetUserData_registerUser_pollsWithVotes_userVotesBuilder();
+    final result = new GgetUserData_getUser_pollsWithVotes_userVotesBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2739,14 +2728,14 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotesSerializer
         case 'option':
           result.option.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GgetUserData_registerUser_pollsWithVotes_userVotes_option))!
-              as GgetUserData_registerUser_pollsWithVotes_userVotes_option);
+                      GgetUserData_getUser_pollsWithVotes_userVotes_option))!
+              as GgetUserData_getUser_pollsWithVotes_userVotes_option);
           break;
         case 'vote':
           result.vote.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GgetUserData_registerUser_pollsWithVotes_userVotes_vote))!
-              as GgetUserData_registerUser_pollsWithVotes_userVotes_vote);
+                      GgetUserData_getUser_pollsWithVotes_userVotes_vote))!
+              as GgetUserData_getUser_pollsWithVotes_userVotes_vote);
           break;
       }
     }
@@ -2755,22 +2744,22 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotesSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotes_optionSerializer
+class _$GgetUserData_getUser_pollsWithVotes_userVotes_optionSerializer
     implements
         StructuredSerializer<
-            GgetUserData_registerUser_pollsWithVotes_userVotes_option> {
+            GgetUserData_getUser_pollsWithVotes_userVotes_option> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes_userVotes_option,
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes_option
+    GgetUserData_getUser_pollsWithVotes_userVotes_option,
+    _$GgetUserData_getUser_pollsWithVotes_userVotes_option
   ];
   @override
   final String wireName =
-      'GgetUserData_registerUser_pollsWithVotes_userVotes_option';
+      'GgetUserData_getUser_pollsWithVotes_userVotes_option';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_pollsWithVotes_userVotes_option object,
+      GgetUserData_getUser_pollsWithVotes_userVotes_option object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2780,7 +2769,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_optionSerializer
       serializers.serialize(object.votes,
           specifiedType: const FullType(BuiltList, const [
             const FullType(
-                GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes)
+                GgetUserData_getUser_pollsWithVotes_userVotes_option_votes)
           ])),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
@@ -2822,11 +2811,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_optionSerializer
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option deserialize(
+  GgetUserData_getUser_pollsWithVotes_userVotes_option deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder();
+        new GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2842,7 +2831,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_optionSerializer
           result.votes.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(
-                    GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes)
+                    GgetUserData_getUser_pollsWithVotes_userVotes_option_votes)
               ]))! as BuiltList<Object?>);
           break;
         case 'id':
@@ -2880,22 +2869,22 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_optionSerializer
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesSerializer
+class _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votesSerializer
     implements
         StructuredSerializer<
-            GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes> {
+            GgetUserData_getUser_pollsWithVotes_userVotes_option_votes> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes,
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
+    GgetUserData_getUser_pollsWithVotes_userVotes_option_votes,
+    _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes
   ];
   @override
   final String wireName =
-      'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes';
+      'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes object,
+      GgetUserData_getUser_pollsWithVotes_userVotes_option_votes object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -2924,11 +2913,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesSerialize
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes deserialize(
+  GgetUserData_getUser_pollsWithVotes_userVotes_option_votes deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder();
+        new GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -2967,22 +2956,21 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesSerialize
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotes_voteSerializer
+class _$GgetUserData_getUser_pollsWithVotes_userVotes_voteSerializer
     implements
         StructuredSerializer<
-            GgetUserData_registerUser_pollsWithVotes_userVotes_vote> {
+            GgetUserData_getUser_pollsWithVotes_userVotes_vote> {
   @override
   final Iterable<Type> types = const [
-    GgetUserData_registerUser_pollsWithVotes_userVotes_vote,
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote
+    GgetUserData_getUser_pollsWithVotes_userVotes_vote,
+    _$GgetUserData_getUser_pollsWithVotes_userVotes_vote
   ];
   @override
-  final String wireName =
-      'GgetUserData_registerUser_pollsWithVotes_userVotes_vote';
+  final String wireName = 'GgetUserData_getUser_pollsWithVotes_userVotes_vote';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GgetUserData_registerUser_pollsWithVotes_userVotes_vote object,
+      GgetUserData_getUser_pollsWithVotes_userVotes_vote object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -3011,11 +2999,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_voteSerializer
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_vote deserialize(
+  GgetUserData_getUser_pollsWithVotes_userVotes_vote deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder();
+        new GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -10278,17 +10266,16 @@ class _$GgetUserData extends GgetUserData {
   @override
   final String G__typename;
   @override
-  final GgetUserData_registerUser registerUser;
+  final GgetUserData_getUser getUser;
 
   factory _$GgetUserData([void Function(GgetUserDataBuilder)? updates]) =>
       (new GgetUserDataBuilder()..update(updates))._build();
 
-  _$GgetUserData._({required this.G__typename, required this.registerUser})
+  _$GgetUserData._({required this.G__typename, required this.getUser})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GgetUserData', 'G__typename');
-    BuiltValueNullFieldError.checkNotNull(
-        registerUser, r'GgetUserData', 'registerUser');
+    BuiltValueNullFieldError.checkNotNull(getUser, r'GgetUserData', 'getUser');
   }
 
   @override
@@ -10303,14 +10290,14 @@ class _$GgetUserData extends GgetUserData {
     if (identical(other, this)) return true;
     return other is GgetUserData &&
         G__typename == other.G__typename &&
-        registerUser == other.registerUser;
+        getUser == other.getUser;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, G__typename.hashCode);
-    _$hash = $jc(_$hash, registerUser.hashCode);
+    _$hash = $jc(_$hash, getUser.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -10319,7 +10306,7 @@ class _$GgetUserData extends GgetUserData {
   String toString() {
     return (newBuiltValueToStringHelper(r'GgetUserData')
           ..add('G__typename', G__typename)
-          ..add('registerUser', registerUser))
+          ..add('getUser', getUser))
         .toString();
   }
 }
@@ -10332,11 +10319,11 @@ class GgetUserDataBuilder
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GgetUserData_registerUserBuilder? _registerUser;
-  GgetUserData_registerUserBuilder get registerUser =>
-      _$this._registerUser ??= new GgetUserData_registerUserBuilder();
-  set registerUser(GgetUserData_registerUserBuilder? registerUser) =>
-      _$this._registerUser = registerUser;
+  GgetUserData_getUserBuilder? _getUser;
+  GgetUserData_getUserBuilder get getUser =>
+      _$this._getUser ??= new GgetUserData_getUserBuilder();
+  set getUser(GgetUserData_getUserBuilder? getUser) =>
+      _$this._getUser = getUser;
 
   GgetUserDataBuilder() {
     GgetUserData._initializeBuilder(this);
@@ -10346,7 +10333,7 @@ class GgetUserDataBuilder
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
-      _registerUser = $v.registerUser.toBuilder();
+      _getUser = $v.getUser.toBuilder();
       _$v = null;
     }
     return this;
@@ -10373,12 +10360,12 @@ class GgetUserDataBuilder
           new _$GgetUserData._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename, r'GgetUserData', 'G__typename'),
-              registerUser: registerUser.build());
+              getUser: getUser.build());
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'registerUser';
-        registerUser.build();
+        _$failedField = 'getUser';
+        getUser.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'GgetUserData', _$failedField, e.toString());
@@ -10390,7 +10377,7 @@ class GgetUserDataBuilder
   }
 }
 
-class _$GgetUserData_registerUser extends GgetUserData_registerUser {
+class _$GgetUserData_getUser extends GgetUserData_getUser {
   @override
   final String G__typename;
   @override
@@ -10400,15 +10387,15 @@ class _$GgetUserData_registerUser extends GgetUserData_registerUser {
   @override
   final String refreshToken;
   @override
-  final BuiltList<GgetUserData_registerUser_polls> polls;
+  final BuiltList<GgetUserData_getUser_polls> polls;
   @override
-  final BuiltList<GgetUserData_registerUser_pollsWithVotes> pollsWithVotes;
+  final BuiltList<GgetUserData_getUser_pollsWithVotes> pollsWithVotes;
 
-  factory _$GgetUserData_registerUser(
-          [void Function(GgetUserData_registerUserBuilder)? updates]) =>
-      (new GgetUserData_registerUserBuilder()..update(updates))._build();
+  factory _$GgetUserData_getUser(
+          [void Function(GgetUserData_getUserBuilder)? updates]) =>
+      (new GgetUserData_getUserBuilder()..update(updates))._build();
 
-  _$GgetUserData_registerUser._(
+  _$GgetUserData_getUser._(
       {required this.G__typename,
       required this.id,
       this.name,
@@ -10417,30 +10404,29 @@ class _$GgetUserData_registerUser extends GgetUserData_registerUser {
       required this.pollsWithVotes})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GgetUserData_registerUser', 'G__typename');
+        G__typename, r'GgetUserData_getUser', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(id, r'GgetUserData_getUser', 'id');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GgetUserData_registerUser', 'id');
+        refreshToken, r'GgetUserData_getUser', 'refreshToken');
     BuiltValueNullFieldError.checkNotNull(
-        refreshToken, r'GgetUserData_registerUser', 'refreshToken');
+        polls, r'GgetUserData_getUser', 'polls');
     BuiltValueNullFieldError.checkNotNull(
-        polls, r'GgetUserData_registerUser', 'polls');
-    BuiltValueNullFieldError.checkNotNull(
-        pollsWithVotes, r'GgetUserData_registerUser', 'pollsWithVotes');
+        pollsWithVotes, r'GgetUserData_getUser', 'pollsWithVotes');
   }
 
   @override
-  GgetUserData_registerUser rebuild(
-          void Function(GgetUserData_registerUserBuilder) updates) =>
+  GgetUserData_getUser rebuild(
+          void Function(GgetUserData_getUserBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUserBuilder toBuilder() =>
-      new GgetUserData_registerUserBuilder()..replace(this);
+  GgetUserData_getUserBuilder toBuilder() =>
+      new GgetUserData_getUserBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser &&
+    return other is GgetUserData_getUser &&
         G__typename == other.G__typename &&
         id == other.id &&
         name == other.name &&
@@ -10464,7 +10450,7 @@ class _$GgetUserData_registerUser extends GgetUserData_registerUser {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GgetUserData_registerUser')
+    return (newBuiltValueToStringHelper(r'GgetUserData_getUser')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('name', name)
@@ -10475,10 +10461,9 @@ class _$GgetUserData_registerUser extends GgetUserData_registerUser {
   }
 }
 
-class GgetUserData_registerUserBuilder
-    implements
-        Builder<GgetUserData_registerUser, GgetUserData_registerUserBuilder> {
-  _$GgetUserData_registerUser? _$v;
+class GgetUserData_getUserBuilder
+    implements Builder<GgetUserData_getUser, GgetUserData_getUserBuilder> {
+  _$GgetUserData_getUser? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -10496,26 +10481,25 @@ class GgetUserData_registerUserBuilder
   String? get refreshToken => _$this._refreshToken;
   set refreshToken(String? refreshToken) => _$this._refreshToken = refreshToken;
 
-  ListBuilder<GgetUserData_registerUser_polls>? _polls;
-  ListBuilder<GgetUserData_registerUser_polls> get polls =>
-      _$this._polls ??= new ListBuilder<GgetUserData_registerUser_polls>();
-  set polls(ListBuilder<GgetUserData_registerUser_polls>? polls) =>
+  ListBuilder<GgetUserData_getUser_polls>? _polls;
+  ListBuilder<GgetUserData_getUser_polls> get polls =>
+      _$this._polls ??= new ListBuilder<GgetUserData_getUser_polls>();
+  set polls(ListBuilder<GgetUserData_getUser_polls>? polls) =>
       _$this._polls = polls;
 
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes>? _pollsWithVotes;
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes> get pollsWithVotes =>
+  ListBuilder<GgetUserData_getUser_pollsWithVotes>? _pollsWithVotes;
+  ListBuilder<GgetUserData_getUser_pollsWithVotes> get pollsWithVotes =>
       _$this._pollsWithVotes ??=
-          new ListBuilder<GgetUserData_registerUser_pollsWithVotes>();
+          new ListBuilder<GgetUserData_getUser_pollsWithVotes>();
   set pollsWithVotes(
-          ListBuilder<GgetUserData_registerUser_pollsWithVotes>?
-              pollsWithVotes) =>
+          ListBuilder<GgetUserData_getUser_pollsWithVotes>? pollsWithVotes) =>
       _$this._pollsWithVotes = pollsWithVotes;
 
-  GgetUserData_registerUserBuilder() {
-    GgetUserData_registerUser._initializeBuilder(this);
+  GgetUserData_getUserBuilder() {
+    GgetUserData_getUser._initializeBuilder(this);
   }
 
-  GgetUserData_registerUserBuilder get _$this {
+  GgetUserData_getUserBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -10530,31 +10514,31 @@ class GgetUserData_registerUserBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser other) {
+  void replace(GgetUserData_getUser other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser;
+    _$v = other as _$GgetUserData_getUser;
   }
 
   @override
-  void update(void Function(GgetUserData_registerUserBuilder)? updates) {
+  void update(void Function(GgetUserData_getUserBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser build() => _build();
+  GgetUserData_getUser build() => _build();
 
-  _$GgetUserData_registerUser _build() {
-    _$GgetUserData_registerUser _$result;
+  _$GgetUserData_getUser _build() {
+    _$GgetUserData_getUser _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser._(
+          new _$GgetUserData_getUser._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GgetUserData_registerUser', 'G__typename'),
+                  G__typename, r'GgetUserData_getUser', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GgetUserData_registerUser', 'id'),
+                  id, r'GgetUserData_getUser', 'id'),
               name: name,
               refreshToken: BuiltValueNullFieldError.checkNotNull(
-                  refreshToken, r'GgetUserData_registerUser', 'refreshToken'),
+                  refreshToken, r'GgetUserData_getUser', 'refreshToken'),
               polls: polls.build(),
               pollsWithVotes: pollsWithVotes.build());
     } catch (_) {
@@ -10566,7 +10550,7 @@ class GgetUserData_registerUserBuilder
         pollsWithVotes.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser', _$failedField, e.toString());
+            r'GgetUserData_getUser', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -10575,12 +10559,11 @@ class GgetUserData_registerUserBuilder
   }
 }
 
-class _$GgetUserData_registerUser_polls
-    extends GgetUserData_registerUser_polls {
+class _$GgetUserData_getUser_polls extends GgetUserData_getUser_polls {
   @override
   final String G__typename;
   @override
-  final BuiltList<GgetUserData_registerUser_polls_options> options;
+  final BuiltList<GgetUserData_getUser_polls_options> options;
   @override
   final int id;
   @override
@@ -10598,11 +10581,11 @@ class _$GgetUserData_registerUser_polls
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_polls(
-          [void Function(GgetUserData_registerUser_pollsBuilder)? updates]) =>
-      (new GgetUserData_registerUser_pollsBuilder()..update(updates))._build();
+  factory _$GgetUserData_getUser_polls(
+          [void Function(GgetUserData_getUser_pollsBuilder)? updates]) =>
+      (new GgetUserData_getUser_pollsBuilder()..update(updates))._build();
 
-  _$GgetUserData_registerUser_polls._(
+  _$GgetUserData_getUser_polls._(
       {required this.G__typename,
       required this.options,
       required this.id,
@@ -10615,34 +10598,34 @@ class _$GgetUserData_registerUser_polls
       required this.createdAt})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GgetUserData_registerUser_polls', 'G__typename');
+        G__typename, r'GgetUserData_getUser_polls', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        options, r'GgetUserData_registerUser_polls', 'options');
+        options, r'GgetUserData_getUser_polls', 'options');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GgetUserData_registerUser_polls', 'id');
+        id, r'GgetUserData_getUser_polls', 'id');
     BuiltValueNullFieldError.checkNotNull(
-        userId, r'GgetUserData_registerUser_polls', 'userId');
+        userId, r'GgetUserData_getUser_polls', 'userId');
     BuiltValueNullFieldError.checkNotNull(
-        title, r'GgetUserData_registerUser_polls', 'title');
+        title, r'GgetUserData_getUser_polls', 'title');
     BuiltValueNullFieldError.checkNotNull(
-        body, r'GgetUserData_registerUser_polls', 'body');
+        body, r'GgetUserData_getUser_polls', 'body');
     BuiltValueNullFieldError.checkNotNull(
-        createdAt, r'GgetUserData_registerUser_polls', 'createdAt');
+        createdAt, r'GgetUserData_getUser_polls', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_polls rebuild(
-          void Function(GgetUserData_registerUser_pollsBuilder) updates) =>
+  GgetUserData_getUser_polls rebuild(
+          void Function(GgetUserData_getUser_pollsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsBuilder toBuilder() =>
-      new GgetUserData_registerUser_pollsBuilder()..replace(this);
+  GgetUserData_getUser_pollsBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_polls &&
+    return other is GgetUserData_getUser_polls &&
         G__typename == other.G__typename &&
         options == other.options &&
         id == other.id &&
@@ -10674,7 +10657,7 @@ class _$GgetUserData_registerUser_polls
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GgetUserData_registerUser_polls')
+    return (newBuiltValueToStringHelper(r'GgetUserData_getUser_polls')
           ..add('G__typename', G__typename)
           ..add('options', options)
           ..add('id', id)
@@ -10689,21 +10672,19 @@ class _$GgetUserData_registerUser_polls
   }
 }
 
-class GgetUserData_registerUser_pollsBuilder
+class GgetUserData_getUser_pollsBuilder
     implements
-        Builder<GgetUserData_registerUser_polls,
-            GgetUserData_registerUser_pollsBuilder> {
-  _$GgetUserData_registerUser_polls? _$v;
+        Builder<GgetUserData_getUser_polls, GgetUserData_getUser_pollsBuilder> {
+  _$GgetUserData_getUser_polls? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  ListBuilder<GgetUserData_registerUser_polls_options>? _options;
-  ListBuilder<GgetUserData_registerUser_polls_options> get options =>
-      _$this._options ??=
-          new ListBuilder<GgetUserData_registerUser_polls_options>();
-  set options(ListBuilder<GgetUserData_registerUser_polls_options>? options) =>
+  ListBuilder<GgetUserData_getUser_polls_options>? _options;
+  ListBuilder<GgetUserData_getUser_polls_options> get options =>
+      _$this._options ??= new ListBuilder<GgetUserData_getUser_polls_options>();
+  set options(ListBuilder<GgetUserData_getUser_polls_options>? options) =>
       _$this._options = options;
 
   int? _id;
@@ -10740,11 +10721,11 @@ class GgetUserData_registerUser_pollsBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_pollsBuilder() {
-    GgetUserData_registerUser_polls._initializeBuilder(this);
+  GgetUserData_getUser_pollsBuilder() {
+    GgetUserData_getUser_polls._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_pollsBuilder get _$this {
+  GgetUserData_getUser_pollsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -10763,36 +10744,36 @@ class GgetUserData_registerUser_pollsBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_polls other) {
+  void replace(GgetUserData_getUser_polls other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_polls;
+    _$v = other as _$GgetUserData_getUser_polls;
   }
 
   @override
-  void update(void Function(GgetUserData_registerUser_pollsBuilder)? updates) {
+  void update(void Function(GgetUserData_getUser_pollsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_polls build() => _build();
+  GgetUserData_getUser_polls build() => _build();
 
-  _$GgetUserData_registerUser_polls _build() {
-    _$GgetUserData_registerUser_polls _$result;
+  _$GgetUserData_getUser_polls _build() {
+    _$GgetUserData_getUser_polls _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_polls._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                  r'GgetUserData_registerUser_polls', 'G__typename'),
+          new _$GgetUserData_getUser_polls._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename, r'GgetUserData_getUser_polls', 'G__typename'),
               options: options.build(),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GgetUserData_registerUser_polls', 'id'),
+                  id, r'GgetUserData_getUser_polls', 'id'),
               userId: BuiltValueNullFieldError.checkNotNull(
-                  userId, r'GgetUserData_registerUser_polls', 'userId'),
+                  userId, r'GgetUserData_getUser_polls', 'userId'),
               title: BuiltValueNullFieldError.checkNotNull(
-                  title, r'GgetUserData_registerUser_polls', 'title'),
+                  title, r'GgetUserData_getUser_polls', 'title'),
               subtitle: subtitle,
               body: BuiltValueNullFieldError.checkNotNull(
-                  body, r'GgetUserData_registerUser_polls', 'body'),
+                  body, r'GgetUserData_getUser_polls', 'body'),
               pollKind: pollKind,
               formJsonSchema: formJsonSchema,
               createdAt: createdAt.build());
@@ -10806,7 +10787,7 @@ class GgetUserData_registerUser_pollsBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_polls', _$failedField, e.toString());
+            r'GgetUserData_getUser_polls', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -10815,12 +10796,12 @@ class GgetUserData_registerUser_pollsBuilder
   }
 }
 
-class _$GgetUserData_registerUser_polls_options
-    extends GgetUserData_registerUser_polls_options {
+class _$GgetUserData_getUser_polls_options
+    extends GgetUserData_getUser_polls_options {
   @override
   final String G__typename;
   @override
-  final BuiltList<GgetUserData_registerUser_polls_options_votes> votes;
+  final BuiltList<GgetUserData_getUser_polls_options_votes> votes;
   @override
   final int id;
   @override
@@ -10836,13 +10817,13 @@ class _$GgetUserData_registerUser_polls_options
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_polls_options(
-          [void Function(GgetUserData_registerUser_polls_optionsBuilder)?
+  factory _$GgetUserData_getUser_polls_options(
+          [void Function(GgetUserData_getUser_polls_optionsBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_polls_optionsBuilder()..update(updates))
+      (new GgetUserData_getUser_polls_optionsBuilder()..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_polls_options._(
+  _$GgetUserData_getUser_polls_options._(
       {required this.G__typename,
       required this.votes,
       required this.id,
@@ -10854,31 +10835,30 @@ class _$GgetUserData_registerUser_polls_options
       required this.createdAt})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GgetUserData_registerUser_polls_options', 'G__typename');
+        G__typename, r'GgetUserData_getUser_polls_options', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        votes, r'GgetUserData_registerUser_polls_options', 'votes');
+        votes, r'GgetUserData_getUser_polls_options', 'votes');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GgetUserData_registerUser_polls_options', 'id');
+        id, r'GgetUserData_getUser_polls_options', 'id');
     BuiltValueNullFieldError.checkNotNull(
-        pollId, r'GgetUserData_registerUser_polls_options', 'pollId');
+        pollId, r'GgetUserData_getUser_polls_options', 'pollId');
     BuiltValueNullFieldError.checkNotNull(
-        createdAt, r'GgetUserData_registerUser_polls_options', 'createdAt');
+        createdAt, r'GgetUserData_getUser_polls_options', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_polls_options rebuild(
-          void Function(GgetUserData_registerUser_polls_optionsBuilder)
-              updates) =>
+  GgetUserData_getUser_polls_options rebuild(
+          void Function(GgetUserData_getUser_polls_optionsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_polls_optionsBuilder toBuilder() =>
-      new GgetUserData_registerUser_polls_optionsBuilder()..replace(this);
+  GgetUserData_getUser_polls_optionsBuilder toBuilder() =>
+      new GgetUserData_getUser_polls_optionsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_polls_options &&
+    return other is GgetUserData_getUser_polls_options &&
         G__typename == other.G__typename &&
         votes == other.votes &&
         id == other.id &&
@@ -10908,8 +10888,7 @@ class _$GgetUserData_registerUser_polls_options
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_polls_options')
+    return (newBuiltValueToStringHelper(r'GgetUserData_getUser_polls_options')
           ..add('G__typename', G__typename)
           ..add('votes', votes)
           ..add('id', id)
@@ -10923,22 +10902,21 @@ class _$GgetUserData_registerUser_polls_options
   }
 }
 
-class GgetUserData_registerUser_polls_optionsBuilder
+class GgetUserData_getUser_polls_optionsBuilder
     implements
-        Builder<GgetUserData_registerUser_polls_options,
-            GgetUserData_registerUser_polls_optionsBuilder> {
-  _$GgetUserData_registerUser_polls_options? _$v;
+        Builder<GgetUserData_getUser_polls_options,
+            GgetUserData_getUser_polls_optionsBuilder> {
+  _$GgetUserData_getUser_polls_options? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  ListBuilder<GgetUserData_registerUser_polls_options_votes>? _votes;
-  ListBuilder<GgetUserData_registerUser_polls_options_votes> get votes =>
+  ListBuilder<GgetUserData_getUser_polls_options_votes>? _votes;
+  ListBuilder<GgetUserData_getUser_polls_options_votes> get votes =>
       _$this._votes ??=
-          new ListBuilder<GgetUserData_registerUser_polls_options_votes>();
-  set votes(
-          ListBuilder<GgetUserData_registerUser_polls_options_votes>? votes) =>
+          new ListBuilder<GgetUserData_getUser_polls_options_votes>();
+  set votes(ListBuilder<GgetUserData_getUser_polls_options_votes>? votes) =>
       _$this._votes = votes;
 
   int? _id;
@@ -10971,11 +10949,11 @@ class GgetUserData_registerUser_polls_optionsBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_polls_optionsBuilder() {
-    GgetUserData_registerUser_polls_options._initializeBuilder(this);
+  GgetUserData_getUser_polls_optionsBuilder() {
+    GgetUserData_getUser_polls_options._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_polls_optionsBuilder get _$this {
+  GgetUserData_getUser_polls_optionsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -10993,32 +10971,32 @@ class GgetUserData_registerUser_polls_optionsBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_polls_options other) {
+  void replace(GgetUserData_getUser_polls_options other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_polls_options;
+    _$v = other as _$GgetUserData_getUser_polls_options;
   }
 
   @override
   void update(
-      void Function(GgetUserData_registerUser_polls_optionsBuilder)? updates) {
+      void Function(GgetUserData_getUser_polls_optionsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_polls_options build() => _build();
+  GgetUserData_getUser_polls_options build() => _build();
 
-  _$GgetUserData_registerUser_polls_options _build() {
-    _$GgetUserData_registerUser_polls_options _$result;
+  _$GgetUserData_getUser_polls_options _build() {
+    _$GgetUserData_getUser_polls_options _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_polls_options._(
+          new _$GgetUserData_getUser_polls_options._(
               G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                  r'GgetUserData_registerUser_polls_options', 'G__typename'),
+                  r'GgetUserData_getUser_polls_options', 'G__typename'),
               votes: votes.build(),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GgetUserData_registerUser_polls_options', 'id'),
+                  id, r'GgetUserData_getUser_polls_options', 'id'),
               pollId: BuiltValueNullFieldError.checkNotNull(
-                  pollId, r'GgetUserData_registerUser_polls_options', 'pollId'),
+                  pollId, r'GgetUserData_getUser_polls_options', 'pollId'),
               priority: priority,
               description: description,
               url: url,
@@ -11034,9 +11012,7 @@ class GgetUserData_registerUser_polls_optionsBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_polls_options',
-            _$failedField,
-            e.toString());
+            r'GgetUserData_getUser_polls_options', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -11045,8 +11021,8 @@ class GgetUserData_registerUser_polls_optionsBuilder
   }
 }
 
-class _$GgetUserData_registerUser_polls_options_votes
-    extends GgetUserData_registerUser_polls_options_votes {
+class _$GgetUserData_getUser_polls_options_votes
+    extends GgetUserData_getUser_polls_options_votes {
   @override
   final String G__typename;
   @override
@@ -11060,14 +11036,13 @@ class _$GgetUserData_registerUser_polls_options_votes
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_polls_options_votes(
-          [void Function(GgetUserData_registerUser_polls_options_votesBuilder)?
+  factory _$GgetUserData_getUser_polls_options_votes(
+          [void Function(GgetUserData_getUser_polls_options_votesBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_polls_options_votesBuilder()
-            ..update(updates))
+      (new GgetUserData_getUser_polls_options_votesBuilder()..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_polls_options_votes._(
+  _$GgetUserData_getUser_polls_options_votes._(
       {required this.G__typename,
       required this.pollOptionId,
       required this.userId,
@@ -11076,31 +11051,31 @@ class _$GgetUserData_registerUser_polls_options_votes
       required this.createdAt})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GgetUserData_registerUser_polls_options_votes', 'G__typename');
+        r'GgetUserData_getUser_polls_options_votes', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(pollOptionId,
-        r'GgetUserData_registerUser_polls_options_votes', 'pollOptionId');
+        r'GgetUserData_getUser_polls_options_votes', 'pollOptionId');
     BuiltValueNullFieldError.checkNotNull(
-        userId, r'GgetUserData_registerUser_polls_options_votes', 'userId');
+        userId, r'GgetUserData_getUser_polls_options_votes', 'userId');
     BuiltValueNullFieldError.checkNotNull(
-        value, r'GgetUserData_registerUser_polls_options_votes', 'value');
-    BuiltValueNullFieldError.checkNotNull(createdAt,
-        r'GgetUserData_registerUser_polls_options_votes', 'createdAt');
+        value, r'GgetUserData_getUser_polls_options_votes', 'value');
+    BuiltValueNullFieldError.checkNotNull(
+        createdAt, r'GgetUserData_getUser_polls_options_votes', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_polls_options_votes rebuild(
-          void Function(GgetUserData_registerUser_polls_options_votesBuilder)
+  GgetUserData_getUser_polls_options_votes rebuild(
+          void Function(GgetUserData_getUser_polls_options_votesBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_polls_options_votesBuilder toBuilder() =>
-      new GgetUserData_registerUser_polls_options_votesBuilder()..replace(this);
+  GgetUserData_getUser_polls_options_votesBuilder toBuilder() =>
+      new GgetUserData_getUser_polls_options_votesBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_polls_options_votes &&
+    return other is GgetUserData_getUser_polls_options_votes &&
         G__typename == other.G__typename &&
         pollOptionId == other.pollOptionId &&
         userId == other.userId &&
@@ -11125,7 +11100,7 @@ class _$GgetUserData_registerUser_polls_options_votes
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_polls_options_votes')
+            r'GgetUserData_getUser_polls_options_votes')
           ..add('G__typename', G__typename)
           ..add('pollOptionId', pollOptionId)
           ..add('userId', userId)
@@ -11136,11 +11111,11 @@ class _$GgetUserData_registerUser_polls_options_votes
   }
 }
 
-class GgetUserData_registerUser_polls_options_votesBuilder
+class GgetUserData_getUser_polls_options_votesBuilder
     implements
-        Builder<GgetUserData_registerUser_polls_options_votes,
-            GgetUserData_registerUser_polls_options_votesBuilder> {
-  _$GgetUserData_registerUser_polls_options_votes? _$v;
+        Builder<GgetUserData_getUser_polls_options_votes,
+            GgetUserData_getUser_polls_options_votesBuilder> {
+  _$GgetUserData_getUser_polls_options_votes? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -11167,11 +11142,11 @@ class GgetUserData_registerUser_polls_options_votesBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_polls_options_votesBuilder() {
-    GgetUserData_registerUser_polls_options_votes._initializeBuilder(this);
+  GgetUserData_getUser_polls_options_votesBuilder() {
+    GgetUserData_getUser_polls_options_votes._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_polls_options_votesBuilder get _$this {
+  GgetUserData_getUser_polls_options_votesBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -11186,38 +11161,33 @@ class GgetUserData_registerUser_polls_options_votesBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_polls_options_votes other) {
+  void replace(GgetUserData_getUser_polls_options_votes other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_polls_options_votes;
+    _$v = other as _$GgetUserData_getUser_polls_options_votes;
   }
 
   @override
   void update(
-      void Function(GgetUserData_registerUser_polls_options_votesBuilder)?
-          updates) {
+      void Function(GgetUserData_getUser_polls_options_votesBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_polls_options_votes build() => _build();
+  GgetUserData_getUser_polls_options_votes build() => _build();
 
-  _$GgetUserData_registerUser_polls_options_votes _build() {
-    _$GgetUserData_registerUser_polls_options_votes _$result;
+  _$GgetUserData_getUser_polls_options_votes _build() {
+    _$GgetUserData_getUser_polls_options_votes _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_polls_options_votes._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename,
-                  r'GgetUserData_registerUser_polls_options_votes',
-                  'G__typename'),
-              pollOptionId: BuiltValueNullFieldError.checkNotNull(
-                  pollOptionId,
-                  r'GgetUserData_registerUser_polls_options_votes',
-                  'pollOptionId'),
+          new _$GgetUserData_getUser_polls_options_votes._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                  r'GgetUserData_getUser_polls_options_votes', 'G__typename'),
+              pollOptionId: BuiltValueNullFieldError.checkNotNull(pollOptionId,
+                  r'GgetUserData_getUser_polls_options_votes', 'pollOptionId'),
               userId: BuiltValueNullFieldError.checkNotNull(userId,
-                  r'GgetUserData_registerUser_polls_options_votes', 'userId'),
-              value: BuiltValueNullFieldError.checkNotNull(value,
-                  r'GgetUserData_registerUser_polls_options_votes', 'value'),
+                  r'GgetUserData_getUser_polls_options_votes', 'userId'),
+              value: BuiltValueNullFieldError.checkNotNull(
+                  value, r'GgetUserData_getUser_polls_options_votes', 'value'),
               formResponse: formResponse,
               createdAt: createdAt.build());
     } catch (_) {
@@ -11227,7 +11197,7 @@ class GgetUserData_registerUser_polls_options_votesBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_polls_options_votes',
+            r'GgetUserData_getUser_polls_options_votes',
             _$failedField,
             e.toString());
       }
@@ -11238,46 +11208,45 @@ class GgetUserData_registerUser_polls_options_votesBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes
-    extends GgetUserData_registerUser_pollsWithVotes {
+class _$GgetUserData_getUser_pollsWithVotes
+    extends GgetUserData_getUser_pollsWithVotes {
   @override
   final String G__typename;
   @override
-  final GgetUserData_registerUser_pollsWithVotes_poll poll;
+  final GgetUserData_getUser_pollsWithVotes_poll poll;
   @override
-  final BuiltList<GgetUserData_registerUser_pollsWithVotes_userVotes> userVotes;
+  final BuiltList<GgetUserData_getUser_pollsWithVotes_userVotes> userVotes;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes(
-          [void Function(GgetUserData_registerUser_pollsWithVotesBuilder)?
+  factory _$GgetUserData_getUser_pollsWithVotes(
+          [void Function(GgetUserData_getUser_pollsWithVotesBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotesBuilder()..update(updates))
+      (new GgetUserData_getUser_pollsWithVotesBuilder()..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes._(
+  _$GgetUserData_getUser_pollsWithVotes._(
       {required this.G__typename, required this.poll, required this.userVotes})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        poll, r'GgetUserData_registerUser_pollsWithVotes', 'poll');
+        G__typename, r'GgetUserData_getUser_pollsWithVotes', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        userVotes, r'GgetUserData_registerUser_pollsWithVotes', 'userVotes');
+        poll, r'GgetUserData_getUser_pollsWithVotes', 'poll');
+    BuiltValueNullFieldError.checkNotNull(
+        userVotes, r'GgetUserData_getUser_pollsWithVotes', 'userVotes');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes rebuild(
-          void Function(GgetUserData_registerUser_pollsWithVotesBuilder)
-              updates) =>
+  GgetUserData_getUser_pollsWithVotes rebuild(
+          void Function(GgetUserData_getUser_pollsWithVotesBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotesBuilder toBuilder() =>
-      new GgetUserData_registerUser_pollsWithVotesBuilder()..replace(this);
+  GgetUserData_getUser_pollsWithVotesBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsWithVotesBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_pollsWithVotes &&
+    return other is GgetUserData_getUser_pollsWithVotes &&
         G__typename == other.G__typename &&
         poll == other.poll &&
         userVotes == other.userVotes;
@@ -11295,8 +11264,7 @@ class _$GgetUserData_registerUser_pollsWithVotes
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes')
+    return (newBuiltValueToStringHelper(r'GgetUserData_getUser_pollsWithVotes')
           ..add('G__typename', G__typename)
           ..add('poll', poll)
           ..add('userVotes', userVotes))
@@ -11304,37 +11272,36 @@ class _$GgetUserData_registerUser_pollsWithVotes
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotesBuilder
+class GgetUserData_getUser_pollsWithVotesBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes,
-            GgetUserData_registerUser_pollsWithVotesBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes,
+            GgetUserData_getUser_pollsWithVotesBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GgetUserData_registerUser_pollsWithVotes_pollBuilder? _poll;
-  GgetUserData_registerUser_pollsWithVotes_pollBuilder get poll =>
-      _$this._poll ??=
-          new GgetUserData_registerUser_pollsWithVotes_pollBuilder();
-  set poll(GgetUserData_registerUser_pollsWithVotes_pollBuilder? poll) =>
+  GgetUserData_getUser_pollsWithVotes_pollBuilder? _poll;
+  GgetUserData_getUser_pollsWithVotes_pollBuilder get poll =>
+      _$this._poll ??= new GgetUserData_getUser_pollsWithVotes_pollBuilder();
+  set poll(GgetUserData_getUser_pollsWithVotes_pollBuilder? poll) =>
       _$this._poll = poll;
 
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_userVotes>? _userVotes;
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_userVotes>
-      get userVotes => _$this._userVotes ??=
-          new ListBuilder<GgetUserData_registerUser_pollsWithVotes_userVotes>();
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_userVotes>? _userVotes;
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_userVotes> get userVotes =>
+      _$this._userVotes ??=
+          new ListBuilder<GgetUserData_getUser_pollsWithVotes_userVotes>();
   set userVotes(
-          ListBuilder<GgetUserData_registerUser_pollsWithVotes_userVotes>?
+          ListBuilder<GgetUserData_getUser_pollsWithVotes_userVotes>?
               userVotes) =>
       _$this._userVotes = userVotes;
 
-  GgetUserData_registerUser_pollsWithVotesBuilder() {
-    GgetUserData_registerUser_pollsWithVotes._initializeBuilder(this);
+  GgetUserData_getUser_pollsWithVotesBuilder() {
+    GgetUserData_getUser_pollsWithVotes._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_pollsWithVotesBuilder get _$this {
+  GgetUserData_getUser_pollsWithVotesBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -11346,27 +11313,27 @@ class GgetUserData_registerUser_pollsWithVotesBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_pollsWithVotes other) {
+  void replace(GgetUserData_getUser_pollsWithVotes other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_pollsWithVotes;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes;
   }
 
   @override
   void update(
-      void Function(GgetUserData_registerUser_pollsWithVotesBuilder)? updates) {
+      void Function(GgetUserData_getUser_pollsWithVotesBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes build() => _build();
+  GgetUserData_getUser_pollsWithVotes build() => _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes _build() {
-    _$GgetUserData_registerUser_pollsWithVotes _$result;
+  _$GgetUserData_getUser_pollsWithVotes _build() {
+    _$GgetUserData_getUser_pollsWithVotes _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes._(
+          new _$GgetUserData_getUser_pollsWithVotes._(
               G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes', 'G__typename'),
+                  r'GgetUserData_getUser_pollsWithVotes', 'G__typename'),
               poll: poll.build(),
               userVotes: userVotes.build());
     } catch (_) {
@@ -11378,7 +11345,7 @@ class GgetUserData_registerUser_pollsWithVotesBuilder
         userVotes.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes',
+            r'GgetUserData_getUser_pollsWithVotes',
             _$failedField,
             e.toString());
       }
@@ -11389,13 +11356,12 @@ class GgetUserData_registerUser_pollsWithVotesBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_poll
-    extends GgetUserData_registerUser_pollsWithVotes_poll {
+class _$GgetUserData_getUser_pollsWithVotes_poll
+    extends GgetUserData_getUser_pollsWithVotes_poll {
   @override
   final String G__typename;
   @override
-  final BuiltList<GgetUserData_registerUser_pollsWithVotes_poll_options>
-      options;
+  final BuiltList<GgetUserData_getUser_pollsWithVotes_poll_options> options;
   @override
   final int id;
   @override
@@ -11413,14 +11379,13 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes_poll(
-          [void Function(GgetUserData_registerUser_pollsWithVotes_pollBuilder)?
+  factory _$GgetUserData_getUser_pollsWithVotes_poll(
+          [void Function(GgetUserData_getUser_pollsWithVotes_pollBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotes_pollBuilder()
-            ..update(updates))
+      (new GgetUserData_getUser_pollsWithVotes_pollBuilder()..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_poll._(
+  _$GgetUserData_getUser_pollsWithVotes_poll._(
       {required this.G__typename,
       required this.options,
       required this.id,
@@ -11433,35 +11398,35 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll
       required this.createdAt})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes_poll', 'G__typename');
+        r'GgetUserData_getUser_pollsWithVotes_poll', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        options, r'GgetUserData_registerUser_pollsWithVotes_poll', 'options');
+        options, r'GgetUserData_getUser_pollsWithVotes_poll', 'options');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GgetUserData_registerUser_pollsWithVotes_poll', 'id');
+        id, r'GgetUserData_getUser_pollsWithVotes_poll', 'id');
     BuiltValueNullFieldError.checkNotNull(
-        userId, r'GgetUserData_registerUser_pollsWithVotes_poll', 'userId');
+        userId, r'GgetUserData_getUser_pollsWithVotes_poll', 'userId');
     BuiltValueNullFieldError.checkNotNull(
-        title, r'GgetUserData_registerUser_pollsWithVotes_poll', 'title');
+        title, r'GgetUserData_getUser_pollsWithVotes_poll', 'title');
     BuiltValueNullFieldError.checkNotNull(
-        body, r'GgetUserData_registerUser_pollsWithVotes_poll', 'body');
-    BuiltValueNullFieldError.checkNotNull(createdAt,
-        r'GgetUserData_registerUser_pollsWithVotes_poll', 'createdAt');
+        body, r'GgetUserData_getUser_pollsWithVotes_poll', 'body');
+    BuiltValueNullFieldError.checkNotNull(
+        createdAt, r'GgetUserData_getUser_pollsWithVotes_poll', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll rebuild(
-          void Function(GgetUserData_registerUser_pollsWithVotes_pollBuilder)
+  GgetUserData_getUser_pollsWithVotes_poll rebuild(
+          void Function(GgetUserData_getUser_pollsWithVotes_pollBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_pollBuilder toBuilder() =>
-      new GgetUserData_registerUser_pollsWithVotes_pollBuilder()..replace(this);
+  GgetUserData_getUser_pollsWithVotes_pollBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsWithVotes_pollBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_pollsWithVotes_poll &&
+    return other is GgetUserData_getUser_pollsWithVotes_poll &&
         G__typename == other.G__typename &&
         options == other.options &&
         id == other.id &&
@@ -11494,7 +11459,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes_poll')
+            r'GgetUserData_getUser_pollsWithVotes_poll')
           ..add('G__typename', G__typename)
           ..add('options', options)
           ..add('id', id)
@@ -11509,22 +11474,22 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotes_pollBuilder
+class GgetUserData_getUser_pollsWithVotes_pollBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes_poll,
-            GgetUserData_registerUser_pollsWithVotes_pollBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes_poll? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes_poll,
+            GgetUserData_getUser_pollsWithVotes_pollBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes_poll? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_poll_options>? _options;
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_poll_options>
-      get options => _$this._options ??= new ListBuilder<
-          GgetUserData_registerUser_pollsWithVotes_poll_options>();
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_poll_options>? _options;
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_poll_options> get options =>
+      _$this._options ??=
+          new ListBuilder<GgetUserData_getUser_pollsWithVotes_poll_options>();
   set options(
-          ListBuilder<GgetUserData_registerUser_pollsWithVotes_poll_options>?
+          ListBuilder<GgetUserData_getUser_pollsWithVotes_poll_options>?
               options) =>
       _$this._options = options;
 
@@ -11562,11 +11527,11 @@ class GgetUserData_registerUser_pollsWithVotes_pollBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_pollsWithVotes_pollBuilder() {
-    GgetUserData_registerUser_pollsWithVotes_poll._initializeBuilder(this);
+  GgetUserData_getUser_pollsWithVotes_pollBuilder() {
+    GgetUserData_getUser_pollsWithVotes_poll._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_pollsWithVotes_pollBuilder get _$this {
+  GgetUserData_getUser_pollsWithVotes_pollBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -11585,40 +11550,37 @@ class GgetUserData_registerUser_pollsWithVotes_pollBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_pollsWithVotes_poll other) {
+  void replace(GgetUserData_getUser_pollsWithVotes_poll other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_pollsWithVotes_poll;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes_poll;
   }
 
   @override
   void update(
-      void Function(GgetUserData_registerUser_pollsWithVotes_pollBuilder)?
-          updates) {
+      void Function(GgetUserData_getUser_pollsWithVotes_pollBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll build() => _build();
+  GgetUserData_getUser_pollsWithVotes_poll build() => _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_poll _build() {
-    _$GgetUserData_registerUser_pollsWithVotes_poll _$result;
+  _$GgetUserData_getUser_pollsWithVotes_poll _build() {
+    _$GgetUserData_getUser_pollsWithVotes_poll _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes_poll._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll',
-                  'G__typename'),
+          new _$GgetUserData_getUser_pollsWithVotes_poll._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                  r'GgetUserData_getUser_pollsWithVotes_poll', 'G__typename'),
               options: options.build(),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GgetUserData_registerUser_pollsWithVotes_poll', 'id'),
+                  id, r'GgetUserData_getUser_pollsWithVotes_poll', 'id'),
               userId: BuiltValueNullFieldError.checkNotNull(userId,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll', 'userId'),
-              title: BuiltValueNullFieldError.checkNotNull(title,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll', 'title'),
+                  r'GgetUserData_getUser_pollsWithVotes_poll', 'userId'),
+              title: BuiltValueNullFieldError.checkNotNull(
+                  title, r'GgetUserData_getUser_pollsWithVotes_poll', 'title'),
               subtitle: subtitle,
-              body: BuiltValueNullFieldError.checkNotNull(body,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll', 'body'),
+              body: BuiltValueNullFieldError.checkNotNull(
+                  body, r'GgetUserData_getUser_pollsWithVotes_poll', 'body'),
               pollKind: pollKind,
               formJsonSchema: formJsonSchema,
               createdAt: createdAt.build());
@@ -11632,7 +11594,7 @@ class GgetUserData_registerUser_pollsWithVotes_pollBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes_poll',
+            r'GgetUserData_getUser_pollsWithVotes_poll',
             _$failedField,
             e.toString());
       }
@@ -11643,13 +11605,12 @@ class GgetUserData_registerUser_pollsWithVotes_pollBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_poll_options
-    extends GgetUserData_registerUser_pollsWithVotes_poll_options {
+class _$GgetUserData_getUser_pollsWithVotes_poll_options
+    extends GgetUserData_getUser_pollsWithVotes_poll_options {
   @override
   final String G__typename;
   @override
-  final BuiltList<GgetUserData_registerUser_pollsWithVotes_poll_options_votes>
-      votes;
+  final BuiltList<GgetUserData_getUser_pollsWithVotes_poll_options_votes> votes;
   @override
   final int id;
   @override
@@ -11665,15 +11626,15 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes_poll_options(
+  factory _$GgetUserData_getUser_pollsWithVotes_poll_options(
           [void Function(
-                  GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder)?
+                  GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder()
+      (new GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder()
             ..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_poll_options._(
+  _$GgetUserData_getUser_pollsWithVotes_poll_options._(
       {required this.G__typename,
       required this.votes,
       required this.id,
@@ -11684,36 +11645,33 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options
       this.formJsonSchema,
       required this.createdAt})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(G__typename,
+        r'GgetUserData_getUser_pollsWithVotes_poll_options', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options',
-        'G__typename');
-    BuiltValueNullFieldError.checkNotNull(votes,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options', 'votes');
+        votes, r'GgetUserData_getUser_pollsWithVotes_poll_options', 'votes');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GgetUserData_registerUser_pollsWithVotes_poll_options', 'id');
-    BuiltValueNullFieldError.checkNotNull(pollId,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options', 'pollId');
+        id, r'GgetUserData_getUser_pollsWithVotes_poll_options', 'id');
+    BuiltValueNullFieldError.checkNotNull(
+        pollId, r'GgetUserData_getUser_pollsWithVotes_poll_options', 'pollId');
     BuiltValueNullFieldError.checkNotNull(createdAt,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options', 'createdAt');
+        r'GgetUserData_getUser_pollsWithVotes_poll_options', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_options rebuild(
-          void Function(
-                  GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder)
+  GgetUserData_getUser_pollsWithVotes_poll_options rebuild(
+          void Function(GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder toBuilder() =>
-      new GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder()
+  GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder()
         ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_pollsWithVotes_poll_options &&
+    return other is GgetUserData_getUser_pollsWithVotes_poll_options &&
         G__typename == other.G__typename &&
         votes == other.votes &&
         id == other.id &&
@@ -11744,7 +11702,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes_poll_options')
+            r'GgetUserData_getUser_pollsWithVotes_poll_options')
           ..add('G__typename', G__typename)
           ..add('votes', votes)
           ..add('id', id)
@@ -11758,24 +11716,22 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder
+class GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes_poll_options,
-            GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes_poll_options? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes_poll_options,
+            GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes_poll_options? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_poll_options_votes>?
-      _votes;
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_poll_options_votes>
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_poll_options_votes>? _votes;
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_poll_options_votes>
       get votes => _$this._votes ??= new ListBuilder<
-          GgetUserData_registerUser_pollsWithVotes_poll_options_votes>();
+          GgetUserData_getUser_pollsWithVotes_poll_options_votes>();
   set votes(
-          ListBuilder<
-                  GgetUserData_registerUser_pollsWithVotes_poll_options_votes>?
+          ListBuilder<GgetUserData_getUser_pollsWithVotes_poll_options_votes>?
               votes) =>
       _$this._votes = votes;
 
@@ -11809,12 +11765,11 @@ class GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder() {
-    GgetUserData_registerUser_pollsWithVotes_poll_options._initializeBuilder(
-        this);
+  GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder() {
+    GgetUserData_getUser_pollsWithVotes_poll_options._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder get _$this {
+  GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -11832,39 +11787,36 @@ class GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_pollsWithVotes_poll_options other) {
+  void replace(GgetUserData_getUser_pollsWithVotes_poll_options other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_pollsWithVotes_poll_options;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes_poll_options;
   }
 
   @override
   void update(
-      void Function(
-              GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder)?
+      void Function(GgetUserData_getUser_pollsWithVotes_poll_optionsBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_options build() => _build();
+  GgetUserData_getUser_pollsWithVotes_poll_options build() => _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_poll_options _build() {
-    _$GgetUserData_registerUser_pollsWithVotes_poll_options _$result;
+  _$GgetUserData_getUser_pollsWithVotes_poll_options _build() {
+    _$GgetUserData_getUser_pollsWithVotes_poll_options _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes_poll_options._(
+          new _$GgetUserData_getUser_pollsWithVotes_poll_options._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll_options',
+                  r'GgetUserData_getUser_pollsWithVotes_poll_options',
                   'G__typename'),
               votes: votes.build(),
-              id: BuiltValueNullFieldError.checkNotNull(
-                  id,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll_options',
-                  'id'),
+              id: BuiltValueNullFieldError.checkNotNull(id,
+                  r'GgetUserData_getUser_pollsWithVotes_poll_options', 'id'),
               pollId: BuiltValueNullFieldError.checkNotNull(
                   pollId,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll_options',
+                  r'GgetUserData_getUser_pollsWithVotes_poll_options',
                   'pollId'),
               priority: priority,
               description: description,
@@ -11881,7 +11833,7 @@ class GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes_poll_options',
+            r'GgetUserData_getUser_pollsWithVotes_poll_options',
             _$failedField,
             e.toString());
       }
@@ -11892,8 +11844,8 @@ class GgetUserData_registerUser_pollsWithVotes_poll_optionsBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes
-    extends GgetUserData_registerUser_pollsWithVotes_poll_options_votes {
+class _$GgetUserData_getUser_pollsWithVotes_poll_options_votes
+    extends GgetUserData_getUser_pollsWithVotes_poll_options_votes {
   @override
   final String G__typename;
   @override
@@ -11907,15 +11859,15 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes(
+  factory _$GgetUserData_getUser_pollsWithVotes_poll_options_votes(
           [void Function(
-                  GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder)?
+                  GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder()
+      (new GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder()
             ..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes._(
+  _$GgetUserData_getUser_pollsWithVotes_poll_options_votes._(
       {required this.G__typename,
       required this.pollOptionId,
       required this.userId,
@@ -11925,44 +11877,36 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
+        r'GgetUserData_getUser_pollsWithVotes_poll_options_votes',
         'G__typename');
     BuiltValueNullFieldError.checkNotNull(
         pollOptionId,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
+        r'GgetUserData_getUser_pollsWithVotes_poll_options_votes',
         'pollOptionId');
-    BuiltValueNullFieldError.checkNotNull(
-        userId,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
-        'userId');
-    BuiltValueNullFieldError.checkNotNull(
-        value,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
-        'value');
-    BuiltValueNullFieldError.checkNotNull(
-        createdAt,
-        r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
-        'createdAt');
+    BuiltValueNullFieldError.checkNotNull(userId,
+        r'GgetUserData_getUser_pollsWithVotes_poll_options_votes', 'userId');
+    BuiltValueNullFieldError.checkNotNull(value,
+        r'GgetUserData_getUser_pollsWithVotes_poll_options_votes', 'value');
+    BuiltValueNullFieldError.checkNotNull(createdAt,
+        r'GgetUserData_getUser_pollsWithVotes_poll_options_votes', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_options_votes rebuild(
+  GgetUserData_getUser_pollsWithVotes_poll_options_votes rebuild(
           void Function(
-                  GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder)
+                  GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder
-      toBuilder() =>
-          new GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder()
-            ..replace(this);
+  GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder()
+        ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other
-            is GgetUserData_registerUser_pollsWithVotes_poll_options_votes &&
+    return other is GgetUserData_getUser_pollsWithVotes_poll_options_votes &&
         G__typename == other.G__typename &&
         pollOptionId == other.pollOptionId &&
         userId == other.userId &&
@@ -11987,7 +11931,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes')
+            r'GgetUserData_getUser_pollsWithVotes_poll_options_votes')
           ..add('G__typename', G__typename)
           ..add('pollOptionId', pollOptionId)
           ..add('userId', userId)
@@ -11998,11 +11942,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder
+class GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes_poll_options_votes,
-            GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes_poll_options_votes,
+            GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes_poll_options_votes? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -12029,13 +11973,12 @@ class GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder() {
-    GgetUserData_registerUser_pollsWithVotes_poll_options_votes
-        ._initializeBuilder(this);
+  GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder() {
+    GgetUserData_getUser_pollsWithVotes_poll_options_votes._initializeBuilder(
+        this);
   }
 
-  GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder
-      get _$this {
+  GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -12050,45 +11993,42 @@ class GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder
   }
 
   @override
-  void replace(
-      GgetUserData_registerUser_pollsWithVotes_poll_options_votes other) {
+  void replace(GgetUserData_getUser_pollsWithVotes_poll_options_votes other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v =
-        other as _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes_poll_options_votes;
   }
 
   @override
   void update(
       void Function(
-              GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder)?
+              GgetUserData_getUser_pollsWithVotes_poll_options_votesBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_poll_options_votes build() =>
-      _build();
+  GgetUserData_getUser_pollsWithVotes_poll_options_votes build() => _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes _build() {
-    _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes _$result;
+  _$GgetUserData_getUser_pollsWithVotes_poll_options_votes _build() {
+    _$GgetUserData_getUser_pollsWithVotes_poll_options_votes _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes_poll_options_votes._(
+          new _$GgetUserData_getUser_pollsWithVotes_poll_options_votes._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_poll_options_votes',
                   'G__typename'),
               pollOptionId: BuiltValueNullFieldError.checkNotNull(
                   pollOptionId,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_poll_options_votes',
                   'pollOptionId'),
               userId: BuiltValueNullFieldError.checkNotNull(
                   userId,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_poll_options_votes',
                   'userId'),
               value: BuiltValueNullFieldError.checkNotNull(
                   value,
-                  r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_poll_options_votes',
                   'value'),
               formResponse: formResponse,
               createdAt: createdAt.build());
@@ -12099,7 +12039,7 @@ class GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes_poll_options_votes',
+            r'GgetUserData_getUser_pollsWithVotes_poll_options_votes',
             _$failedField,
             e.toString());
       }
@@ -12110,50 +12050,47 @@ class GgetUserData_registerUser_pollsWithVotes_poll_options_votesBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotes
-    extends GgetUserData_registerUser_pollsWithVotes_userVotes {
+class _$GgetUserData_getUser_pollsWithVotes_userVotes
+    extends GgetUserData_getUser_pollsWithVotes_userVotes {
   @override
   final String G__typename;
   @override
-  final GgetUserData_registerUser_pollsWithVotes_userVotes_option option;
+  final GgetUserData_getUser_pollsWithVotes_userVotes_option option;
   @override
-  final GgetUserData_registerUser_pollsWithVotes_userVotes_vote vote;
+  final GgetUserData_getUser_pollsWithVotes_userVotes_vote vote;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes_userVotes(
-          [void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotesBuilder)?
+  factory _$GgetUserData_getUser_pollsWithVotes_userVotes(
+          [void Function(GgetUserData_getUser_pollsWithVotes_userVotesBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotes_userVotesBuilder()
+      (new GgetUserData_getUser_pollsWithVotes_userVotesBuilder()
             ..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes._(
+  _$GgetUserData_getUser_pollsWithVotes_userVotes._(
       {required this.G__typename, required this.option, required this.vote})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes', 'G__typename');
-    BuiltValueNullFieldError.checkNotNull(option,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes', 'option');
+        r'GgetUserData_getUser_pollsWithVotes_userVotes', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        vote, r'GgetUserData_registerUser_pollsWithVotes_userVotes', 'vote');
+        option, r'GgetUserData_getUser_pollsWithVotes_userVotes', 'option');
+    BuiltValueNullFieldError.checkNotNull(
+        vote, r'GgetUserData_getUser_pollsWithVotes_userVotes', 'vote');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes rebuild(
-          void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotesBuilder)
+  GgetUserData_getUser_pollsWithVotes_userVotes rebuild(
+          void Function(GgetUserData_getUser_pollsWithVotes_userVotesBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotesBuilder toBuilder() =>
-      new GgetUserData_registerUser_pollsWithVotes_userVotesBuilder()
-        ..replace(this);
+  GgetUserData_getUser_pollsWithVotes_userVotesBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsWithVotes_userVotesBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_pollsWithVotes_userVotes &&
+    return other is GgetUserData_getUser_pollsWithVotes_userVotes &&
         G__typename == other.G__typename &&
         option == other.option &&
         vote == other.vote;
@@ -12172,7 +12109,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes')
+            r'GgetUserData_getUser_pollsWithVotes_userVotes')
           ..add('G__typename', G__typename)
           ..add('option', option)
           ..add('vote', vote))
@@ -12180,39 +12117,37 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotes_userVotesBuilder
+class GgetUserData_getUser_pollsWithVotes_userVotesBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes_userVotes,
-            GgetUserData_registerUser_pollsWithVotes_userVotesBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes_userVotes,
+            GgetUserData_getUser_pollsWithVotes_userVotesBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes_userVotes? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder? _option;
-  GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder get option =>
+  GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder? _option;
+  GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder get option =>
       _$this._option ??=
-          new GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder();
+          new GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder();
   set option(
-          GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder?
+          GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder?
               option) =>
       _$this._option = option;
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder? _vote;
-  GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder get vote =>
+  GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder? _vote;
+  GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder get vote =>
       _$this._vote ??=
-          new GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder();
-  set vote(
-          GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder?
-              vote) =>
+          new GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder();
+  set vote(GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder? vote) =>
       _$this._vote = vote;
 
-  GgetUserData_registerUser_pollsWithVotes_userVotesBuilder() {
-    GgetUserData_registerUser_pollsWithVotes_userVotes._initializeBuilder(this);
+  GgetUserData_getUser_pollsWithVotes_userVotesBuilder() {
+    GgetUserData_getUser_pollsWithVotes_userVotes._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_pollsWithVotes_userVotesBuilder get _$this {
+  GgetUserData_getUser_pollsWithVotes_userVotesBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -12224,29 +12159,29 @@ class GgetUserData_registerUser_pollsWithVotes_userVotesBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_pollsWithVotes_userVotes other) {
+  void replace(GgetUserData_getUser_pollsWithVotes_userVotes other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_pollsWithVotes_userVotes;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes_userVotes;
   }
 
   @override
   void update(
-      void Function(GgetUserData_registerUser_pollsWithVotes_userVotesBuilder)?
+      void Function(GgetUserData_getUser_pollsWithVotes_userVotesBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes build() => _build();
+  GgetUserData_getUser_pollsWithVotes_userVotes build() => _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes _build() {
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes _$result;
+  _$GgetUserData_getUser_pollsWithVotes_userVotes _build() {
+    _$GgetUserData_getUser_pollsWithVotes_userVotes _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes_userVotes._(
+          new _$GgetUserData_getUser_pollsWithVotes_userVotes._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes',
                   'G__typename'),
               option: option.build(),
               vote: vote.build());
@@ -12259,7 +12194,7 @@ class GgetUserData_registerUser_pollsWithVotes_userVotesBuilder
         vote.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes',
+            r'GgetUserData_getUser_pollsWithVotes_userVotes',
             _$failedField,
             e.toString());
       }
@@ -12270,13 +12205,13 @@ class GgetUserData_registerUser_pollsWithVotes_userVotesBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option
-    extends GgetUserData_registerUser_pollsWithVotes_userVotes_option {
+class _$GgetUserData_getUser_pollsWithVotes_userVotes_option
+    extends GgetUserData_getUser_pollsWithVotes_userVotes_option {
   @override
   final String G__typename;
   @override
-  final BuiltList<
-      GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes> votes;
+  final BuiltList<GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>
+      votes;
   @override
   final int id;
   @override
@@ -12292,15 +12227,15 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes_userVotes_option(
+  factory _$GgetUserData_getUser_pollsWithVotes_userVotes_option(
           [void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder)?
+                  GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder()
+      (new GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder()
             ..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_option._(
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_option._(
       {required this.G__typename,
       required this.votes,
       required this.id,
@@ -12311,39 +12246,34 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option
       this.formJsonSchema,
       required this.createdAt})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option',
-        'G__typename');
+    BuiltValueNullFieldError.checkNotNull(G__typename,
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(votes,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option', 'votes');
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option', 'votes');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GgetUserData_registerUser_pollsWithVotes_userVotes_option', 'id');
+        id, r'GgetUserData_getUser_pollsWithVotes_userVotes_option', 'id');
     BuiltValueNullFieldError.checkNotNull(pollId,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option', 'pollId');
-    BuiltValueNullFieldError.checkNotNull(
-        createdAt,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option',
-        'createdAt');
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option', 'pollId');
+    BuiltValueNullFieldError.checkNotNull(createdAt,
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option rebuild(
+  GgetUserData_getUser_pollsWithVotes_userVotes_option rebuild(
           void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder)
+                  GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder
-      toBuilder() =>
-          new GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder()
-            ..replace(this);
+  GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder()
+        ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_pollsWithVotes_userVotes_option &&
+    return other is GgetUserData_getUser_pollsWithVotes_userVotes_option &&
         G__typename == other.G__typename &&
         votes == other.votes &&
         id == other.id &&
@@ -12374,7 +12304,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes_option')
+            r'GgetUserData_getUser_pollsWithVotes_userVotes_option')
           ..add('G__typename', G__typename)
           ..add('votes', votes)
           ..add('id', id)
@@ -12388,24 +12318,24 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder
+class GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes_userVotes_option,
-            GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_option? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes_userVotes_option,
+            GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_option? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes>?
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>?
       _votes;
-  ListBuilder<GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes>
+  ListBuilder<GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>
       get votes => _$this._votes ??= new ListBuilder<
-          GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes>();
+          GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>();
   set votes(
           ListBuilder<
-                  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes>?
+                  GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>?
               votes) =>
       _$this._votes = votes;
 
@@ -12439,12 +12369,12 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder() {
-    GgetUserData_registerUser_pollsWithVotes_userVotes_option
-        ._initializeBuilder(this);
+  GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder() {
+    GgetUserData_getUser_pollsWithVotes_userVotes_option._initializeBuilder(
+        this);
   }
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder get _$this {
+  GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -12462,40 +12392,39 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder
   }
 
   @override
-  void replace(
-      GgetUserData_registerUser_pollsWithVotes_userVotes_option other) {
+  void replace(GgetUserData_getUser_pollsWithVotes_userVotes_option other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_pollsWithVotes_userVotes_option;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes_userVotes_option;
   }
 
   @override
   void update(
       void Function(
-              GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder)?
+              GgetUserData_getUser_pollsWithVotes_userVotes_optionBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option build() => _build();
+  GgetUserData_getUser_pollsWithVotes_userVotes_option build() => _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_option _build() {
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes_option _$result;
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_option _build() {
+    _$GgetUserData_getUser_pollsWithVotes_userVotes_option _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes_userVotes_option._(
+          new _$GgetUserData_getUser_pollsWithVotes_userVotes_option._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_option',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_option',
                   'G__typename'),
               votes: votes.build(),
               id: BuiltValueNullFieldError.checkNotNull(
                   id,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_option',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_option',
                   'id'),
               pollId: BuiltValueNullFieldError.checkNotNull(
                   pollId,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_option',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_option',
                   'pollId'),
               priority: priority,
               description: description,
@@ -12512,7 +12441,7 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes_option',
+            r'GgetUserData_getUser_pollsWithVotes_userVotes_option',
             _$failedField,
             e.toString());
       }
@@ -12523,8 +12452,8 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_optionBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
-    extends GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes {
+class _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes
+    extends GgetUserData_getUser_pollsWithVotes_userVotes_option_votes {
   @override
   final String G__typename;
   @override
@@ -12538,15 +12467,15 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes(
+  factory _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes(
           [void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder)?
+                  GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder()
+      (new GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder()
             ..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes._(
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes._(
       {required this.G__typename,
       required this.pollOptionId,
       required this.userId,
@@ -12556,44 +12485,42 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
         'G__typename');
     BuiltValueNullFieldError.checkNotNull(
         pollOptionId,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
         'pollOptionId');
     BuiltValueNullFieldError.checkNotNull(
         userId,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
         'userId');
-    BuiltValueNullFieldError.checkNotNull(
-        value,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
-        'value');
+    BuiltValueNullFieldError.checkNotNull(value,
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes', 'value');
     BuiltValueNullFieldError.checkNotNull(
         createdAt,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
         'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes rebuild(
+  GgetUserData_getUser_pollsWithVotes_userVotes_option_votes rebuild(
           void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder)
+                  GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder
+  GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder
       toBuilder() =>
-          new GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder()
+          new GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder()
             ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other
-            is GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes &&
+            is GgetUserData_getUser_pollsWithVotes_userVotes_option_votes &&
         G__typename == other.G__typename &&
         pollOptionId == other.pollOptionId &&
         userId == other.userId &&
@@ -12618,7 +12545,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes')
+            r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes')
           ..add('G__typename', G__typename)
           ..add('pollOptionId', pollOptionId)
           ..add('userId', userId)
@@ -12629,11 +12556,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder
+class GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes,
-            GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes_userVotes_option_votes,
+            GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -12660,13 +12587,12 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder() {
-    GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
+  GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder() {
+    GgetUserData_getUser_pollsWithVotes_userVotes_option_votes
         ._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder
-      get _$this {
+  GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -12682,44 +12608,43 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder
 
   @override
   void replace(
-      GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes other) {
+      GgetUserData_getUser_pollsWithVotes_userVotes_option_votes other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other
-        as _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes;
   }
 
   @override
   void update(
       void Function(
-              GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder)?
+              GgetUserData_getUser_pollsWithVotes_userVotes_option_votesBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes build() =>
+  GgetUserData_getUser_pollsWithVotes_userVotes_option_votes build() =>
       _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes _build() {
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes _$result;
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes _build() {
+    _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes._(
+          new _$GgetUserData_getUser_pollsWithVotes_userVotes_option_votes._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
                   'G__typename'),
               pollOptionId: BuiltValueNullFieldError.checkNotNull(
                   pollOptionId,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
                   'pollOptionId'),
               userId: BuiltValueNullFieldError.checkNotNull(
                   userId,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
                   'userId'),
               value: BuiltValueNullFieldError.checkNotNull(
                   value,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
                   'value'),
               formResponse: formResponse,
               createdAt: createdAt.build());
@@ -12730,7 +12655,7 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes',
+            r'GgetUserData_getUser_pollsWithVotes_userVotes_option_votes',
             _$failedField,
             e.toString());
       }
@@ -12741,8 +12666,8 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_option_votesBuilder
   }
 }
 
-class _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote
-    extends GgetUserData_registerUser_pollsWithVotes_userVotes_vote {
+class _$GgetUserData_getUser_pollsWithVotes_userVotes_vote
+    extends GgetUserData_getUser_pollsWithVotes_userVotes_vote {
   @override
   final String G__typename;
   @override
@@ -12756,15 +12681,15 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote
   @override
   final _i2.GDate createdAt;
 
-  factory _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote(
+  factory _$GgetUserData_getUser_pollsWithVotes_userVotes_vote(
           [void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder)?
+                  GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder)?
               updates]) =>
-      (new GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder()
+      (new GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder()
             ..update(updates))
           ._build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote._(
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_vote._(
       {required this.G__typename,
       required this.pollOptionId,
       required this.userId,
@@ -12772,40 +12697,34 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote
       this.formResponse,
       required this.createdAt})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        G__typename,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
-        'G__typename');
-    BuiltValueNullFieldError.checkNotNull(
-        pollOptionId,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
-        'pollOptionId');
+    BuiltValueNullFieldError.checkNotNull(G__typename,
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_vote', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(pollOptionId,
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_vote', 'pollOptionId');
     BuiltValueNullFieldError.checkNotNull(userId,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote', 'userId');
-    BuiltValueNullFieldError.checkNotNull(value,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote', 'value');
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_vote', 'userId');
     BuiltValueNullFieldError.checkNotNull(
-        createdAt,
-        r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
-        'createdAt');
+        value, r'GgetUserData_getUser_pollsWithVotes_userVotes_vote', 'value');
+    BuiltValueNullFieldError.checkNotNull(createdAt,
+        r'GgetUserData_getUser_pollsWithVotes_userVotes_vote', 'createdAt');
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_vote rebuild(
+  GgetUserData_getUser_pollsWithVotes_userVotes_vote rebuild(
           void Function(
-                  GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder)
+                  GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder toBuilder() =>
-      new GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder()
+  GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder toBuilder() =>
+      new GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder()
         ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUserData_registerUser_pollsWithVotes_userVotes_vote &&
+    return other is GgetUserData_getUser_pollsWithVotes_userVotes_vote &&
         G__typename == other.G__typename &&
         pollOptionId == other.pollOptionId &&
         userId == other.userId &&
@@ -12830,7 +12749,7 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote')
+            r'GgetUserData_getUser_pollsWithVotes_userVotes_vote')
           ..add('G__typename', G__typename)
           ..add('pollOptionId', pollOptionId)
           ..add('userId', userId)
@@ -12841,11 +12760,11 @@ class _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote
   }
 }
 
-class GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder
+class GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder
     implements
-        Builder<GgetUserData_registerUser_pollsWithVotes_userVotes_vote,
-            GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder> {
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote? _$v;
+        Builder<GgetUserData_getUser_pollsWithVotes_userVotes_vote,
+            GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder> {
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_vote? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -12872,12 +12791,11 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder
       _$this._createdAt ??= new _i2.GDateBuilder();
   set createdAt(_i2.GDateBuilder? createdAt) => _$this._createdAt = createdAt;
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder() {
-    GgetUserData_registerUser_pollsWithVotes_userVotes_vote._initializeBuilder(
-        this);
+  GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder() {
+    GgetUserData_getUser_pollsWithVotes_userVotes_vote._initializeBuilder(this);
   }
 
-  GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder get _$this {
+  GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -12892,42 +12810,42 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder
   }
 
   @override
-  void replace(GgetUserData_registerUser_pollsWithVotes_userVotes_vote other) {
+  void replace(GgetUserData_getUser_pollsWithVotes_userVotes_vote other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote;
+    _$v = other as _$GgetUserData_getUser_pollsWithVotes_userVotes_vote;
   }
 
   @override
   void update(
-      void Function(
-              GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder)?
+      void Function(GgetUserData_getUser_pollsWithVotes_userVotes_voteBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GgetUserData_registerUser_pollsWithVotes_userVotes_vote build() => _build();
+  GgetUserData_getUser_pollsWithVotes_userVotes_vote build() => _build();
 
-  _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote _build() {
-    _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote _$result;
+  _$GgetUserData_getUser_pollsWithVotes_userVotes_vote _build() {
+    _$GgetUserData_getUser_pollsWithVotes_userVotes_vote _$result;
     try {
       _$result = _$v ??
-          new _$GgetUserData_registerUser_pollsWithVotes_userVotes_vote._(
+          new _$GgetUserData_getUser_pollsWithVotes_userVotes_vote._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_vote',
                   'G__typename'),
               pollOptionId: BuiltValueNullFieldError.checkNotNull(
                   pollOptionId,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_vote',
                   'pollOptionId'),
-              userId: BuiltValueNullFieldError.checkNotNull(
-                  userId,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
-                  'userId'),
+              userId:
+                  BuiltValueNullFieldError.checkNotNull(
+                      userId,
+                      r'GgetUserData_getUser_pollsWithVotes_userVotes_vote',
+                      'userId'),
               value: BuiltValueNullFieldError.checkNotNull(
                   value,
-                  r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
+                  r'GgetUserData_getUser_pollsWithVotes_userVotes_vote',
                   'value'),
               formResponse: formResponse,
               createdAt: createdAt.build());
@@ -12938,7 +12856,7 @@ class GgetUserData_registerUser_pollsWithVotes_userVotes_voteBuilder
         createdAt.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GgetUserData_registerUser_pollsWithVotes_userVotes_vote',
+            r'GgetUserData_getUser_pollsWithVotes_userVotes_vote',
             _$failedField,
             e.toString());
       }

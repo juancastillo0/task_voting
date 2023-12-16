@@ -67,21 +67,19 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GgetPollsReq.serializer)
       ..add(GgetPollsVars.serializer)
       ..add(GgetUserData.serializer)
-      ..add(GgetUserData_registerUser.serializer)
-      ..add(GgetUserData_registerUser_polls.serializer)
-      ..add(GgetUserData_registerUser_pollsWithVotes.serializer)
-      ..add(GgetUserData_registerUser_pollsWithVotes_poll.serializer)
-      ..add(GgetUserData_registerUser_pollsWithVotes_poll_options.serializer)
-      ..add(GgetUserData_registerUser_pollsWithVotes_poll_options_votes
-          .serializer)
-      ..add(GgetUserData_registerUser_pollsWithVotes_userVotes.serializer)
+      ..add(GgetUserData_getUser.serializer)
+      ..add(GgetUserData_getUser_polls.serializer)
+      ..add(GgetUserData_getUser_pollsWithVotes.serializer)
+      ..add(GgetUserData_getUser_pollsWithVotes_poll.serializer)
+      ..add(GgetUserData_getUser_pollsWithVotes_poll_options.serializer)
+      ..add(GgetUserData_getUser_pollsWithVotes_poll_options_votes.serializer)
+      ..add(GgetUserData_getUser_pollsWithVotes_userVotes.serializer)
+      ..add(GgetUserData_getUser_pollsWithVotes_userVotes_option.serializer)
       ..add(
-          GgetUserData_registerUser_pollsWithVotes_userVotes_option.serializer)
-      ..add(GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes
-          .serializer)
-      ..add(GgetUserData_registerUser_pollsWithVotes_userVotes_vote.serializer)
-      ..add(GgetUserData_registerUser_polls_options.serializer)
-      ..add(GgetUserData_registerUser_polls_options_votes.serializer)
+          GgetUserData_getUser_pollsWithVotes_userVotes_option_votes.serializer)
+      ..add(GgetUserData_getUser_pollsWithVotes_userVotes_vote.serializer)
+      ..add(GgetUserData_getUser_polls_options.serializer)
+      ..add(GgetUserData_getUser_polls_options_votes.serializer)
       ..add(GgetUserReq.serializer)
       ..add(GgetUserVars.serializer)
       ..add(GinsertPollData.serializer)
@@ -217,50 +215,47 @@ Serializers _$serializers = (new Serializers().toBuilder()
               const [const FullType(GgetPollsData_getPolls_options_votes)]),
           () => new ListBuilder<GgetPollsData_getPolls_options_votes>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType(GgetUserData_registerUser_polls)]),
-          () => new ListBuilder<GgetUserData_registerUser_polls>())
+          const FullType(
+              BuiltList, const [const FullType(GgetUserData_getUser_polls)]),
+          () => new ListBuilder<GgetUserData_getUser_polls>())
       ..addBuilderFactory(
           const FullType(BuiltList,
-              const [const FullType(GgetUserData_registerUser_pollsWithVotes)]),
-          () => new ListBuilder<GgetUserData_registerUser_pollsWithVotes>())
+              const [const FullType(GgetUserData_getUser_pollsWithVotes)]),
+          () => new ListBuilder<GgetUserData_getUser_pollsWithVotes>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(GgetUserData_getUser_pollsWithVotes_poll_options)
+          ]),
+          () => new ListBuilder<
+              GgetUserData_getUser_pollsWithVotes_poll_options>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType(
-                GgetUserData_registerUser_pollsWithVotes_poll_options)
+                GgetUserData_getUser_pollsWithVotes_poll_options_votes)
           ]),
           () => new ListBuilder<
-              GgetUserData_registerUser_pollsWithVotes_poll_options>())
+              GgetUserData_getUser_pollsWithVotes_poll_options_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType(
-                GgetUserData_registerUser_pollsWithVotes_poll_options_votes)
-          ]),
-          () => new ListBuilder<
-              GgetUserData_registerUser_pollsWithVotes_poll_options_votes>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(GgetUserData_registerUser_pollsWithVotes_userVotes)
-          ]),
-          () => new ListBuilder<
-              GgetUserData_registerUser_pollsWithVotes_userVotes>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(
-                GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes)
-          ]),
-          () => new ListBuilder<
-              GgetUserData_registerUser_pollsWithVotes_userVotes_option_votes>())
-      ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType(GgetUserData_registerUser_polls_options)]),
-          () => new ListBuilder<GgetUserData_registerUser_polls_options>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(GgetUserData_registerUser_polls_options_votes)
+            const FullType(GgetUserData_getUser_pollsWithVotes_userVotes)
           ]),
           () =>
-              new ListBuilder<GgetUserData_registerUser_polls_options_votes>())
+              new ListBuilder<GgetUserData_getUser_pollsWithVotes_userVotes>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(
+                GgetUserData_getUser_pollsWithVotes_userVotes_option_votes)
+          ]),
+          () => new ListBuilder<
+              GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(GgetUserData_getUser_polls_options)]),
+          () => new ListBuilder<GgetUserData_getUser_polls_options>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(GgetUserData_getUser_polls_options_votes)]),
+          () => new ListBuilder<GgetUserData_getUser_polls_options_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType(GinsertPollData_insertPoll_options)]),

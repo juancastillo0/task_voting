@@ -60,7 +60,7 @@ const registerUser = _i1.OperationDefinitionNode(
       variable: _i1.VariableNode(name: _i1.NameNode(value: 'name')),
       type: _i1.NamedTypeNode(
         name: _i1.NameNode(value: 'String'),
-        isNonNull: true,
+        isNonNull: false,
       ),
       defaultValue: _i1.DefaultValueNode(value: null),
       directives: [],
@@ -104,7 +104,7 @@ const getUser = _i1.OperationDefinitionNode(
   directives: [],
   selectionSet: _i1.SelectionSetNode(selections: [
     _i1.FieldNode(
-      name: _i1.NameNode(value: 'registerUser'),
+      name: _i1.NameNode(value: 'getUser'),
       alias: null,
       arguments: [
         _i1.ArgumentNode(
