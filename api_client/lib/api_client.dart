@@ -34,6 +34,17 @@ extension ApiClientFuture on ApiClient {
     OperationRequest<TData, TVars> r,
   ) =>
       request(r).firstWhere((e) => e.dataSource != DataSource.Cache);
+
+  Future<TData> requestNoCacheThrow<TData, TVars>(
+    OperationRequest<TData, TVars> r,
+  ) async {
+    final response = await requestNoCache(r);
+    final data = response.data;
+    if (response.hasErrors || data == null) {
+      throw (response.linkException ?? response.graphqlErrors)!;
+    }
+    return data;
+  }
 }
 
 class _HttpClient extends http.BaseClient {

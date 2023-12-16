@@ -30,8 +30,9 @@ class SettingsController with ChangeNotifier {
   String? _refreshToken;
   String? get refreshToken => _refreshToken;
 
-  ApiClient? _apiClient;
+  ApiClient? apiClient;
   GFullUser? _user;
+  GFullUser? get user => _user;
 
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the
@@ -39,30 +40,40 @@ class SettingsController with ChangeNotifier {
   Future<void> loadSettings() async {
     _themeMode = await _settingsService.themeMode();
     _locale = await _settingsService.locale();
+    await _setupApiClient();
+    notifyListeners();
+  }
+
+  Future<void> _setupApiClient() async {
     _refreshToken = await _settingsService.refreshToken();
     const backendHost = String.fromEnvironment('BACKEND_HOST');
-    if (backendHost.isNotEmpty) {
-      final client = makeClient(
-        url: backendHost,
-        getAuthHeader: () => _refreshToken,
-      );
-      _apiClient = client;
-      if (_refreshToken != null) {
-        final getUserResponse =
-            await client.requestNoCache(GgetUserReq((u) => u.vars..name = ''));
-      }
+    if (backendHost.isEmpty) return;
 
-      final registerUserResponse = await client
-          .requestNoCache(GregisterUserReq((u) => u.vars..name = ''));
-      final registerUser = registerUserResponse.data?.registerUser;
+    final client = makeClient(
+      url: backendHost,
+      getAuthHeader: () => _refreshToken,
+    );
+    apiClient = client;
+    if (_refreshToken != null) {
+      final getUserResponse = await client.requestNoCache(GgetUserReq());
+      final getUser = getUserResponse.data?.getUser;
 
-      if (registerUser == null) {
-        throw (registerUserResponse.linkException ??
-            registerUserResponse.graphqlErrors)!;
+      // if (getUserResponse.hasErrors) {
+      //   // TODO: only log errors
+      //   throw (getUserResponse.linkException ?? getUserResponse.graphqlErrors)!;
+      // }
+      if (getUser != null) {
+        _user = getUser;
+      } else {
+        _refreshToken = null;
       }
-      await updateRefreshToken(registerUser.refreshToken);
     }
-    notifyListeners();
+    if (_user == null) {
+      final registerUserResponse =
+          await client.requestNoCacheThrow(GregisterUserReq());
+      _user = registerUserResponse.registerUser;
+    }
+    await updateRefreshToken(_user!.refreshToken);
   }
 
   /// Update and persist the ThemeMode based on the user's selection.

@@ -342,7 +342,7 @@ class _ToJsonConstant with ToJson {
   }
 }
 
-abstract class MutableListenableValue<T>
+mixin MutableListenableValue<T>
     implements flutter.ValueListenable<T>, MutableValue<T> {}
 
 abstract class MutableValue<T> implements ObservableValue<T> {
