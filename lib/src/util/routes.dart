@@ -6,8 +6,7 @@ import 'package:task_voting/src/polls/polls_store.dart';
 import 'package:task_voting/src/settings/settings_view.dart';
 import 'package:task_voting/src/tasks/tasks_store.dart';
 import 'package:task_voting/src/util/disposable.dart';
-
-import '../choices/choice_list_view.dart';
+import 'package:task_voting/src/util/main_route.dart';
 
 // ignore: constant_identifier_names
 const ROUTE = 'route';
@@ -187,7 +186,7 @@ class TaskRouteInfo
   static final spec = RouteSpecValue(
     route: AppRoute.main,
     requiredParams: {'tab': AppTab.tasks.name},
-    builder: (context, info) => const SampleItemListView(),
+    builder: (context, info) => const MainRouteView(),
     // getCurrent: (root) => root.ref(TasksStore.ref).routeInfo,
     parser: (url) {
       if (url.queryParameters['tab'] != AppTab.tasks.name) {
@@ -254,7 +253,7 @@ class VoteRouteInfo
   static final spec = RouteSpecValue(
     route: AppRoute.main,
     requiredParams: {'tab': AppTab.votes.name},
-    builder: (context, info) => const SampleItemListView(),
+    builder: (context, info) => const MainRouteView(),
     // getCurrent: (root) => root.ref(TasksStore.ref).routeInfo,
     parser: (url) {
       if (url.queryParameters['tab'] != AppTab.votes.name) {
@@ -327,7 +326,7 @@ class PollsRouteInfo
   static final spec = RouteSpecValue(
     route: AppRoute.main,
     requiredParams: {'tab': _tab.name},
-    builder: (context, info) => const SampleItemListView(),
+    builder: (context, info) => const MainRouteView(),
     // getCurrent: (root) => root.ref(TasksStore.ref).routeInfo,
     parser: (url) {
       if (url.queryParameters['tab'] != _tab.name) {
