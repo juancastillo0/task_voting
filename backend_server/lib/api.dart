@@ -119,7 +119,22 @@ class PollController {
 
   @Mutation()
   Future<Poll> insertPoll(PollInsert insert) async {
-    final inserted = await controller.insertReturning(insert.toDB());
+    // final db.Poll inserted;
+    // if (insert.id != null) {
+    //   final updated = await controller.updateReturning(
+    //     db.PollKeyId(id: insert.id!),
+    //     db.PollUpdate.fromJson(insert.toDB().toJson()),
+    //   );
+    //   if (updated == null) throw Exception('Poll not found');
+    //   inserted = updated;
+    // } else {
+    //   inserted = await controller.insertReturning(insert.toDB());
+    // }
+    final inserted = await controller.upsertReturning(
+      insert: insert.toDB(),
+      update: db.PollUpdate.fromJson(insert.toDB().toJson()),
+      getKey: (e) => e.id == null ? null : db.PollKeyId(id: e.id!),
+    );
     final options = insert.options;
     if (options != null && options.isNotEmpty) {
       return addPollOptions(inserted.id, options);
@@ -136,8 +151,34 @@ class PollController {
     if (poll == null) {
       throw Exception('Poll not found');
     }
-    await optionController.insertManyReturning(
-        options.map((e) => e.toDB(pollId)).toList(growable: false));
+    // final toUpdate = options.where((e) => e.id != null).toList(growable: false);
+    // final toInsert = options.where((e) => e.id == null).toList(growable: false);
+    // final result =
+    //     await optionController.executor.executor.transaction(() async {
+    //   final updated = await Future.wait(toUpdate.map(
+    //     (e) => optionController.updateReturning(
+    //       db.PollOptionKeyId(id: e.id!),
+    //       db.PollOptionUpdate.fromJson(e.toDB(pollId).toJson()),
+    //     ),
+    //   ));
+    //   final notFound =
+    //       updated.indexed.where((e) => e.$2 == null).toList(growable: false);
+    //   if (notFound.isNotEmpty) {
+    //     throw Exception(
+    //         'Failed to update options: ${notFound.map((e) => toUpdate[e.$1]).join(', ')}');
+    //   }
+    //   final inserted = await optionController.insertManyReturning(
+    //       toInsert.map((e) => e.toDB(pollId)).toList(growable: false));
+    //   return updated..addAll(inserted);
+    // });
+    // if (result == null) {
+    //   throw Exception('Failed to insert options');
+    // }
+    await optionController.upsertManyReturning(
+      options.map((e) => e.toDB(pollId)).toList(growable: false),
+      getUpdate: (e) => db.PollOptionUpdate.fromJson(e.toJson()),
+      getKey: (e) => e.id == null ? null : db.PollOptionKeyId(id: e.id!),
+    );
     return Poll.fromDB(
       poll,
       // TODO: send precomputed options
@@ -150,8 +191,15 @@ class PollController {
     int pollId,
     List<PollOptionVoteInsert> votes,
   ) async {
-    final inserted = await voteController.insertManyReturning(
-        votes.map((e) => e.toDB()).toList(growable: false));
+    final inserted = await voteController.upsertManyReturning(
+      votes.map((e) => e.toDB()).toList(growable: false),
+      getKey: (e) => db.PollOptionVoteKeyPollOptionIdUserId(
+        pollOptionId: e.pollOptionId,
+        userId: e.userId,
+      ),
+      // TODO: Option to update. Set null passed values in Update model not represented by the insert model.
+      getUpdate: (e) => db.PollOptionVoteUpdate.fromJson(e.toJson()),
+    );
     return Ok(inserted.length);
   }
 }
