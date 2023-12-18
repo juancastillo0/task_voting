@@ -19,7 +19,7 @@ final _userGraphQLType =
   setValue(__userGraphQLType);
   __userGraphQLType.fields.addAll(
     [
-      pollGraphQLType.nonNull().list().nonNull().field(
+      ownerPollGraphQLType.nonNull().list().nonNull().field(
         'polls',
         resolve: (
           obj,
@@ -182,6 +182,64 @@ final _pollGraphQLType =
 
 /// Auto-generated from [Poll].
 GraphQLObjectType<Poll> get pollGraphQLType => _pollGraphQLType.value;
+
+final _ownerPollGraphQLType =
+    HotReloadableDefinition<GraphQLObjectType<OwnerPoll>>((setValue) {
+  final __name = 'OwnerPoll';
+
+  final __ownerPollGraphQLType = objectType<OwnerPoll>(
+    __name,
+    isInterface: false,
+    interfaces: [],
+  );
+
+  setValue(__ownerPollGraphQLType);
+  __ownerPollGraphQLType.fields.addAll(
+    [
+      pollOptionVoteGraphQLType.nonNull().list().nonNull().field(
+        'votes',
+        resolve: (
+          obj,
+          ctx,
+        ) {
+          final args = ctx.args;
+
+          return obj.votes(ctx);
+        },
+      ),
+      pollGraphQLType.nonNull().field(
+            'poll',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.poll,
+          ),
+      graphQLString.nonNull().field(
+            'adminShareToken',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.adminShareToken,
+          ),
+      graphQLString.nonNull().field(
+            'voterShareToken',
+            resolve: (
+              obj,
+              ctx,
+            ) =>
+                obj.voterShareToken,
+          ),
+    ],
+  );
+
+  return __ownerPollGraphQLType;
+});
+
+/// Auto-generated from [OwnerPoll].
+GraphQLObjectType<OwnerPoll> get ownerPollGraphQLType =>
+    _ownerPollGraphQLType.value;
 
 final _pollUserGraphQLType =
     HotReloadableDefinition<GraphQLObjectType<PollUser>>((setValue) {
@@ -371,13 +429,11 @@ final _pollInsertGraphQLTypeInput =
   __pollInsertGraphQLTypeInput.fields.addAll(
     [
       graphQLInt.inputField('id'),
-      graphQLInt.nonNull().inputField('userId'),
       graphQLString.nonNull().inputField('title'),
       graphQLString.inputField('subtitle'),
       graphQLString.nonNull().inputField('body'),
       graphQLString.inputField('pollKind'),
       graphQLString.inputField('formJsonSchema'),
-      graphQLDate.inputField('createdAt'),
       pollOptionInsertGraphQLTypeInput.nonNull().list().inputField('options'),
     ],
   );

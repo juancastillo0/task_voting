@@ -196,6 +196,10 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
   final String? body;
   final Option<String>? pollKind;
   final Option<String>? formJsonSchema;
+  final Option<DateTime>? deletedAt;
+  final Option<DateTime>? endsAt;
+  final String? voterShareToken;
+  final String? adminShareToken;
   final DateTime? createdAt;
   const PollUpdate({
     this.id,
@@ -205,6 +209,10 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
     this.body,
     this.pollKind,
     this.formJsonSchema,
+    this.deletedAt,
+    this.endsAt,
+    this.voterShareToken,
+    this.adminShareToken,
     this.createdAt,
   });
   @override
@@ -216,6 +224,10 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
         'body': body,
         'pollKind': pollKind,
         'formJsonSchema': formJsonSchema,
+        'deletedAt': deletedAt,
+        'endsAt': endsAt,
+        'voterShareToken': voterShareToken,
+        'adminShareToken': adminShareToken,
         'createdAt': createdAt,
       });
   factory PollUpdate.fromJson(Object? obj_) {
@@ -229,6 +241,10 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
             'body',
             'pollKind',
             'formJsonSchema',
+            'deletedAt',
+            'endsAt',
+            'voterShareToken',
+            'adminShareToken',
             'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -241,6 +257,10 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
         final body,
         final pollKind,
         final formJsonSchema,
+        final deletedAt,
+        final endsAt,
+        final voterShareToken,
+        final adminShareToken,
         final createdAt,
       ] =>
         PollUpdate(
@@ -258,6 +278,24 @@ class PollUpdate with BaseDataClass implements SqlUpdateModel<Poll> {
               ? null
               : Option.fromJson(
                   formJsonSchema, (formJsonSchema) => formJsonSchema as String),
+          deletedAt: deletedAt == null
+              ? null
+              : Option.fromJson(
+                  deletedAt,
+                  (deletedAt) => deletedAt is int
+                      ? DateTime.fromMicrosecondsSinceEpoch(deletedAt)
+                      : DateTime.parse(deletedAt as String)),
+          endsAt: endsAt == null
+              ? null
+              : Option.fromJson(
+                  endsAt,
+                  (endsAt) => endsAt is int
+                      ? DateTime.fromMicrosecondsSinceEpoch(endsAt)
+                      : DateTime.parse(endsAt as String)),
+          voterShareToken:
+              voterShareToken == null ? null : voterShareToken as String,
+          adminShareToken:
+              adminShareToken == null ? null : adminShareToken as String,
           createdAt: createdAt == null
               ? null
               : createdAt is int
@@ -280,6 +318,10 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
   final String body;
   final String? pollKind;
   final String? formJsonSchema;
+  final DateTime? deletedAt;
+  final DateTime? endsAt;
+  final String voterShareToken;
+  final String adminShareToken;
   final DateTime? createdAt;
   const PollInsert({
     this.id,
@@ -289,6 +331,10 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
     required this.body,
     this.pollKind,
     this.formJsonSchema,
+    this.deletedAt,
+    this.endsAt,
+    required this.voterShareToken,
+    required this.adminShareToken,
     this.createdAt,
   });
   @override
@@ -300,6 +346,10 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
         'body': body,
         'pollKind': pollKind,
         'formJsonSchema': formJsonSchema,
+        'deletedAt': deletedAt,
+        'endsAt': endsAt,
+        'voterShareToken': voterShareToken,
+        'adminShareToken': adminShareToken,
         'createdAt': createdAt,
       });
   factory PollInsert.fromJson(Object? obj_) {
@@ -313,6 +363,10 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
             'body',
             'pollKind',
             'formJsonSchema',
+            'deletedAt',
+            'endsAt',
+            'voterShareToken',
+            'adminShareToken',
             'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -325,6 +379,10 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
         final body,
         final pollKind,
         final formJsonSchema,
+        final deletedAt,
+        final endsAt,
+        final voterShareToken,
+        final adminShareToken,
         final createdAt,
       ] =>
         PollInsert(
@@ -336,6 +394,18 @@ class PollInsert with BaseDataClass implements SqlInsertModel<Poll> {
           pollKind: pollKind == null ? null : pollKind as String,
           formJsonSchema:
               formJsonSchema == null ? null : formJsonSchema as String,
+          deletedAt: deletedAt == null
+              ? null
+              : deletedAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(deletedAt)
+                  : DateTime.parse(deletedAt as String),
+          endsAt: endsAt == null
+              ? null
+              : endsAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(endsAt)
+                  : DateTime.parse(endsAt as String),
+          voterShareToken: voterShareToken as String,
+          adminShareToken: adminShareToken as String,
           createdAt: createdAt == null
               ? null
               : createdAt is int
@@ -358,6 +428,10 @@ class Poll with BaseDataClass implements SqlReturnModel {
   final String body;
   final String? pollKind;
   final String? formJsonSchema;
+  final DateTime? deletedAt;
+  final DateTime? endsAt;
+  final String voterShareToken;
+  final String adminShareToken;
   final DateTime createdAt;
   const Poll({
     required this.id,
@@ -367,6 +441,10 @@ class Poll with BaseDataClass implements SqlReturnModel {
     required this.body,
     this.pollKind,
     this.formJsonSchema,
+    this.deletedAt,
+    this.endsAt,
+    required this.voterShareToken,
+    required this.adminShareToken,
     required this.createdAt,
   });
   @override
@@ -378,6 +456,10 @@ class Poll with BaseDataClass implements SqlReturnModel {
         'body': body,
         'pollKind': pollKind,
         'formJsonSchema': formJsonSchema,
+        'deletedAt': deletedAt,
+        'endsAt': endsAt,
+        'voterShareToken': voterShareToken,
+        'adminShareToken': adminShareToken,
         'createdAt': createdAt,
       });
   factory Poll.fromJson(Object? obj_) {
@@ -391,6 +473,10 @@ class Poll with BaseDataClass implements SqlReturnModel {
             'body',
             'pollKind',
             'formJsonSchema',
+            'deletedAt',
+            'endsAt',
+            'voterShareToken',
+            'adminShareToken',
             'createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -403,6 +489,10 @@ class Poll with BaseDataClass implements SqlReturnModel {
         final body,
         final pollKind,
         final formJsonSchema,
+        final deletedAt,
+        final endsAt,
+        final voterShareToken,
+        final adminShareToken,
         final createdAt,
       ] =>
         Poll(
@@ -414,6 +504,18 @@ class Poll with BaseDataClass implements SqlReturnModel {
           pollKind: pollKind == null ? null : pollKind as String,
           formJsonSchema:
               formJsonSchema == null ? null : formJsonSchema as String,
+          deletedAt: deletedAt == null
+              ? null
+              : deletedAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(deletedAt)
+                  : DateTime.parse(deletedAt as String),
+          endsAt: endsAt == null
+              ? null
+              : endsAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(endsAt)
+                  : DateTime.parse(endsAt as String),
+          voterShareToken: voterShareToken as String,
+          adminShareToken: adminShareToken as String,
           createdAt: createdAt is int
               ? DateTime.fromMicrosecondsSinceEpoch(createdAt)
               : DateTime.parse(createdAt as String),
@@ -455,6 +557,191 @@ class PollKeyId
   }
   @override
   String get table => 'poll';
+}
+
+class PollUsersUpdate with BaseDataClass implements SqlUpdateModel<PollUsers> {
+  final int? userId;
+  final int? pollId;
+  final String? permission;
+  final DateTime? createdAt;
+  const PollUsersUpdate({
+    this.userId,
+    this.pollId,
+    this.permission,
+    this.createdAt,
+  });
+  @override
+  DataClassProps get dataClassProps => DataClassProps('PollUsersUpdate', {
+        'userId': userId,
+        'pollId': pollId,
+        'permission': permission,
+        'createdAt': createdAt,
+      });
+  factory PollUsersUpdate.fromJson(Object? obj_) {
+    final obj = obj_ is String ? jsonDecode(obj_) : obj_;
+    final list = obj is Map
+        ? const ['userId', 'pollId', 'permission', 'createdAt']
+            .map((f) => obj[f])
+            .toList(growable: false)
+        : obj;
+    return switch (list) {
+      [
+        final userId,
+        final pollId,
+        final permission,
+        final createdAt,
+      ] =>
+        PollUsersUpdate(
+          userId: userId == null ? null : userId as int,
+          pollId: pollId == null ? null : pollId as int,
+          permission: permission == null ? null : permission as String,
+          createdAt: createdAt == null
+              ? null
+              : createdAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(createdAt)
+                  : DateTime.parse(createdAt as String),
+        ),
+      _ => throw Exception(
+          'Invalid JSON or SQL Row for PollUsersUpdate.fromJson ${obj.runtimeType}'),
+    };
+  }
+  @override
+  String get table => 'poll_users';
+}
+
+class PollUsersInsert with BaseDataClass implements SqlInsertModel<PollUsers> {
+  final int userId;
+  final int pollId;
+  final String permission;
+  final DateTime? createdAt;
+  const PollUsersInsert({
+    required this.userId,
+    required this.pollId,
+    required this.permission,
+    this.createdAt,
+  });
+  @override
+  DataClassProps get dataClassProps => DataClassProps('PollUsersInsert', {
+        'userId': userId,
+        'pollId': pollId,
+        'permission': permission,
+        'createdAt': createdAt,
+      });
+  factory PollUsersInsert.fromJson(Object? obj_) {
+    final obj = obj_ is String ? jsonDecode(obj_) : obj_;
+    final list = obj is Map
+        ? const ['userId', 'pollId', 'permission', 'createdAt']
+            .map((f) => obj[f])
+            .toList(growable: false)
+        : obj;
+    return switch (list) {
+      [
+        final userId,
+        final pollId,
+        final permission,
+        final createdAt,
+      ] =>
+        PollUsersInsert(
+          userId: userId as int,
+          pollId: pollId as int,
+          permission: permission as String,
+          createdAt: createdAt == null
+              ? null
+              : createdAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(createdAt)
+                  : DateTime.parse(createdAt as String),
+        ),
+      _ => throw Exception(
+          'Invalid JSON or SQL Row for PollUsersInsert.fromJson ${obj.runtimeType}'),
+    };
+  }
+  @override
+  String get table => 'poll_users';
+}
+
+class PollUsers with BaseDataClass implements SqlReturnModel {
+  final int userId;
+  final int pollId;
+  final String permission;
+  final DateTime createdAt;
+  const PollUsers({
+    required this.userId,
+    required this.pollId,
+    required this.permission,
+    required this.createdAt,
+  });
+  @override
+  DataClassProps get dataClassProps => DataClassProps('poll_users', {
+        'userId': userId,
+        'pollId': pollId,
+        'permission': permission,
+        'createdAt': createdAt,
+      });
+  factory PollUsers.fromJson(Object? obj_) {
+    final obj = obj_ is String ? jsonDecode(obj_) : obj_;
+    final list = obj is Map
+        ? const ['userId', 'pollId', 'permission', 'createdAt']
+            .map((f) => obj[f])
+            .toList(growable: false)
+        : obj;
+    return switch (list) {
+      [
+        final userId,
+        final pollId,
+        final permission,
+        final createdAt,
+      ] =>
+        PollUsers(
+          userId: userId as int,
+          pollId: pollId as int,
+          permission: permission as String,
+          createdAt: createdAt is int
+              ? DateTime.fromMicrosecondsSinceEpoch(createdAt)
+              : DateTime.parse(createdAt as String),
+        ),
+      _ => throw Exception(
+          'Invalid JSON or SQL Row for PollUsers.fromJson ${obj.runtimeType}'),
+    };
+  }
+  @override
+  String get table => 'poll_users';
+}
+
+class PollUsersKeyPollIdUserId
+    with BaseDataClass
+    implements SqlUniqueKeyModel<PollUsers, PollUsersUpdate> {
+  final int pollId;
+  final int userId;
+  const PollUsersKeyPollIdUserId({
+    required this.pollId,
+    required this.userId,
+  });
+  @override
+  DataClassProps get dataClassProps =>
+      DataClassProps('PollUsersKeyPollIdUserId', {
+        'pollId': pollId,
+        'userId': userId,
+      });
+  factory PollUsersKeyPollIdUserId.fromJson(Object? obj_) {
+    final obj = obj_ is String ? jsonDecode(obj_) : obj_;
+    final list = obj is Map
+        ? const ['pollId', 'userId'].map((f) => obj[f]).toList(growable: false)
+        : obj;
+    return switch (list) {
+      [
+        final pollId,
+        final userId,
+      ] =>
+        PollUsersKeyPollIdUserId(
+          pollId: pollId as int,
+          userId: userId as int,
+        ),
+      _ => throw Exception(
+          'Invalid JSON or SQL Row for PollUsersKeyPollIdUserId.fromJson ${obj.runtimeType}'),
+    };
+  }
+  @override
+  String get table => 'poll_users';
 }
 
 class PollOptionUpdate
@@ -1545,6 +1832,10 @@ class QuerySelectUser1 with BaseDataClass {
   final String pollBody;
   final String? pollPollKind;
   final String? pollFormJsonSchema;
+  final DateTime? pollDeletedAt;
+  final DateTime? pollEndsAt;
+  final String pollVoterShareToken;
+  final String pollAdminShareToken;
   final DateTime pollCreatedAt;
   const QuerySelectUser1({
     this.usersId,
@@ -1557,6 +1848,10 @@ class QuerySelectUser1 with BaseDataClass {
     required this.pollBody,
     this.pollPollKind,
     this.pollFormJsonSchema,
+    this.pollDeletedAt,
+    this.pollEndsAt,
+    required this.pollVoterShareToken,
+    required this.pollAdminShareToken,
     required this.pollCreatedAt,
   });
   @override
@@ -1571,6 +1866,10 @@ class QuerySelectUser1 with BaseDataClass {
         'poll.body': pollBody,
         'poll.pollKind': pollPollKind,
         'poll.formJsonSchema': pollFormJsonSchema,
+        'poll.deletedAt': pollDeletedAt,
+        'poll.endsAt': pollEndsAt,
+        'poll.voterShareToken': pollVoterShareToken,
+        'poll.adminShareToken': pollAdminShareToken,
         'poll.createdAt': pollCreatedAt,
       });
   factory QuerySelectUser1.fromJson(Object? obj_) {
@@ -1587,6 +1886,10 @@ class QuerySelectUser1 with BaseDataClass {
             'poll.body',
             'poll.pollKind',
             'poll.formJsonSchema',
+            'poll.deletedAt',
+            'poll.endsAt',
+            'poll.voterShareToken',
+            'poll.adminShareToken',
             'poll.createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -1602,6 +1905,10 @@ class QuerySelectUser1 with BaseDataClass {
         final pollBody,
         final pollPollKind,
         final pollFormJsonSchema,
+        final pollDeletedAt,
+        final pollEndsAt,
+        final pollVoterShareToken,
+        final pollAdminShareToken,
         final pollCreatedAt,
       ] =>
         QuerySelectUser1(
@@ -1616,6 +1923,18 @@ class QuerySelectUser1 with BaseDataClass {
           pollPollKind: pollPollKind == null ? null : pollPollKind as String,
           pollFormJsonSchema:
               pollFormJsonSchema == null ? null : pollFormJsonSchema as String,
+          pollDeletedAt: pollDeletedAt == null
+              ? null
+              : pollDeletedAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(pollDeletedAt)
+                  : DateTime.parse(pollDeletedAt as String),
+          pollEndsAt: pollEndsAt == null
+              ? null
+              : pollEndsAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(pollEndsAt)
+                  : DateTime.parse(pollEndsAt as String),
+          pollVoterShareToken: pollVoterShareToken as String,
+          pollAdminShareToken: pollAdminShareToken as String,
           pollCreatedAt: pollCreatedAt is int
               ? DateTime.fromMicrosecondsSinceEpoch(pollCreatedAt)
               : DateTime.parse(pollCreatedAt as String),
@@ -1926,6 +2245,10 @@ class UserWithVotes with BaseDataClass {
   final String pollBody;
   final String? pollPollKind;
   final String? pollFormJsonSchema;
+  final DateTime? pollDeletedAt;
+  final DateTime? pollEndsAt;
+  final String pollVoterShareToken;
+  final String pollAdminShareToken;
   final DateTime pollCreatedAt;
   const UserWithVotes({
     required this.poId,
@@ -1947,6 +2270,10 @@ class UserWithVotes with BaseDataClass {
     required this.pollBody,
     this.pollPollKind,
     this.pollFormJsonSchema,
+    this.pollDeletedAt,
+    this.pollEndsAt,
+    required this.pollVoterShareToken,
+    required this.pollAdminShareToken,
     required this.pollCreatedAt,
   });
   @override
@@ -1970,6 +2297,10 @@ class UserWithVotes with BaseDataClass {
         'poll.body': pollBody,
         'poll.pollKind': pollPollKind,
         'poll.formJsonSchema': pollFormJsonSchema,
+        'poll.deletedAt': pollDeletedAt,
+        'poll.endsAt': pollEndsAt,
+        'poll.voterShareToken': pollVoterShareToken,
+        'poll.adminShareToken': pollAdminShareToken,
         'poll.createdAt': pollCreatedAt,
       });
   factory UserWithVotes.fromJson(Object? obj_) {
@@ -1995,6 +2326,10 @@ class UserWithVotes with BaseDataClass {
             'poll.body',
             'poll.pollKind',
             'poll.formJsonSchema',
+            'poll.deletedAt',
+            'poll.endsAt',
+            'poll.voterShareToken',
+            'poll.adminShareToken',
             'poll.createdAt'
           ].map((f) => obj[f]).toList(growable: false)
         : obj;
@@ -2019,6 +2354,10 @@ class UserWithVotes with BaseDataClass {
         final pollBody,
         final pollPollKind,
         final pollFormJsonSchema,
+        final pollDeletedAt,
+        final pollEndsAt,
+        final pollVoterShareToken,
+        final pollAdminShareToken,
         final pollCreatedAt,
       ] =>
         UserWithVotes(
@@ -2048,6 +2387,18 @@ class UserWithVotes with BaseDataClass {
           pollPollKind: pollPollKind == null ? null : pollPollKind as String,
           pollFormJsonSchema:
               pollFormJsonSchema == null ? null : pollFormJsonSchema as String,
+          pollDeletedAt: pollDeletedAt == null
+              ? null
+              : pollDeletedAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(pollDeletedAt)
+                  : DateTime.parse(pollDeletedAt as String),
+          pollEndsAt: pollEndsAt == null
+              ? null
+              : pollEndsAt is int
+                  ? DateTime.fromMicrosecondsSinceEpoch(pollEndsAt)
+                  : DateTime.parse(pollEndsAt as String),
+          pollVoterShareToken: pollVoterShareToken as String,
+          pollAdminShareToken: pollAdminShareToken as String,
           pollCreatedAt: pollCreatedAt is int
               ? DateTime.fromMicrosecondsSinceEpoch(pollCreatedAt)
               : DateTime.parse(pollCreatedAt as String),
@@ -2085,6 +2436,89 @@ class UserWithVotesArgs with BaseDataClass {
   }
 }
 
+class PollVotes with BaseDataClass {
+  final int povPollOptionId;
+  final int povUserId;
+  final int povValue;
+  final String? povFormResponse;
+  final DateTime povCreatedAt;
+  const PollVotes({
+    required this.povPollOptionId,
+    required this.povUserId,
+    required this.povValue,
+    this.povFormResponse,
+    required this.povCreatedAt,
+  });
+  @override
+  DataClassProps get dataClassProps => DataClassProps('PollVotes', {
+        'pov.pollOptionId': povPollOptionId,
+        'pov.userId': povUserId,
+        'pov.value': povValue,
+        'pov.formResponse': povFormResponse,
+        'pov.createdAt': povCreatedAt,
+      });
+  factory PollVotes.fromJson(Object? obj_) {
+    final obj = obj_ is String ? jsonDecode(obj_) : obj_;
+    final list = obj is Map
+        ? const [
+            'pov.pollOptionId',
+            'pov.userId',
+            'pov.value',
+            'pov.formResponse',
+            'pov.createdAt'
+          ].map((f) => obj[f]).toList(growable: false)
+        : obj;
+    return switch (list) {
+      [
+        final povPollOptionId,
+        final povUserId,
+        final povValue,
+        final povFormResponse,
+        final povCreatedAt,
+      ] =>
+        PollVotes(
+          povPollOptionId: povPollOptionId as int,
+          povUserId: povUserId as int,
+          povValue: povValue as int,
+          povFormResponse:
+              povFormResponse == null ? null : povFormResponse as String,
+          povCreatedAt: povCreatedAt is int
+              ? DateTime.fromMicrosecondsSinceEpoch(povCreatedAt)
+              : DateTime.parse(povCreatedAt as String),
+        ),
+      _ => throw Exception(
+          'Invalid JSON or SQL Row for PollVotes.fromJson ${obj.runtimeType}'),
+    };
+  }
+}
+
+class PollVotesArgs with BaseDataClass {
+  final int pollId;
+  const PollVotesArgs({
+    required this.pollId,
+  });
+  @override
+  DataClassProps get dataClassProps => DataClassProps('PollVotesArgs', {
+        'pollId': pollId,
+      });
+  factory PollVotesArgs.fromJson(Object? obj_) {
+    final obj = obj_ is String ? jsonDecode(obj_) : obj_;
+    final list = obj is Map
+        ? const ['pollId'].map((f) => obj[f]).toList(growable: false)
+        : obj;
+    return switch (list) {
+      [
+        final pollId,
+      ] =>
+        PollVotesArgs(
+          pollId: pollId as int,
+        ),
+      _ => throw Exception(
+          'Invalid JSON or SQL Row for PollVotesArgs.fromJson ${obj.runtimeType}'),
+    };
+  }
+}
+
 class TableQueriesQueries {
   final SqlExecutor executor;
   final SqlTypedExecutor typedExecutor;
@@ -2111,9 +2545,22 @@ class TableQueriesQueries {
           (name: 'body', type: BTypeString(), hasDefault: false),
           (name: 'pollKind', type: BTypeString(), hasDefault: true),
           (name: 'formJsonSchema', type: BTypeString(), hasDefault: true),
+          (name: 'deletedAt', type: BTypeDateTime(), hasDefault: true),
+          (name: 'endsAt', type: BTypeDateTime(), hasDefault: true),
+          (name: 'voterShareToken', type: BTypeString(), hasDefault: false),
+          (name: 'adminShareToken', type: BTypeString(), hasDefault: false),
           (name: 'createdAt', type: BTypeDateTime(), hasDefault: true)
         ],
         Poll.fromJson),
+    PollUsers: SqlTypeData<PollUsers, PollUsersUpdate>.value(
+        'poll_users',
+        [
+          (name: 'userId', type: BTypeInteger(), hasDefault: false),
+          (name: 'pollId', type: BTypeInteger(), hasDefault: false),
+          (name: 'permission', type: BTypeString(), hasDefault: false),
+          (name: 'createdAt', type: BTypeDateTime(), hasDefault: true)
+        ],
+        PollUsers.fromJson),
     PollOption: SqlTypeData<PollOption, PollOptionUpdate>.value(
         'poll_option',
         [
@@ -2171,6 +2618,8 @@ class TableQueriesQueries {
       SqlTypedController(typedExecutor);
   late final SqlTypedController<Poll, PollUpdate> pollController =
       SqlTypedController(typedExecutor);
+  late final SqlTypedController<PollUsers, PollUsersUpdate>
+      pollUsersController = SqlTypedController(typedExecutor);
   late final SqlTypedController<PollOption, PollOptionUpdate>
       pollOptionController = SqlTypedController(typedExecutor);
   late final SqlTypedController<PollVote, PollVoteUpdate> pollVoteController =
@@ -2245,7 +2694,24 @@ CREATE TABLE poll (
     body TEXT NOT NULL,
     pollKind VARCHAR(512) NULL,
     formJsonSchema JSON NULL,
+    deletedAt TIMESTAMP NULL,
+    endsAt TIMESTAMP NULL,
+    voterShareToken TEXT NOT NULL,
+    adminShareToken TEXT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)''');
+    return result;
+  }
+
+  Future<SqlExecution> createTablePollUsers() async {
+    final result = await executor.execute('''
+-- 
+CREATE TABLE poll_users (
+    userId INTEGER NOT NULL REFERENCES poll(id),
+    pollId INTEGER NOT NULL REFERENCES poll(id),
+    permission TEXT NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(pollId, userId)
 )''');
     return result;
   }
@@ -2438,9 +2904,21 @@ WHERE pov.userId = :userId''', [args.userId]);
     return result.map(UserWithVotes.fromJson).toList();
   }
 
+  Future<List<PollVotes>> pollVotes(PollVotesArgs args) async {
+    final result = await executor.query('''
+-- {"name":"pollVotes"}
+SELECT pov.*
+FROM poll
+inner join poll_option po on po.pollId = poll.id
+inner join poll_option_vote pov on pov.pollOptionId = po.id
+WHERE poll.id = :pollId''', [args.pollId]);
+    return result.map(PollVotes.fromJson).toList();
+  }
+
   Future<void> defineDatabaseObjects() async {
     await createTableUsers();
     await createTablePoll();
+    await createTablePollUsers();
     await createTablePollOption();
     await createTablePollVote();
     await createTablePollOptionVote();

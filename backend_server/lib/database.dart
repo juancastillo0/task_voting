@@ -82,11 +82,22 @@ Future<void> testDatabase({
   }
 
   {
+    final adminShareToken = '';
+    final voterShareToken = '';
     final toInsert = [
-      PollInsert(id: 3, userId: 4, title: 'title', body: 'body'),
+      PollInsert(
+        id: 3,
+        userId: 4,
+        adminShareToken: adminShareToken,
+        voterShareToken: voterShareToken,
+        title: 'title',
+        body: 'body',
+      ),
       PollInsert(
         id: 4,
         userId: 4,
+        adminShareToken: adminShareToken,
+        voterShareToken: voterShareToken,
         title: 'title4',
         body: 'body4',
         subtitle: 'subtitle4',
@@ -100,6 +111,8 @@ Future<void> testDatabase({
         PollInsert(
           id: 3,
           userId: 4,
+          adminShareToken: adminShareToken,
+          voterShareToken: voterShareToken,
           title: 'title',
           body: 'body',
           createdAt: inserted.first.createdAt,
@@ -127,6 +140,8 @@ Future<void> testDatabase({
       Poll(
         id: 4,
         userId: 4,
+        adminShareToken: adminShareToken,
+        voterShareToken: voterShareToken,
         title: 'title4',
         body: 'body4',
         subtitle: 'subtitleUpdated',

@@ -25,11 +25,19 @@ final ScopedRef<SqlExecutor> dbExecutorRef =
 final ScopedRef<db.TableQueriesQueries> dbRef =
     ScopedRef.global((ctx) => db.TableQueriesQueries(dbExecutorRef.get(ctx)));
 
-String _randomRefreshToken() {
+String _randomRefreshToken({int numChars = 64}) {
   const baseAlphabet = 'abcdefghijklmnopqrstuvwxyz';
-  final alphabet = '$baseAlphabet${baseAlphabet.toUpperCase()}';
+  final alphabet = '$baseAlphabet${baseAlphabet.toUpperCase()}0123456789';
   final r = Random.secure();
-  return List.generate(64, (_) => alphabet[r.nextInt(alphabet.length)]).join();
+  return List.generate(numChars, (_) => alphabet[r.nextInt(alphabet.length)])
+      .join();
+}
+
+@GraphQLEnum()
+enum PollPermission {
+  OWNER,
+  ADMIN,
+  VOTER,
 }
 
 @ClassResolver()
@@ -72,21 +80,25 @@ class UserController {
   String getAuthHeader(Ctx ctx) {
     final authHeader = ctx.request.headers['authorization'];
     if (authHeader == null) {
-      ctx.updateResponse((r) => Response(400));
-      throw Exception('Unauthorized');
+      throwUnauthorized(ctx);
     }
     return authHeader;
   }
 
   Future<db.Users> getAuthUser(Ctx ctx) async {
+    // TODO: save in ctx
     final authHeader = getAuthHeader(ctx);
     final found = await controller
         .selectUnique(db.UsersKeyRefreshToken(refreshToken: authHeader));
     if (found == null) {
-      ctx.updateResponse((r) => Response(400));
-      throw Exception('Unauthorized');
+      throwUnauthorized(ctx);
     }
     return found;
+  }
+
+  Never throwUnauthorized(Ctx ctx) {
+    ctx.updateResponse((r) => Response(400));
+    throw Exception('Unauthorized');
   }
 }
 
@@ -94,8 +106,11 @@ class UserController {
 class PollController {
   PollController({
     required this.queries,
+    required this.userController,
   });
   final db.TableQueriesQueries queries;
+  final UserController userController;
+
   SqlTypedController<db.PollOptionVote, db.PollOptionVoteUpdate>
       get voteController => queries.pollOptionVoteController;
   SqlTypedController<db.Poll, db.PollUpdate> get controller =>
@@ -104,7 +119,10 @@ class PollController {
       queries.pollOptionController;
 
   static final ScopedRef<PollController> ref = ScopedRef.global(
-    (ctx) => PollController(queries: dbRef.get(ctx)),
+    (ctx) => PollController(
+      queries: dbRef.get(ctx),
+      userController: UserController.ref.get(ctx),
+    ),
   );
 
   @Query()
@@ -118,7 +136,7 @@ class PollController {
   }
 
   @Mutation()
-  Future<Poll> insertPoll(PollInsert insert) async {
+  Future<OwnerPoll> insertPoll(Ctx ctx, PollInsert insert) async {
     // final db.Poll inserted;
     // if (insert.id != null) {
     //   final updated = await controller.updateReturning(
@@ -130,56 +148,85 @@ class PollController {
     // } else {
     //   inserted = await controller.insertReturning(insert.toDB());
     // }
+    final user = await userController.getAuthUser(ctx);
+    final isUpdate = insert.id != null;
+    if (isUpdate) {
+      await _pollUserWithAccess(
+        ctx,
+        userPoll:
+            db.PollUsersKeyPollIdUserId(userId: user.id, pollId: insert.id!),
+        canEdit: true,
+      );
+    }
+    final dbPoll = insert.toDB(
+      userId: user.id,
+      adminShareToken: _randomRefreshToken(),
+      voterShareToken: _randomRefreshToken(),
+    );
+    const ownerFields = [
+      'userId',
+      'adminShareToken',
+      'voterShareToken',
+    ];
     final inserted = await controller.upsertReturning(
-      insert: insert.toDB(),
-      update: db.PollUpdate.fromJson(insert.toDB().toJson()),
+      insert: dbPoll,
+      update: db.PollUpdate.fromJson(
+        dbPoll.toJson()..removeWhere((k, _) => ownerFields.contains(k)),
+      ),
       getKey: (e) => e.id == null ? null : db.PollKeyId(id: e.id!),
     );
+    if (!isUpdate) {
+      await queries.pollUsersController.insertReturning(db.PollUsersInsert(
+        userId: user.id,
+        pollId: inserted.id,
+        permission: PollPermission.OWNER.name,
+      ));
+    }
     final options = insert.options;
     if (options != null && options.isNotEmpty) {
-      return addPollOptions(inserted.id, options);
+      await _upsertOptions(inserted.id, options);
     }
-    return Poll.fromDB(inserted);
+    return OwnerPoll.fromDB(inserted);
+  }
+
+  Future<db.PollUsers> _pollUserWithAccess(
+    Ctx ctx, {
+    required db.PollUsersKeyPollIdUserId userPoll,
+    required bool canEdit,
+  }) async {
+    final pollUser = await queries.pollUsersController.selectUnique(userPoll);
+    final permissions = (canEdit
+            ? const [PollPermission.OWNER, PollPermission.ADMIN]
+            : const [
+                PollPermission.OWNER,
+                PollPermission.ADMIN,
+                PollPermission.VOTER,
+              ])
+        .map((e) => e.name);
+    if (pollUser == null || !permissions.contains(pollUser.permission)) {
+      userController.throwUnauthorized(ctx);
+    }
+    return pollUser;
   }
 
   @Mutation()
-  Future<Poll> addPollOptions(
+  Future<OwnerPoll> addPollOptions(
+    Ctx ctx,
     int pollId,
     List<PollOptionInsert> options,
   ) async {
+    final user = await userController.getAuthUser(ctx);
+    await _pollUserWithAccess(
+      ctx,
+      userPoll: db.PollUsersKeyPollIdUserId(pollId: pollId, userId: user.id),
+      canEdit: true,
+    );
     final poll = await controller.selectUnique(db.PollKeyId(id: pollId));
     if (poll == null) {
       throw Exception('Poll not found');
     }
-    // final toUpdate = options.where((e) => e.id != null).toList(growable: false);
-    // final toInsert = options.where((e) => e.id == null).toList(growable: false);
-    // final result =
-    //     await optionController.executor.executor.transaction(() async {
-    //   final updated = await Future.wait(toUpdate.map(
-    //     (e) => optionController.updateReturning(
-    //       db.PollOptionKeyId(id: e.id!),
-    //       db.PollOptionUpdate.fromJson(e.toDB(pollId).toJson()),
-    //     ),
-    //   ));
-    //   final notFound =
-    //       updated.indexed.where((e) => e.$2 == null).toList(growable: false);
-    //   if (notFound.isNotEmpty) {
-    //     throw Exception(
-    //         'Failed to update options: ${notFound.map((e) => toUpdate[e.$1]).join(', ')}');
-    //   }
-    //   final inserted = await optionController.insertManyReturning(
-    //       toInsert.map((e) => e.toDB(pollId)).toList(growable: false));
-    //   return updated..addAll(inserted);
-    // });
-    // if (result == null) {
-    //   throw Exception('Failed to insert options');
-    // }
-    await optionController.upsertManyReturning(
-      options.map((e) => e.toDB(pollId)).toList(growable: false),
-      getUpdate: (e) => db.PollOptionUpdate.fromJson(e.toJson()),
-      getKey: (e) => e.id == null ? null : db.PollOptionKeyId(id: e.id!),
-    );
-    return Poll.fromDB(
+    await _upsertOptions(pollId, options);
+    return OwnerPoll.fromDB(
       poll,
       // TODO: send precomputed options
       // options: inserted.map(PollOption.fromDB).toList(growable: false),
@@ -187,10 +234,76 @@ class PollController {
   }
 
   @Mutation()
+  Future<Poll> accessPoll(Ctx ctx, String pollToken) async {
+    final user = await userController.getAuthUser(ctx);
+
+    final polls = await controller.selectMany(FilterOr([
+      FilterEq(db.PollUpdate(voterShareToken: pollToken)),
+      FilterEq(db.PollUpdate(adminShareToken: pollToken)),
+    ]));
+    if (polls.isEmpty) userController.throwUnauthorized(ctx);
+    final poll = polls.fold(
+        polls.first, (p, e) => e.adminShareToken == pollToken ? e : p);
+
+    /// Previous state
+    final key = db.PollUsersKeyPollIdUserId(pollId: poll.id, userId: user.id);
+    final pollUser = await queries.pollUsersController.selectUnique(key);
+    final permission = poll.adminShareToken == pollToken
+        ? PollPermission.ADMIN.name
+        : PollPermission.VOTER.name;
+    if (pollUser != null) {
+      if (pollUser.permission != permission) {
+        await queries.pollUsersController.updateReturning(
+          key,
+          db.PollUsersUpdate(permission: permission),
+        );
+      }
+    } else {
+      await queries.pollUsersController.insertReturning(db.PollUsersInsert(
+        userId: user.id,
+        pollId: poll.id,
+        permission: permission,
+      ));
+    }
+    return Poll.fromDB(poll);
+  }
+
+  Future<List<db.PollOption>> _upsertOptions(
+    int pollId,
+    List<PollOptionInsert> options,
+  ) {
+    return optionController.upsertManyReturning(
+      options.map((e) => e.toDB(pollId)).toList(growable: false),
+      getUpdate: (e) => db.PollOptionUpdate.fromJson(e.toJson()),
+      getKey: (e) => e.id == null ? null : db.PollOptionKeyId(id: e.id!),
+    );
+  }
+
+  @Mutation()
+  Future<Poll?> deletePoll(Ctx ctx, int pollId) async {
+    final user = await userController.getAuthUser(ctx);
+    final found = await controller.selectUnique(db.PollKeyId(id: pollId));
+    if (found?.userId != user.id) userController.throwUnauthorized(ctx);
+
+    final poll = await controller.updateReturning(
+      db.PollKeyId(id: pollId),
+      db.PollUpdate(deletedAt: Some(DateTime.now())),
+    );
+    return poll == null ? null : Poll.fromDB(poll);
+  }
+
+  @Mutation()
   Future<Result<int, String>> votePoll(
+    Ctx ctx,
     int pollId,
     List<PollOptionVoteInsert> votes,
   ) async {
+    final user = await userController.getAuthUser(ctx);
+    await _pollUserWithAccess(
+      ctx,
+      userPoll: db.PollUsersKeyPollIdUserId(pollId: pollId, userId: user.id),
+      canEdit: false,
+    );
     final inserted = await voteController.upsertManyReturning(
       votes.map((e) => e.toDB()).toList(growable: false),
       getKey: (e) => db.PollOptionVoteKeyPollOptionIdUserId(

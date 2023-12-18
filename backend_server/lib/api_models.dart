@@ -5,6 +5,8 @@ import 'package:typesql/typesql.dart';
 
 part 'api_models.g.dart';
 
+typedef UserId = int;
+
 @GraphQLObject()
 class User {
   final int id;
@@ -22,11 +24,11 @@ class User {
         refreshToken: u.refreshToken,
       );
 
-  Future<List<Poll>> polls(Ctx ctx) async => (await dbRef
+  Future<List<OwnerPoll>> polls(Ctx ctx) async => (await dbRef
           .get(ctx)
           .pollController
           .selectMany(FilterEq(db.PollUpdate(userId: id))))
-      .map(Poll.fromDB)
+      .map(OwnerPoll.fromDB)
       .toList(growable: false);
 
   Future<List<PollOptionVote>> votes(Ctx ctx) async => (await dbRef
@@ -132,6 +134,39 @@ class Poll {
           .toList(growable: false);
 }
 
+@GraphQLObject()
+class OwnerPoll {
+  final Poll poll;
+  final String adminShareToken;
+  final String voterShareToken;
+
+  const OwnerPoll({
+    required this.poll,
+    required this.adminShareToken,
+    required this.voterShareToken,
+  });
+
+  factory OwnerPoll.fromDB(db.Poll v, {List<PollOption>? options}) {
+    return OwnerPoll(
+      poll: Poll.fromDB(v, options: options),
+      adminShareToken: v.adminShareToken,
+      voterShareToken: v.voterShareToken,
+    );
+  }
+
+  Future<List<PollOptionVote>> votes(Ctx ctx) async =>
+      (await dbRef.get(ctx).pollVotes(db.PollVotesArgs(pollId: poll.id)))
+          .map((e) => db.PollOptionVote(
+                createdAt: e.povCreatedAt,
+                pollOptionId: e.povPollOptionId,
+                userId: e.povUserId,
+                value: e.povValue,
+                formResponse: e.povFormResponse,
+              ))
+          .map(PollOptionVote.fromDB)
+          .toList(growable: false);
+}
+
 // TODO: extends in schema str
 @GraphQLObject()
 class PollUser {
@@ -195,6 +230,7 @@ class PollOption {
     );
   }
 
+  // TODO: authenticate, maybe create a custom SQL with userId as param
   Future<List<PollOptionVote>> votes(Ctx ctx) async =>
       _votes ??
       (await dbRef
@@ -208,31 +244,32 @@ class PollOption {
 @GraphQLInput()
 class PollInsert {
   final int? id;
-  final int userId;
   final String title;
   final String? subtitle;
   final String body;
   final String? pollKind;
   final String? formJsonSchema;
-  final DateTime? createdAt;
   final List<PollOptionInsert>? options;
 
   const PollInsert({
     this.id,
-    required this.userId,
     required this.title,
     this.subtitle,
     required this.body,
     this.pollKind,
     this.formJsonSchema,
-    this.createdAt,
     this.options,
   });
 
   factory PollInsert.fromJson(Object? json) {
-    final v = db.PollInsert.fromJson(json);
-    return PollInsert.fromDB(
-      v,
+    final v = db.PollUpdate.fromJson(json);
+    return PollInsert(
+      id: v.id,
+      title: v.title!,
+      subtitle: v.subtitle?.value,
+      body: v.body!,
+      pollKind: v.pollKind?.value,
+      formJsonSchema: v.formJsonSchema?.value,
       options: ((json as Map)['options'] as List?)
           ?.map(PollOptionInsert.fromJson)
           .toList(growable: false),
@@ -245,27 +282,30 @@ class PollInsert {
   }) {
     return PollInsert(
       id: v.id,
-      userId: v.userId,
       title: v.title,
       subtitle: v.subtitle,
       body: v.body,
       pollKind: v.pollKind,
       formJsonSchema: v.formJsonSchema,
-      createdAt: v.createdAt,
       options: options,
     );
   }
 
-  db.PollInsert toDB() {
+  db.PollInsert toDB({
+    required UserId userId,
+    required String adminShareToken,
+    required String voterShareToken,
+  }) {
     return db.PollInsert(
       id: id,
       userId: userId,
       title: title,
       subtitle: subtitle,
       body: body,
+      adminShareToken: adminShareToken,
+      voterShareToken: voterShareToken,
       pollKind: pollKind,
       formJsonSchema: formJsonSchema,
-      createdAt: createdAt,
     );
   }
 }
@@ -297,8 +337,17 @@ class PollOptionVote {
   }
 }
 
+abstract class ToKey<K extends SqlUniqueKeyModel<dynamic, dynamic>> {
+  K toSqlKey();
+}
+
+abstract class ToUpdate<U extends SqlUpdateModel<dynamic>> {
+  U toSqlUpdate();
+}
+
 @GraphQLInput()
-class PollOptionVoteInsert {
+class PollOptionVoteInsert
+    implements ToKey<db.PollOptionVoteKeyPollOptionIdUserId> {
   final int pollOptionId;
   final int userId;
   final int value;
@@ -335,6 +384,14 @@ class PollOptionVoteInsert {
       value: value,
       formResponse: formResponse,
       createdAt: createdAt,
+    );
+  }
+
+  @override
+  db.PollOptionVoteKeyPollOptionIdUserId toSqlKey() {
+    return db.PollOptionVoteKeyPollOptionIdUserId(
+      pollOptionId: pollOptionId,
+      userId: userId,
     );
   }
 }

@@ -32,7 +32,19 @@ CREATE TABLE poll (
     body TEXT NOT NULL,
     pollKind VARCHAR(512) NULL,
     formJsonSchema JSON NULL,
+    deletedAt TIMESTAMP NULL,
+    endsAt TIMESTAMP NULL,
+    voterShareToken TEXT NOT NULL,
+    adminShareToken TEXT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+-- 
+CREATE TABLE poll_users (
+    userId INTEGER NOT NULL REFERENCES poll(id),
+    pollId INTEGER NOT NULL REFERENCES poll(id),
+    permission TEXT NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(pollId, userId)
 );
 -- 
 CREATE TABLE poll_option (
@@ -177,3 +189,9 @@ FROM poll
 inner join poll_option po on po.pollId = poll.id
 inner join poll_option_vote pov on pov.pollOptionId = po.id
 WHERE pov.userId = :userId;
+-- {"name":"pollVotes"}
+SELECT pov.*
+FROM poll
+inner join poll_option po on po.pollId = poll.id
+inner join poll_option_vote pov on pov.pollOptionId = po.id
+WHERE poll.id = :pollId;

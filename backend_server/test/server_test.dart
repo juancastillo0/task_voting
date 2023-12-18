@@ -30,14 +30,14 @@ void main() {
     final insertPollsResponse = await c.requestNoCache(GinsertPollReq(
       (u) => u
         ..vars.insert = (GPollInsertBuilder()
-          ..userId = 1
           ..title = 'fefs'
           ..body = 'fefs'
           ..options.addAll([
             GPollOptionInsert((u) => u..description = 'option 1'),
           ])),
     ));
-    final insertPoll = insertPollsResponse.data?.insertPoll;
+    final insertPollOwner = insertPollsResponse.data?.insertPoll;
+    final insertPoll = insertPollOwner?.poll;
     if (insertPoll == null) {
       throw (insertPollsResponse.linkException ??
           insertPollsResponse.graphqlErrors)!;
@@ -73,7 +73,7 @@ void main() {
       throw (addPollOptionsResponse.linkException ??
           addPollOptionsResponse.graphqlErrors)!;
     }
-    final options = addPollOptions.options;
+    final options = addPollOptions.poll.options;
     expect(options, hasLength(3));
     expect(
       options.map((p) => p.description),

@@ -76,17 +76,17 @@ final _getPollsGraphQLField =
                 graphQLInt.inputField('userId')
               ]));
 
-GraphQLObjectField<Poll, Object?, Object?> get insertPollGraphQLField =>
+GraphQLObjectField<OwnerPoll, Object?, Object?> get insertPollGraphQLField =>
     _insertPollGraphQLField.value;
 final _insertPollGraphQLField =
-    HotReloadableDefinition<GraphQLObjectField<Poll, Object?, Object?>>(
-        (setValue) => setValue(pollGraphQLType.nonNull().field<Object?>(
+    HotReloadableDefinition<GraphQLObjectField<OwnerPoll, Object?, Object?>>(
+        (setValue) => setValue(ownerPollGraphQLType.nonNull().field<Object?>(
               'insertPoll',
               resolve: (obj, ctx) {
                 final args = ctx.args;
 
                 final _call = (PollController r) =>
-                    r.insertPoll((args["insert"] as PollInsert));
+                    r.insertPoll(ctx, (args["insert"] as PollInsert));
                 final FutureOr<PollController> _obj =
 // ignore: unnecessary_non_null_assertion
                     PollController.ref.get(ctx)!;
@@ -99,16 +99,17 @@ final _insertPollGraphQLField =
               ..inputs.addAll(
                   [pollInsertGraphQLTypeInput.nonNull().inputField('insert')]));
 
-GraphQLObjectField<Poll, Object?, Object?> get addPollOptionsGraphQLField =>
-    _addPollOptionsGraphQLField.value;
+GraphQLObjectField<OwnerPoll, Object?, Object?>
+    get addPollOptionsGraphQLField => _addPollOptionsGraphQLField.value;
 final _addPollOptionsGraphQLField =
-    HotReloadableDefinition<GraphQLObjectField<Poll, Object?, Object?>>(
-        (setValue) => setValue(pollGraphQLType.nonNull().field<Object?>(
+    HotReloadableDefinition<GraphQLObjectField<OwnerPoll, Object?, Object?>>(
+        (setValue) => setValue(ownerPollGraphQLType.nonNull().field<Object?>(
               'addPollOptions',
               resolve: (obj, ctx) {
                 final args = ctx.args;
 
                 final _call = (PollController r) => r.addPollOptions(
+                    ctx,
                     (args["pollId"] as int),
                     (args["options"] as List<PollOptionInsert>));
                 final FutureOr<PollController> _obj =
@@ -129,6 +130,50 @@ final _addPollOptionsGraphQLField =
                     .inputField('options')
               ]));
 
+GraphQLObjectField<Poll, Object?, Object?> get accessPollGraphQLField =>
+    _accessPollGraphQLField.value;
+final _accessPollGraphQLField = HotReloadableDefinition<
+        GraphQLObjectField<Poll, Object?, Object?>>(
+    (setValue) => setValue(pollGraphQLType.nonNull().field<Object?>(
+          'accessPoll',
+          resolve: (obj, ctx) {
+            final args = ctx.args;
+
+            final _call = (PollController r) =>
+                r.accessPoll(ctx, (args["pollToken"] as String));
+            final FutureOr<PollController> _obj =
+// ignore: unnecessary_non_null_assertion
+                PollController.ref.get(ctx)!;
+            if (_obj is Future<PollController>)
+              return _obj.then(_call);
+            else
+              return _call(_obj);
+          },
+        ))
+          ..inputs.addAll([graphQLString.nonNull().inputField('pollToken')]));
+
+GraphQLObjectField<Poll?, Object?, Object?> get deletePollGraphQLField =>
+    _deletePollGraphQLField.value;
+final _deletePollGraphQLField =
+    HotReloadableDefinition<GraphQLObjectField<Poll?, Object?, Object?>>(
+        (setValue) => setValue(pollGraphQLType.field<Object?>(
+              'deletePoll',
+              resolve: (obj, ctx) {
+                final args = ctx.args;
+
+                final _call = (PollController r) =>
+                    r.deletePoll(ctx, (args["pollId"] as int));
+                final FutureOr<PollController> _obj =
+// ignore: unnecessary_non_null_assertion
+                    PollController.ref.get(ctx)!;
+                if (_obj is Future<PollController>)
+                  return _obj.then(_call);
+                else
+                  return _call(_obj);
+              },
+            ))
+              ..inputs.addAll([graphQLInt.nonNull().inputField('pollId')]));
+
 GraphQLObjectField<Result<int, String>, Object?, Object?>
     get votePollGraphQLField => _votePollGraphQLField.value;
 final _votePollGraphQLField = HotReloadableDefinition<
@@ -142,6 +187,7 @@ final _votePollGraphQLField = HotReloadableDefinition<
             final args = ctx.args;
 
             final _call = (PollController r) => r.votePoll(
+                ctx,
                 (args["pollId"] as int),
                 (args["votes"] as List<PollOptionVoteInsert>));
             final FutureOr<PollController> _obj =
@@ -249,3 +295,23 @@ final _modelGraphQLType =
 
 /// Auto-generated from [Model].
 GraphQLObjectType<Model> get modelGraphQLType => _modelGraphQLType.value;
+
+/// Auto-generated from [PollPermission].
+final GraphQLEnumType<PollPermission> pollPermissionGraphQLType =
+    GraphQLEnumType(
+  'PollPermission',
+  [
+    GraphQLEnumValue(
+      'OWNER',
+      PollPermission.OWNER,
+    ),
+    GraphQLEnumValue(
+      'ADMIN',
+      PollPermission.ADMIN,
+    ),
+    GraphQLEnumValue(
+      'VOTER',
+      PollPermission.VOTER,
+    ),
+  ],
+);

@@ -34,6 +34,8 @@ GraphQLSchema get graphqlApiSchema => _graphqlApiSchema ??= GraphQLSchema(
           registerUserGraphQLField,
           insertPollGraphQLField,
           addPollOptionsGraphQLField,
+          accessPollGraphQLField,
+          deletePollGraphQLField,
           votePollGraphQLField,
         ],
       ),
