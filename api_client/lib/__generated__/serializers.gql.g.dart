@@ -9,6 +9,13 @@ part of 'serializers.gql.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(FetchPolicy.serializer)
       ..add(GDate.serializer)
+      ..add(GFullOwnerPollData.serializer)
+      ..add(GFullOwnerPollData_poll.serializer)
+      ..add(GFullOwnerPollData_poll_options.serializer)
+      ..add(GFullOwnerPollData_poll_options_votes.serializer)
+      ..add(GFullOwnerPollData_votes.serializer)
+      ..add(GFullOwnerPollReq.serializer)
+      ..add(GFullOwnerPollVars.serializer)
       ..add(GFullPollData.serializer)
       ..add(GFullPollData_options.serializer)
       ..add(GFullPollData_options_votes.serializer)
@@ -47,8 +54,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GFullUserData_pollsWithVotes_userVotes_option.serializer)
       ..add(GFullUserData_pollsWithVotes_userVotes_option_votes.serializer)
       ..add(GFullUserData_pollsWithVotes_userVotes_vote.serializer)
-      ..add(GFullUserData_polls_options.serializer)
-      ..add(GFullUserData_polls_options_votes.serializer)
+      ..add(GFullUserData_polls_poll.serializer)
+      ..add(GFullUserData_polls_poll_options.serializer)
+      ..add(GFullUserData_polls_poll_options_votes.serializer)
+      ..add(GFullUserData_polls_votes.serializer)
       ..add(GFullUserReq.serializer)
       ..add(GFullUserVars.serializer)
       ..add(GPollInsert.serializer)
@@ -56,8 +65,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GPollOptionVoteInsert.serializer)
       ..add(GaddPollOptionsData.serializer)
       ..add(GaddPollOptionsData_addPollOptions.serializer)
-      ..add(GaddPollOptionsData_addPollOptions_options.serializer)
-      ..add(GaddPollOptionsData_addPollOptions_options_votes.serializer)
+      ..add(GaddPollOptionsData_addPollOptions_poll.serializer)
+      ..add(GaddPollOptionsData_addPollOptions_poll_options.serializer)
+      ..add(GaddPollOptionsData_addPollOptions_poll_options_votes.serializer)
+      ..add(GaddPollOptionsData_addPollOptions_votes.serializer)
       ..add(GaddPollOptionsReq.serializer)
       ..add(GaddPollOptionsVars.serializer)
       ..add(GgetPollsData.serializer)
@@ -78,14 +89,18 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(
           GgetUserData_getUser_pollsWithVotes_userVotes_option_votes.serializer)
       ..add(GgetUserData_getUser_pollsWithVotes_userVotes_vote.serializer)
-      ..add(GgetUserData_getUser_polls_options.serializer)
-      ..add(GgetUserData_getUser_polls_options_votes.serializer)
+      ..add(GgetUserData_getUser_polls_poll.serializer)
+      ..add(GgetUserData_getUser_polls_poll_options.serializer)
+      ..add(GgetUserData_getUser_polls_poll_options_votes.serializer)
+      ..add(GgetUserData_getUser_polls_votes.serializer)
       ..add(GgetUserReq.serializer)
       ..add(GgetUserVars.serializer)
       ..add(GinsertPollData.serializer)
       ..add(GinsertPollData_insertPoll.serializer)
-      ..add(GinsertPollData_insertPoll_options.serializer)
-      ..add(GinsertPollData_insertPoll_options_votes.serializer)
+      ..add(GinsertPollData_insertPoll_poll.serializer)
+      ..add(GinsertPollData_insertPoll_poll_options.serializer)
+      ..add(GinsertPollData_insertPoll_poll_options_votes.serializer)
+      ..add(GinsertPollData_insertPoll_votes.serializer)
       ..add(GinsertPollReq.serializer)
       ..add(GinsertPollVars.serializer)
       ..add(GregisterUserData.serializer)
@@ -104,14 +119,28 @@ Serializers _$serializers = (new Serializers().toBuilder()
           .serializer)
       ..add(GregisterUserData_registerUser_pollsWithVotes_userVotes_vote
           .serializer)
-      ..add(GregisterUserData_registerUser_polls_options.serializer)
-      ..add(GregisterUserData_registerUser_polls_options_votes.serializer)
+      ..add(GregisterUserData_registerUser_polls_poll.serializer)
+      ..add(GregisterUserData_registerUser_polls_poll_options.serializer)
+      ..add(GregisterUserData_registerUser_polls_poll_options_votes.serializer)
+      ..add(GregisterUserData_registerUser_polls_votes.serializer)
       ..add(GregisterUserReq.serializer)
       ..add(GregisterUserVars.serializer)
       ..add(GvotePollData.serializer)
       ..add(GvotePollData_votePoll.serializer)
       ..add(GvotePollReq.serializer)
       ..add(GvotePollVars.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(GFullOwnerPollData_poll_options)]),
+          () => new ListBuilder<GFullOwnerPollData_poll_options>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(GFullOwnerPollData_poll_options_votes)]),
+          () => new ListBuilder<GFullOwnerPollData_poll_options_votes>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(GFullOwnerPollData_votes)]),
+          () => new ListBuilder<GFullOwnerPollData_votes>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(GFullPollData_options)]),
@@ -174,13 +203,17 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<
               GFullUserData_pollsWithVotes_userVotes_option_votes>())
       ..addBuilderFactory(
-          const FullType(
-              BuiltList, const [const FullType(GFullUserData_polls_options)]),
-          () => new ListBuilder<GFullUserData_polls_options>())
+          const FullType(BuiltList,
+              const [const FullType(GFullUserData_polls_poll_options)]),
+          () => new ListBuilder<GFullUserData_polls_poll_options>())
       ..addBuilderFactory(
           const FullType(BuiltList,
-              const [const FullType(GFullUserData_polls_options_votes)]),
-          () => new ListBuilder<GFullUserData_polls_options_votes>())
+              const [const FullType(GFullUserData_polls_poll_options_votes)]),
+          () => new ListBuilder<GFullUserData_polls_poll_options_votes>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(GFullUserData_polls_votes)]),
+          () => new ListBuilder<GFullUserData_polls_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(GPollOptionInsert)]),
           () => new ListBuilder<GPollOptionInsert>())
@@ -193,15 +226,21 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GPollOptionVoteInsert>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType(GaddPollOptionsData_addPollOptions_options)
-          ]),
-          () => new ListBuilder<GaddPollOptionsData_addPollOptions_options>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(GaddPollOptionsData_addPollOptions_options_votes)
+            const FullType(GaddPollOptionsData_addPollOptions_poll_options)
           ]),
           () => new ListBuilder<
-              GaddPollOptionsData_addPollOptions_options_votes>())
+              GaddPollOptionsData_addPollOptions_poll_options>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(
+                GaddPollOptionsData_addPollOptions_poll_options_votes)
+          ]),
+          () => new ListBuilder<
+              GaddPollOptionsData_addPollOptions_poll_options_votes>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(GaddPollOptionsData_addPollOptions_votes)]),
+          () => new ListBuilder<GaddPollOptionsData_addPollOptions_votes>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(GgetPollsData_getPolls)]),
@@ -250,20 +289,32 @@ Serializers _$serializers = (new Serializers().toBuilder()
               GgetUserData_getUser_pollsWithVotes_userVotes_option_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList,
-              const [const FullType(GgetUserData_getUser_polls_options)]),
-          () => new ListBuilder<GgetUserData_getUser_polls_options>())
+              const [const FullType(GgetUserData_getUser_polls_poll_options)]),
+          () => new ListBuilder<GgetUserData_getUser_polls_poll_options>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(GgetUserData_getUser_polls_poll_options_votes)
+          ]),
+          () =>
+              new ListBuilder<GgetUserData_getUser_polls_poll_options_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList,
-              const [const FullType(GgetUserData_getUser_polls_options_votes)]),
-          () => new ListBuilder<GgetUserData_getUser_polls_options_votes>())
+              const [const FullType(GgetUserData_getUser_polls_votes)]),
+          () => new ListBuilder<GgetUserData_getUser_polls_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList,
-              const [const FullType(GinsertPollData_insertPoll_options)]),
-          () => new ListBuilder<GinsertPollData_insertPoll_options>())
+              const [const FullType(GinsertPollData_insertPoll_poll_options)]),
+          () => new ListBuilder<GinsertPollData_insertPoll_poll_options>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(GinsertPollData_insertPoll_poll_options_votes)
+          ]),
+          () =>
+              new ListBuilder<GinsertPollData_insertPoll_poll_options_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList,
-              const [const FullType(GinsertPollData_insertPoll_options_votes)]),
-          () => new ListBuilder<GinsertPollData_insertPoll_options_votes>())
+              const [const FullType(GinsertPollData_insertPoll_votes)]),
+          () => new ListBuilder<GinsertPollData_insertPoll_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType(GregisterUserData_registerUser_polls)]),
@@ -304,15 +355,22 @@ Serializers _$serializers = (new Serializers().toBuilder()
               GregisterUserData_registerUser_pollsWithVotes_userVotes_option_votes>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType(GregisterUserData_registerUser_polls_options)
-          ]),
-          () => new ListBuilder<GregisterUserData_registerUser_polls_options>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(GregisterUserData_registerUser_polls_options_votes)
+            const FullType(GregisterUserData_registerUser_polls_poll_options)
           ]),
           () => new ListBuilder<
-              GregisterUserData_registerUser_polls_options_votes>()))
+              GregisterUserData_registerUser_polls_poll_options>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(
+                GregisterUserData_registerUser_polls_poll_options_votes)
+          ]),
+          () => new ListBuilder<
+              GregisterUserData_registerUser_polls_poll_options_votes>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(GregisterUserData_registerUser_polls_votes)
+          ]),
+          () => new ListBuilder<GregisterUserData_registerUser_polls_votes>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

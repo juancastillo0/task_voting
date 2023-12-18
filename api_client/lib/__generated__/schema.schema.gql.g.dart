@@ -22,8 +22,6 @@ class _$GPollInsertSerializer implements StructuredSerializer<GPollInsert> {
   Iterable<Object?> serialize(Serializers serializers, GPollInsert object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'userId',
-      serializers.serialize(object.userId, specifiedType: const FullType(int)),
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
@@ -58,13 +56,6 @@ class _$GPollInsertSerializer implements StructuredSerializer<GPollInsert> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.createdAt;
-    if (value != null) {
-      result
-        ..add('createdAt')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(GDate)));
-    }
     value = object.options;
     if (value != null) {
       result
@@ -91,10 +82,6 @@ class _$GPollInsertSerializer implements StructuredSerializer<GPollInsert> {
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'userId':
-          result.userId = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
-          break;
         case 'title':
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
@@ -114,10 +101,6 @@ class _$GPollInsertSerializer implements StructuredSerializer<GPollInsert> {
         case 'formJsonSchema':
           result.formJsonSchema = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
-          break;
-        case 'createdAt':
-          result.createdAt.replace(serializers.deserialize(value,
-              specifiedType: const FullType(GDate))! as GDate);
           break;
         case 'options':
           result.options.replace(serializers.deserialize(value,
@@ -395,8 +378,6 @@ class _$GPollInsert extends GPollInsert {
   @override
   final int? id;
   @override
-  final int userId;
-  @override
   final String title;
   @override
   final String? subtitle;
@@ -407,8 +388,6 @@ class _$GPollInsert extends GPollInsert {
   @override
   final String? formJsonSchema;
   @override
-  final GDate? createdAt;
-  @override
   final BuiltList<GPollOptionInsert>? options;
 
   factory _$GPollInsert([void Function(GPollInsertBuilder)? updates]) =>
@@ -416,16 +395,13 @@ class _$GPollInsert extends GPollInsert {
 
   _$GPollInsert._(
       {this.id,
-      required this.userId,
       required this.title,
       this.subtitle,
       required this.body,
       this.pollKind,
       this.formJsonSchema,
-      this.createdAt,
       this.options})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(userId, r'GPollInsert', 'userId');
     BuiltValueNullFieldError.checkNotNull(title, r'GPollInsert', 'title');
     BuiltValueNullFieldError.checkNotNull(body, r'GPollInsert', 'body');
   }
@@ -442,13 +418,11 @@ class _$GPollInsert extends GPollInsert {
     if (identical(other, this)) return true;
     return other is GPollInsert &&
         id == other.id &&
-        userId == other.userId &&
         title == other.title &&
         subtitle == other.subtitle &&
         body == other.body &&
         pollKind == other.pollKind &&
         formJsonSchema == other.formJsonSchema &&
-        createdAt == other.createdAt &&
         options == other.options;
   }
 
@@ -456,13 +430,11 @@ class _$GPollInsert extends GPollInsert {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, id.hashCode);
-    _$hash = $jc(_$hash, userId.hashCode);
     _$hash = $jc(_$hash, title.hashCode);
     _$hash = $jc(_$hash, subtitle.hashCode);
     _$hash = $jc(_$hash, body.hashCode);
     _$hash = $jc(_$hash, pollKind.hashCode);
     _$hash = $jc(_$hash, formJsonSchema.hashCode);
-    _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, options.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -472,13 +444,11 @@ class _$GPollInsert extends GPollInsert {
   String toString() {
     return (newBuiltValueToStringHelper(r'GPollInsert')
           ..add('id', id)
-          ..add('userId', userId)
           ..add('title', title)
           ..add('subtitle', subtitle)
           ..add('body', body)
           ..add('pollKind', pollKind)
           ..add('formJsonSchema', formJsonSchema)
-          ..add('createdAt', createdAt)
           ..add('options', options))
         .toString();
   }
@@ -490,10 +460,6 @@ class GPollInsertBuilder implements Builder<GPollInsert, GPollInsertBuilder> {
   int? _id;
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
-
-  int? _userId;
-  int? get userId => _$this._userId;
-  set userId(int? userId) => _$this._userId = userId;
 
   String? _title;
   String? get title => _$this._title;
@@ -516,10 +482,6 @@ class GPollInsertBuilder implements Builder<GPollInsert, GPollInsertBuilder> {
   set formJsonSchema(String? formJsonSchema) =>
       _$this._formJsonSchema = formJsonSchema;
 
-  GDateBuilder? _createdAt;
-  GDateBuilder get createdAt => _$this._createdAt ??= new GDateBuilder();
-  set createdAt(GDateBuilder? createdAt) => _$this._createdAt = createdAt;
-
   ListBuilder<GPollOptionInsert>? _options;
   ListBuilder<GPollOptionInsert> get options =>
       _$this._options ??= new ListBuilder<GPollOptionInsert>();
@@ -532,13 +494,11 @@ class GPollInsertBuilder implements Builder<GPollInsert, GPollInsertBuilder> {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
-      _userId = $v.userId;
       _title = $v.title;
       _subtitle = $v.subtitle;
       _body = $v.body;
       _pollKind = $v.pollKind;
       _formJsonSchema = $v.formJsonSchema;
-      _createdAt = $v.createdAt?.toBuilder();
       _options = $v.options?.toBuilder();
       _$v = null;
     }
@@ -565,8 +525,6 @@ class GPollInsertBuilder implements Builder<GPollInsert, GPollInsertBuilder> {
       _$result = _$v ??
           new _$GPollInsert._(
               id: id,
-              userId: BuiltValueNullFieldError.checkNotNull(
-                  userId, r'GPollInsert', 'userId'),
               title: BuiltValueNullFieldError.checkNotNull(
                   title, r'GPollInsert', 'title'),
               subtitle: subtitle,
@@ -574,13 +532,10 @@ class GPollInsertBuilder implements Builder<GPollInsert, GPollInsertBuilder> {
                   body, r'GPollInsert', 'body'),
               pollKind: pollKind,
               formJsonSchema: formJsonSchema,
-              createdAt: _createdAt?.build(),
               options: _options?.build());
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'createdAt';
-        _createdAt?.build();
         _$failedField = 'options';
         _options?.build();
       } catch (e) {

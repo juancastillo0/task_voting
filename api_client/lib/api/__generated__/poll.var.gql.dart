@@ -214,6 +214,28 @@ abstract class GFullPollUserVoteVars
       );
 }
 
+abstract class GFullOwnerPollVars
+    implements Built<GFullOwnerPollVars, GFullOwnerPollVarsBuilder> {
+  GFullOwnerPollVars._();
+
+  factory GFullOwnerPollVars([Function(GFullOwnerPollVarsBuilder b) updates]) =
+      _$GFullOwnerPollVars;
+
+  static Serializer<GFullOwnerPollVars> get serializer =>
+      _$gFullOwnerPollVarsSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullOwnerPollVars.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullOwnerPollVars? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullOwnerPollVars.serializer,
+        json,
+      );
+}
+
 abstract class GFullPollVars
     implements Built<GFullPollVars, GFullPollVarsBuilder> {
   GFullPollVars._();

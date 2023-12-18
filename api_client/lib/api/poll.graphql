@@ -18,13 +18,13 @@ mutation getUser($name: String) {
 
 mutation insertPoll($insert: PollInsert!) {
   insertPoll(insert: $insert) {
-    ...FullPoll
+    ...FullOwnerPoll
   }
 }
 
 mutation addPollOptions($pollId: Int!, $options: [PollOptionInsert!]!) {
   addPollOptions(pollId: $pollId, options: $options) {
-    ...FullPoll
+    ...FullOwnerPoll
   }
 }
 
@@ -41,7 +41,7 @@ fragment FullUser on User {
   name
   refreshToken
   polls {
-    ...FullPoll
+    ...FullOwnerPoll
   }
   pollsWithVotes {
     ...FullPollUser
@@ -63,6 +63,17 @@ fragment FullPollUserVote on PollUserVote {
   }
   vote {
     ...FullPollOptionVote
+  }
+}
+
+fragment FullOwnerPoll on OwnerPoll {
+  adminShareToken
+  voterShareToken
+  votes {
+    ...FullPollOptionVote
+  }
+  poll {
+    ...FullPoll
   }
 }
 

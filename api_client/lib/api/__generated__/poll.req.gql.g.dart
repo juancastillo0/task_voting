@@ -23,6 +23,8 @@ Serializer<GFullPollUserReq> _$gFullPollUserReqSerializer =
     new _$GFullPollUserReqSerializer();
 Serializer<GFullPollUserVoteReq> _$gFullPollUserVoteReqSerializer =
     new _$GFullPollUserVoteReqSerializer();
+Serializer<GFullOwnerPollReq> _$gFullOwnerPollReqSerializer =
+    new _$GFullOwnerPollReqSerializer();
 Serializer<GFullPollReq> _$gFullPollReqSerializer =
     new _$GFullPollReqSerializer();
 Serializer<GFullPollOptionReq> _$gFullPollOptionReqSerializer =
@@ -933,6 +935,79 @@ class _$GFullPollUserVoteReqSerializer
           result.vars.replace(serializers.deserialize(value,
                   specifiedType: const FullType(_i3.GFullPollUserVoteVars))!
               as _i3.GFullPollUserVoteVars);
+          break;
+        case 'document':
+          result.document = serializers.deserialize(value,
+                  specifiedType: const FullType(_i7.DocumentNode))!
+              as _i7.DocumentNode;
+          break;
+        case 'fragmentName':
+          result.fragmentName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'idFields':
+          result.idFields = serializers.deserialize(value,
+              specifiedType: const FullType(Map, const [
+                const FullType(String),
+                const FullType(dynamic)
+              ]))! as Map<String, dynamic>;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GFullOwnerPollReqSerializer
+    implements StructuredSerializer<GFullOwnerPollReq> {
+  @override
+  final Iterable<Type> types = const [GFullOwnerPollReq, _$GFullOwnerPollReq];
+  @override
+  final String wireName = 'GFullOwnerPollReq';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GFullOwnerPollReq object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'vars',
+      serializers.serialize(object.vars,
+          specifiedType: const FullType(_i3.GFullOwnerPollVars)),
+      'document',
+      serializers.serialize(object.document,
+          specifiedType: const FullType(_i7.DocumentNode)),
+      'idFields',
+      serializers.serialize(object.idFields,
+          specifiedType: const FullType(
+              Map, const [const FullType(String), const FullType(dynamic)])),
+    ];
+    Object? value;
+    value = object.fragmentName;
+    if (value != null) {
+      result
+        ..add('fragmentName')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  GFullOwnerPollReq deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GFullOwnerPollReqBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'vars':
+          result.vars.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(_i3.GFullOwnerPollVars))!
+              as _i3.GFullOwnerPollVars);
           break;
         case 'document':
           result.document = serializers.deserialize(value,
@@ -2943,6 +3018,151 @@ class GFullPollUserVoteReqBuilder
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'GFullPollUserVoteReq', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GFullOwnerPollReq extends GFullOwnerPollReq {
+  @override
+  final _i3.GFullOwnerPollVars vars;
+  @override
+  final _i7.DocumentNode document;
+  @override
+  final String? fragmentName;
+  @override
+  final Map<String, dynamic> idFields;
+
+  factory _$GFullOwnerPollReq(
+          [void Function(GFullOwnerPollReqBuilder)? updates]) =>
+      (new GFullOwnerPollReqBuilder()..update(updates))._build();
+
+  _$GFullOwnerPollReq._(
+      {required this.vars,
+      required this.document,
+      this.fragmentName,
+      required this.idFields})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(vars, r'GFullOwnerPollReq', 'vars');
+    BuiltValueNullFieldError.checkNotNull(
+        document, r'GFullOwnerPollReq', 'document');
+    BuiltValueNullFieldError.checkNotNull(
+        idFields, r'GFullOwnerPollReq', 'idFields');
+  }
+
+  @override
+  GFullOwnerPollReq rebuild(void Function(GFullOwnerPollReqBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GFullOwnerPollReqBuilder toBuilder() =>
+      new GFullOwnerPollReqBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GFullOwnerPollReq &&
+        vars == other.vars &&
+        document == other.document &&
+        fragmentName == other.fragmentName &&
+        idFields == other.idFields;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, vars.hashCode);
+    _$hash = $jc(_$hash, document.hashCode);
+    _$hash = $jc(_$hash, fragmentName.hashCode);
+    _$hash = $jc(_$hash, idFields.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GFullOwnerPollReq')
+          ..add('vars', vars)
+          ..add('document', document)
+          ..add('fragmentName', fragmentName)
+          ..add('idFields', idFields))
+        .toString();
+  }
+}
+
+class GFullOwnerPollReqBuilder
+    implements Builder<GFullOwnerPollReq, GFullOwnerPollReqBuilder> {
+  _$GFullOwnerPollReq? _$v;
+
+  _i3.GFullOwnerPollVarsBuilder? _vars;
+  _i3.GFullOwnerPollVarsBuilder get vars =>
+      _$this._vars ??= new _i3.GFullOwnerPollVarsBuilder();
+  set vars(_i3.GFullOwnerPollVarsBuilder? vars) => _$this._vars = vars;
+
+  _i7.DocumentNode? _document;
+  _i7.DocumentNode? get document => _$this._document;
+  set document(_i7.DocumentNode? document) => _$this._document = document;
+
+  String? _fragmentName;
+  String? get fragmentName => _$this._fragmentName;
+  set fragmentName(String? fragmentName) => _$this._fragmentName = fragmentName;
+
+  Map<String, dynamic>? _idFields;
+  Map<String, dynamic>? get idFields => _$this._idFields;
+  set idFields(Map<String, dynamic>? idFields) => _$this._idFields = idFields;
+
+  GFullOwnerPollReqBuilder() {
+    GFullOwnerPollReq._initializeBuilder(this);
+  }
+
+  GFullOwnerPollReqBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _vars = $v.vars.toBuilder();
+      _document = $v.document;
+      _fragmentName = $v.fragmentName;
+      _idFields = $v.idFields;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GFullOwnerPollReq other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFullOwnerPollReq;
+  }
+
+  @override
+  void update(void Function(GFullOwnerPollReqBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GFullOwnerPollReq build() => _build();
+
+  _$GFullOwnerPollReq _build() {
+    _$GFullOwnerPollReq _$result;
+    try {
+      _$result = _$v ??
+          new _$GFullOwnerPollReq._(
+              vars: vars.build(),
+              document: BuiltValueNullFieldError.checkNotNull(
+                  document, r'GFullOwnerPollReq', 'document'),
+              fragmentName: fragmentName,
+              idFields: BuiltValueNullFieldError.checkNotNull(
+                  idFields, r'GFullOwnerPollReq', 'idFields'));
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'vars';
+        vars.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GFullOwnerPollReq', _$failedField, e.toString());
       }
       rethrow;
     }

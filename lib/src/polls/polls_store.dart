@@ -72,8 +72,8 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
   void _updateUserInfo() {
     final settings = rootStore.getGlobal<SettingsController>();
     final user = settings.user!;
-    final userPolls = BuiltMap.of(
-        Map.fromIterables(user.polls.map((p) => p.id.toString()), user.polls));
+    final userPolls = BuiltMap.of(Map.fromIterables(
+        user.polls.map((p) => p.poll.id.toString()), user.polls));
     if (BuiltMap(polls) != userPolls) {
       polls.set(userPolls.toMap());
     }
@@ -85,8 +85,9 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
     }
   }
 
-  final polls = ObsMap<GFullPoll>('polls', serde: typeSerdeGFullPoll.map());
-  static final typeSerdeGFullPoll = Serde<GFullPoll>(
+  final polls =
+      ObsMap<GFullOwnerPoll>('polls', serde: typeSerdeGFullPoll.map());
+  static final typeSerdeGFullPoll = Serde<GFullOwnerPoll>(
     fromJson: (json) =>
         GgetUserData_getUser_polls.fromJson(json as Map<String, dynamic>)!,
     toJson: (value) => value?.toJson(),
@@ -102,24 +103,23 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
     toJson: (value) => value?.toJson(),
   );
 
-  late final pollList =
-      Computed<List<MapEntry<GFullPoll, BuiltList<GFullPollUserVote>?>>>(() {
+  late final pollList = Computed<List<UIPoll>>(() {
     return switch (view.value) {
-      PollsView.polls =>
-        polls.values.map((e) => MapEntry(e, null)).toList(growable: false),
-      PollsView.votes => pollsWithVotes.values
-          .map((e) => MapEntry(e.poll, e.userVotes))
+      PollsView.polls => polls.values
+          .map((e) => UIPoll(e.poll, null, e))
           .toList(growable: false),
-      PollsView.recent => SplayTreeMap<DateAndKey,
-            MapEntry<GFullPoll, BuiltList<GFullPollUserVote>?>>.fromIterable(
+      PollsView.votes => pollsWithVotes.values
+          .map((e) => UIPoll(e.poll, e.userVotes, null))
+          .toList(growable: false),
+      PollsView.recent => SplayTreeMap<DateAndKey, UIPoll>.fromIterable(
           polls.values
               .map(
                 (e) => MapEntry(
                   DateAndKey(
-                    e.id.toString(),
-                    DateTime.parse(e.createdAt.value),
+                    e.poll.id.toString(),
+                    DateTime.parse(e.poll.createdAt.value),
                   ),
-                  MapEntry<GFullPoll, BuiltList<GFullPollUserVote>?>(e, null),
+                  UIPoll(e.poll, null, e),
                 ),
               )
               .followedBy(
@@ -134,7 +134,7 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
                             ),
                       ),
                     ),
-                    MapEntry(e.poll, e.userVotes),
+                    UIPoll(e.poll, e.userVotes, null),
                   ),
                 ),
               ),
@@ -156,14 +156,15 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
   );
   final isCreatingPoll = Obs('isCreatingPoll', false);
   final areItemsExpanded = Obs('areItemsExpanded', false);
-  late final pollInsert = Obs('pollInsert', _emptyPoll);
-  late final _emptyPoll = GPollInsert(
+  final pollInsert = Obs('pollInsert', _emptyPoll);
+  static final _emptyPoll = GPollInsert(
     (u) => u
-      ..userId = rootStore.getGlobal<SettingsController>().user!.id
       ..title = ''
       ..body = '',
   );
-  final selectedPoll = Obs<GFullPoll?>('selectedPoll', null);
+  final selectedPollId = Obs<int?>('selectedPollId', null);
+  late final selectedPoll = Computed<GFullOwnerPoll?>(
+      name: 'selectedPoll', () => polls[selectedPollId.value?.toString()]);
 
   void updatePollForm(void Function(GPollInsertBuilder u) func) {
     pollInsert.set(pollInsert.value.rebuild(func));
@@ -180,12 +181,12 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
     isCreatingPoll,
     areItemsExpanded,
     pollInsert,
-    selectedPoll,
+    selectedPollId,
   ];
 
   late final routeInfo = Computed(
     () => PollsRouteInfo(
-      selectedPoll: selectedPoll.value?.id,
+      selectedPoll: selectedPoll.value?.poll.id,
       view: view.value,
       expanded: areItemsExpanded.value,
       editing: isCreatingPoll.value,
@@ -205,12 +206,12 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
 
   void goBackToPollList() {
     isCreatingPoll.set(false);
-    selectedPoll.set(null);
+    selectedPollId.set(null);
     view.set(PollsView.polls);
   }
 
-  void selectPoll(GFullPoll poll) {
-    selectedPoll.set(poll);
+  void selectPoll(int pollId) {
+    selectedPollId.set(pollId);
   }
 
   void clearPoll() {
@@ -219,19 +220,17 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
 
   void duplicatePoll() {
     startCreatingPoll();
-    final s = selectedPoll.value!;
+    final s = selectedPoll.value!.poll;
     pollInsert.set(GPollInsert(
       (u) => u
         ..body = s.body
         // TODO: ..options = s.options.toBuilder()
         ..id = s.id
-        ..userId = s.userId
         ..title = s.title
         ..subtitle = s.subtitle
         ..body = s.body
         ..pollKind = s.pollKind
-        ..formJsonSchema = s.formJsonSchema
-        ..createdAt = s.createdAt.toBuilder(),
+        ..formJsonSchema = s.formJsonSchema,
     ));
   }
 
@@ -239,7 +238,7 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
     final insertPollsResponse = await apiClient.requestNoCacheThrow(
         GinsertPollReq((u) => u..vars.insert = pollInsert.value.toBuilder()));
     final poll = insertPollsResponse.insertPoll;
-    polls[poll.id.toString()] = poll;
+    polls[poll.poll.id.toString()] = poll;
     clearPoll();
     goBackToPollList();
 
@@ -255,7 +254,7 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
   void createOption() async {
     final addPollOptionsResponse =
         await apiClient.requestNoCache(GaddPollOptionsReq((u) => u.vars
-          ..pollId = selectedPoll.value!.id
+          ..pollId = selectedPoll.value!.poll.id
           ..options.addAll([
             GPollOptionInsert((u) => u
               ..priority = 4
@@ -278,7 +277,7 @@ class PollsStore with DisposableWithSetUp, StoreSerde {
       final selectedStore = this;
       if (route.selectedPoll != null) {
         final found = polls[route.selectedPoll.toString()];
-        if (found != null) selectedStore.selectedPoll.set(found);
+        if (found != null) selectedStore.selectedPollId.set(found.poll.id);
       }
       if (route.view != null) {
         selectedStore.view.set(route.view!);
@@ -306,4 +305,12 @@ class DateAndKey implements Comparable<DateAndKey> {
     final comp = date.compareTo(other.date);
     return comp != 0 ? comp : key.compareTo(other.key);
   }
+}
+
+class UIPoll {
+  final GFullPoll poll;
+  final BuiltList<GFullPollUserVote>? voter;
+  final GFullOwnerPoll? ownerPoll;
+
+  UIPoll(this.poll, this.voter, this.ownerPoll);
 }

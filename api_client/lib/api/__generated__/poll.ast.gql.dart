@@ -150,7 +150,7 @@ const insertPoll = _i1.OperationDefinitionNode(
       directives: [],
       selectionSet: _i1.SelectionSetNode(selections: [
         _i1.FragmentSpreadNode(
-          name: _i1.NameNode(value: 'FullPoll'),
+          name: _i1.NameNode(value: 'FullOwnerPoll'),
           directives: [],
         )
       ]),
@@ -201,7 +201,7 @@ const addPollOptions = _i1.OperationDefinitionNode(
       directives: [],
       selectionSet: _i1.SelectionSetNode(selections: [
         _i1.FragmentSpreadNode(
-          name: _i1.NameNode(value: 'FullPoll'),
+          name: _i1.NameNode(value: 'FullOwnerPoll'),
           directives: [],
         )
       ]),
@@ -313,7 +313,7 @@ const FullUser = _i1.FragmentDefinitionNode(
       directives: [],
       selectionSet: _i1.SelectionSetNode(selections: [
         _i1.FragmentSpreadNode(
-          name: _i1.NameNode(value: 'FullPoll'),
+          name: _i1.NameNode(value: 'FullOwnerPoll'),
           directives: [],
         )
       ]),
@@ -396,6 +396,55 @@ const FullPollUserVote = _i1.FragmentDefinitionNode(
       selectionSet: _i1.SelectionSetNode(selections: [
         _i1.FragmentSpreadNode(
           name: _i1.NameNode(value: 'FullPollOptionVote'),
+          directives: [],
+        )
+      ]),
+    ),
+  ]),
+);
+const FullOwnerPoll = _i1.FragmentDefinitionNode(
+  name: _i1.NameNode(value: 'FullOwnerPoll'),
+  typeCondition: _i1.TypeConditionNode(
+      on: _i1.NamedTypeNode(
+    name: _i1.NameNode(value: 'OwnerPoll'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: _i1.SelectionSetNode(selections: [
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'adminShareToken'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'voterShareToken'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'votes'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPollOptionVote'),
+          directives: [],
+        )
+      ]),
+    ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'poll'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'FullPoll'),
           directives: [],
         )
       ]),
@@ -609,6 +658,7 @@ const document = _i1.DocumentNode(definitions: [
   FullUser,
   FullPollUser,
   FullPollUserVote,
+  FullOwnerPoll,
   FullPoll,
   FullPollOption,
   FullPollOptionVote,

@@ -51,18 +51,27 @@ type Mutation {
   ): Boolean!
   getUser(name: String): User!
   registerUser(name: String): User!
-  insertPoll(insert: PollInsert!): Poll!
-  addPollOptions(pollId: Int!, options: [PollOptionInsert!]!): Poll!
+  insertPoll(insert: PollInsert!): OwnerPoll!
+  addPollOptions(pollId: Int!, options: [PollOptionInsert!]!): OwnerPoll!
+  accessPoll(pollToken: String!): Poll!
+  deletePoll(pollId: Int!): Poll
   votePoll(pollId: Int!, votes: [PollOptionVoteInsert!]!): ResultIntString!
 }
 
 type User {
-  polls: [Poll!]!
+  polls: [OwnerPoll!]!
   votes: [PollOptionVote!]!
   pollsWithVotes: [PollUser!]!
   id: Int!
   name: String
   refreshToken: String!
+}
+
+type OwnerPoll {
+  votes: [PollOptionVote!]!
+  poll: Poll!
+  adminShareToken: String!
+  voterShareToken: String!
 }
 
 type PollUser {
@@ -77,13 +86,11 @@ type PollUserVote {
 
 input PollInsert {
   id: Int
-  userId: Int!
   title: String!
   subtitle: String
   body: String!
   pollKind: String
   formJsonSchema: String
-  createdAt: Date
   options: [PollOptionInsert!]
 }
 

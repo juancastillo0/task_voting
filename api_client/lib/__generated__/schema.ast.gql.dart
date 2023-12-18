@@ -382,7 +382,7 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
         )
       ],
       type: _i1.NamedTypeNode(
-        name: _i1.NameNode(value: 'Poll'),
+        name: _i1.NameNode(value: 'OwnerPoll'),
         isNonNull: true,
       ),
     ),
@@ -413,8 +413,46 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
         ),
       ],
       type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'OwnerPoll'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'accessPoll'),
+      directives: [],
+      args: [
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'pollToken'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'String'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        )
+      ],
+      type: _i1.NamedTypeNode(
         name: _i1.NameNode(value: 'Poll'),
         isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'deletePoll'),
+      directives: [],
+      args: [
+        _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'pollId'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+            name: _i1.NameNode(value: 'Int'),
+            isNonNull: true,
+          ),
+          defaultValue: null,
+        )
+      ],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Poll'),
+        isNonNull: false,
       ),
     ),
     _i1.FieldDefinitionNode(
@@ -461,7 +499,7 @@ const User = _i1.ObjectTypeDefinitionNode(
       args: [],
       type: _i1.ListTypeNode(
         type: _i1.NamedTypeNode(
-          name: _i1.NameNode(value: 'Poll'),
+          name: _i1.NameNode(value: 'OwnerPoll'),
           isNonNull: true,
         ),
         isNonNull: true,
@@ -511,6 +549,52 @@ const User = _i1.ObjectTypeDefinitionNode(
     ),
     _i1.FieldDefinitionNode(
       name: _i1.NameNode(value: 'refreshToken'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+    ),
+  ],
+);
+const OwnerPoll = _i1.ObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'OwnerPoll'),
+  directives: [],
+  interfaces: [],
+  fields: [
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'votes'),
+      directives: [],
+      args: [],
+      type: _i1.ListTypeNode(
+        type: _i1.NamedTypeNode(
+          name: _i1.NameNode(value: 'PollOptionVote'),
+          isNonNull: true,
+        ),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'poll'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Poll'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'adminShareToken'),
+      directives: [],
+      args: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'String'),
+        isNonNull: true,
+      ),
+    ),
+    _i1.FieldDefinitionNode(
+      name: _i1.NameNode(value: 'voterShareToken'),
       directives: [],
       args: [],
       type: _i1.NamedTypeNode(
@@ -587,15 +671,6 @@ const PollInsert = _i1.InputObjectTypeDefinitionNode(
       defaultValue: null,
     ),
     _i1.InputValueDefinitionNode(
-      name: _i1.NameNode(value: 'userId'),
-      directives: [],
-      type: _i1.NamedTypeNode(
-        name: _i1.NameNode(value: 'Int'),
-        isNonNull: true,
-      ),
-      defaultValue: null,
-    ),
-    _i1.InputValueDefinitionNode(
       name: _i1.NameNode(value: 'title'),
       directives: [],
       type: _i1.NamedTypeNode(
@@ -636,15 +711,6 @@ const PollInsert = _i1.InputObjectTypeDefinitionNode(
       directives: [],
       type: _i1.NamedTypeNode(
         name: _i1.NameNode(value: 'String'),
-        isNonNull: false,
-      ),
-      defaultValue: null,
-    ),
-    _i1.InputValueDefinitionNode(
-      name: _i1.NameNode(value: 'createdAt'),
-      directives: [],
-      type: _i1.NamedTypeNode(
-        name: _i1.NameNode(value: 'Date'),
         isNonNull: false,
       ),
       defaultValue: null,
@@ -833,6 +899,7 @@ const document = _i1.DocumentNode(definitions: [
   PollOptionVote,
   Mutation,
   User,
+  OwnerPoll,
   PollUser,
   PollUserVote,
   PollInsert,

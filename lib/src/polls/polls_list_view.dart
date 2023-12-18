@@ -258,7 +258,7 @@ class _PollsListViewState extends State<PollsListView> with DisposableState {
                                       //   return ChoiceInfo(choice: e);
                                       // }
                                       return PollInfo(
-                                        poll: e.key,
+                                        poll: e.poll,
                                         isExpanded: // e.isExpanded.value ??
                                             store.areItemsExpanded.value,
                                         // onRemove: () {
@@ -311,10 +311,13 @@ class PollInfo extends StatelessObserverWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(poll.title, style: Theme.of(context).textTheme.headlineMedium),
+              Text(
+                poll.title,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
               OutlinedButton.icon(
                 key: const Key('selectPoll'),
-                onPressed: () => store.selectPoll(poll),
+                onPressed: () => store.selectPoll(poll.id),
                 icon: const Icon(Icons.edit),
                 label: Text(loc.pollsEdit),
               ),

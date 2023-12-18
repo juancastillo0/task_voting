@@ -29,13 +29,11 @@ abstract class GPollInsert implements Built<GPollInsert, GPollInsertBuilder> {
   factory GPollInsert([Function(GPollInsertBuilder b) updates]) = _$GPollInsert;
 
   int? get id;
-  int get userId;
   String get title;
   String? get subtitle;
   String get body;
   String? get pollKind;
   String? get formJsonSchema;
-  GDate? get createdAt;
   BuiltList<GPollOptionInsert>? get options;
   static Serializer<GPollInsert> get serializer => _$gPollInsertSerializer;
 

@@ -593,6 +593,52 @@ abstract class GFullPollUserVoteReq
       );
 }
 
+abstract class GFullOwnerPollReq
+    implements
+        Built<GFullOwnerPollReq, GFullOwnerPollReqBuilder>,
+        _i1.FragmentRequest<_i2.GFullOwnerPollData, _i3.GFullOwnerPollVars> {
+  GFullOwnerPollReq._();
+
+  factory GFullOwnerPollReq([Function(GFullOwnerPollReqBuilder b) updates]) =
+      _$GFullOwnerPollReq;
+
+  static void _initializeBuilder(GFullOwnerPollReqBuilder b) => b
+    ..document = _i5.document
+    ..fragmentName = 'FullOwnerPoll';
+
+  @override
+  _i3.GFullOwnerPollVars get vars;
+  @override
+  _i7.DocumentNode get document;
+  @override
+  String? get fragmentName;
+  @override
+  Map<String, dynamic> get idFields;
+  @override
+  _i2.GFullOwnerPollData? parseData(Map<String, dynamic> json) =>
+      _i2.GFullOwnerPollData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(dynamic data) => data.toJson();
+
+  static Serializer<GFullOwnerPollReq> get serializer =>
+      _$gFullOwnerPollReqSerializer;
+
+  Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
+        GFullOwnerPollReq.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullOwnerPollReq? fromJson(Map<String, dynamic> json) =>
+      _i6.serializers.deserializeWith(
+        GFullOwnerPollReq.serializer,
+        json,
+      );
+}
+
 abstract class GFullPollReq
     implements
         Built<GFullPollReq, GFullPollReqBuilder>,

@@ -24,6 +24,8 @@ Serializer<GFullPollUserVars> _$gFullPollUserVarsSerializer =
     new _$GFullPollUserVarsSerializer();
 Serializer<GFullPollUserVoteVars> _$gFullPollUserVoteVarsSerializer =
     new _$GFullPollUserVoteVarsSerializer();
+Serializer<GFullOwnerPollVars> _$gFullOwnerPollVarsSerializer =
+    new _$GFullOwnerPollVarsSerializer();
 Serializer<GFullPollVars> _$gFullPollVarsSerializer =
     new _$GFullPollVarsSerializer();
 Serializer<GFullPollOptionVars> _$gFullPollOptionVarsSerializer =
@@ -384,6 +386,28 @@ class _$GFullPollUserVoteVarsSerializer
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new GFullPollUserVoteVarsBuilder().build();
+  }
+}
+
+class _$GFullOwnerPollVarsSerializer
+    implements StructuredSerializer<GFullOwnerPollVars> {
+  @override
+  final Iterable<Type> types = const [GFullOwnerPollVars, _$GFullOwnerPollVars];
+  @override
+  final String wireName = 'GFullOwnerPollVars';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GFullOwnerPollVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    return <Object?>[];
+  }
+
+  @override
+  GFullOwnerPollVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    return new GFullOwnerPollVarsBuilder().build();
   }
 }
 
@@ -1195,6 +1219,66 @@ class GFullPollUserVoteVarsBuilder
 
   _$GFullPollUserVoteVars _build() {
     final _$result = _$v ?? new _$GFullPollUserVoteVars._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GFullOwnerPollVars extends GFullOwnerPollVars {
+  factory _$GFullOwnerPollVars(
+          [void Function(GFullOwnerPollVarsBuilder)? updates]) =>
+      (new GFullOwnerPollVarsBuilder()..update(updates))._build();
+
+  _$GFullOwnerPollVars._() : super._();
+
+  @override
+  GFullOwnerPollVars rebuild(
+          void Function(GFullOwnerPollVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GFullOwnerPollVarsBuilder toBuilder() =>
+      new GFullOwnerPollVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GFullOwnerPollVars;
+  }
+
+  @override
+  int get hashCode {
+    return 625052951;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper(r'GFullOwnerPollVars').toString();
+  }
+}
+
+class GFullOwnerPollVarsBuilder
+    implements Builder<GFullOwnerPollVars, GFullOwnerPollVarsBuilder> {
+  _$GFullOwnerPollVars? _$v;
+
+  GFullOwnerPollVarsBuilder();
+
+  @override
+  void replace(GFullOwnerPollVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFullOwnerPollVars;
+  }
+
+  @override
+  void update(void Function(GFullOwnerPollVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GFullOwnerPollVars build() => _build();
+
+  _$GFullOwnerPollVars _build() {
+    final _$result = _$v ?? new _$GFullOwnerPollVars._();
     replace(_$result);
     return _$result;
   }

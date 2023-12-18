@@ -260,7 +260,7 @@ abstract class GregisterUserData_registerUser_polls
         Built<GregisterUserData_registerUser_polls,
             GregisterUserData_registerUser_pollsBuilder>,
         GFullUser_polls,
-        GFullPoll {
+        GFullOwnerPoll {
   GregisterUserData_registerUser_polls._();
 
   factory GregisterUserData_registerUser_polls(
@@ -269,29 +269,19 @@ abstract class GregisterUserData_registerUser_polls
 
   static void _initializeBuilder(
           GregisterUserData_registerUser_pollsBuilder b) =>
-      b..G__typename = 'Poll';
+      b..G__typename = 'OwnerPoll';
 
   @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
-  BuiltList<GregisterUserData_registerUser_polls_options> get options;
+  String get adminShareToken;
   @override
-  int get id;
+  String get voterShareToken;
   @override
-  int get userId;
+  BuiltList<GregisterUserData_registerUser_polls_votes> get votes;
   @override
-  String get title;
-  @override
-  String? get subtitle;
-  @override
-  String get body;
-  @override
-  String? get pollKind;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
+  GregisterUserData_registerUser_polls_poll get poll;
   static Serializer<GregisterUserData_registerUser_polls> get serializer =>
       _$gregisterUserDataRegisterUserPollsSerializer;
 
@@ -309,75 +299,21 @@ abstract class GregisterUserData_registerUser_polls
       );
 }
 
-abstract class GregisterUserData_registerUser_polls_options
+abstract class GregisterUserData_registerUser_polls_votes
     implements
-        Built<GregisterUserData_registerUser_polls_options,
-            GregisterUserData_registerUser_polls_optionsBuilder>,
-        GFullUser_polls_options,
-        GFullPoll_options,
-        GFullPollOption {
-  GregisterUserData_registerUser_polls_options._();
-
-  factory GregisterUserData_registerUser_polls_options(
-      [Function(GregisterUserData_registerUser_polls_optionsBuilder b)
-          updates]) = _$GregisterUserData_registerUser_polls_options;
-
-  static void _initializeBuilder(
-          GregisterUserData_registerUser_polls_optionsBuilder b) =>
-      b..G__typename = 'PollOption';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  BuiltList<GregisterUserData_registerUser_polls_options_votes> get votes;
-  @override
-  int get id;
-  @override
-  int get pollId;
-  @override
-  int? get priority;
-  @override
-  String? get description;
-  @override
-  String? get url;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
-  static Serializer<GregisterUserData_registerUser_polls_options>
-      get serializer => _$gregisterUserDataRegisterUserPollsOptionsSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GregisterUserData_registerUser_polls_options.serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GregisterUserData_registerUser_polls_options? fromJson(
-          Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
-        GregisterUserData_registerUser_polls_options.serializer,
-        json,
-      );
-}
-
-abstract class GregisterUserData_registerUser_polls_options_votes
-    implements
-        Built<GregisterUserData_registerUser_polls_options_votes,
-            GregisterUserData_registerUser_polls_options_votesBuilder>,
-        GFullUser_polls_options_votes,
-        GFullPoll_options_votes,
-        GFullPollOption_votes,
+        Built<GregisterUserData_registerUser_polls_votes,
+            GregisterUserData_registerUser_polls_votesBuilder>,
+        GFullUser_polls_votes,
+        GFullOwnerPoll_votes,
         GFullPollOptionVote {
-  GregisterUserData_registerUser_polls_options_votes._();
+  GregisterUserData_registerUser_polls_votes._();
 
-  factory GregisterUserData_registerUser_polls_options_votes(
-      [Function(GregisterUserData_registerUser_polls_options_votesBuilder b)
-          updates]) = _$GregisterUserData_registerUser_polls_options_votes;
+  factory GregisterUserData_registerUser_polls_votes(
+      [Function(GregisterUserData_registerUser_polls_votesBuilder b)
+          updates]) = _$GregisterUserData_registerUser_polls_votes;
 
   static void _initializeBuilder(
-          GregisterUserData_registerUser_polls_options_votesBuilder b) =>
+          GregisterUserData_registerUser_polls_votesBuilder b) =>
       b..G__typename = 'PollOptionVote';
 
   @override
@@ -393,20 +329,180 @@ abstract class GregisterUserData_registerUser_polls_options_votes
   String? get formResponse;
   @override
   _i2.GDate get createdAt;
-  static Serializer<GregisterUserData_registerUser_polls_options_votes>
-      get serializer =>
-          _$gregisterUserDataRegisterUserPollsOptionsVotesSerializer;
+  static Serializer<GregisterUserData_registerUser_polls_votes>
+      get serializer => _$gregisterUserDataRegisterUserPollsVotesSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GregisterUserData_registerUser_polls_options_votes.serializer,
+        GregisterUserData_registerUser_polls_votes.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GregisterUserData_registerUser_polls_options_votes? fromJson(
+  static GregisterUserData_registerUser_polls_votes? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GregisterUserData_registerUser_polls_options_votes.serializer,
+        GregisterUserData_registerUser_polls_votes.serializer,
+        json,
+      );
+}
+
+abstract class GregisterUserData_registerUser_polls_poll
+    implements
+        Built<GregisterUserData_registerUser_polls_poll,
+            GregisterUserData_registerUser_polls_pollBuilder>,
+        GFullUser_polls_poll,
+        GFullOwnerPoll_poll,
+        GFullPoll {
+  GregisterUserData_registerUser_polls_poll._();
+
+  factory GregisterUserData_registerUser_polls_poll(
+      [Function(GregisterUserData_registerUser_polls_pollBuilder b)
+          updates]) = _$GregisterUserData_registerUser_polls_poll;
+
+  static void _initializeBuilder(
+          GregisterUserData_registerUser_polls_pollBuilder b) =>
+      b..G__typename = 'Poll';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GregisterUserData_registerUser_polls_poll_options> get options;
+  @override
+  int get id;
+  @override
+  int get userId;
+  @override
+  String get title;
+  @override
+  String? get subtitle;
+  @override
+  String get body;
+  @override
+  String? get pollKind;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GregisterUserData_registerUser_polls_poll> get serializer =>
+      _$gregisterUserDataRegisterUserPollsPollSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GregisterUserData_registerUser_polls_poll.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GregisterUserData_registerUser_polls_poll? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GregisterUserData_registerUser_polls_poll.serializer,
+        json,
+      );
+}
+
+abstract class GregisterUserData_registerUser_polls_poll_options
+    implements
+        Built<GregisterUserData_registerUser_polls_poll_options,
+            GregisterUserData_registerUser_polls_poll_optionsBuilder>,
+        GFullUser_polls_poll_options,
+        GFullOwnerPoll_poll_options,
+        GFullPoll_options,
+        GFullPollOption {
+  GregisterUserData_registerUser_polls_poll_options._();
+
+  factory GregisterUserData_registerUser_polls_poll_options(
+      [Function(GregisterUserData_registerUser_polls_poll_optionsBuilder b)
+          updates]) = _$GregisterUserData_registerUser_polls_poll_options;
+
+  static void _initializeBuilder(
+          GregisterUserData_registerUser_polls_poll_optionsBuilder b) =>
+      b..G__typename = 'PollOption';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GregisterUserData_registerUser_polls_poll_options_votes> get votes;
+  @override
+  int get id;
+  @override
+  int get pollId;
+  @override
+  int? get priority;
+  @override
+  String? get description;
+  @override
+  String? get url;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GregisterUserData_registerUser_polls_poll_options>
+      get serializer =>
+          _$gregisterUserDataRegisterUserPollsPollOptionsSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GregisterUserData_registerUser_polls_poll_options.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GregisterUserData_registerUser_polls_poll_options? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GregisterUserData_registerUser_polls_poll_options.serializer,
+        json,
+      );
+}
+
+abstract class GregisterUserData_registerUser_polls_poll_options_votes
+    implements
+        Built<GregisterUserData_registerUser_polls_poll_options_votes,
+            GregisterUserData_registerUser_polls_poll_options_votesBuilder>,
+        GFullUser_polls_poll_options_votes,
+        GFullOwnerPoll_poll_options_votes,
+        GFullPoll_options_votes,
+        GFullPollOption_votes,
+        GFullPollOptionVote {
+  GregisterUserData_registerUser_polls_poll_options_votes._();
+
+  factory GregisterUserData_registerUser_polls_poll_options_votes(
+      [Function(
+              GregisterUserData_registerUser_polls_poll_options_votesBuilder b)
+          updates]) = _$GregisterUserData_registerUser_polls_poll_options_votes;
+
+  static void _initializeBuilder(
+          GregisterUserData_registerUser_polls_poll_options_votesBuilder b) =>
+      b..G__typename = 'PollOptionVote';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GregisterUserData_registerUser_polls_poll_options_votes>
+      get serializer =>
+          _$gregisterUserDataRegisterUserPollsPollOptionsVotesSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GregisterUserData_registerUser_polls_poll_options_votes.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GregisterUserData_registerUser_polls_poll_options_votes? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GregisterUserData_registerUser_polls_poll_options_votes.serializer,
         json,
       );
 }
@@ -914,7 +1010,7 @@ abstract class GgetUserData_getUser_polls
     implements
         Built<GgetUserData_getUser_polls, GgetUserData_getUser_pollsBuilder>,
         GFullUser_polls,
-        GFullPoll {
+        GFullOwnerPoll {
   GgetUserData_getUser_polls._();
 
   factory GgetUserData_getUser_polls(
@@ -922,29 +1018,19 @@ abstract class GgetUserData_getUser_polls
       _$GgetUserData_getUser_polls;
 
   static void _initializeBuilder(GgetUserData_getUser_pollsBuilder b) =>
-      b..G__typename = 'Poll';
+      b..G__typename = 'OwnerPoll';
 
   @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
-  BuiltList<GgetUserData_getUser_polls_options> get options;
+  String get adminShareToken;
   @override
-  int get id;
+  String get voterShareToken;
   @override
-  int get userId;
+  BuiltList<GgetUserData_getUser_polls_votes> get votes;
   @override
-  String get title;
-  @override
-  String? get subtitle;
-  @override
-  String get body;
-  @override
-  String? get pollKind;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
+  GgetUserData_getUser_polls_poll get poll;
   static Serializer<GgetUserData_getUser_polls> get serializer =>
       _$ggetUserDataGetUserPollsSerializer;
 
@@ -961,74 +1047,20 @@ abstract class GgetUserData_getUser_polls
       );
 }
 
-abstract class GgetUserData_getUser_polls_options
+abstract class GgetUserData_getUser_polls_votes
     implements
-        Built<GgetUserData_getUser_polls_options,
-            GgetUserData_getUser_polls_optionsBuilder>,
-        GFullUser_polls_options,
-        GFullPoll_options,
-        GFullPollOption {
-  GgetUserData_getUser_polls_options._();
-
-  factory GgetUserData_getUser_polls_options(
-          [Function(GgetUserData_getUser_polls_optionsBuilder b) updates]) =
-      _$GgetUserData_getUser_polls_options;
-
-  static void _initializeBuilder(GgetUserData_getUser_polls_optionsBuilder b) =>
-      b..G__typename = 'PollOption';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  BuiltList<GgetUserData_getUser_polls_options_votes> get votes;
-  @override
-  int get id;
-  @override
-  int get pollId;
-  @override
-  int? get priority;
-  @override
-  String? get description;
-  @override
-  String? get url;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
-  static Serializer<GgetUserData_getUser_polls_options> get serializer =>
-      _$ggetUserDataGetUserPollsOptionsSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GgetUserData_getUser_polls_options.serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GgetUserData_getUser_polls_options? fromJson(
-          Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
-        GgetUserData_getUser_polls_options.serializer,
-        json,
-      );
-}
-
-abstract class GgetUserData_getUser_polls_options_votes
-    implements
-        Built<GgetUserData_getUser_polls_options_votes,
-            GgetUserData_getUser_polls_options_votesBuilder>,
-        GFullUser_polls_options_votes,
-        GFullPoll_options_votes,
-        GFullPollOption_votes,
+        Built<GgetUserData_getUser_polls_votes,
+            GgetUserData_getUser_polls_votesBuilder>,
+        GFullUser_polls_votes,
+        GFullOwnerPoll_votes,
         GFullPollOptionVote {
-  GgetUserData_getUser_polls_options_votes._();
+  GgetUserData_getUser_polls_votes._();
 
-  factory GgetUserData_getUser_polls_options_votes(
-      [Function(GgetUserData_getUser_polls_options_votesBuilder b)
-          updates]) = _$GgetUserData_getUser_polls_options_votes;
+  factory GgetUserData_getUser_polls_votes(
+          [Function(GgetUserData_getUser_polls_votesBuilder b) updates]) =
+      _$GgetUserData_getUser_polls_votes;
 
-  static void _initializeBuilder(
-          GgetUserData_getUser_polls_options_votesBuilder b) =>
+  static void _initializeBuilder(GgetUserData_getUser_polls_votesBuilder b) =>
       b..G__typename = 'PollOptionVote';
 
   @override
@@ -1044,19 +1076,175 @@ abstract class GgetUserData_getUser_polls_options_votes
   String? get formResponse;
   @override
   _i2.GDate get createdAt;
-  static Serializer<GgetUserData_getUser_polls_options_votes> get serializer =>
-      _$ggetUserDataGetUserPollsOptionsVotesSerializer;
+  static Serializer<GgetUserData_getUser_polls_votes> get serializer =>
+      _$ggetUserDataGetUserPollsVotesSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GgetUserData_getUser_polls_options_votes.serializer,
+        GgetUserData_getUser_polls_votes.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GgetUserData_getUser_polls_options_votes? fromJson(
+  static GgetUserData_getUser_polls_votes? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GgetUserData_getUser_polls_options_votes.serializer,
+        GgetUserData_getUser_polls_votes.serializer,
+        json,
+      );
+}
+
+abstract class GgetUserData_getUser_polls_poll
+    implements
+        Built<GgetUserData_getUser_polls_poll,
+            GgetUserData_getUser_polls_pollBuilder>,
+        GFullUser_polls_poll,
+        GFullOwnerPoll_poll,
+        GFullPoll {
+  GgetUserData_getUser_polls_poll._();
+
+  factory GgetUserData_getUser_polls_poll(
+          [Function(GgetUserData_getUser_polls_pollBuilder b) updates]) =
+      _$GgetUserData_getUser_polls_poll;
+
+  static void _initializeBuilder(GgetUserData_getUser_polls_pollBuilder b) =>
+      b..G__typename = 'Poll';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GgetUserData_getUser_polls_poll_options> get options;
+  @override
+  int get id;
+  @override
+  int get userId;
+  @override
+  String get title;
+  @override
+  String? get subtitle;
+  @override
+  String get body;
+  @override
+  String? get pollKind;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GgetUserData_getUser_polls_poll> get serializer =>
+      _$ggetUserDataGetUserPollsPollSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GgetUserData_getUser_polls_poll.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GgetUserData_getUser_polls_poll? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GgetUserData_getUser_polls_poll.serializer,
+        json,
+      );
+}
+
+abstract class GgetUserData_getUser_polls_poll_options
+    implements
+        Built<GgetUserData_getUser_polls_poll_options,
+            GgetUserData_getUser_polls_poll_optionsBuilder>,
+        GFullUser_polls_poll_options,
+        GFullOwnerPoll_poll_options,
+        GFullPoll_options,
+        GFullPollOption {
+  GgetUserData_getUser_polls_poll_options._();
+
+  factory GgetUserData_getUser_polls_poll_options(
+      [Function(GgetUserData_getUser_polls_poll_optionsBuilder b)
+          updates]) = _$GgetUserData_getUser_polls_poll_options;
+
+  static void _initializeBuilder(
+          GgetUserData_getUser_polls_poll_optionsBuilder b) =>
+      b..G__typename = 'PollOption';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GgetUserData_getUser_polls_poll_options_votes> get votes;
+  @override
+  int get id;
+  @override
+  int get pollId;
+  @override
+  int? get priority;
+  @override
+  String? get description;
+  @override
+  String? get url;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GgetUserData_getUser_polls_poll_options> get serializer =>
+      _$ggetUserDataGetUserPollsPollOptionsSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GgetUserData_getUser_polls_poll_options.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GgetUserData_getUser_polls_poll_options? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GgetUserData_getUser_polls_poll_options.serializer,
+        json,
+      );
+}
+
+abstract class GgetUserData_getUser_polls_poll_options_votes
+    implements
+        Built<GgetUserData_getUser_polls_poll_options_votes,
+            GgetUserData_getUser_polls_poll_options_votesBuilder>,
+        GFullUser_polls_poll_options_votes,
+        GFullOwnerPoll_poll_options_votes,
+        GFullPoll_options_votes,
+        GFullPollOption_votes,
+        GFullPollOptionVote {
+  GgetUserData_getUser_polls_poll_options_votes._();
+
+  factory GgetUserData_getUser_polls_poll_options_votes(
+      [Function(GgetUserData_getUser_polls_poll_options_votesBuilder b)
+          updates]) = _$GgetUserData_getUser_polls_poll_options_votes;
+
+  static void _initializeBuilder(
+          GgetUserData_getUser_polls_poll_options_votesBuilder b) =>
+      b..G__typename = 'PollOptionVote';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GgetUserData_getUser_polls_poll_options_votes>
+      get serializer => _$ggetUserDataGetUserPollsPollOptionsVotesSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GgetUserData_getUser_polls_poll_options_votes.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GgetUserData_getUser_polls_poll_options_votes? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GgetUserData_getUser_polls_poll_options_votes.serializer,
         json,
       );
 }
@@ -1491,7 +1679,7 @@ abstract class GinsertPollData
 abstract class GinsertPollData_insertPoll
     implements
         Built<GinsertPollData_insertPoll, GinsertPollData_insertPollBuilder>,
-        GFullPoll {
+        GFullOwnerPoll {
   GinsertPollData_insertPoll._();
 
   factory GinsertPollData_insertPoll(
@@ -1499,29 +1687,19 @@ abstract class GinsertPollData_insertPoll
       _$GinsertPollData_insertPoll;
 
   static void _initializeBuilder(GinsertPollData_insertPollBuilder b) =>
-      b..G__typename = 'Poll';
+      b..G__typename = 'OwnerPoll';
 
   @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
-  BuiltList<GinsertPollData_insertPoll_options> get options;
+  String get adminShareToken;
   @override
-  int get id;
+  String get voterShareToken;
   @override
-  int get userId;
+  BuiltList<GinsertPollData_insertPoll_votes> get votes;
   @override
-  String get title;
-  @override
-  String? get subtitle;
-  @override
-  String get body;
-  @override
-  String? get pollKind;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
+  GinsertPollData_insertPoll_poll get poll;
   static Serializer<GinsertPollData_insertPoll> get serializer =>
       _$ginsertPollDataInsertPollSerializer;
 
@@ -1538,72 +1716,19 @@ abstract class GinsertPollData_insertPoll
       );
 }
 
-abstract class GinsertPollData_insertPoll_options
+abstract class GinsertPollData_insertPoll_votes
     implements
-        Built<GinsertPollData_insertPoll_options,
-            GinsertPollData_insertPoll_optionsBuilder>,
-        GFullPoll_options,
-        GFullPollOption {
-  GinsertPollData_insertPoll_options._();
-
-  factory GinsertPollData_insertPoll_options(
-          [Function(GinsertPollData_insertPoll_optionsBuilder b) updates]) =
-      _$GinsertPollData_insertPoll_options;
-
-  static void _initializeBuilder(GinsertPollData_insertPoll_optionsBuilder b) =>
-      b..G__typename = 'PollOption';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  BuiltList<GinsertPollData_insertPoll_options_votes> get votes;
-  @override
-  int get id;
-  @override
-  int get pollId;
-  @override
-  int? get priority;
-  @override
-  String? get description;
-  @override
-  String? get url;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
-  static Serializer<GinsertPollData_insertPoll_options> get serializer =>
-      _$ginsertPollDataInsertPollOptionsSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GinsertPollData_insertPoll_options.serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GinsertPollData_insertPoll_options? fromJson(
-          Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
-        GinsertPollData_insertPoll_options.serializer,
-        json,
-      );
-}
-
-abstract class GinsertPollData_insertPoll_options_votes
-    implements
-        Built<GinsertPollData_insertPoll_options_votes,
-            GinsertPollData_insertPoll_options_votesBuilder>,
-        GFullPoll_options_votes,
-        GFullPollOption_votes,
+        Built<GinsertPollData_insertPoll_votes,
+            GinsertPollData_insertPoll_votesBuilder>,
+        GFullOwnerPoll_votes,
         GFullPollOptionVote {
-  GinsertPollData_insertPoll_options_votes._();
+  GinsertPollData_insertPoll_votes._();
 
-  factory GinsertPollData_insertPoll_options_votes(
-      [Function(GinsertPollData_insertPoll_options_votesBuilder b)
-          updates]) = _$GinsertPollData_insertPoll_options_votes;
+  factory GinsertPollData_insertPoll_votes(
+          [Function(GinsertPollData_insertPoll_votesBuilder b) updates]) =
+      _$GinsertPollData_insertPoll_votes;
 
-  static void _initializeBuilder(
-          GinsertPollData_insertPoll_options_votesBuilder b) =>
+  static void _initializeBuilder(GinsertPollData_insertPoll_votesBuilder b) =>
       b..G__typename = 'PollOptionVote';
 
   @override
@@ -1619,19 +1744,172 @@ abstract class GinsertPollData_insertPoll_options_votes
   String? get formResponse;
   @override
   _i2.GDate get createdAt;
-  static Serializer<GinsertPollData_insertPoll_options_votes> get serializer =>
-      _$ginsertPollDataInsertPollOptionsVotesSerializer;
+  static Serializer<GinsertPollData_insertPoll_votes> get serializer =>
+      _$ginsertPollDataInsertPollVotesSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GinsertPollData_insertPoll_options_votes.serializer,
+        GinsertPollData_insertPoll_votes.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GinsertPollData_insertPoll_options_votes? fromJson(
+  static GinsertPollData_insertPoll_votes? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GinsertPollData_insertPoll_options_votes.serializer,
+        GinsertPollData_insertPoll_votes.serializer,
+        json,
+      );
+}
+
+abstract class GinsertPollData_insertPoll_poll
+    implements
+        Built<GinsertPollData_insertPoll_poll,
+            GinsertPollData_insertPoll_pollBuilder>,
+        GFullOwnerPoll_poll,
+        GFullPoll {
+  GinsertPollData_insertPoll_poll._();
+
+  factory GinsertPollData_insertPoll_poll(
+          [Function(GinsertPollData_insertPoll_pollBuilder b) updates]) =
+      _$GinsertPollData_insertPoll_poll;
+
+  static void _initializeBuilder(GinsertPollData_insertPoll_pollBuilder b) =>
+      b..G__typename = 'Poll';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GinsertPollData_insertPoll_poll_options> get options;
+  @override
+  int get id;
+  @override
+  int get userId;
+  @override
+  String get title;
+  @override
+  String? get subtitle;
+  @override
+  String get body;
+  @override
+  String? get pollKind;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GinsertPollData_insertPoll_poll> get serializer =>
+      _$ginsertPollDataInsertPollPollSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GinsertPollData_insertPoll_poll.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GinsertPollData_insertPoll_poll? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GinsertPollData_insertPoll_poll.serializer,
+        json,
+      );
+}
+
+abstract class GinsertPollData_insertPoll_poll_options
+    implements
+        Built<GinsertPollData_insertPoll_poll_options,
+            GinsertPollData_insertPoll_poll_optionsBuilder>,
+        GFullOwnerPoll_poll_options,
+        GFullPoll_options,
+        GFullPollOption {
+  GinsertPollData_insertPoll_poll_options._();
+
+  factory GinsertPollData_insertPoll_poll_options(
+      [Function(GinsertPollData_insertPoll_poll_optionsBuilder b)
+          updates]) = _$GinsertPollData_insertPoll_poll_options;
+
+  static void _initializeBuilder(
+          GinsertPollData_insertPoll_poll_optionsBuilder b) =>
+      b..G__typename = 'PollOption';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GinsertPollData_insertPoll_poll_options_votes> get votes;
+  @override
+  int get id;
+  @override
+  int get pollId;
+  @override
+  int? get priority;
+  @override
+  String? get description;
+  @override
+  String? get url;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GinsertPollData_insertPoll_poll_options> get serializer =>
+      _$ginsertPollDataInsertPollPollOptionsSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GinsertPollData_insertPoll_poll_options.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GinsertPollData_insertPoll_poll_options? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GinsertPollData_insertPoll_poll_options.serializer,
+        json,
+      );
+}
+
+abstract class GinsertPollData_insertPoll_poll_options_votes
+    implements
+        Built<GinsertPollData_insertPoll_poll_options_votes,
+            GinsertPollData_insertPoll_poll_options_votesBuilder>,
+        GFullOwnerPoll_poll_options_votes,
+        GFullPoll_options_votes,
+        GFullPollOption_votes,
+        GFullPollOptionVote {
+  GinsertPollData_insertPoll_poll_options_votes._();
+
+  factory GinsertPollData_insertPoll_poll_options_votes(
+      [Function(GinsertPollData_insertPoll_poll_options_votesBuilder b)
+          updates]) = _$GinsertPollData_insertPoll_poll_options_votes;
+
+  static void _initializeBuilder(
+          GinsertPollData_insertPoll_poll_options_votesBuilder b) =>
+      b..G__typename = 'PollOptionVote';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GinsertPollData_insertPoll_poll_options_votes>
+      get serializer => _$ginsertPollDataInsertPollPollOptionsVotesSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GinsertPollData_insertPoll_poll_options_votes.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GinsertPollData_insertPoll_poll_options_votes? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GinsertPollData_insertPoll_poll_options_votes.serializer,
         json,
       );
 }
@@ -1668,7 +1946,7 @@ abstract class GaddPollOptionsData_addPollOptions
     implements
         Built<GaddPollOptionsData_addPollOptions,
             GaddPollOptionsData_addPollOptionsBuilder>,
-        GFullPoll {
+        GFullOwnerPoll {
   GaddPollOptionsData_addPollOptions._();
 
   factory GaddPollOptionsData_addPollOptions(
@@ -1676,29 +1954,19 @@ abstract class GaddPollOptionsData_addPollOptions
       _$GaddPollOptionsData_addPollOptions;
 
   static void _initializeBuilder(GaddPollOptionsData_addPollOptionsBuilder b) =>
-      b..G__typename = 'Poll';
+      b..G__typename = 'OwnerPoll';
 
   @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
-  BuiltList<GaddPollOptionsData_addPollOptions_options> get options;
+  String get adminShareToken;
   @override
-  int get id;
+  String get voterShareToken;
   @override
-  int get userId;
+  BuiltList<GaddPollOptionsData_addPollOptions_votes> get votes;
   @override
-  String get title;
-  @override
-  String? get subtitle;
-  @override
-  String get body;
-  @override
-  String? get pollKind;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
+  GaddPollOptionsData_addPollOptions_poll get poll;
   static Serializer<GaddPollOptionsData_addPollOptions> get serializer =>
       _$gaddPollOptionsDataAddPollOptionsSerializer;
 
@@ -1716,73 +1984,20 @@ abstract class GaddPollOptionsData_addPollOptions
       );
 }
 
-abstract class GaddPollOptionsData_addPollOptions_options
+abstract class GaddPollOptionsData_addPollOptions_votes
     implements
-        Built<GaddPollOptionsData_addPollOptions_options,
-            GaddPollOptionsData_addPollOptions_optionsBuilder>,
-        GFullPoll_options,
-        GFullPollOption {
-  GaddPollOptionsData_addPollOptions_options._();
-
-  factory GaddPollOptionsData_addPollOptions_options(
-      [Function(GaddPollOptionsData_addPollOptions_optionsBuilder b)
-          updates]) = _$GaddPollOptionsData_addPollOptions_options;
-
-  static void _initializeBuilder(
-          GaddPollOptionsData_addPollOptions_optionsBuilder b) =>
-      b..G__typename = 'PollOption';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  BuiltList<GaddPollOptionsData_addPollOptions_options_votes> get votes;
-  @override
-  int get id;
-  @override
-  int get pollId;
-  @override
-  int? get priority;
-  @override
-  String? get description;
-  @override
-  String? get url;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
-  static Serializer<GaddPollOptionsData_addPollOptions_options>
-      get serializer => _$gaddPollOptionsDataAddPollOptionsOptionsSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GaddPollOptionsData_addPollOptions_options.serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GaddPollOptionsData_addPollOptions_options? fromJson(
-          Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
-        GaddPollOptionsData_addPollOptions_options.serializer,
-        json,
-      );
-}
-
-abstract class GaddPollOptionsData_addPollOptions_options_votes
-    implements
-        Built<GaddPollOptionsData_addPollOptions_options_votes,
-            GaddPollOptionsData_addPollOptions_options_votesBuilder>,
-        GFullPoll_options_votes,
-        GFullPollOption_votes,
+        Built<GaddPollOptionsData_addPollOptions_votes,
+            GaddPollOptionsData_addPollOptions_votesBuilder>,
+        GFullOwnerPoll_votes,
         GFullPollOptionVote {
-  GaddPollOptionsData_addPollOptions_options_votes._();
+  GaddPollOptionsData_addPollOptions_votes._();
 
-  factory GaddPollOptionsData_addPollOptions_options_votes(
-      [Function(GaddPollOptionsData_addPollOptions_options_votesBuilder b)
-          updates]) = _$GaddPollOptionsData_addPollOptions_options_votes;
+  factory GaddPollOptionsData_addPollOptions_votes(
+      [Function(GaddPollOptionsData_addPollOptions_votesBuilder b)
+          updates]) = _$GaddPollOptionsData_addPollOptions_votes;
 
   static void _initializeBuilder(
-          GaddPollOptionsData_addPollOptions_options_votesBuilder b) =>
+          GaddPollOptionsData_addPollOptions_votesBuilder b) =>
       b..G__typename = 'PollOptionVote';
 
   @override
@@ -1798,20 +2013,176 @@ abstract class GaddPollOptionsData_addPollOptions_options_votes
   String? get formResponse;
   @override
   _i2.GDate get createdAt;
-  static Serializer<GaddPollOptionsData_addPollOptions_options_votes>
-      get serializer =>
-          _$gaddPollOptionsDataAddPollOptionsOptionsVotesSerializer;
+  static Serializer<GaddPollOptionsData_addPollOptions_votes> get serializer =>
+      _$gaddPollOptionsDataAddPollOptionsVotesSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GaddPollOptionsData_addPollOptions_options_votes.serializer,
+        GaddPollOptionsData_addPollOptions_votes.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GaddPollOptionsData_addPollOptions_options_votes? fromJson(
+  static GaddPollOptionsData_addPollOptions_votes? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GaddPollOptionsData_addPollOptions_options_votes.serializer,
+        GaddPollOptionsData_addPollOptions_votes.serializer,
+        json,
+      );
+}
+
+abstract class GaddPollOptionsData_addPollOptions_poll
+    implements
+        Built<GaddPollOptionsData_addPollOptions_poll,
+            GaddPollOptionsData_addPollOptions_pollBuilder>,
+        GFullOwnerPoll_poll,
+        GFullPoll {
+  GaddPollOptionsData_addPollOptions_poll._();
+
+  factory GaddPollOptionsData_addPollOptions_poll(
+      [Function(GaddPollOptionsData_addPollOptions_pollBuilder b)
+          updates]) = _$GaddPollOptionsData_addPollOptions_poll;
+
+  static void _initializeBuilder(
+          GaddPollOptionsData_addPollOptions_pollBuilder b) =>
+      b..G__typename = 'Poll';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GaddPollOptionsData_addPollOptions_poll_options> get options;
+  @override
+  int get id;
+  @override
+  int get userId;
+  @override
+  String get title;
+  @override
+  String? get subtitle;
+  @override
+  String get body;
+  @override
+  String? get pollKind;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GaddPollOptionsData_addPollOptions_poll> get serializer =>
+      _$gaddPollOptionsDataAddPollOptionsPollSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GaddPollOptionsData_addPollOptions_poll.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GaddPollOptionsData_addPollOptions_poll? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GaddPollOptionsData_addPollOptions_poll.serializer,
+        json,
+      );
+}
+
+abstract class GaddPollOptionsData_addPollOptions_poll_options
+    implements
+        Built<GaddPollOptionsData_addPollOptions_poll_options,
+            GaddPollOptionsData_addPollOptions_poll_optionsBuilder>,
+        GFullOwnerPoll_poll_options,
+        GFullPoll_options,
+        GFullPollOption {
+  GaddPollOptionsData_addPollOptions_poll_options._();
+
+  factory GaddPollOptionsData_addPollOptions_poll_options(
+      [Function(GaddPollOptionsData_addPollOptions_poll_optionsBuilder b)
+          updates]) = _$GaddPollOptionsData_addPollOptions_poll_options;
+
+  static void _initializeBuilder(
+          GaddPollOptionsData_addPollOptions_poll_optionsBuilder b) =>
+      b..G__typename = 'PollOption';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GaddPollOptionsData_addPollOptions_poll_options_votes> get votes;
+  @override
+  int get id;
+  @override
+  int get pollId;
+  @override
+  int? get priority;
+  @override
+  String? get description;
+  @override
+  String? get url;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GaddPollOptionsData_addPollOptions_poll_options>
+      get serializer =>
+          _$gaddPollOptionsDataAddPollOptionsPollOptionsSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GaddPollOptionsData_addPollOptions_poll_options.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GaddPollOptionsData_addPollOptions_poll_options? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GaddPollOptionsData_addPollOptions_poll_options.serializer,
+        json,
+      );
+}
+
+abstract class GaddPollOptionsData_addPollOptions_poll_options_votes
+    implements
+        Built<GaddPollOptionsData_addPollOptions_poll_options_votes,
+            GaddPollOptionsData_addPollOptions_poll_options_votesBuilder>,
+        GFullOwnerPoll_poll_options_votes,
+        GFullPoll_options_votes,
+        GFullPollOption_votes,
+        GFullPollOptionVote {
+  GaddPollOptionsData_addPollOptions_poll_options_votes._();
+
+  factory GaddPollOptionsData_addPollOptions_poll_options_votes(
+      [Function(GaddPollOptionsData_addPollOptions_poll_options_votesBuilder b)
+          updates]) = _$GaddPollOptionsData_addPollOptions_poll_options_votes;
+
+  static void _initializeBuilder(
+          GaddPollOptionsData_addPollOptions_poll_options_votesBuilder b) =>
+      b..G__typename = 'PollOptionVote';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GaddPollOptionsData_addPollOptions_poll_options_votes>
+      get serializer =>
+          _$gaddPollOptionsDataAddPollOptionsPollOptionsVotesSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GaddPollOptionsData_addPollOptions_poll_options_votes.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GaddPollOptionsData_addPollOptions_poll_options_votes? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GaddPollOptionsData_addPollOptions_poll_options_votes.serializer,
         json,
       );
 }
@@ -1884,11 +2255,44 @@ abstract class GFullUser {
   Map<String, dynamic> toJson();
 }
 
-abstract class GFullUser_polls implements GFullPoll {
+abstract class GFullUser_polls implements GFullOwnerPoll {
   @override
   String get G__typename;
   @override
-  BuiltList<GFullUser_polls_options> get options;
+  String get adminShareToken;
+  @override
+  String get voterShareToken;
+  @override
+  BuiltList<GFullUser_polls_votes> get votes;
+  @override
+  GFullUser_polls_poll get poll;
+  @override
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullUser_polls_votes
+    implements GFullOwnerPoll_votes, GFullPollOptionVote {
+  @override
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  @override
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullUser_polls_poll implements GFullOwnerPoll_poll, GFullPoll {
+  @override
+  String get G__typename;
+  @override
+  BuiltList<GFullUser_polls_poll_options> get options;
   @override
   int get id;
   @override
@@ -1909,12 +2313,12 @@ abstract class GFullUser_polls implements GFullPoll {
   Map<String, dynamic> toJson();
 }
 
-abstract class GFullUser_polls_options
-    implements GFullPoll_options, GFullPollOption {
+abstract class GFullUser_polls_poll_options
+    implements GFullOwnerPoll_poll_options, GFullPoll_options, GFullPollOption {
   @override
   String get G__typename;
   @override
-  BuiltList<GFullUser_polls_options_votes> get votes;
+  BuiltList<GFullUser_polls_poll_options_votes> get votes;
   @override
   int get id;
   @override
@@ -1933,8 +2337,9 @@ abstract class GFullUser_polls_options
   Map<String, dynamic> toJson();
 }
 
-abstract class GFullUser_polls_options_votes
+abstract class GFullUser_polls_poll_options_votes
     implements
+        GFullOwnerPoll_poll_options_votes,
         GFullPoll_options_votes,
         GFullPollOption_votes,
         GFullPollOptionVote {
@@ -2161,36 +2566,26 @@ abstract class GFullUserData_polls
     implements
         Built<GFullUserData_polls, GFullUserData_pollsBuilder>,
         GFullUser_polls,
-        GFullPoll {
+        GFullOwnerPoll {
   GFullUserData_polls._();
 
   factory GFullUserData_polls(
       [Function(GFullUserData_pollsBuilder b) updates]) = _$GFullUserData_polls;
 
   static void _initializeBuilder(GFullUserData_pollsBuilder b) =>
-      b..G__typename = 'Poll';
+      b..G__typename = 'OwnerPoll';
 
   @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
-  BuiltList<GFullUserData_polls_options> get options;
+  String get adminShareToken;
   @override
-  int get id;
+  String get voterShareToken;
   @override
-  int get userId;
+  BuiltList<GFullUserData_polls_votes> get votes;
   @override
-  String get title;
-  @override
-  String? get subtitle;
-  @override
-  String get body;
-  @override
-  String? get pollKind;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
+  GFullUserData_polls_poll get poll;
   static Serializer<GFullUserData_polls> get serializer =>
       _$gFullUserDataPollsSerializer;
 
@@ -2207,71 +2602,19 @@ abstract class GFullUserData_polls
       );
 }
 
-abstract class GFullUserData_polls_options
+abstract class GFullUserData_polls_votes
     implements
-        Built<GFullUserData_polls_options, GFullUserData_polls_optionsBuilder>,
-        GFullUser_polls_options,
-        GFullPoll_options,
-        GFullPollOption {
-  GFullUserData_polls_options._();
-
-  factory GFullUserData_polls_options(
-          [Function(GFullUserData_polls_optionsBuilder b) updates]) =
-      _$GFullUserData_polls_options;
-
-  static void _initializeBuilder(GFullUserData_polls_optionsBuilder b) =>
-      b..G__typename = 'PollOption';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  BuiltList<GFullUserData_polls_options_votes> get votes;
-  @override
-  int get id;
-  @override
-  int get pollId;
-  @override
-  int? get priority;
-  @override
-  String? get description;
-  @override
-  String? get url;
-  @override
-  String? get formJsonSchema;
-  @override
-  _i2.GDate get createdAt;
-  static Serializer<GFullUserData_polls_options> get serializer =>
-      _$gFullUserDataPollsOptionsSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GFullUserData_polls_options.serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GFullUserData_polls_options? fromJson(Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(
-        GFullUserData_polls_options.serializer,
-        json,
-      );
-}
-
-abstract class GFullUserData_polls_options_votes
-    implements
-        Built<GFullUserData_polls_options_votes,
-            GFullUserData_polls_options_votesBuilder>,
-        GFullUser_polls_options_votes,
-        GFullPoll_options_votes,
-        GFullPollOption_votes,
+        Built<GFullUserData_polls_votes, GFullUserData_polls_votesBuilder>,
+        GFullUser_polls_votes,
+        GFullOwnerPoll_votes,
         GFullPollOptionVote {
-  GFullUserData_polls_options_votes._();
+  GFullUserData_polls_votes._();
 
-  factory GFullUserData_polls_options_votes(
-          [Function(GFullUserData_polls_options_votesBuilder b) updates]) =
-      _$GFullUserData_polls_options_votes;
+  factory GFullUserData_polls_votes(
+          [Function(GFullUserData_polls_votesBuilder b) updates]) =
+      _$GFullUserData_polls_votes;
 
-  static void _initializeBuilder(GFullUserData_polls_options_votesBuilder b) =>
+  static void _initializeBuilder(GFullUserData_polls_votesBuilder b) =>
       b..G__typename = 'PollOptionVote';
 
   @override
@@ -2287,19 +2630,172 @@ abstract class GFullUserData_polls_options_votes
   String? get formResponse;
   @override
   _i2.GDate get createdAt;
-  static Serializer<GFullUserData_polls_options_votes> get serializer =>
-      _$gFullUserDataPollsOptionsVotesSerializer;
+  static Serializer<GFullUserData_polls_votes> get serializer =>
+      _$gFullUserDataPollsVotesSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GFullUserData_polls_options_votes.serializer,
+        GFullUserData_polls_votes.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GFullUserData_polls_options_votes? fromJson(
+  static GFullUserData_polls_votes? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullUserData_polls_votes.serializer,
+        json,
+      );
+}
+
+abstract class GFullUserData_polls_poll
+    implements
+        Built<GFullUserData_polls_poll, GFullUserData_polls_pollBuilder>,
+        GFullUser_polls_poll,
+        GFullOwnerPoll_poll,
+        GFullPoll {
+  GFullUserData_polls_poll._();
+
+  factory GFullUserData_polls_poll(
+          [Function(GFullUserData_polls_pollBuilder b) updates]) =
+      _$GFullUserData_polls_poll;
+
+  static void _initializeBuilder(GFullUserData_polls_pollBuilder b) =>
+      b..G__typename = 'Poll';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GFullUserData_polls_poll_options> get options;
+  @override
+  int get id;
+  @override
+  int get userId;
+  @override
+  String get title;
+  @override
+  String? get subtitle;
+  @override
+  String get body;
+  @override
+  String? get pollKind;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GFullUserData_polls_poll> get serializer =>
+      _$gFullUserDataPollsPollSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullUserData_polls_poll.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullUserData_polls_poll? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullUserData_polls_poll.serializer,
+        json,
+      );
+}
+
+abstract class GFullUserData_polls_poll_options
+    implements
+        Built<GFullUserData_polls_poll_options,
+            GFullUserData_polls_poll_optionsBuilder>,
+        GFullUser_polls_poll_options,
+        GFullOwnerPoll_poll_options,
+        GFullPoll_options,
+        GFullPollOption {
+  GFullUserData_polls_poll_options._();
+
+  factory GFullUserData_polls_poll_options(
+          [Function(GFullUserData_polls_poll_optionsBuilder b) updates]) =
+      _$GFullUserData_polls_poll_options;
+
+  static void _initializeBuilder(GFullUserData_polls_poll_optionsBuilder b) =>
+      b..G__typename = 'PollOption';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GFullUserData_polls_poll_options_votes> get votes;
+  @override
+  int get id;
+  @override
+  int get pollId;
+  @override
+  int? get priority;
+  @override
+  String? get description;
+  @override
+  String? get url;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GFullUserData_polls_poll_options> get serializer =>
+      _$gFullUserDataPollsPollOptionsSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullUserData_polls_poll_options.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullUserData_polls_poll_options? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GFullUserData_polls_options_votes.serializer,
+        GFullUserData_polls_poll_options.serializer,
+        json,
+      );
+}
+
+abstract class GFullUserData_polls_poll_options_votes
+    implements
+        Built<GFullUserData_polls_poll_options_votes,
+            GFullUserData_polls_poll_options_votesBuilder>,
+        GFullUser_polls_poll_options_votes,
+        GFullOwnerPoll_poll_options_votes,
+        GFullPoll_options_votes,
+        GFullPollOption_votes,
+        GFullPollOptionVote {
+  GFullUserData_polls_poll_options_votes._();
+
+  factory GFullUserData_polls_poll_options_votes(
+          [Function(GFullUserData_polls_poll_options_votesBuilder b) updates]) =
+      _$GFullUserData_polls_poll_options_votes;
+
+  static void _initializeBuilder(
+          GFullUserData_polls_poll_options_votesBuilder b) =>
+      b..G__typename = 'PollOptionVote';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GFullUserData_polls_poll_options_votes> get serializer =>
+      _$gFullUserDataPollsPollOptionsVotesSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullUserData_polls_poll_options_votes.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullUserData_polls_poll_options_votes? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullUserData_polls_poll_options_votes.serializer,
         json,
       );
 }
@@ -3447,6 +3943,334 @@ abstract class GFullPollUserVoteData_vote
   static GFullPollUserVoteData_vote? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GFullPollUserVoteData_vote.serializer,
+        json,
+      );
+}
+
+abstract class GFullOwnerPoll {
+  String get G__typename;
+  String get adminShareToken;
+  String get voterShareToken;
+  BuiltList<GFullOwnerPoll_votes> get votes;
+  GFullOwnerPoll_poll get poll;
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullOwnerPoll_votes implements GFullPollOptionVote {
+  @override
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  @override
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullOwnerPoll_poll implements GFullPoll {
+  @override
+  String get G__typename;
+  @override
+  BuiltList<GFullOwnerPoll_poll_options> get options;
+  @override
+  int get id;
+  @override
+  int get userId;
+  @override
+  String get title;
+  @override
+  String? get subtitle;
+  @override
+  String get body;
+  @override
+  String? get pollKind;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  @override
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullOwnerPoll_poll_options
+    implements GFullPoll_options, GFullPollOption {
+  @override
+  String get G__typename;
+  @override
+  BuiltList<GFullOwnerPoll_poll_options_votes> get votes;
+  @override
+  int get id;
+  @override
+  int get pollId;
+  @override
+  int? get priority;
+  @override
+  String? get description;
+  @override
+  String? get url;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  @override
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullOwnerPoll_poll_options_votes
+    implements
+        GFullPoll_options_votes,
+        GFullPollOption_votes,
+        GFullPollOptionVote {
+  @override
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  @override
+  Map<String, dynamic> toJson();
+}
+
+abstract class GFullOwnerPollData
+    implements
+        Built<GFullOwnerPollData, GFullOwnerPollDataBuilder>,
+        GFullOwnerPoll {
+  GFullOwnerPollData._();
+
+  factory GFullOwnerPollData([Function(GFullOwnerPollDataBuilder b) updates]) =
+      _$GFullOwnerPollData;
+
+  static void _initializeBuilder(GFullOwnerPollDataBuilder b) =>
+      b..G__typename = 'OwnerPoll';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String get adminShareToken;
+  @override
+  String get voterShareToken;
+  @override
+  BuiltList<GFullOwnerPollData_votes> get votes;
+  @override
+  GFullOwnerPollData_poll get poll;
+  static Serializer<GFullOwnerPollData> get serializer =>
+      _$gFullOwnerPollDataSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullOwnerPollData.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullOwnerPollData? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullOwnerPollData.serializer,
+        json,
+      );
+}
+
+abstract class GFullOwnerPollData_votes
+    implements
+        Built<GFullOwnerPollData_votes, GFullOwnerPollData_votesBuilder>,
+        GFullOwnerPoll_votes,
+        GFullPollOptionVote {
+  GFullOwnerPollData_votes._();
+
+  factory GFullOwnerPollData_votes(
+          [Function(GFullOwnerPollData_votesBuilder b) updates]) =
+      _$GFullOwnerPollData_votes;
+
+  static void _initializeBuilder(GFullOwnerPollData_votesBuilder b) =>
+      b..G__typename = 'PollOptionVote';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GFullOwnerPollData_votes> get serializer =>
+      _$gFullOwnerPollDataVotesSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullOwnerPollData_votes.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullOwnerPollData_votes? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullOwnerPollData_votes.serializer,
+        json,
+      );
+}
+
+abstract class GFullOwnerPollData_poll
+    implements
+        Built<GFullOwnerPollData_poll, GFullOwnerPollData_pollBuilder>,
+        GFullOwnerPoll_poll,
+        GFullPoll {
+  GFullOwnerPollData_poll._();
+
+  factory GFullOwnerPollData_poll(
+          [Function(GFullOwnerPollData_pollBuilder b) updates]) =
+      _$GFullOwnerPollData_poll;
+
+  static void _initializeBuilder(GFullOwnerPollData_pollBuilder b) =>
+      b..G__typename = 'Poll';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GFullOwnerPollData_poll_options> get options;
+  @override
+  int get id;
+  @override
+  int get userId;
+  @override
+  String get title;
+  @override
+  String? get subtitle;
+  @override
+  String get body;
+  @override
+  String? get pollKind;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GFullOwnerPollData_poll> get serializer =>
+      _$gFullOwnerPollDataPollSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullOwnerPollData_poll.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullOwnerPollData_poll? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullOwnerPollData_poll.serializer,
+        json,
+      );
+}
+
+abstract class GFullOwnerPollData_poll_options
+    implements
+        Built<GFullOwnerPollData_poll_options,
+            GFullOwnerPollData_poll_optionsBuilder>,
+        GFullOwnerPoll_poll_options,
+        GFullPoll_options,
+        GFullPollOption {
+  GFullOwnerPollData_poll_options._();
+
+  factory GFullOwnerPollData_poll_options(
+          [Function(GFullOwnerPollData_poll_optionsBuilder b) updates]) =
+      _$GFullOwnerPollData_poll_options;
+
+  static void _initializeBuilder(GFullOwnerPollData_poll_optionsBuilder b) =>
+      b..G__typename = 'PollOption';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<GFullOwnerPollData_poll_options_votes> get votes;
+  @override
+  int get id;
+  @override
+  int get pollId;
+  @override
+  int? get priority;
+  @override
+  String? get description;
+  @override
+  String? get url;
+  @override
+  String? get formJsonSchema;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GFullOwnerPollData_poll_options> get serializer =>
+      _$gFullOwnerPollDataPollOptionsSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullOwnerPollData_poll_options.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullOwnerPollData_poll_options? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullOwnerPollData_poll_options.serializer,
+        json,
+      );
+}
+
+abstract class GFullOwnerPollData_poll_options_votes
+    implements
+        Built<GFullOwnerPollData_poll_options_votes,
+            GFullOwnerPollData_poll_options_votesBuilder>,
+        GFullOwnerPoll_poll_options_votes,
+        GFullPoll_options_votes,
+        GFullPollOption_votes,
+        GFullPollOptionVote {
+  GFullOwnerPollData_poll_options_votes._();
+
+  factory GFullOwnerPollData_poll_options_votes(
+          [Function(GFullOwnerPollData_poll_options_votesBuilder b) updates]) =
+      _$GFullOwnerPollData_poll_options_votes;
+
+  static void _initializeBuilder(
+          GFullOwnerPollData_poll_options_votesBuilder b) =>
+      b..G__typename = 'PollOptionVote';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get pollOptionId;
+  @override
+  int get userId;
+  @override
+  int get value;
+  @override
+  String? get formResponse;
+  @override
+  _i2.GDate get createdAt;
+  static Serializer<GFullOwnerPollData_poll_options_votes> get serializer =>
+      _$gFullOwnerPollDataPollOptionsVotesSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GFullOwnerPollData_poll_options_votes.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GFullOwnerPollData_poll_options_votes? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GFullOwnerPollData_poll_options_votes.serializer,
         json,
       );
 }
