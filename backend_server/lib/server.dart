@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert' show jsonEncode, jsonDecode;
-import 'dart:io' show HttpServer;
+import 'dart:io' show HttpServer, Platform;
 
 import 'package:backend_server/api.dart';
 import 'package:backend_server/database.dart';
@@ -12,17 +12,26 @@ import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_router/shelf_router.dart' show Router;
 
 Future<void> main() async {
-  final server = await runServer();
+  final server = await runServer(
+    filename: Platform.script.resolve('db.sqlite3').toFilePath(),
+  );
   final url = Uri.parse('http://${server.address.host}:${server.port}/graphql');
   await testServer(url);
 }
 
-Future<HttpServer> runServer({int? serverPort, ScopedMap? globals}) async {
+Future<HttpServer> runServer({
+  int? serverPort,
+  ScopedMap? globals,
+  String? filename,
+}) async {
   // you can override state with ScopedMap.setGlobal/setScoped
-  final executor = await inMemoryExecutor();
+  final executor = await sqliteExecutor(filename: filename);
   final ScopedMap scopedMap = globals ??
       ScopedMap(overrides: [dbExecutorRef.override((scope) => executor)]);
-  await dbRef.get(scopedMap).defineDatabaseObjects();
+  try {
+    // TODO: migrations
+    await dbRef.get(scopedMap).defineDatabaseObjects();
+  } catch (_) {}
 
   if (globals == null) {
     // if it wasn't overridden it should be the default

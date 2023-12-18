@@ -13,9 +13,9 @@ void _defaultExpect(Object? a, Object? b) {
   if (a != b) throw Exception('$a != $b');
 }
 
-Future<SqliteExecutor> inMemoryExecutor() async {
+Future<SqliteExecutor> sqliteExecutor({String? filename}) async {
   final sqlite = await loadSqlite();
-  final db = sqlite.openInMemory();
+  final db = filename == null ? sqlite.openInMemory() : sqlite.open(filename);
   final executor = SqliteExecutor(db);
   return executor;
 }

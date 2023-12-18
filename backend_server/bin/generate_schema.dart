@@ -8,11 +8,10 @@ void main(List<String> args) async {
     return;
   }
   var previousChange = DateTime.now();
-  Directory(Platform.script.resolve('../lib').toFilePath())
-      .watch()
-      .listen((_) async {
-    final p = previousChange;
+  final watchDir = Directory(Platform.script.resolve('../lib').toFilePath());
+  watchDir.watch(recursive: true).listen((_) async {
     previousChange = DateTime.now();
+    final p = previousChange;
     await Future.delayed(const Duration(seconds: 3));
     if (p != previousChange) return;
 

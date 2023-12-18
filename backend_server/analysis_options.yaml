@@ -22,6 +22,9 @@ include: package:lints/recommended.yaml
 analyzer:
   exclude:
     - "**/*.g.dart"
+  errors:
+    unrelated_type_equality_checks: error
+    iterable_contains_unrelated_type: error
 
 # For more information about the core and recommended set of lints, see
 # https://dart.dev/go/core-lints

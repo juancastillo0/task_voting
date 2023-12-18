@@ -151,6 +151,7 @@ class TaskItem extends StatelessObserverWidget {
                       final p = int.tryParse(v);
                       return p == null ? 'invalid integer' : null;
                     }
+                    return null;
                   },
                   onChanged: (maxWeight) {
                     final v = int.tryParse(maxWeight);
